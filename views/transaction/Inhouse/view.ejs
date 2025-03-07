@@ -1,3 +1,5 @@
+<!-- Prefiex Legend -->
+<!-- tihv = Transaction In-house View -->
 <%- include("../../partials/header") %>
 <%- include("../../partials/header-sidebar") %>
 <main id="main" class="main">
@@ -14,11 +16,13 @@
             </span>
         </h1>
         <nav>
+            <!-- Prefix Legend -->
+            <!-- tihvbc = Transaction In-house View Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="/transaction">Transactions</a></li>
                 <li class="breadcrumb-item"><a href="/transaction/inhouse">In-house</a></li>
-                <li class="breadcrumb-item active"><span class="tihvJobOrder"></span></li>
+                <li class="breadcrumb-item active" id="tihvbcJobOrder"></li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -28,17 +32,17 @@
             <div class="col-xl-4 clientInformation">
                 <div class="card">
                     <!-- badges -->
+                    <!-- Prefiex Legend -->
+                    <!-- tihvt = Transaction In-house View Tags  -->
                     <div id="tihvtStatus" class="container mt-2">
-                        <!-- temporary status -->
-                        
-                        <!-- <span class="badge bg-warning text-dark">Quotation</span>
+                        <!-- <span class="badge bg-warning text-dark">Pending</span>
+                        <span class="badge bg-warning text-dark">Quotation</span>
                         <span class="badge bg-warning text-dark">Pending Approval</span>
                         <span class="badge bg-warning text-dark">For Release</span>
                         <span class="badge bg-warning text-dark">Pending Payment</span>
                         <span class="badge bg-warning text-dark">Incomplete Payment</span>
                         <span class="badge bg-warning text-dark">Hold</span> -->
 
-                        <!-- fixed status -->
                         <!-- <span class="badge bg-success">Cancel Repair</span>    
                         <span class="badge bg-success">Partial Approval</span>    
                         <span class="badge bg-success">Parts Request</span>    
@@ -50,27 +54,38 @@
                     </div>
 
                     <!-- client information -->
-                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center text-center placeholder-glow">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                         <img id="tihvProfile" alt="Profile" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
-                        <div class="d-flex align-items-center" >
+						<div class="d-flex align-items-center" >
                             <h2 id="tihvClientName" class="mb-1">
                                 <span class="placeholder col-12"></span>
                             </h2>
                             <i id="tihvClientEdit" class="bi bi-pencil-square hover-effect" data-bs-toggle="modal" data-bs-target=""></i>
                         </div>
-              
-                        <p class="mb-1"><strong>Address:</strong>
-                            <!-- assets/js/transaction\inhouse/view.js -->
-                            <span id="tihvClientAddress">
-                                <span class="placeholder col-12"></span>
-                            </span>
-                        </p>
-                        <p class="mb-1"><strong>Contact Numbers:</strong></p>
-                        <!-- assets/js/transaction\inhouse/view.js -->
-                        <ul class="list-unstyled mb-3" id="tihvClientContactNumbers">
-                            <span class="placeholder col-12"></span>
-                            <span class="placeholder col-12"></span>
-                        </ul>
+
+                        <div class="tab-pane active profile-overview" id="profile-overview">
+                            <div class="d-flex justify-content-between"> 
+                                <h5 class="card-title">Profile Details</h5>
+                                <i id="tihvClientEdit" class="bi bi-pencil-square hover-effect align-self-center" data-bs-toggle="modal" data-bs-target=""></i>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Address</div>
+                                <div id="tihvClientAddress" class="col-lg-9 col-md-8"></div>
+                            </div>
+                            <!-- for contact person template  -->
+                            <!-- <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Contact Person</div>
+                                <div id="ccoContactPerson" class="col-lg-9 col-md-8"></div>
+                            </div> -->
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Contact Number</div>
+                                <div id="tihvClientContactNumbers" class="col-lg-9 col-md-8"></div>
+                            </div>
+                            <h5 class="card-title">Notes</h5>
+                            <p id="tihCreateNotes" class="small fst-italic"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -507,7 +522,7 @@
 <%- include("../../partials/script") %>
 
 <!-- for edit client modal -->
-<!-- <script src="../../../assets/js/client/edit.js"></script> -->
+<script src="../../../assets/js/client/crud/edit.js"></script>
 <!-- inhouse transaction view script -->
 <script src="../../../assets/js/transaction/inhouse/view.js"></script>
 <%- include("../../partials/footer") %>

@@ -2,18 +2,24 @@
 var id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
 $(function(){
+    //======================================================
+    // Initialize Quill/Toast
+    //======================================================
     var quill = quillInit("tihvNotes")
     // initialize toast
     $(".toast").toast({
         delay: 5000
     });
 
+    //======================================================
+    // initialize functionality
+    //======================================================
     // show or hide client info and maximize and minimize image chage 
 
     $('#tihvMaxMinDisplay').on('click', function() {
         if ($('.clientInformation').css('display') === 'none') { // Check if client information is hidden
             $(this).removeClass("bi-fullscreen-exit")
-            $(this).addClass("bi-fullscreen")
+            $(this).addClass("bi-fullscreen")       
             $('.clientInformation').css('display', 'block'); // Show client information
             $(".mainContent").removeClass('col-xl-12').addClass('col-xl-8'); // Adjust main content width to 8 columns
         } else {
@@ -24,64 +30,45 @@ $(function(){
         }
     });
 
+    //======================================================
+    // Edit tags 
+    //======================================================
+    // hide all tags first on start
+    // $('#tihvteSample .badge').css('display','none');
+    $('#tihvteSample .badge').hide();
+
+    // //add on toggle effects
+    $('#tihvteSwitch input[type="checkbox"]').on('change', function() {
+        $('.' + $(this).attr('name')).toggle(this.checked);
+    });
+
     //population of data
     var currentTransaction = crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post');
     tihvPopulateData(currentTransaction,quill); // populate data
 
-    // hide all tags first
-    $('#tihvteSample .badge').css('display','none');
-    //add on toggle effects on edit tags
-    $('#tihvteSwitch input[type="checkbox"]').on('change', function() {
-        console.log($(this).attr('name'))
-        $('.' + $(this).attr('name')).toggle(this.checked);
-    });
-
-
-
+    //======================================================
+    // Edit Client
+    //======================================================
     // populate edit client individual on click on edit
     $("#tihvClientEdit").on('click', function() {
+        // check if individual or corporate
         if  (currentTransaction.Client.isIndividual){
-            clientEditIndividualPopulate(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post').Client)
+            // input client id 
+            clientEditIndividual(currentTransaction.Client._id).then(function() {
+                //update all client info
+                tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
+            });
         } else {
-            clientEditCorporatePopulate(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post').Client)
+            clientEditCorporate(currentTransaction.Client._id).then(function() {
+                //update all client info
+                tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
+            });
         }
     });
-
-    //update edit client individual
-    $('#ciEdit :submit').on('click',function(e){
-        if ($(this).closest('form').is(':valid') === true){
-            e.preventDefault();
-            clientEditIndividualUpdate(currentTransaction.Client._id);
-            //update all client info
-            tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
-
-            // close modal   
-            $('#ciEditModal').modal('toggle'); // fix modal toggle method
-            $('.modal-backdrop').remove(); // ensure backdrop is removed
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfuly edited a client!")
-            $(".toast").find(".toast-title").text("Edit Client")
-        }
-    })
-
-    //update edit client Corporate
-    $('#ccEdit :submit').on('click',function(e){
-        if ($(this).closest('form').is(':valid') === true){
-            alert('no edit on corporate.. wait for patch')
-            e.preventDefault();
-            clientEditCorporateUpdate(currentTransaction.Client._id);
-            //update all client info
-            tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
-            
-            // close modal   
-            $('#ccEditModal').modal('toggle'); // fix modal toggle method
-            $('.modal-backdrop').remove(); // ensure backdrop is removed
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfuly edited a client!")
-            $(".toast").find(".toast-title").text("Edit Client")
-        }
-    })
-
+    
+    //======================================================
+    // Repair Accordion
+    //======================================================
     // repair accordion
     //Report Edit click populate details
     $('#tihvRepairEdit').on('click',function(){
@@ -148,18 +135,36 @@ $(function(){
 
 
 function tihvPopulateData(data,quill) {
+    //======================================================
+    // Header with breadcumb
+    //======================================================
     //header details
     $('#tihvTitleJobOrder').text(data.JobOrder);
     $('#tihvTitleDevice').text(data.Device);
     $('#tihvTitleSerial').text("("+ data.SerialNumber + ")");
+    // breadcrumbs
+    $('#tihvbcJobOrder').text(data.JobOrder);
 
-    //remove all badges
+    //======================================================
+    // Tags
+    //======================================================
+    //remove all badges first 
+    // is is not on edit
     $('#tihvtStatus .badge').remove()
-    //populate pill status (temporary)
+
+    //populate pill status 
+    // this one includes the initial status on edit
     data.TempStatus.forEach(function(status){
+        // loop on all status to be included
         $('#tihvtStatus').append("<span class='badge bg-warning text-dark'>" + status + "</span>")
+        // add also on edit tags (enable all data)
+        $("." + status).show(); // unhide tags
+        $("#tihvteSwitch input[name=" + status + "]").prop('checked', true); //  check the checkbox on edit tags
     })
 
+    //======================================================
+    // Repair Details
+    //======================================================
     //edit details
     $('#tihvrJobOrder').text(data.JobOrder);
     $('#tihvrRecieveDate').text(moment(data.RecieveDate).format("YYYY-MM-DD"));
@@ -171,33 +176,37 @@ function tihvPopulateData(data,quill) {
         $('#tihvrTechnician').text(data.Technician);
     } 
 
+    quill.setContents(data.Notes); // job order notes
+    //======================================================
+    // Client Details / Profile Image/ Contact Numbers / Edit Client Modal target
+    //======================================================
     $('#tihvClientName').text(data.Client.Name);
     $('#tihvClientAddress').append(data.Client.Address);
-    quill.setContents(data.Notes);
-    // $('#tihCreateNotes').append(data.Client.Notes);
-    // clear li items
-    $('#tihvClientContactNumbers').empty();
+    $('#tihCreateNotes').append(data.Client.Notes);
     
-    // populate address
-    $('#tihvClientAddress').text(data.Client.Address);
-
-    //profile image
+    // clear li items on contact numbers
+    $('#tihvClientContactNumbers').empty();
+    //profile image / contact numbers and edit client modal target
     if (data.Client.isIndividual) {
+        // logo image identification if fale of female
         if (data.Client.isMale) {
             $('#tihvProfile').attr('src', '/assets/img/male.png');
         } else {
             $('#tihvProfile').attr('src', '/assets/img/female.jpg');
         }
-        //edit client individual
+        //edit client individual modal target
         $('#tihvClientEdit').attr('data-bs-target', "#ciEditModal");
+
         // loop contact number
         data.Client.ContactDetails.forEach(function(number) {
             $('#tihvClientContactNumbers').append('<li>' + number + '</li>');
         });
     } else {
+        // coroporate profile image
         $('#tihvProfile').attr('src', '/assets/img/company.jpg');
-        // edit client corporate
+        // edit client corporate modal target
         $('#tihvClientEdit').attr('data-bs-target', "#ccEditModal");
+
         // loop contact person with number
         data.Client.ContactDetails.forEach(function(detail) {
             $('#tihvClientContactNumbers').append('<li><strong>' + detail.ContactPerson + ':</strong> ' + detail.ContactNumber + ' </li>');
