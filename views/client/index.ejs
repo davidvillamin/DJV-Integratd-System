@@ -1,3 +1,6 @@
+<!-- Prefix Legends -->
+
+<!-- ci - Client Index -->
 <%- include("../partials/header") %>
 <%- include("../partials/header-sidebar") %>
 <main id="main" class="main">
@@ -17,18 +20,14 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">All Clients</h5>
-                    <!-- create client button
-
-                    ciCreateModal = Client Index Create Modal
-                    ciCreate = Client Create
-                    location = \views\client\modal\create.ejs -->
+                    <!-- create client button -->
+                    <!-- location = \views\client\modal\create.ejs  -->
                     <button id="ciCreate" type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#cCreateModal">
                         <i class="bi bi-file-earmark"></i> Create
                     </button><!-- end of client create button -->
                 </div>
                 <!-- Table for list of clients
 
-                ciTable = Client Index Table
                 This table is created by DataTable
                 location = \assets\js\client\index.js -->
                 <table id="ciTable">
