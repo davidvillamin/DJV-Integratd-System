@@ -1,0 +1,139 @@
+<%- include("../../partials/header") %>
+<input type="hidden" id="serviceType" value='<%= JSON.stringify(foundServiceType) %>'>
+    <div class="container pt-1">
+        <nav aria-label="breadcrumb">
+            <h3 class="mt-4">Create Repair Job Order</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="/service/repair/jo">Repair Job Order List</a></li>
+            </ol>
+        </nav>
+        <form id="crtJoRep" class='needs-validation' novalidate  enctype="multipart/form-data">
+            <!-- client  -->
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoRepClntNmLbl">Client</span>
+                        <input type="text" list="crtJoRepClntLst" class="form-control" id="crtJoRepClntNm" aria-describedby="crtJoRepClntNmLbl" required>
+                        <datalist id="crtJoRepClntLst">
+                        </datalist>
+                        <button class='btn btn-sm btn-success' type='button'>View</button>
+                        <button class='btn btn-sm btn-primary' id="crtJoRepClntFind" type='button'>Find</button>
+                    </div>
+                    <div class="input-group input-group-sm my-1 mt-2">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoRepClntTypeLbl">Client Type</span>
+                        <input type="text" class="form-control" id="crtJoRepClntType" aria-describedby="crtJoRepClntTypeLbl" disabled>
+                    </div>
+                    <div class="input-group input-group-sm my-1 mt-2">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoRepClntAddLbl">Address</span>
+                        <input type="text" class="form-control" id="crtJoRepClntAdd" aria-describedby="crtJoRepClntAddLbl" disabled>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center">Device</span>
+                        <select class="form-select" id="crtJoRepDevNm" required disabled>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 pe-1">
+                            <div class="input-group input-group-sm my-1">
+                                <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoRepDevTypeLbl">Type</span>
+                                <input type="text" class="form-control" id="crtJoRepDevType" aria-describedby="crtJoRepDevTypeLbl" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="input-group input-group-sm my-1">
+                                <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoRepDevBrandLbl">Brand</span>
+                                <input type="text" class="form-control" id="crtJoRepDevBrand" aria-describedby="crtJoRepDevBrandLbl" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 pe-1">
+                            <div class="input-group input-group-sm my-1">
+                                <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoRepDevModelLbl">Model</span>
+                                <input type="text" class="form-control" id="crtJoRepDevModel" aria-describedby="crtJoRepDevModelLbl" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1">
+                            <div class="input-group input-group-sm my-1">
+                                <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoRepDevSNLbl">Serial</span>
+                                <input type="text" class="form-control" id="crtJoRepDevSN" aria-describedby="crtJoRepDevSNLbl" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr>
+            <!-- service -->
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-4 d-flex justify-content-center" id="crtJoRepSvcsCatLbl">Category</span>
+                        <input type="text" class="form-control" id="crtJoRepSvcsCat" aria-describedby="crtJoRepSvcsCatLbl" disabled>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-4 d-flex justify-content-center" id="crtJoRepSvcsTypeLbl">Type</span>
+                        <input type="text" class="form-control" id="crtJoRepSvcsType" aria-describedby="crtJoRepSvcsTypeLbl" disabled>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-4 d-flex justify-content-center" id="crtJoRepSvcsTicketLbl">Ticket</span>
+                        <input type="text" class="form-control" id="crtJoRepSvcsTicket" aria-describedby="crtJoRepSvcsTicketLbl" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 pe-1">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-3 d-flex justify-content-center" id="crtJoRepSvcsRecvByLbl">Recieved by</span>
+                        <input type="text" class="form-control" id="crtJoRepSvcsRecvBy" aria-describedby="crtJoRepSvcsRecvByLbl" required disabled>
+                    </div>
+                </div>
+                <div class="col-4 ps-1">
+                    <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/markup.html -->
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-4 d-flex justify-content-center" id="crtJoRepSvcsRecvDateLbl">Recived Date</span>
+                        <input type="date" class="form-control" id="crtJoRepSvcsRecvDate" aria-describedby="crtJoRepSvcsRecvDateLbl" value="<%= new Date().toISOString().split('T')[0] %>" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group input-group-sm my-1">
+                <span class="input-group-text col-2 justify-content-center" id="crtJoRepSvcsTroubleLbl">Trouble</span>
+                <textarea class="form-control" id="crtJoRepSvcsTrouble" aria-describedby="crtJoRepSvcsTroubleLbl" required disabled></textarea>
+            </div>
+            Note: image only but on the future video will be supported
+            <div class="input-group input-group-sm my-1">
+                <input type="file" class="form-control" name="crtJoRepSvcsTroubleFile" multiple accept="image/png, image/gif, image/jpeg" disabled>
+            </div>
+            <!-- view uploaded images -->
+            <div id="crtJoRepSvcsTroubleFileView">
+                <div class="row">
+                </div>
+            </div>
+            <div class="input-group input-group-sm my-1">
+                <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoRepSvcsChargeLbl">Service Charge</span>
+                <span class="input-group-text">₱</span>
+                <input type="text" class="form-control" id="crtJoRepSvcsCharge" aria-describedby="crtJoRepSvcsChargeLbl" required disabled>
+                <span class="input-group-text">.00</span>
+            </div>
+            <hr>
+            <!-- Dynamic add draft material -->
+            <a class="btn btn-primary btn-sm d-flex justify-content-center" id="crtJoRepSvcsAddDraftMat">Add Draft Material</a>
+            <div class="mt-1 float-end">
+                <a href="/service/jo" type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</a>
+                <button type="submit" class="btn btn-success btn-sm">Create</button>
+            </div>
+        </form>
+    </div>
+    <%- include("../../partials/script") %>
+    <%- include("../../partials/toaster") %>
+    <script src="/js/service/repairJobOrder/create-repair-jo.js"></script>
+    <script src="/js/crud.js"></script>
+    <script src="/js/validation.js"></script>
+<%- include("../../partials/footer") %>

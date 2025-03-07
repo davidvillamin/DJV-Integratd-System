@@ -1,0 +1,88 @@
+<%- include("../../partials/header") %>
+<input type="hidden" id="serviceType" value='<%= JSON.stringify(foundServiceType) %>'>
+    <div class="container pt-1">
+        <nav aria-label="breadcrumb">
+            <h3 class="mt-4">Create marketing job order</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="/service/marketing/jo">Marketing Job Order List</a></li>
+            </ol>
+        </nav>
+        <!-- body -->
+        <form id="crtJoMktg" class='needs-validation'  enctype="multipart/form-data">
+            <!-- client  -->
+            <div class="card">
+                <div class="card-header">
+                    Client
+                </div>
+                <div class="card-body">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoMktgClntNmLbl">Client</span>
+                        <input type="text" list="crtJoMktgClntLst" class="form-control" id="crtJoMktgClntNm" aria-describedby="crtJoMktgClntNmLbl" required>
+                        <datalist id="crtJoMktgClntLst">
+                        </datalist>
+                        <button class='btn btn-sm btn-success' type='button'>View</button>
+                        <button class='btn btn-sm btn-primary' id="crtJoMktgClntFind" type='button'>Find</button>
+                    </div>
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoMktgClntTypeLbl">Client Type</span>
+                        <input type="text" class="form-control" id="crtJoMktgClntType" aria-describedby="crtJoMktgClntTypeLbl" disabled>
+                    </div>
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoMktgClntAddLbl">Address</span>
+                        <input type="text" class="form-control" id="crtJoMktgClntAdd" aria-describedby="crtJoMktgClntAddLbl" disabled>
+                    </div>
+                </div>
+            </div>
+            <!-- Draft Material -->
+            <div class="card mt-2">
+                <div class="card-header">
+                    Draft Material
+                </div>
+
+                <div class="card-body">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center">Material</span>
+                        <input type="text" class="form-control crtJoMktgDraftMatNm" required>
+                        <a class="btn btn-danger crtJoMktgDraftMatDel">Delete</a>
+                    </div>
+                    <!-- Dynamic add draft material -->
+                    <a class="btn btn-primary btn-sm d-flex justify-content-center" id="crtJoMktgAddDraftMat">Add Draft Material</a>
+                    <hr>
+                    <!-- services -->
+                    <div class="row">
+                        <div class="col-8 pe-1">
+                            <div class="input-group input-group-sm my-1">
+                                <span class="input-group-text col-3 d-flex justify-content-center" id="crtJoMktgSvcsCreatedByLbl">Created by</span>
+                                <input type="text" class="form-control" id="crtJoMktgSvcsCreatedBy" aria-describedby="crtJoMktgSvcsCreatedByLbl" required>
+                            </div>
+                        </div>
+                        <div class="col-4 ps-1">
+                            <!-- https://bootstrap-datepicker.readthedocs.io/en/latest/markup.html -->
+                            <div class="input-group input-group-sm my-1">
+                                <span class="input-group-text col-4 d-flex justify-content-center" id="crtJoMktgSvcsCreatedDateLbl">Created Date</span>
+                                <input type="date" class="form-control" id="crtJoMktgSvcsCreatedDate" aria-describedby="crtJoMktgSvcsCreatedDateLbl" value="<%= new Date().toISOString().split('T')[0] %>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtJoMktgSvcsServiceChargeLbl">Service Charge</span>
+                        <span class="input-group-text">₱</span>
+                        <input type="text" class="form-control" id="crtJoMktgSvcsServiceCharge" aria-describedby="crtJoMktgSvcsServiceChargeLbl" required>
+                        <span class="input-group-text">.00</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="mt-1 float-end">
+                <a href="/service/jo" type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</a>
+                <button type="submit" class="btn btn-success btn-sm">Create</button>
+            </div>
+        </form>
+    </div>
+    <%- include("../../partials/script") %>
+    <%- include("../../partials/toaster") %>
+    <script src="/js/service/marketingJobOrder/create-marketing-jo.js"></script>
+    <script src="/js/crud.js"></script>
+    <script src="/js/validation.js"></script>
+<%- include("../../partials/footer") %>

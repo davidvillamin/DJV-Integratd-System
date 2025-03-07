@@ -1,0 +1,63 @@
+<!--// ============================================================
+// Edit job order
+// ============================================================ -->
+<div class="modal fade" id="dltRepJoMod" tabindex="-1" role="dialog" aria-labelledby="dltRepJoModLbl" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dltRepJoModLbl">Delete repair job order </h5>
+                <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Are you sure you want to delete this job order?</h6>
+                <div class="card card-body">
+                    <div class="dltDevBody">
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Job order number: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltRepJoNum"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Type: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltRepJoType"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Device: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltRepJoDev"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Client: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltRepJoClnt"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form  id="dltRepJo" class="needs-validation" novalidate>
+                    Please type <strong>DELETE</strong> to confirm.
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="dltRepJoConfirmLbl">Confirmation</span>
+                        <input type="text" class="form-control" id="dltRepJoConfirm" aria-describedby="dltRepJoConfirmLbl" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

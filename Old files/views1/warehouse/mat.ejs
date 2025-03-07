@@ -1,0 +1,39 @@
+<%- include("../partials/header") %>
+<div class="container pt-1">
+    <h3 class="mt-4">Warehouse Material</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/Warehouse/mat">Warehouse Material</a></li>
+        </ol>
+    </nav>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h6 class="m-0">Materials</h6>
+            <a id="crtMaterials" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modCrtMat">
+                Create Materials
+            </a>
+        </div>
+        <div class="card-body">
+            <table id="tblMatIndex" class="table-responsive-md w-100">
+                <thead>
+                    <tr>
+                        <td class="text-center">Brand</td>
+                        <td class="text-center">Model</td>
+                        <td class="text-center">Qty</td>
+                        <td class="text-center">Action</td>
+                    </tr>
+                </thead>
+                <tbody id="tblMatIndexBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<%- include("modal/mod-mat") %>
+<%- include("../partials/script") %>
+<%- include("../partials/flash") %>
+    <script src="/js/crud.js"></script>
+    <script src="/js/warehouse/mat.js"></script>
+    <script src="/js/validation.js"></script>
+<%- include("../partials/footer") %>

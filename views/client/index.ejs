@@ -1,0 +1,62 @@
+<%- include("../partials/header") %>
+<%- include("../partials/header-sidebar") %>
+<main id="main" class="main">
+    <!-- Title Page -->
+    <div class="pagetitle">
+        <h1>Client</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Client</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">All Clients</h5>
+                    <!-- create client button
+
+                    ciCreateModal = Client Index Create Modal
+                    ciCreate = Client Create
+                    location = \views\client\modal\create.ejs -->
+                    <button id="ciCreate" type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#cCreateModal">
+                        <i class="bi bi-file-earmark"></i> Create
+                    </button><!-- end of client create button -->
+                </div>
+                <!-- Table for list of clients
+
+                ciTable = Client Index Table
+                This table is created by DataTable
+                location = \assets\js\client\index.js -->
+                <table id="ciTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                </table>
+                <!-- End Table on list of clients -->
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- modal -->
+<%- include("modal/create") %>
+<!-- notification -->
+<%- include("../partials/toaster") %>
+
+<!-- dependencies -->
+<%- include("../partials/script") %>
+
+<!-- JS -->
+<script src="/assets/js/client/index.js"></script>
+<script src="/assets/js/client/crud/create.js"></script>
+
+<%- include("../partials/footer") %>

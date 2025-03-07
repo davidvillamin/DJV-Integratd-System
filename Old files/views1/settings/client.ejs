@@ -1,0 +1,202 @@
+<%- include("../partials/header") %>
+<div class="container pt-1">
+    <h3 class="mt-4">Client Settings</h3>
+    <div class="accordion accordion-flush" id="accClntSetting">
+        <!-- client Type -->
+        <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed p-2" type="button" data-bs-toggle="collapse" data-bs-target="#flushClntType" aria-expanded="false" aria-controls="flushClntType">
+                Client Type
+            </button>
+        </h2>
+            <div id="flushClntType" class="accordion-collapse collapse" data-bs-parent="#accClntSetting">
+                <div class="accordion-body ">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>
+                                Client Type List
+                            </strong>
+                        </div>
+                        <div class="container">
+                            <div class="d-flex flex-row-reverse">
+                                <button type="button" class="btn btn-success btn-sm my-2 " data-bs-toggle="modal" data-bs-target="#modCrtClntType">
+                                    Add Client Type
+                                </button>
+                            </div>
+                            <table id="tblClntTypeLst" class="table table-sm table-bordered ">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Type</th>
+                                        <th>With Contact Person</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblClntTypeLstTBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Client Contact Type -->
+        <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushContType" aria-expanded="false" aria-controls="flushContType">
+                <h6>
+                    Client Contact Type
+                </h6>
+            </button>
+        </h2>
+        <div id="flushContType" class="accordion-collapse collapse" data-bs-parent="#accClntSetting">
+            <div class="accordion-body ">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>
+                            Contact Type List
+                        </strong>
+                    </div>
+                    <div class="container">
+                        <div class="d-flex flex-row-reverse">
+                            <button type="button" class="btn btn-success btn-sm my-2 " data-bs-toggle="modal" data-bs-target="#modCrtContType">
+                                Add Contact Type
+                            </button>
+                        </div>
+                        <table id="tblClntContTypeLst" class="table table-sm table-bordered ">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Type</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblClntContTypeLstTBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- Client Device Type -->
+        <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushDeviceType" aria-expanded="false" aria-controls="flushDeviceType">
+                <h6>
+                    Device Type
+                </h6>
+            </button>
+        </h2>
+        <div id="flushDeviceType" class="accordion-collapse collapse" data-bs-parent="#accClntSetting">
+            <div class="accordion-body ">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>
+                            Device type List
+                        </strong>
+                    </div>
+                    <div class="container">
+                        <div class="d-flex flex-row-reverse">
+                            <button type="button" class="btn btn-success btn-sm my-2 " data-bs-toggle="modal" data-bs-target="#modCrtDevType">
+                                Add Device Type
+                            </button>
+                        </div>
+                        <table id="tblClntDevTypeLst" class="table table-sm table-bordered ">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Type</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblClntDevTypeLstTBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- Client Device Brand -->
+        <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushDeviceBrand" aria-expanded="false" aria-controls="flushDeviceBrand">
+                <h6>
+                    Device Brand
+                </h6>
+            </button>
+        </h2>
+        <div id="flushDeviceBrand" class="accordion-collapse collapse" data-bs-parent="#accClntSetting">
+            <div class="accordion-body ">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>
+                            Device Brand List
+                        </strong>
+                    </div>
+                    <div class="container">
+                        <div class="d-flex flex-row-reverse">
+                            <button type="button" class="btn btn-success btn-sm my-2 " data-bs-toggle="modal" data-bs-target="#modCrtDevBrand">
+                                Add Device Brand
+                            </button>
+                        </div>
+                        <table id="tblClntDevBrandLst" class="table table-sm table-bordered ">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Brand</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblClntDevBrandLstTBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- Client Device Part Type -->
+        <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushDevicePartType" aria-expanded="false" aria-controls="flushDevicePartType">
+                <h6>
+                    Device Part Type
+                </h6>
+            </button>
+        </h2>
+        <div id="flushDevicePartType" class="accordion-collapse collapse" data-bs-parent="#accClntSetting">
+            <div class="accordion-body ">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>
+                            Device Part type
+                        </strong>
+                    </div>
+                    <div class="container">
+                        <div class="d-flex flex-row-reverse">
+                            <button type="button" class="btn btn-success btn-sm my-2 " data-bs-toggle="modal" data-bs-target="#modCrtDevPartType">
+                                Add Device Brand
+                            </button>
+                        </div>
+                        <table id="tblClntDevPartTypeList" class="table table-sm table-bordered ">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Type</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblClntDevPartTypeListTBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<%- include("modal/mod-client") %>
+<%- include("../partials/script") %>
+<%- include("../partials/flash") %>
+    <script src="/js/crud.js"></script>
+    <script src="/js/settings/client.js"></script>
+    <script src="/js/validation.js"></script>
+<%- include("../partials/footer") %>

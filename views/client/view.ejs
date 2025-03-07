@@ -1,0 +1,129 @@
+<%- include("../partials/header") %>
+<%- include("../partials/header-sidebar") %>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Profile</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/client">Client</a></li>
+                <li class="breadcrumb-item active">Client Profile</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img id="cvProfileImg" src="/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+						
+
+                        <div class="tab-pane active profile-overview" id="profile-overview">
+                            <h5 class="card-title">Notes</h5>
+                            <p id="ccoNotes" class="small fst-italic"></p>
+
+                            <h5 class="card-title">Profile Details</h5>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Full Name</div>
+                                <div id="ccoName" class="col-lg-9 col-md-8"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Address</div>
+                                <div id="ccoAddress" class="col-lg-9 col-md-8"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Contact Person</div>
+                                <div id="ccoContactPerson" class="col-lg-9 col-md-8"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Contact Number</div>
+                                <div id="ccoContactNumber" class="col-lg-9 col-md-8"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Email</div>
+                                <div id="ccoEmail" class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                            </div>
+                        </div>
+                        <div class="social-links mt-2">
+                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+							<div class="accordion-item">
+							  <h2 class="accordion-header" id="flush-headingOne">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+								  Pending
+								</button>
+							  </h2>
+							  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+								<div class="accordion-body">
+									<table id="cvpTable">
+										<thead>
+											<tr>
+												<th>Job Order</th>
+												<th>Device</th>
+												<th>Bill</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							  </div>
+							</div>
+							<div class="accordion-item">
+							  <h2 class="accordion-header" id="flush-headingTwo">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+								  Completed
+								</button>
+							  </h2>
+							  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+								<div class="accordion-body">
+									<table id="cvcTable">
+										<thead>
+											<tr>
+												<th>Job Order</th>
+												<th>Device</th>
+												<th>Bill</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							  </div>
+							</div>
+						  </div>
+						
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+								
+							</div>
+							<div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
+							<div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">...</div>
+							<div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">...</div>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main><!-- End #main -->
+<script src="../../../assets/js/transaction/inhouse/view.js"></script>
+<%- include("../partials/script") %>
+<script src="/assets/js/client/view.js"></script>
+
+<%- include("../partials/footer") %>

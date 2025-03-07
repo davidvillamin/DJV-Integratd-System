@@ -1,0 +1,62 @@
+<div class="modal fade" id="psCreateModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Parts Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="psCreate" novalidate enctype="multipart/form-data">
+                    <div class="row g-3 mb-1 align-items-center">
+                        <!-- Suppliers Price -->
+                        <div class="col-auto">
+                            <label for="pscSuppliersPrice" class="col-form-label">Suppliers Price</label>
+                          </div>
+                          <div class="col-4">
+                            <input type="text" id="pscSuppliersPrice" class="form-control" required>
+                          </div>
+                          <!-- Retail Price -->
+                          <div class="col-auto">
+                            <label for="pscRetailPrice" class="col-form-label">Retail Price</label>
+                          </div>
+                          <div class="col-4">
+                            <input type="text" id="pscRetailPrice" class="form-control" required>
+                        </div>
+                        <!-- serial -->
+                        <div class="col-auto">
+                          <label for="pscSerial" class="col-form-label">Serial</label>
+                        </div>
+                        <div class="col-9">
+                          <input type="text" id="pscSerial" class="form-control">
+                        </div>
+                        <!-- Add Button -->
+                        <div class="col-auto">
+                            <a id="pscAdd" class="btn btn-success"><i class="bi bi-plus"></i>Add</a>
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        <table id="pscSerialTable">
+                            <thead>
+                                <tr>
+                                    <th data-field="partinformation" data-visible="false">Id</th>
+                                    <th data-field="Brand" data-visible="false">Brand</th>
+                                    <th data-field="Model" data-visible="false">Model</th>
+                                    <th data-field="Description" data-visible="false">Description</th>
+                                    <th data-field="Serial">Serial</th>
+                                    <th data-field="SupplierPrice">Supplier Price</th>
+                                    <th data-field="RetailPrice">Retail Price</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

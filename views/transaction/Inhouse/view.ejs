@@ -1,0 +1,512 @@
+<%- include("../../partials/header") %>
+<%- include("../../partials/header-sidebar") %>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1 class="placeholder-glow">
+            <span id="tihvTitleJobOrder">
+                <span class="placeholder col-1"></span>
+            </span>
+            <span id="tihvTitleDevice">
+                <span class="placeholder col-1"></span>
+            </span> 
+            <span id="tihvTitleSerial">
+                <span class="placeholder col-1"></span>
+            </span>
+        </h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/transaction">Transactions</a></li>
+                <li class="breadcrumb-item"><a href="/transaction/inhouse">In-house</a></li>
+                <li class="breadcrumb-item active"><span class="tihvJobOrder"></span></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+            <div class="col-xl-4 clientInformation">
+                <div class="card">
+                    <!-- badges -->
+                    <div id="tihvtStatus" class="container mt-2">
+                        <!-- temporary status -->
+                        
+                        <!-- <span class="badge bg-warning text-dark">Quotation</span>
+                        <span class="badge bg-warning text-dark">Pending Approval</span>
+                        <span class="badge bg-warning text-dark">For Release</span>
+                        <span class="badge bg-warning text-dark">Pending Payment</span>
+                        <span class="badge bg-warning text-dark">Incomplete Payment</span>
+                        <span class="badge bg-warning text-dark">Hold</span> -->
+
+                        <!-- fixed status -->
+                        <!-- <span class="badge bg-success">Cancel Repair</span>    
+                        <span class="badge bg-success">Partial Approval</span>    
+                        <span class="badge bg-success">Parts Request</span>    
+                        <span class="badge bg-success">Pars Approve</span>    
+                        <span class="badge bg-success">Repaired</span>    
+                        <span class="badge bg-success">Repeased</span>    
+                        <span class="badge bg-success">Paid</span>     -->
+                        <i class="bi bi-pencil-square hover-effect" data-bs-toggle="modal" data-bs-target="#tihvtEditModal"></i>
+                    </div>
+
+                    <!-- client information -->
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center text-center placeholder-glow">
+                        <img id="tihvProfile" alt="Profile" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
+                        <div class="d-flex align-items-center" >
+                            <h2 id="tihvClientName" class="mb-1">
+                                <span class="placeholder col-12"></span>
+                            </h2>
+                            <i id="tihvClientEdit" class="bi bi-pencil-square hover-effect" data-bs-toggle="modal" data-bs-target=""></i>
+                        </div>
+              
+                        <p class="mb-1"><strong>Address:</strong>
+                            <span id="tihvClientAddress">
+                                <span class="placeholder col-12"></span>
+                            </span>
+                        </p>
+                        <p class="mb-1"><strong>Contact Numbers:</strong></p>
+                        <ul class="list-unstyled mb-3" id="tihvClientContactNumbers">
+                            <span class="placeholder col-12"></span>
+                            <span class="placeholder col-12"></span>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-8 mainContent">
+                <div class="card">
+                    <!-- show/hide client info -->
+                     <div class="mx-3 mt-2 d-flex flex-row-reverse">
+                         <i id="tihvMaxMinDisplay" class="bi bi-fullscreen hover-effect"></i>
+                    </div>
+                    <!-- <i class="bi bi-fullscreen-exit hover-effect"></i> -->
+                    <div class="card-body pt-3">
+                        <div class="accordion accordion-flush" id="tihEditAccordion">
+                            <!-- repair -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header d-flex flex-row">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseRepair" aria-expanded="false" aria-controls="flush-collapseRepair">
+                                        Repair
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseRepair" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
+                                    <div class="accordion-body p-0">
+                                        <div class="d-flex flex-row-reverse">
+                                            <i id="tihvRepairEdit" class="bi bi-pencil-square pencil-icon" data-bs-toggle="modal" data-bs-target="#tihvrEditModal"></i>
+                                        </div>
+                                        <table class="table table-borderless p-0">
+                                            <tr>
+                                                <td class="p-0">
+                                                    <strong>Job Order:</strong>
+                                                    <span id="tihvrJobOrder"></span>
+                                                </td>
+                                                <td class="p-0">
+                                                    <Strong>Recieve Date:</Strong>
+                                                    <span id="tihvrRecieveDate"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-0">
+                                                    <strong>Device:</strong>
+                                                    <span id="tihvrDevice"></span>
+                                                </td>
+                                                <td class="p-0">
+                                                    <Strong>Serial Number:</Strong>
+                                                    <span id="tihvrSerial"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-0">
+                                                    <Strong>Technician:</Strong>
+                                                    <span id="tihvrTechnician"></span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Billing -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBilling" aria-expanded="false" aria-controls="flush-collapseBilling">
+                                    Billing
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseBilling" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
+                                    <div class="accordion-body">
+                                        <div class="d-flex flex-row-reverse mb-2">
+                                            <button class="btn btn-primary" id="addRowBtn"><i class="bi bi-plus-square"></i> Add Row</button>
+                                        </div>
+
+                                        <table class="table" id="billingTable">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Description</th>
+                                                    <th scope="col">Qty</th>
+                                                    <th scope="col">SRP</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Canon Cartridge</td>
+                                                    <td>1 pc</td>
+                                                    <td>Php. 1,500.00</td>
+                                                    <td>Php. 1,500.00</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm editRowBtn"><i class="bi bi-pencil-square"></i></button>
+                                                        <button class="btn btn-danger btn-sm deleteRowBtn"><i class="bi bi-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Service Charge</td>
+                                                    <td>1 lot</td>
+                                                    <td>Php. 1,000.00</td>
+                                                    <td>Php. 1,000.00</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm editRowBtn"><i class="bi bi-pencil-square"></i></button>
+                                                        <button class="btn btn-danger btn-sm deleteRowBtn"><i class="bi bi-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr class="bg-warning">
+                                                    <th scope="row">Overall Total</th>
+                                                    <td colspan="2"></td>
+                                                    <td id="overallTotal">Php. 2,500.00</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <script>
+                                            document.getElementById('addRowBtn').addEventListener('click', function() {
+                                                const table = document.getElementById('billingTable').getElementsByTagName('tbody')[0];
+                                                const newRow = table.insertRow(table.rows.length - 1);
+                                                newRow.innerHTML = `
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm editRowBtn"><i class="bi bi-pencil-square"></i></button>
+                                                        <button class="btn btn-danger btn-sm deleteRowBtn"><i class="bi bi-trash"></i></button>
+                                                    </td>
+                                                `;
+                                                addEditEvent(newRow.querySelector('.editRowBtn'));
+                                                addDeleteEvent(newRow.querySelector('.deleteRowBtn'));
+                                            });
+
+                                            document.querySelectorAll('.deleteRowBtn').forEach(button => {
+                                                addDeleteEvent(button);
+                                            });
+
+                                            document.querySelectorAll('.editRowBtn').forEach(button => {
+                                                addEditEvent(button);
+                                            });
+
+                                            function addDeleteEvent(button) {
+                                                button.addEventListener('click', function() {
+                                                    const row = button.closest('tr');
+                                                    row.parentNode.removeChild(row);
+                                                    updateOverallTotal();
+                                                });
+                                            }
+
+                                            function addEditEvent(button) {
+                                                button.addEventListener('click', function() {
+                                                    const row = button.closest('tr');
+                                                    row.querySelectorAll('td:not(:last-child)').forEach(cell => {
+                                                        cell.contentEditable = true;
+                                                    });
+                                                    button.classList.remove('btn-warning');
+                                                    button.classList.add('btn-success');
+                                                    button.innerHTML = '<i class="bi bi-check-square"></i>';
+                                                    button.removeEventListener('click', arguments.callee);
+                                                    button.addEventListener('click', function() {
+                                                        row.querySelectorAll('td:not(:last-child)').forEach(cell => {
+                                                            cell.contentEditable = false;
+                                                        });
+                                                        button.classList.remove('btn-success');
+                                                        button.classList.add('btn-warning');
+                                                        button.innerHTML = '<i class="bi bi-pencil-square"></i>';
+                                                        updateOverallTotal();
+                                                        addEditEvent(button);
+                                                    });
+                                                });
+                                            }
+
+                                            function updateOverallTotal() {
+                                                let total = 0;
+                                                document.querySelectorAll('#billingTable tbody tr:not(.bg-warning)').forEach(row => {
+                                                    const totalCell = row.cells[3];
+                                                    const amount = parseFloat(totalCell.textContent.replace(/[^0-9.-]+/g,""));
+                                                    if (!isNaN(amount)) {
+                                                        total += amount;
+                                                    }
+                                                });
+                                                document.getElementById('overallTotal').textContent = `Php. ${total.toFixed(2)}`;
+                                            }
+
+                                            document.querySelectorAll('#billingTable tbody tr:not(.bg-warning) td[contenteditable="true"]').forEach(cell => {
+                                                cell.addEventListener('input', updateOverallTotal);
+                                            });
+                                        </script>
+                                    <div class="card mt-3">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Add Payment</h5>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="date" class="form-control" id="paymentDate" placeholder="Date">
+                                                        <label for="paymentDate">Date</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" id="paymentAmount" placeholder="Amount">
+                                                        <label for="paymentAmount">Amount</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-success" id="addPaymentBtn">Add Payment</button>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        document.getElementById('addPaymentBtn').addEventListener('click', function() {
+                                            const dateInput = document.getElementById('paymentDate');
+                                            const amountInput = document.getElementById('paymentAmount');
+                                            const date = dateInput.value;
+                                            const amount = parseFloat(amountInput.value.replace(/[^0-9.-]+/g,""));
+
+                                            if (date && !isNaN(amount)) {
+                                                const table = document.getElementById('paymentTable').getElementsByTagName('tbody')[0];
+                                                const newRow = table.insertRow();
+                                                newRow.innerHTML = `
+                                                    <td>${date}</td>
+                                                    <td>Php. ${amount.toFixed(2)}</td>
+                                                    <td>
+                                                        <button class="btn btn-danger btn-sm deletePaymentBtn"><i class="bi bi-trash"></i></button>
+                                                    </td>
+                                                `;
+                                                addDeletePaymentEvent(newRow.querySelector('.deletePaymentBtn'));
+                                                updateTotalPayment();
+                                                dateInput.value = '';
+                                                amountInput.value = '';
+                                            }
+                                        });
+
+                                        function addDeletePaymentEvent(button) {
+                                            button.addEventListener('click', function() {
+                                                const row = button.closest('tr');
+                                                row.parentNode.removeChild(row);
+                                                updateTotalPayment();
+                                            });
+                                        }
+
+                                        function updateTotalPayment() {
+                                            let total = 0;
+                                            document.querySelectorAll('#paymentTable tbody tr').forEach(row => {
+                                                const amountCell = row.cells[1];
+                                                const amount = parseFloat(amountCell.textContent.replace(/[^0-9.-]+/g,""));
+                                                if (!isNaN(amount)) {
+                                                    total += amount;
+                                                }
+                                            });
+                                            document.getElementById('totalPayment').textContent = `Php. ${total.toFixed(2)}`;
+                                        }
+                                    </script>
+                                        <h5 class="card-title mx-3">Payment History</h5>
+                                        <div class="card-body">
+                                            <table class="table" id="paymentTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">Amount</th>
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Payment rows will be added here -->
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="bg-warning">
+                                                        <th scope="row">Total Payment</th>
+                                                        <td id="totalPayment">Php. 0.00</td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        document.querySelector('.btn-success').addEventListener('click', function() {
+                                            const dateInput = document.querySelector('input[type="date"]');
+                                            const amountInput = document.querySelector('input[type="text"]');
+                                            const date = dateInput.value;
+                                            const amount = parseFloat(amountInput.value.replace(/[^0-9.-]+/g,""));
+
+                                            if (date && !isNaN(amount)) {
+                                                const table = document.getElementById('paymentTable').getElementsByTagName('tbody')[0];
+                                                const newRow = table.insertRow();
+                                                newRow.innerHTML = `
+                                                    <td>${date}</td>
+                                                    <td>Php. ${amount.toFixed(2)}</td>
+                                                    <td>
+                                                        <button class="btn btn-danger btn-sm deletePaymentBtn"><i class="bi bi-trash"></i></button>
+                                                    </td>
+                                                `;
+                                                addDeletePaymentEvent(newRow.querySelector('.deletePaymentBtn'));
+                                                updateTotalPayment();
+                                            }
+                                        });
+
+                                        function addDeletePaymentEvent(button) {
+                                            button.addEventListener('click', function() {
+                                                const row = button.closest('tr');
+                                                row.parentNode.removeChild(row);
+                                                updateTotalPayment();
+                                            });
+                                        }
+
+                                        function updateTotalPayment() {
+                                            let total = 0;
+                                            document.querySelectorAll('#paymentTable tbody tr').forEach(row => {
+                                                const amountCell = row.cells[1];
+                                                const amount = parseFloat(amountCell.textContent.replace(/[^0-9.-]+/g,""));
+                                                if (!isNaN(amount)) {
+                                                    total += amount;
+                                                }
+                                            });
+                                            document.getElementById('totalPayment').textContent = `Php. ${total.toFixed(2)}`;
+                                        }
+                                    </script>
+                                        
+                                </div>
+                            </div>
+                            <!-- Release -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseRelease" aria-expanded="false" aria-controls="flush-collapseRelease">
+                                    Release
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseRelease" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-floating">
+                                                    <input type="date" class="form-control" id="tiheRecieveDate" placeholder="Recieve Date" required>
+                                                    <label for="tiheRecieveDate">Release Date</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                                        <option selected>Technician</option>
+                                                        <option value="1">Deancent</option>
+                                                        <option value="2">Vince</option>
+                                                        <option value="3">David</option>
+                                                    </select>
+                                                    <label for="floatingSelect">Released by</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Images -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseApproval" aria-expanded="false" aria-controls="flush-collapseApproval">
+                                    Images
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseApproval" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <h6 class="card-title mx-3">Approval</h6>
+                                                    <div class="card-body">
+                                                        <div class="input-group mb-3">
+                                                            <input type="file" class="form-control" id="inputGroupFile01" accept="image/*">
+                                                        </div>
+                                                        <img id="loadImage"  class="img-thumbnail w-auto">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card">
+                                                    <h6 class="mx-3 card-title">Other Options</h6>
+                                                    <div class="card-body">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                            <label class="form-check-label" for="exampleRadios1">
+                                                            Hold
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                                            <label class="form-check-label" for="exampleRadios2">
+                                                            Repair Cancel
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Notes -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNotes" aria-expanded="false" aria-controls="flush-collapseRelease">
+                                    Notes
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseNotes" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-body pt-3">
+                                                <div class="d-flex justify-content-between">
+                                                    <h5 class="card-title">Notes</h5>
+                                                    <a class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#tihvPrintModal">Print</a>
+                                                </div>
+                                                <div class="row">
+                                                    <div id="tihvNotes"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->    
+<!-- edit client modal -->
+<%- include("../../client/modal/edit") %>
+<!-- for print of report -->
+<%- include("modal/print") %>
+
+<!-- edit repair modal -->
+<%- include("modal/edit-repair") %>
+<!-- edit tags modal -->
+<%- include("modal/edit-tags") %>
+
+ <!-- toaster notification -->
+<%- include("../../partials/toaster") %>
+<!-- essential scripts -->
+<%- include("../../partials/script") %>
+
+<!-- for edit client modal -->
+<!-- <script src="../../../assets/js/client/edit.js"></script> -->
+<!-- inhouse transaction view script -->
+<script src="../../../assets/js/transaction/inhouse/view.js"></script>
+<%- include("../../partials/footer") %>
+

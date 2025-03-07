@@ -1,0 +1,182 @@
+<!--    // ============================================================
+        // Create client Type
+        // ============================================================ -->
+<div class="modal fade" id="modCrtClntType" tabindex="-1" role="dialog" aria-labelledby="modCrtClntTypeLbl" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-fullscreen-md-down" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modCrtClntTypeLbl">Client Type</h5>
+                <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="crtClntType" class="needs-validation" novalidate>
+                    <div class="input-group input-group-sm my-1">
+                        <label class="input-group-text col-2 d-flex justify-content-center" for="crtClntTypeOpt">Client Type</label>
+                        <select class="form-select" id="crtClntTypeOpt" required>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Proceed</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    // ============================================================
+        // Create client w/o contact person modal
+        // ============================================================ -->
+
+<div class="modal fade" id="modCrtClntWoCP" tabindex="-1" role="dialog" aria-labelledby="modCrtClntWoCPLbl" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modCrtClntWoCPLbl">Create Client</h5>
+                <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form  id="crtClntWoCP" class="needs-validation" novalidate>
+                    <input type="hidden" minlength="1" id="crtClntWoCPTypeID">
+                    <input type="hidden" minlength="1" id="crtClntWoCPTypewContPer">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtClntWoCPTypeLbl">Client Type</span>
+                        <input type="text" class="form-control" id="crtClntWoCPType" minlength="1" aria-describedby="crtClntWoCPTypeLbl" disabled>
+                    </div>
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtClntWoCPFistNmLbl">First Name</span>
+                        <input type="text" class="form-control" id="crtClntWoCPFistNm" minlength="1" aria-describedby="crtClntWoCPFistNmLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtClntWoCPLastNmLbl">Last Name</span>
+                        <input type="text" class="form-control" id="crtClntWoCPLastNm" minlength="1" aria-describedby="crtClntWoCPLastNmLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtClntWoCPAddLbl">Address</span>
+                        <input type="text" class="form-control w-50" id="crtClntWoCPAdd" minlength="1" aria-describedby="crtClntWoCPAddLbl" required>
+                        <label class="input-group-text col-1 d-flex justify-content-center" for="crtClntWoCPAddTypeOpt">Type</label>
+                        <select class="form-select" id="crtClntWoCPAddTypeOpt" disabled>
+                        </select>
+                    </div>
+                    <div>
+                        <!-- dynamic input of contact before the button -->
+                        <a id="crtClntWoCPContAdd" class="btn btn-primary btn-sm d-flex justify-content-center">Add Contact</a>
+                    </div>
+                    <!-- ============================================= -->
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 justify-content-center" id="crtClntWoCPOtherDetLbl">Other Details</span>
+                        <textarea class="form-control" id="crtClntWoCPOtherDet" minlength="1" aria-describedby="crtClntWoCPOtherDetLbl"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success btn-sm">Create Client</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    // ============================================================
+        // Create client with contact person modal
+        // ============================================================ -->
+<div class="modal fade" id="modCrtClntWCP" tabindex="-1" role="dialog" aria-labelledby="modCrtClntWCPLbl" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modCrtClntWCPLbl">Create Client</h5>
+                <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form  id="crtClntWCP" class="needs-validation" novalidate>
+                    <input type="hidden" id="crtClntWCPTypeID">
+                    <input type="hidden" id="crtClntWCPTypewContPer">
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtClntWCPTypeLbl">Client Type</span>
+                        <input type="text" class="form-control" id="crtClntWCPType" aria-describedby="crtClntWCPTypeLbl" disabled>
+                    </div>
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtClntWCPClntNameLbl">Client Name</span>
+                        <input type="text" class="form-control" id="crtClntWCPClntName" aria-describedby="crtClntWCPClntNameLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="crtClntWCPAddLbl">Address</span>
+                        <input type="text" class="form-control w-50" id="crtClntWCPAdd" aria-describedby="crtClntWCPAddLbl" required>
+                        <label class="input-group-text col-1 d-flex justify-content-center" for="crtClntWCPAddTypeOpt">Type</label>
+                        <select class="form-select" id="crtClntWCPAddTypeOpt" disabled>
+                        </select>
+                    </div>
+                    <div>
+                        <!-- dynamic input of contact before the button -->
+                        <a id="crtClntWCPContAdd" class="btn btn-primary btn-sm d-flex justify-content-center mt-2">Add Contact</a>
+                    </div>
+                    <!-- ============================================= -->
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 justify-content-center" id="crtClntWCPOtherDetLbl">Other Details</span>
+                        <textarea class="form-control" id="crtClntWCPOtherDet" aria-describedby="crtClntWCPOtherDetLbl"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success btn-sm">Create Client</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    // ============================================================
+        // Delete Client with contact or without contact number modal
+        // ============================================================ -->
+<div class="modal fade" id="dltClntMod" tabindex="-1" role="dialog" aria-labelledby="dltClntModLbl" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dltClntModLbl">Delete Client</h5>
+                <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" >
+                <h6>Are you sure you want to delete this client?</h6>
+                <div class="card card-body">
+                    <div class="dltClntBody">
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Client Name: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltClntNm"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Address: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltClntAdd"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Client Type: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltClntType"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form  id='dltClnt' class='needs-validation' novalidate>
+                    <input type="hidden" id="dltClntID">
+                    Please type <strong>DELETE</strong> to confirm.
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="dltClntConfirmLbl">Confirmation</span>
+                        <input type="text" class="form-control" id="dltClntConfirm" aria-describedby="dltClntConfirmLbl" required>
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-secondary btn-sm' data-bs-dismiss='modal'>Close</button>
+                        <button type='submit' class='btn btn-danger btn-sm'>Delete Client</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

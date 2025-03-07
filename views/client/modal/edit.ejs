@@ -1,0 +1,121 @@
+<!-- Individual -->
+<div class="modal fade" id="ciEditModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Individual Client</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <!-- Individual -->
+                <form class="needs-validation" id="ciEdit" novalidate enctype="multipart/form-data">
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <input id="cieName" type="text" class="form-control"placeholder="Name" required>
+                            <label for="cieName">*Name</label>
+                        </div>
+                    </div>
+                    <div class="col-12 my-3">
+                        <div class="form-floating">
+                            <textarea id="cieAddress" class="form-control" placeholder="Address" style="height: 100px;"></textarea>
+                            <label for="cieAddress">Address</label>
+                        </div>
+                    </div>
+                    <div class="row" id="cieEmailGender">
+                        <div class="col-md-8 my-3">
+                            <div class="form-floating">
+                                <input id="cieEmail" type="email" class="form-control" placeholder="Email">
+                                <label for="cieEmail">Email</label>
+                            </div>
+                        </div>
+                        <!-- gender -->
+                        <div class="col-md-3 my-3 d-flex align-items-center">
+                            <label for="cciGender" class="form-label me-3">Gender</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="cieGender" value="true" required>
+                                <label class="form-check-label" for="genderMale">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="cieGender" value="false" required>
+                                <label class="form-check-label" for="genderFemale">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Contact -->
+                    <!-- <div class="input-group my-3 cieContactNumberGroup">
+                        <span class="input-group-text">Contact Number</span>
+                        <input type="text" class="form-control cieContactNumber">
+                        <button class="btn btn-success cieContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                        <button class="btn btn-danger cieContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
+                    </div> -->
+                    <div class="col-md-12 my-3">
+                        <div class="form-floating">
+                            <textarea id="cieNotes" type="date" class="form-control" placeholder="Notes" style="height: 100px;"></textarea>
+                            <label for="cieNotes">Notes</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Corporate -->
+<div class="modal fade" id="ccEditModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Corporate Client</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Corporate -->
+                <form class="needs-validation" id="ccEdit" novalidate enctype="multipart/form-data">
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <input id="cceName" type="text" class="form-control" placeholder="Company Name" required>
+                            <label for="cceName">*Company Name</label>
+                        </div>
+                    </div>
+                    <div class="col-12 my-3" id="cceAddressGroup">
+                        <div class="form-floating">
+                            <textarea id="cceAddress" class="form-control" placeholder="Address" style="height: 100px;"></textarea>
+                            <label for="cceAddress">Address</label>
+                        </div>
+                    </div>
+                    <!-- Contact person -->
+                    <!-- <div class="input-group my-3 cceContactPersonGroup">
+                        <span class="input-group-text">Contact Person</span>
+                        <input type="text" class="form-control cceContactPerson">
+                        <span class="input-group-text">Contact Number</span>
+                        <input type="text" class="form-control cceContactNumber">
+                        <button class="btn btn-success cceContactAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                        <button class="btn btn-danger cceContactDelete" type="button"><i class="bi bi-trash"></i></button>
+                    </div> -->
+                    <div class="col-md-12 my-3">
+                        <div class="form-floating">
+                            <input id="cceEmail" type="email" class="form-control" placeholder="Email">
+                            <label for="cceEmail">Email</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 my-3">
+                        <div class="form-floating">
+                            <textarea id="cceNotes" type="date" class="form-control" placeholder="Notes" style="height: 100px;"></textarea>
+                            <label for="cceNotes">Notes</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

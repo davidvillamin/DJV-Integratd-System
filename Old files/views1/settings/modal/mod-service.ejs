@@ -1,0 +1,83 @@
+<!-- =========================================================== -->
+<!-- CRUD Service Category -->
+<!-- =========================================================== -->
+<!-- Create service type -->
+<div class="modal fade" id="modCrtServiceCat" tabindex="-1" aria-labelledby="modCrtServiceCatLbl" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modCrtServiceCatLbl">Add Service Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="crtServiceCat" class="needs-validation" novalidate>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-3">
+                            <label for="crtServiceCatNm" class="col-form-label">Category</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="text" id="crtServiceCatNm" class="form-control form-control-sm" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" >Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit service Type -->
+
+<!-- Delete service Type -->
+<!-- =========================================================== -->
+<!-- CRUD Service Type -->
+<!-- =========================================================== -->
+<!-- Create service type -->
+<div class="modal fade" id="modCrtServiceType" tabindex="-1" aria-labelledby="modCrtServiceTypeLbl" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modCrtServiceTypeLbl">Add Service Type</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="crtServiceType" class="needs-validation" novalidate>
+                    <div class="input-group input-group-sm my-1">
+                        <label class="input-group-text col-2 d-flex justify-content-center" for="crtServiceTypeCat">Category</label>
+                        <select class="form-select" id="crtServiceTypeCat" required>
+                        </select>
+                    </div>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-3">
+                            <label for="crtServiceTypeType" class="col-form-label">Type: </label>
+                        </div>
+                        <div class="col-9">
+                            <input type="text" id="crtServiceTypeType" class="form-control form-control-sm" required>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="crtServiceTypeTicket" type="radio" value="true" required>
+                            <label class="form-check-label">With ticket</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="crtServiceTypeTicket" type="radio" value="false" required>
+                            <label class="form-check-label">Without ticket</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" >Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit service Type -->
+
+<!-- Delete service Type -->

@@ -1,0 +1,75 @@
+<%- include("../../partials/header") %>
+<%- include("../../partials/header-sidebar") %>
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+        <h1>In-House</h1>
+        <nav>
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/transaction">Transactions</a></li>
+            <li class="breadcrumb-item active">In-House</li>
+            </ol>
+        </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Floating Labels Form -->
+                    <a href="/transaction/inhouse/view/aa/print">Print</a>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group m-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="tihvJobOrderLbl">Job Order</span>
+                                </div>
+                                <input id="tihvJobOrder" type="text" class="form-control" aria-describedby="tihvJobOrderLbl">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group m-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="tihvRecieveDateLbl">Recieve Date</span>
+                                </div>
+                                <input id="tihvRecieveDate" type="date" class="form-control" aria-describedby="tihvRecieveDateLbl">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="input-group m-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="tihvClientNameLbl">Client Name</span>
+                                </div>
+                                <input id="tihvClientName" type="text" class="form-control" aria-describedby="tihvClientNameLbl">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group m-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="tihvDeviceLbl">Device</span>
+                                </div>
+                                <input id="tihvDevice" type="text" class="form-control" aria-describedby="tihvDeviceLbl">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group m-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="tihvSerialLbl">Serial Number</span>
+                                </div>
+                                <input id="tihvSerial" type="text" class="form-control" aria-describedby="tihvSerialLbl">
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-12 m-3"> -->
+                            Notes
+                            <div id="tihCreateNotes" class="quill-editor-full">
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+<%- include("../../partials/script") %>
+<script src="../../../assets/js/transaction/inhouse/view.js"></script>
+<%- include("../../partials/footer") %>

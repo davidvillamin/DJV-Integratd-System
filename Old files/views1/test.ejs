@@ -1,0 +1,87 @@
+<%- include("partials/header") %>
+<div class="input-group mb-3">
+    <form id="formTest" enctype="multipart/form-data">
+        <input type="file" class="form-control fileInput"  name="afiles1">
+        <input type="file" class="form-control fileInput"  name="afiles2">
+        <button id="uploadAll">upload all</button>
+    </form>
+    <div id="imgLst">
+    </div>
+
+    <button id="sendToBackend">sendToBackend</button>
+    <!-- get images -->
+    <button id="getFiles">Get files</button>
+  </div>
+    <%- include("partials/script") %>
+    <script src="/js/validation.js"></script>
+    <script src="/js/crud.js"></script>
+    <script>
+        var delFile = []
+        //input files
+        // function readURL(input) {
+        //     if (input.files && input.files[0]) {
+        //         for (let i = 0; i < input.files.length; i++) {
+        //             // dataStr.push(input.files[i])
+        //             switch (input.files[i].type.split("/")[0]){
+        //                 case "video":
+        //                     $('#imgLst').append("<video data-ind='" + i + "' src='' controls>")
+        //                     $("video[data-ind='" + i + "']").attr('src', URL.createObjectURL(input.files[i]))
+        //                     break;
+        //                 case "image":
+        //                     $('#imgLst').append("<img class='images' data-ind='" + i + "' src=''>")
+        //                     $("img[data-ind='" + i + "']").attr('src', URL.createObjectURL(input.files[i]))
+        //                     break;
+        //             }
+        //         }
+        //         return input.files
+        //     }
+        // }
+
+        $('#uploadAll').on("click",function(e){
+            e.preventDefault()
+            console.log($(this).parents("form").find(".fileInput"))
+            // $('#fileInput').files = readURL(this)
+            // console.log( $('#inputFile').files)
+            formData = new FormData($('#formTest')[0]);
+            console.log(formData)
+            $.ajax({
+                type: "POST",
+                url: "/test",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res){
+                    console.log(res)
+                },
+                error: function (e) {
+                    console.log("some error", e);
+                }
+            });
+        })
+
+        //get files
+        $('#getFiles').on("click",function(){
+            crudiAjax('', '/getFile', 'GET').fileSend.forEach(function(file,i){
+                switch (file.split(".")[1]){
+                    case "mp4":
+                        $('#imgLst').append("<div class='data'><video name='uploadFile' data-ind='" + i + "' src='' controls></video><button class='delData'>Delete</button></div>")
+                        $("video[data-ind='" + i + "']").attr('src', file)
+                        break;
+                    case "jpeg":
+                        $('#imgLst').append("<div class='data'><img name='uploadFile' class='images' data-ind='" + i + "' src=''><button class='delData'>Delete</button></div>")
+                        $("img[data-ind='" + i + "']").attr('src', file)
+                    break;
+                }
+            })
+            $('.delData').on('click',function(){
+                delFile.push($(this).closest($('.data')).children('img').attr('src'))
+                $(this).closest($('.data')).remove()
+            })
+        })
+        // send to backend
+        $('#sendToBackend').on('click',function(){
+            console.log(delFile)
+            crudiAjax(delFile,"/test/delete","Delete")
+        })
+    </script>
+<%- include("partials/footer") %>

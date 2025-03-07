@@ -1,0 +1,40 @@
+<%- include("../partials/header") %>
+    <div class="container pt-1">
+        <nav aria-label="breadcrumb">
+            <h3 class="mt-4">Client List</h3>
+        </nav>
+        <div class="d-flex flex-row-reverse">
+            <button id="crtClnt" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                data-bs-target="#modCrtClntType">Create Client</button>
+        </div>
+        <div class="border rounded-3 mt-2 px-sm-5 py-3 shadow p-3 mb-5 bg-white rounded">
+            <table id="tblClntIndex" class="table-responsive-md w-100">
+                <thead>
+                    <tr>
+                        <td class="text-center">Name</td>
+                        <td class="text-center">Address</td>
+                        <td class="text-center">Type</td>
+                        <td class="text-center">Action</td>
+                    </tr>
+                </thead>
+                <tbody id="tblClntIndexBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+<!-- modals -->
+<!-- create client type -->
+<%- include("../modals/crtClntType") %>
+<!-- create client without contact person -->
+<%- include("../modals/crtClntWoCP") %>
+<!-- create client with contact person -->
+<%- include("../modals/crtClntWCP") %>
+<!-- delete client -->
+<%- include("../modals/dltClnt") %>
+
+<%- include("../partials/script") %>
+<%- include("../partials/toaster") %>
+<script src="/js/validation.js"></script>
+<script src="/js/crud.js"></script>
+<script src="/js/client/index.js"></script>
+<%- include("../partials/footer") %>

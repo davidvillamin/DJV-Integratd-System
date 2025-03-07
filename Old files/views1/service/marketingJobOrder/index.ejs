@@ -1,0 +1,39 @@
+<%- include("../../partials/header") %>
+    <div class="container pt-1">
+        <nav aria-label="breadcrumb">
+            <h3 class="mt-4">Marketing Job Order</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="/service/repair/jo">Job Order List</a></li>
+            </ol>
+        </nav>
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="m-0">Job Order List</h6>
+                <button class="btn btn-success btn-sm" id="crtMktgJobOrderBtn" data-bs-toggle="modal" data-bs-target="#modCrtServiceType">Create Job Order</button>
+            </div>
+            <div class="card-body">
+                <table id="tblMktgJo" class="table-responsive-md w-100">
+                    <thead>
+                        <tr>
+                            <td class="text-center">Job Order</td>
+                            <td class="text-center">Type</td>
+                            <td class="text-center">Device</td>
+                            <td class="text-center">Client</td>
+                            <td class="text-center">Status</td>
+                            <td class="text-center">Action</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tblMktgJoTbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    <%- include("../mod-serviceType.ejs") %>
+    <%- include("../../partials/script") %>
+    <%- include("../../partials/toaster") %>
+    <script src="/js/crud.js"></script>
+    <script src="/js/validation.js"></script>
+    <script src="/js/service/marketingjobOrder/index.js"></script>
+<%- include("../../partials/footer") %>

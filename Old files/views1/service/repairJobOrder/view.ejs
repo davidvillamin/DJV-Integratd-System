@@ -1,0 +1,145 @@
+<%- include("../../partials/header") %>
+    <div class="container pt-1">
+        <div class="hstack gap-3">
+            <!-- job order number -->
+            <h3 class="mt-4" id="joViewJoNum"></h3>  
+            <!-- Custody -->
+            <div class="btn-group ms-auto">
+                <button type="button" class="btn btn-secondary btn-sm">Custody</button>
+                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">On-Hand</a></li>
+                    <li><a class="dropdown-item" href="#">Released</a></li>
+                </ul>
+            </div>
+            <!-- status -->
+            <div class="btn-group float-end">
+                <button type="button" class="btn btn-secondary btn-sm">Status</button>
+                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Repaird</a></li>
+                    <li><a class="dropdown-item" href="#">Pending</a></li>
+                    <li><a class="dropdown-item" href="#">Pull-out</a></li>
+                    <li><a class="dropdown-item" href="#">Warranty</a></li>
+                    <li><a class="dropdown-item" href="#">Unrepairable</a></li>
+                    <li><a class="dropdown-item" href="#">Outsourced</a></li>
+                </ul>
+            </div>
+            <!-- payment -->
+            <div class="btn-group float-end">
+                <button type="button" class="btn btn-danger">payment</button>
+                <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Downpayemt</a></li>
+                    <li><a class="dropdown-item" href="#">Paid</a></li>
+                    <li><a class="dropdown-item" href="#">Unpaid</a></li>
+                    <li><a class="dropdown-item" href="#">No Collection</a></li>
+                </ul>
+            </div>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a href="/service/repair/jo">Job Order List</a></li>
+            </ol>
+        </nav>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="p-3 bg-light border rounded-3 h-100">
+                        <Strong class="d-flex justify-content-center">Client</Strong>
+                        <hr class="m-1">
+                        <strong>Name: </strong><span><a id="joViewClntNm"></a></span> <br>
+                        <strong>Device: </strong><span><a id="joViewClntDev"></a></span>
+                </div>
+            </div>
+            <div class="col-md-6 mt-2 mt-md-0 p-0">
+                <div class="p-3 bg-light border rounded-3 h-100">
+                        <strong class="d-flex justify-content-center">Service</strong>
+                        <hr class="m-1">
+                        <div class="row">
+                            <div class="col-8">
+                                <!-- <strong>Recieved Date: </strong><span><%#= foundJo.dateRecieve.toISOString().split('T')[0]%></span> <br> -->
+                                <strong>Recieved Date: </strong><span id="joViewRecievedDate"></span> <br>
+                                <strong>Recieved By: </strong><span id="joViewRecievedBy"></span> <br>
+                                <strong>Service Charge: </strong><span id="joViewServiceCharge"></span> <br>
+                            </div>
+                            <div class="col-4">
+                                <strong>Category: </strong><span id="joViewCat"></span> <br>
+                                <strong>Type: </strong><span id="joViewType"></span> <br>
+                                <strong>Ticket: </strong><span id="joViewWTicket"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-md-3 mt-2 mt-md-0">
+                <div class="p-3 bg-light border rounded-3 h-100">
+                    <strong class="d-flex justify-content-center">Draft Material:</strong>
+                    <!-- append after  -->
+                    <hr class="m-1">
+                    <div id="joViewDraftMat">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border rounded-3 mt-2 p-2">
+            <div class="container-fluid">
+                <strong>Trouble: </strong> <br>
+                <span id="joViewTrouble" style="white-space: pre;"></span> <br>
+                <strong>File: </strong> <br>
+                <div id="joViewTroubleFile" class="hstack gap-3 overflow-auto">
+                </div>
+            </div>
+        </div>
+        <!-- Materials -->
+        <div class="border rounded-3 mt-2 p-2">
+            <div class="container-fluid">
+                <strong>Material: </strong> <br>
+            </div>
+        </div>
+        <!-- Bill -->
+        <div class="border rounded-3 mt-2 p-2">
+            <div class="container-fluid">
+                <strong>Bill: </strong> <br>
+            </div>
+        </div>
+        <!-- report summary -->
+        <div class='p-2 border rounded-3 mt-2'>
+            <div class='container-fluid'>
+                <strong>
+                    Status Report: (Timeline)
+                </strong> <br>
+                <table id="joViewTbl" class="table table-borderless" style="width: 100% ;">
+                    <thead class="table-light">
+                        <td class="col-2"><Strong>Date</Strong></td>
+                        <td class="col-7"><Strong>Report</Strong></td>
+                        <td class="col-1"><Strong>Tech</Strong></td>
+                        <td class="col-2"><Strong>Action</Strong></td>
+                    </thead>
+                    <tbody id="joViewTblTbody">
+                    </tbody>
+                </table>
+                <button id="joViewRepStatAddBtn" class="btn btn-success btn-sm w-100 mt-1">Add Report</button>
+            </div>
+        </div>
+
+        <!-- Materials -->
+        <div class="mt-2" id="repJoView">
+            <div class="float-end">
+                <button type="button" class="btn btn-secondary btn-sm">Back</button>
+                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+            </div>
+        </div>
+    </div>
+<%- include("modal/mod-view") %>
+<%- include("../../partials/script") %>
+<%- include("../../partials/toaster") %>
+<script src="/js/crud.js"></script>
+<script src="/js/validation.js"></script>
+<script src="/js/service/repairJobOrder/view.js"></script>
+<%- include("../../partials/footer") %>

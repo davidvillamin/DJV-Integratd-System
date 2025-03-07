@@ -1,0 +1,64 @@
+<div class="modal fade" id="tihvrEditModal" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Repair</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="tihvrEdit" novalidate enctype="multipart/form-data">
+                    <div class="mb-1 row">
+                        <label for="tihvreJobOrderNumber" class="col-auto me-auto col-form-label">Job Order</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="tihvreJobOrderNumber">
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="tihvreRecieveDate" class="col-auto me-auto col-form-label">Recieve Date</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="tihvreRecieveDate">
+                        </div>
+                    </div>
+                    <!-- client name change -->
+                    <div class="mb-1 d-flex flex-row">
+                        <label class="col-auto me-auto" for="tihvreClientName">Client Name</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" id="tihvreClientName" disabled>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-1 row">
+                        <label for="tihvreDevice" class="col-auto me-auto col-form-label">Device</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="tihvreDevice">
+                        </div>
+                    </div>
+
+                    <div class="mb-1 row">
+                        <label for="tihvreSerial" class="col-auto me-auto col-form-label">Serial Number</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="tihvreSerial">
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="tihvreTechnician" class="col-auto me-auto col-form-label">Technician</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" id="tihvreTechnician">
+                                <option selected>Technician</option>
+                                <option value="Deancent">Deancent</option>
+                                <option value="Vinc">Vinc</option>
+                                <option value="David">David</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        

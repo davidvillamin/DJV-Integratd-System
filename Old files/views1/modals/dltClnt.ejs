@@ -1,0 +1,57 @@
+
+<!--    // ============================================================
+        // Delete Client with contact or without contact number modal
+        // ============================================================ -->
+<div class="modal fade" id="dltClntMod" tabindex="-1" role="dialog" aria-labelledby="dltClntModLbl" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dltClntModLbl">Delete Client</h5>
+                <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" >
+                <h6>Are you sure you want to delete this client?</h6>
+                <div class="card card-body">
+                    <div class="dltClntBody">
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Client Name: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltClntNm"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Address: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltClntAdd"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Client Type: </strong> 
+                            </div>
+                            <div class="col-9">
+                                <span id="dltClntType"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form  id='dltClnt' class='needs-validation' novalidate>
+                    <input type="hidden" id="dltClntID">
+                    Please type <strong>DELETE</strong> to confirm.
+                    <div class="input-group input-group-sm my-1">
+                        <span class="input-group-text col-2 d-flex justify-content-center" id="dltClntConfirmLbl">Confirmation</span>
+                        <input type="text" class="form-control" id="dltClntConfirm" aria-describedby="dltClntConfirmLbl" required>
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-secondary btn-sm' data-bs-dismiss='modal'>Close</button>
+                        <button type='submit' class='btn btn-danger btn-sm'>Delete Client</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
