@@ -3,12 +3,12 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-        <h1>In-House</h1>
+        <h1>Project Base</h1>
         <nav>
             <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="/transaction">Transactions</a></li>
-            <li class="breadcrumb-item active">In-House</li>
+            <li class="breadcrumb-item active">Project Base</li>
             </ol>
         </nav>
         </div><!-- End Page Title -->
@@ -18,10 +18,13 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <h5 class="card-title">All Transactions</h5>
-                        <a href="/transaction/inhouse/create" type="button" class="btn btn-success m-3"><i class="bi bi-file-earmark"></i> Create</a>
+                        <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#tsCreateModal">
+                            <i class="bi bi-file-earmark"></i> Create
+                        </button>
                     </div>
                     <!-- Table with stripped rows -->
-                    <table class="table datatable">
+                    <!-- assets/js/transaction/inhouse/index.js -->
+                    <table id="tsIndexTable">
                         <thead>
                         <tr>
                             <th>Job Order</th>
@@ -32,14 +35,15 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         </tbody>
                     </table>
                     <!-- End Table with stripped rows -->
                 </div>
             </div>
         </section>
-    </main><!-- End #main -->
+    <main><!-- End #main -->
+<%- include("modal/create") %>
+<%- include("../../partials/toaster") %>
 <%- include("../../partials/script") %>
-<script src="../../../assets/js/transaction/inhouse/index.js"></script>
+<script src="../../../assets/js/transaction/sales/index.js"></script>
 <%- include("../../partials/footer") %>

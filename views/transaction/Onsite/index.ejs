@@ -3,12 +3,12 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-        <h1>In-House</h1>
+        <h1>On-Site</h1>
         <nav>
             <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="/transaction">Transactions</a></li>
-            <li class="breadcrumb-item active">In-House</li>
+            <li class="breadcrumb-item active">On-Site</li>
             </ol>
         </nav>
         </div><!-- End Page Title -->
@@ -18,10 +18,13 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <h5 class="card-title">All Transactions</h5>
-                        <a href="/transaction/inhouse/create" type="button" class="btn btn-success m-3"><i class="bi bi-file-earmark"></i> Create</a>
+                        <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#tosCreateModal">
+                            <i class="bi bi-file-earmark"></i> Create
+                        </button>
                     </div>
                     <!-- Table with stripped rows -->
-                    <table class="table datatable">
+                    <!-- assets/js/transaction/inhouse/index.js -->
+                    <table id="tosIndexTable">
                         <thead>
                         <tr>
                             <th>Job Order</th>
@@ -32,7 +35,6 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         </tbody>
                     </table>
                     <!-- End Table with stripped rows -->
@@ -40,6 +42,10 @@
             </div>
         </section>
     </main><!-- End #main -->
+    </a>
+<!-- modal create -->
+<%- include("modal/create") %>
+<%- include("../../partials/toaster") %>
 <%- include("../../partials/script") %>
-<script src="../../../assets/js/transaction/inhouse/index.js"></script>
+<script src="../../../assets/js/transaction/onsite/index.js"></script>
 <%- include("../../partials/footer") %>
