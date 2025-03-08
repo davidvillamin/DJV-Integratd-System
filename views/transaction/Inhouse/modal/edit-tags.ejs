@@ -12,12 +12,16 @@
                 <form class="needs-validation" id="tihvtEdit" novalidate enctype="multipart/form-data">
 
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-lg-7">
                             <div class="row" id="tihvteSwitch">
                                 <div class="col-6">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch" id="tihvtePending" name="Pending">
                                         <label class="form-check-label" for="tihvtePending">Pending</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="tihvteInProgress" name="InProgress">
+                                        <label class="form-check-label" for="tihvteInProgress">In Progress</label>
                                     </div>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch" id="tihvteQuotation" name="Quotation">
@@ -72,12 +76,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-lg-5">
                             <div class="row" id="tihvteSample">
                                 <div class="col-6">
                                     <!-- temporary status -->
                                     <!-- tihvtes - Transaction InHouse View Tags Edit Sample -->
                                     <span class="badge bg-warning text-dark Pending">Pending</span> <br>
+                                    <span class="badge bg-warning text-dark InProgress">In Progress</span> <br>
                                     <span class="badge bg-warning text-dark Quotation">Quotation</span> <br>
                                     <span class="badge bg-warning text-dark PendingApproval">Pending Approval</span> <br>
                                     <span class="badge bg-warning text-dark ForRelease">For Release</span><br>

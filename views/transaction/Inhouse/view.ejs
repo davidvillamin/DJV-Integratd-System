@@ -49,23 +49,26 @@
                         <span class="badge bg-success">Pars Approve</span>    
                         <span class="badge bg-success">Repaired</span>    
                         <span class="badge bg-success">Repeased</span>    
-                        <span class="badge bg-success">Paid</span>     -->
+                        <span class="badge bg-success">Paid</span>     
+                        <span class="badge bg-success">OverDue</span>     -->
+
+                        <!-- edit tags -->
                         <i class="bi bi-pencil-square hover-effect" data-bs-toggle="modal" data-bs-target="#tihvtEditModal"></i>
                     </div>
 
                     <!-- client information -->
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <!-- Profiel Image -->
                         <img id="tihvProfile" alt="Profile" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
-						<div class="d-flex align-items-center" >
-                            <h2 id="tihvClientName" class="mb-1">
-                                <span class="placeholder col-12"></span>
-                            </h2>
-                            <i id="tihvClientEdit" class="bi bi-pencil-square hover-effect" data-bs-toggle="modal" data-bs-target=""></i>
-                        </div>
+                        <!-- Client Name -->
+                        <h2 id="tihvClientName" class="mb-1">
+                            <span class="placeholder col-12"></span>
+                        </h2>
 
                         <div class="tab-pane active profile-overview" id="profile-overview">
                             <div class="d-flex justify-content-between"> 
                                 <h5 class="card-title">Profile Details</h5>
+                                <!-- Edit Client -->
                                 <i id="tihvClientEdit" class="bi bi-pencil-square hover-effect align-self-center" data-bs-toggle="modal" data-bs-target=""></i>
                             </div>
 
@@ -103,42 +106,45 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header d-flex flex-row">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseRepair" aria-expanded="false" aria-controls="flush-collapseRepair">
-                                        Repair
+                                        Repair Details
                                     </button>
                                 </h2>
                                 <div id="flush-collapseRepair" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
                                     <div class="accordion-body p-0">
-                                        <div class="d-flex flex-row-reverse">
-                                            <i id="tihvRepairEdit" class="bi bi-pencil-square pencil-icon" data-bs-toggle="modal" data-bs-target="#tihvrEditModal"></i>
+                                        <div class="profile-card pt-4 d-flex flex-column ">
+                                            <div class="tab-pane active profile-overview" id="profile-overview">
+                                                <!-- edit Repair Detials -->
+                                                <div class="d-flex flex-row-reverse">
+                                                    <i id="tihvRepairEdit" class="bi bi-pencil-square pencil-icon" data-bs-toggle="modal" data-bs-target="#tihvrEditModal"></i>
+                                                </div>
+                    
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Job Order:</div>
+                                                    <div id="tihvrJobOrder" class="col-lg-9 col-md-8">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Recieved Date:</div>
+                                                    <div id="tihvrRecieveDate" class="col-lg-9 col-md-8">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Device:</div>
+                                                    <div id="tihvrDevice" class="col-lg-9 col-md-8">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Serial Number:</div>
+                                                    <div id="tihvrSerial" class="col-lg-9 col-md-8">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Technician:</div>
+                                                    <div id="tihvrTechnician" class="col-lg-9 col-md-8">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <table class="table table-borderless p-0">
-                                            <tr>
-                                                <td class="p-0">
-                                                    <strong>Job Order:</strong>
-                                                    <span id="tihvrJobOrder"></span>
-                                                </td>
-                                                <td class="p-0">
-                                                    <Strong>Recieve Date:</Strong>
-                                                    <span id="tihvrRecieveDate"></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-0">
-                                                    <strong>Device:</strong>
-                                                    <span id="tihvrDevice"></span>
-                                                </td>
-                                                <td class="p-0">
-                                                    <Strong>Serial Number:</Strong>
-                                                    <span id="tihvrSerial"></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-0">
-                                                    <Strong>Technician:</Strong>
-                                                    <span id="tihvrTechnician"></span>
-                                                </td>
-                                            </tr>
-                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -523,6 +529,10 @@
 
 <!-- for edit client modal -->
 <script src="../../../assets/js/client/crud/edit.js"></script>
+<!-- for edit repair modal -->
+<script src="../../../assets/js/transaction/inhouse/accordion/edit-repair.js"></script>
+<!-- for edit tags modal -->
+<script src="../../../assets/js/transaction/inhouse/tags/edit-tags.js"></script>
 <!-- inhouse transaction view script -->
 <script src="../../../assets/js/transaction/inhouse/view.js"></script>
 <%- include("../../partials/footer") %>
