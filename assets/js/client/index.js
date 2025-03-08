@@ -1,4 +1,6 @@
 $(function(){
+    //remove class collapsed after click on sidebar
+    $("#sbClient").removeClass("collapsed");
     // initialize toast
     $(".toast").toast({
         delay: 5000

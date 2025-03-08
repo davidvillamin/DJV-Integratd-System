@@ -1,4 +1,6 @@
 $(function(){
+    $("#sbinhouse").removeClass("collapsed");
+    
     var quill = quillInit("tihcNotes")
     // initialize toast
     $(".toast").toast({

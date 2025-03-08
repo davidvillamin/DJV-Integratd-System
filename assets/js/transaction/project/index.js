@@ -1,4 +1,5 @@
 $(function(){
+    $("#sbproject").removeClass("collapsed");
     var quill = quillInit("tpcNotes")
     // initialize toast
     $(".toast").toast({

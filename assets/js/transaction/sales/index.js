@@ -1,4 +1,5 @@
 $(function(){
+    $("#sbsales").removeClass("collapsed");
     var quill = quillInit("tscNotes")
     // initialize toast
     $(".toast").toast({

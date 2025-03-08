@@ -22,6 +22,7 @@ var express                         = require("express"),
     transactionProjectRoutes        = require("./routes/transactionProject"),
     //parts
     partsRoutes                     = require("./routes/parts"),
+    deviceRoutes                    = require("./routes/device"),
     // serviceRoutes                   = require("./routes/service"), 
     niceAdminRoutes                 = require("./routes/niceadmin");
 
@@ -90,6 +91,8 @@ app.use(transactionOnSiteRoutes);
 app.use(transactionProjectRoutes);
 app.use(transactionSalesRoutes);
 app.use(partsRoutes);
+app.use(deviceRoutes);
+
 // app.use(serviceRoutes);
 // app.use(settingsRoutes);
 // app.use(warehouseRoutes);
