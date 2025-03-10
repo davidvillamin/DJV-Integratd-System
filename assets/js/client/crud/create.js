@@ -6,6 +6,13 @@
 
 // need to put datatable variable for repopulating of table (if needed)
 function createClient(dTable){
+    //======================================================
+    // Loading Screen
+    //======================================================
+    // hide loading screen
+    $(window).on('load', function() {
+        $("#loadingScreen").attr('style', 'display: none !important');
+    });
     // Individual
     // adding event listener
     listenerContactNumberAdd();

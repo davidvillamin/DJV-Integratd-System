@@ -5,6 +5,13 @@
 // prefix legend: cie = client individual edit
 
 function clientEditIndividual(id) { // client id
+    //======================================================
+    // Loading Screen
+    //======================================================
+    // hide loading screen
+    $(window).on('load', function() {
+        $("#loadingScreen").attr('style', 'display: none !important');
+    });
     return new Promise(async (resolve, reject) => {
         try {
             // get client data
