@@ -27,6 +27,7 @@ var express                         = require("express"),
     //settings
     settingsRoutes                    = require("./routes/settings"),
 
+    //loading screen
     // serviceRoutes                   = require("./routes/service"), 
     niceAdminRoutes                 = require("./routes/niceadmin");
 

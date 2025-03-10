@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
-var partInformationSchema = new mongoose.Schema({
+var deviceInformationSchema = new mongoose.Schema({
     Brand: String,
     Model: String,
     Description: String    
 });
 
-module.exports = mongoose.model("partInformation", partInformationSchema);
+module.exports = mongoose.model("deviceInformation", deviceInformationSchema);

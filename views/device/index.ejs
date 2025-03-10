@@ -2,11 +2,11 @@
 <%- include("../partials/header-sidebar") %>
 <main id="main" class="main">
     <div class="pagetitle">
-    <h1>Parts</h1>
+    <h1>Devices</h1>
     <nav>
         <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active">Parts</li>
+        <li class="breadcrumb-item active">Devices</li>
         </ol>
     </nav>
     </div><!-- End Page Title -->
@@ -15,13 +15,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h5 class="card-title">All Parts</h5>
-                    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#piCreateModal">
+                    <h5 class="card-title">All Devices</h5>
+                    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#dCreateModal">
                         <i class="bi bi-file-earmark-plus"></i> Create
                     </button>
                 </div>
                 <!-- Table with stripped rows -->
-                <table id="piIndexTable">
+                <table id="dIndexTable">
                     <thead>
                         <tr>
                             <th>Brand</th>
@@ -41,6 +41,6 @@
 <!-- modal -->
 <%- include("modal/create") %>
 <%- include("../partials/script") %>
-<script src="../../assets/js/parts/index.js"></script>
+<script src="../../assets/js/device/index.js"></script>
 
 <%- include("../partials/footer") %>

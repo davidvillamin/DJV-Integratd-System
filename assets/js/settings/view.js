@@ -80,9 +80,7 @@ function pvcsAddTableData(partsInfo){
             Model: partsInfo.Model,
             Description: partsInfo.Description,
             partinformation: id,
-            Serial: $('#pscSerial').val(),
-            SupplierPrice: $('#pscSuppliersPrice').val(),
-            RetailPrice: $('#pscRetailPrice').val()
+            
         })
         $('#pscSerial').val('') //reset value of serial
     }

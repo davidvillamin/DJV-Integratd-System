@@ -6,29 +6,29 @@ $(function(){
     });
 
     // initialize datatable
-    var dTable = $('#piIndexTable').DataTable({
-        data: crudiAjax({}, "/parts/index/populate/table", "POST"),
+    var dTable = $('#dIndexTable').DataTable({
+        // data: crudiAjax({}, "/device/populate/index/table", "POST"),
         pageLength: 5, // set to display 5 items
         lengthMenu: [5, 10, 25, 50, 100], // entries per page options
     })
 
     //create parts information
-    $('#piCreate :submit').on('click',function(e){
+    $('#dCreate :submit').on('click',function(e){
         if ($(this).closest('form').is(':valid') === true){
             e.preventDefault();
             var data = {
-                Brand: $('#picBrand').val(),
-                Model: $('#picModel').val(),
-                Description: $('#picDescription').val(),
+                Brand: $('#dcBrand').val(),
+                Model: $('#dcModel').val(),
+                Description: $('#dcDescription').val(),
             }
-            dTable.clear().rows.add(crudiAjax(data, "/parts/partsinformation/create", "Post")).draw()
-            $('#piCreate')[0].reset();
+            dTable.clear().rows.add(crudiAjax(data, "/device/deviceinformation/create", "Post")).draw()
+            $('#dCreate')[0].reset();
 
-            $('#piCreateModal').modal('toggle'); // fix modal toggle method
+            $('#dCreateModal').modal('toggle'); // fix modal toggle method
             $('.modal-backdrop').remove(); // ensure backdrop is removed
             // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfuly created a parts information!")
-            $(".toast").find(".toast-title").text("New parts information")
+            $(".toast").toast("show").find(".toast-body").text("You have successfuly created a device information!")
+            $(".toast").find(".toast-title").text("New device information")
         }
     })
 })

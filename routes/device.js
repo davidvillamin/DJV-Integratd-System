@@ -1,6 +1,6 @@
 var express                             = require("express"),
-    PartInformation                     = require("../models/partinformation"),
-    Parts                               = require("../models/part"),
+    deviceInformation                   = require("../models/deviceinformation"),
+    device                              = require("../models/device"),
     router                              = express.Router();
 
 router.get("/device", function(req, res){
