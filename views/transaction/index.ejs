@@ -1,4 +1,5 @@
 <%- include("../partials/header") %>
+<%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
     <main id="main" class="main">
 
@@ -15,10 +16,10 @@
         <!-- Transactions -->
         <section class="section">
             <div class="row">
-                <div class="col-xxl-3 md-6">
+                <div class="col-xl-3 md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">In-House <span>| This week</span></h5>
+                            <a href="/transaction/inhouse"> <h5 class="card-title">In-House <span>| This week</span></h5></a>
                             <div class="d-flex align-items-center" >
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-house-gear-fill" viewBox="0 0 16 16">
@@ -41,7 +42,7 @@
                 <div class="col-xl-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">On-site <span>| This week</span></h5>
+                            <a href="/transaction/Onsite"> <h5 class="card-title">On-site <span>| This week</span></h5></a>
                             <div class="d-flex align-items-center">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-walking" viewBox="0 0 16 16">
@@ -62,7 +63,7 @@
                 <div class="col-xl-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Sales <span>| This week</span></h5>
+                            <a href="/transaction/Sales"> <h5 class="card-title">Sales <span>| This week</span></h5></a>
                             <div class="d-flex align-items-center">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
@@ -82,7 +83,7 @@
                 <div class="col-xl-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Project-based <span>| This week</span></h5>
+                            <a href="/transaction/Projects"> <h5 class="card-title">Projects <span>| This week</span></h5></a>
                             <div class="d-flex align-items-center">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
@@ -197,4 +198,5 @@
          
     </main><!-- End #main -->
 <%- include("../partials/script") %>
+<script src="../../../assets/js/transaction/index.js"></script>
 <%- include("../partials/footer") %>

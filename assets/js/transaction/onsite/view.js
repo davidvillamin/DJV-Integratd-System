@@ -2,6 +2,14 @@
 var id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
 $(function(){
+    //======================================================
+    // Loading Screen
+    //======================================================
+    // hide loading screen
+    $(window).on('load', function() {
+        $("#loadingScreen").attr('style', 'display: none !important');
+    });
+    
     var quill = quillInit("tosvNotes")
     // initialize toast
     $(".toast").toast({

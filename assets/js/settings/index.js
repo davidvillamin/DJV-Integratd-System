@@ -1,11 +1,19 @@
 $(function(){
+    //======================================================
+    // Loading Screen
+    //======================================================
+    // hide loading screen
+    $(window).on('load', function() {
+        $("#loadingScreen").attr('style', 'display: none !important');
+    });
     
     // initialize toast
     $(".toast").toast({
         delay: 5000
     });
 
-    // initialize datatable
+    // initialize datata
+    // ble
     var dTable = $('#piIndexTable').DataTable({
         data: crudiAjax({}, "/parts/index/populate/table", "POST"),
         pageLength: 5, // set to display 5 items
