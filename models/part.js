@@ -10,6 +10,7 @@ var partSchema = new mongoose.Schema({
     Serial: String,
     SupplierPrice: Number,
     RetailPrice: Number,
+    hasSerial: Boolean
     //supplier Detials 
 });
 

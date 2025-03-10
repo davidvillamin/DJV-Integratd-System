@@ -1,6 +1,14 @@
 var id                                              = window.location.href.split('/')[window.location.href.split('/').length - 1]              
 
 $(function(){
+    //======================================================
+    // Loading Screen
+    //======================================================
+    // hide loading screen
+    $(window).on('load', function() {
+        $("#loadingScreen").attr('style', 'display: none !important');
+    });
+    
     //population of data
     var currentClient = crudiAjax({id: id}, "/client/view/ajax", 'Post')
     $('#ccName').text(currentClient.Name)

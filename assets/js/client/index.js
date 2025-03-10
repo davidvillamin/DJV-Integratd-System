@@ -1,4 +1,12 @@
 $(function(){
+    //======================================================
+    // Loading Screen
+    //======================================================
+    // hide loading screen
+    $(window).on('load', function() {
+        $("#loadingScreen").attr('style', 'display: none !important');
+    });
+    
     //remove class collapsed after click on sidebar
     $("#sbClient").removeClass("collapsed");
     // initialize toast

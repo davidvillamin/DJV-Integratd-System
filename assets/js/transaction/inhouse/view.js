@@ -26,6 +26,7 @@ $(function(){
 
     $('#tihvMaxMinDisplay').on('click', function() {
         if ($('.clientInformation').css('display') === 'none') { // Check if client information is hidden
+            
             $("#tihvMaxMinDisplay").text("Maximize")
             $('.clientInformation').css('display', 'block'); // Show client information
             $(".mainContent").removeClass('col-xl-12').addClass('col-xl-8'); // Adjust main content width to 8 columns
@@ -68,6 +69,9 @@ $(function(){
         }
     });
     
+
+
+
     //======================================================
     // Repair Accordion
     //======================================================
@@ -97,6 +101,11 @@ $(function(){
         reader.readAsDataURL(file);
         console.log(reader)
     });
+    //======================================================
+    // billing Accordion
+    //======================================================
+    // billing
+    // $('#tihvpTable').bootstrapTable()
 });
 
 

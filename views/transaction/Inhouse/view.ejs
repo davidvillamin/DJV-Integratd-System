@@ -103,10 +103,43 @@
                         <div class="dropdown">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#tihvrViewModal">Repair Detials</a></li>
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#tihvrelViewModal">Release</a></li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihvrViewModal">
+                                        <i class="bx bx-detail me-2"></i>
+                                        Repair Details
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihvrelViewModal">
+                                        <i class="bx bx-export me-2"></i>
+                                        Release
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihviAddModal">
+                                        <i class="bx bxs-image-add me-2"></i>
+                                        Image
+                                    </a>
+                                </li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" id="tihvMaxMinDisplay">Maximize</a></li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center">
+                                        <i class="bx bxs-save me-2"></i>
+                                        Save Changes    
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center">
+                                        <i class="bx bx-window-close me-2"></i>
+                                        Closed Transaction
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" id="tihvMaxMinDisplay">
+                                        Maximize
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -123,6 +156,52 @@
                                 </h2>
                                 <div id="flush-collapseBilling" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
                                     <div class="accordion-body">
+                                        <!-- ====================================================== -->
+                                        <!-- parts -->
+                                        <div class="d-flex flex-row-reverse mb-2">
+                                            <button class="btn btn-primary" id="addRowBtn"><i class="bi bi-plus-square"></i>  Parts</button>
+                                        </div>
+                                        <table class="table" id="tihvpTable">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Description</th>
+                                                    <th scope="col">Qty</th>
+                                                    <th scope="col">SRP</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Canon Cartridge</td>
+                                                    <td>1 pc</td>
+                                                    <td>Php. 1,500.00</td>
+                                                    <td>Php. 1,500.00</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm editRowBtn"><i class="bi bi-pencil-square"></i></button>
+                                                        <button class="btn btn-danger btn-sm deleteRowBtn"><i class="bi bi-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Service Charge</td>
+                                                    <td>1 lot</td>
+                                                    <td>Php. 1,000.00</td>
+                                                    <td>Php. 1,000.00</td>
+                                                    <td>
+                                                        <button class="btn btn-warning btn-sm editRowBtn"><i class="bi bi-pencil-square"></i></button>
+                                                        <button class="btn btn-danger btn-sm deleteRowBtn"><i class="bi bi-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr class="bg-warning">
+                                                    <th scope="row">Overall Total</th>
+                                                    <td colspan="2"></td>
+                                                    <td id="overallTotal">Php. 2,500.00</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <!-- ====================================================== -->
                                         <div class="d-flex flex-row-reverse mb-2">
                                             <button class="btn btn-primary" id="addRowBtn"><i class="bi bi-plus-square"></i> Add Row</button>
                                         </div>
@@ -383,10 +462,7 @@
                                     <div class="accordion-body">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <div class="input-group mb-3">
-                                                    <input type="file" class="form-control" id="inputGroupFile01" accept="image/*">
-                                                </div>
-                                                <textarea class="form-control"></textarea>
+                                                Image List
                                                 <div class="list-group">
                                                     <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
                                                       The current button
@@ -400,7 +476,7 @@
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <img id="loadImage"  class="img-thumbnail w-auto">
+                                                        <img id="loadImage" src="/assets/img/no-image.jpg" class="img-thumbnail w-auto">
                                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                                     </div>
                                                 </div>
@@ -456,6 +532,11 @@ release
 ======================================= -->
 <!-- create/edit release modal -->
 <%- include("modal/release") %>
+<!-- =======================================
+images
+======================================= -->
+<!-- create/edit release modal -->
+<%- include("modal/image") %>
 
 
 <!-- =======================================
