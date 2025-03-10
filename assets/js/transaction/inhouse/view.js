@@ -3,6 +3,14 @@ var id = window.location.href.split('/')[window.location.href.split('/').length 
 
 $(function(){
     //======================================================
+    // Loading Screen
+    //======================================================
+    // hide loading screen
+    $(window).on('load', function() {
+        $("#loadingScreen").attr('style', 'display: none !important');
+    });
+    
+    //======================================================
     // Initialize Quill/Toast
     //======================================================
     var quill = quillInit("tihvNotes")
@@ -18,13 +26,11 @@ $(function(){
 
     $('#tihvMaxMinDisplay').on('click', function() {
         if ($('.clientInformation').css('display') === 'none') { // Check if client information is hidden
-            $(this).removeClass("bi-fullscreen-exit")
-            $(this).addClass("bi-fullscreen")       
+            $("#tihvMaxMinDisplay").text("Maximize")
             $('.clientInformation').css('display', 'block'); // Show client information
             $(".mainContent").removeClass('col-xl-12').addClass('col-xl-8'); // Adjust main content width to 8 columns
         } else {
-            $(this).removeClass("bi-fullscreen")
-            $(this).addClass("bi-fullscreen-exit")
+            $("#tihvMaxMinDisplay").text("Minimize")
             $('.clientInformation').css('display', 'none'); // Hide client information
             $(".mainContent").removeClass('col-xl-8').addClass('col-xl-12'); // Adjust main content width to 12 columns
         }

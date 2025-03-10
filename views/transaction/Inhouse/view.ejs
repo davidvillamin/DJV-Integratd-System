@@ -1,6 +1,7 @@
 <!-- Prefiex Legend -->
 <!-- tihv = Transaction In-house View -->
 <%- include("../../partials/header") %>
+<%- include("../../partials/loading") %>
 <%- include("../../partials/header-sidebar") %>
 <main id="main" class="main">
     <div class="pagetitle">
@@ -26,6 +27,7 @@
             </ol>
         </nav>
     </div><!-- End Page Title -->
+    
 
     <section class="section profile">
         <div class="row">
@@ -97,57 +99,21 @@
                 <div class="card">
                     <!-- show/hide client info -->
                      <div class="mx-3 mt-2 d-flex flex-row-reverse">
-                         <i id="tihvMaxMinDisplay" class="bi bi-fullscreen hover-effect"></i>
+                        <!-- <i id="tihvMaxMinDisplay" class="bi bi-fullscreen hover-effect"></i> -->
+                        <div class="dropdown">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#tihvrViewModal">Repair Detials</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#tihvrelViewModal">Release</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" id="tihvMaxMinDisplay">Maximize</a></li>
+                            </ul>
+                        </div>
                     </div>
+              
                     <!-- <i class="bi bi-fullscreen-exit hover-effect"></i> -->
                     <div class="card-body pt-3">
                         <div class="accordion accordion-flush" id="tihEditAccordion">
-                            <!-- repair -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header d-flex flex-row">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseRepair" aria-expanded="false" aria-controls="flush-collapseRepair">
-                                        Repair Details
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseRepair" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
-                                    <div class="accordion-body p-0">
-                                        <div class="profile-card pt-4 d-flex flex-column ">
-                                            <div class="tab-pane active profile-overview" id="profile-overview">
-                                                <!-- edit Repair Detials -->
-                                                <div class="d-flex flex-row-reverse">
-                                                    <i id="tihvRepairEdit" class="bi bi-pencil-square pencil-icon" data-bs-toggle="modal" data-bs-target="#tihvrEditModal"></i>
-                                                </div>
-                    
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label">Job Order:</div>
-                                                    <div id="tihvrJobOrder" class="col-lg-9 col-md-8">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label">Recieved Date:</div>
-                                                    <div id="tihvrRecieveDate" class="col-lg-9 col-md-8">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label">Device:</div>
-                                                    <div id="tihvrDevice" class="col-lg-9 col-md-8">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label">Serial Number:</div>
-                                                    <div id="tihvrSerial" class="col-lg-9 col-md-8">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label">Technician:</div>
-                                                    <div id="tihvrTechnician" class="col-lg-9 col-md-8">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- Billing -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
@@ -406,37 +372,6 @@
                                         
                                 </div>
                             </div>
-                            <!-- Release -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseRelease" aria-expanded="false" aria-controls="flush-collapseRelease">
-                                    Release
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseRelease" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
-                                    <div class="accordion-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-floating">
-                                                    <input type="date" class="form-control" id="tiheRecieveDate" placeholder="Recieve Date" required>
-                                                    <label for="tiheRecieveDate">Release Date</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-floating">
-                                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                        <option selected>Technician</option>
-                                                        <option value="1">Deancent</option>
-                                                        <option value="2">Vince</option>
-                                                        <option value="3">David</option>
-                                                    </select>
-                                                    <label for="floatingSelect">Released by</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- Images -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
@@ -448,32 +383,25 @@
                                     <div class="accordion-body">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <div class="card">
-                                                    <h6 class="card-title mx-3">Approval</h6>
-                                                    <div class="card-body">
-                                                        <div class="input-group mb-3">
-                                                            <input type="file" class="form-control" id="inputGroupFile01" accept="image/*">
-                                                        </div>
-                                                        <img id="loadImage"  class="img-thumbnail w-auto">
-                                                    </div>
+                                                <div class="input-group mb-3">
+                                                    <input type="file" class="form-control" id="inputGroupFile01" accept="image/*">
+                                                </div>
+                                                <textarea class="form-control"></textarea>
+                                                <div class="list-group">
+                                                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                                                      The current button
+                                                    </button>
+                                                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
+                                                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                                                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                                                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="card">
-                                                    <h6 class="mx-3 card-title">Other Options</h6>
                                                     <div class="card-body">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                            <label class="form-check-label" for="exampleRadios1">
-                                                            Hold
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                                            <label class="form-check-label" for="exampleRadios2">
-                                                            Repair Cancel
-                                                            </label>
-                                                        </div>
+                                                        <img id="loadImage"  class="img-thumbnail w-auto">
+                                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -516,9 +444,23 @@
 <%- include("../../client/modal/edit") %>
 <!-- for print of report -->
 <%- include("modal/print") %>
-
+<!-- =======================================
+repair 
+======================================= -->
+<!-- view repair modal -->
+<%- include("modal/view-repair") %>
 <!-- edit repair modal -->
 <%- include("modal/edit-repair") %>
+<!-- =======================================
+release
+======================================= -->
+<!-- create/edit release modal -->
+<%- include("modal/release") %>
+
+
+<!-- =======================================
+Tags 
+======================================= -->
 <!-- edit tags modal -->
 <%- include("modal/edit-tags") %>
 
@@ -526,6 +468,7 @@
 <%- include("../../partials/toaster") %>
 <!-- essential scripts -->
 <%- include("../../partials/script") %>
+
 
 <!-- for edit client modal -->
 <script src="../../../assets/js/client/crud/edit.js"></script>
