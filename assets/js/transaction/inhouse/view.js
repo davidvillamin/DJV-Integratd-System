@@ -3,6 +3,14 @@ var id = window.location.href.split('/')[window.location.href.split('/').length 
 
 $(function(){
     //======================================================
+    // Loading Screen
+    //======================================================
+    // hide loading screen
+    $(window).on('load', function() {
+        $("#loadingScreen").attr('style', 'display: none !important');
+    });
+    
+    //======================================================
     // Initialize Quill/Toast
     //======================================================
     var quill = quillInit("tihvNotes")
@@ -18,13 +26,11 @@ $(function(){
 
     $('#tihvMaxMinDisplay').on('click', function() {
         if ($('.clientInformation').css('display') === 'none') { // Check if client information is hidden
-            $(this).removeClass("bi-fullscreen-exit")
-            $(this).addClass("bi-fullscreen")       
+            $("#tihvMaxMinDisplay").text("Maximize")
             $('.clientInformation').css('display', 'block'); // Show client information
             $(".mainContent").removeClass('col-xl-12').addClass('col-xl-8'); // Adjust main content width to 8 columns
         } else {
-            $(this).removeClass("bi-fullscreen")
-            $(this).addClass("bi-fullscreen-exit")
+            $("#tihvMaxMinDisplay").text("Minimize")
             $('.clientInformation').css('display', 'none'); // Hide client information
             $(".mainContent").removeClass('col-xl-8').addClass('col-xl-12'); // Adjust main content width to 12 columns
         }
@@ -33,15 +39,11 @@ $(function(){
     //======================================================
     // Edit tags 
     //======================================================
-    // hide all tags first on start
-    // $('#tihvteSample .badge').css('display','none');
-    $('#tihvteSample .badge').hide();
+    editTags()
 
-    // //add on toggle effects
-    $('#tihvteSwitch input[type="checkbox"]').on('change', function() {
-        $('.' + $(this).attr('name')).toggle(this.checked);
-    });
-
+    //======================================================
+    // Data Population
+    //======================================================
     //population of data
     var currentTransaction = crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post');
     tihvPopulateData(currentTransaction,quill); // populate data
@@ -69,45 +71,9 @@ $(function(){
     //======================================================
     // Repair Accordion
     //======================================================
-    // repair accordion
-    //Report Edit click populate details
-    $('#tihvRepairEdit').on('click',function(){
-        $('#tihvreJobOrderNumber').val(currentTransaction.JobOrder)
-        $('#tihvreRecieveDate').val(moment(currentTransaction.RecieveDate).format('YYYY-MM-DD') )
-        $('#tihvreDevice').val(currentTransaction.Device)
-        $('#tihvreSerial').val(currentTransaction.SerialNumber)
-    })
-
-
-    //update repair accordion
-    $('#tihvrEdit').on('submit',function(e){
-        if ($(this).closest('form').is(':valid') === true){
-            e.preventDefault();
-            var data = {}
-            
-            data.data = {
-                JobOrder:$('#tihvreJobOrderNumber').val(),
-                RecieveDate:$('#tihvreRecieveDate').val(),
-                Device:$('#tihvreDevice').val(),
-                SerialNumber:$('#tihvreSerial').val(),
-                Technician: $("#tihvreTechnician option:selected").val(),
-                TempStatus: []
-            }
-            // alert($('#tihvrTechnician option:selected').val())
-            if ( $('#tihvreTechnician option:selected').val() != 'Technician'){
-                data.data.TempStatus.push("In Progress")
-            }
-            data.id = id
-
-            tihvPopulateData(crudiAjax(data,'/transaction/inhouse/edit/ajax','Post'),quill)
-            $('#tihvrEdit')[0].reset();
-            // close modal   
-            $('#tihvrEditModal').modal('toggle'); // fix modal toggle method
-            $('.modal-backdrop').remove(); // ensure backdrop is remove
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfuly edited a transaction!")
-            $(".toast").find(".toast-title").text("Edit transaction")
-        }
+    editRepair(id).then(function(){
+        //update all client info
+        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
     })
 
     // upload image 
