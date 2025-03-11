@@ -7,7 +7,7 @@ $(function(){
         $("#loadingScreen").attr('style', 'display: none !important');
     });
     
-    $("#sbinhouse").removeClass("collapsed");
+    $("#sbdashboard").removeClass("collapsed");
     
     var quill = quillInit("tihcNotes")
     // initialize toast

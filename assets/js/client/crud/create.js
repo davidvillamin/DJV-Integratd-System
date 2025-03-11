@@ -97,27 +97,27 @@ function createClient(dTable){
         }
     })
 }
-//==================================================================
-// for Individual
-function listenerContactNumberAdd() {
-    //cciContactNumberAdd = Client Create Individual Contact Number
-    $(".cciContactNumberAdd").off('click').on('click', function(){
-        var newContactGroup = $('.cciContactNumberGroup').first().clone();
-        newContactGroup.find('input').val('');
-        newContactGroup.insertBefore($(this).closest('.cciContactNumberGroup'));
-        listenerContactNumberAdd(); // re-attach listener to new elements
-        listenerContactNumberDelete(); // re-attach delete listener to new elements
-    });
-}
+    //==================================================================
+    // for Individual
+    function listenerContactNumberAdd() {
+        //cciContactNumberAdd = Client Create Individual Contact Number
+        $(".cciContactNumberAdd").off('click').on('click', function(){
+            var newContactGroup = $('.cciContactNumberGroup').first().clone();
+            newContactGroup.find('input').val('');
+            newContactGroup.insertBefore($(this).closest('.cciContactNumberGroup'));
+            listenerContactNumberAdd(); // re-attach listener to new elements
+            listenerContactNumberDelete(); // re-attach delete listener to new elements
+        });
+    }
 
-function listenerContactNumberDelete() {
-    // cciContactNumberDelete = Client Create Indivial Contact Number Delete
-    $(".cciContactNumberDelete").off('click').on('click', function(){
-        if ($('.cciContactNumberGroup').length > 1) {
-            $(this).closest('.cciContactNumberGroup').remove();
-        }
-    });
-}
+    function listenerContactNumberDelete() {
+        // cciContactNumberDelete = Client Create Indivial Contact Number Delete
+        $(".cciContactNumberDelete").off('click').on('click', function(){
+            if ($('.cciContactNumberGroup').length > 1) {
+                $(this).closest('.cciContactNumberGroup').remove();
+            }
+        });
+    }
 // end of Individual
 //==================================================================
 //==================================================================

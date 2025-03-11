@@ -7,17 +7,16 @@ $(function(){
         $("#loadingScreen").attr('style', 'display: none !important');
     });
     
-    //remove class collapsed after click on sidebar
-    $("#sbdevice").removeClass("collapsed");
+    $("#sbaccounting").removeClass("collapsed");
     // initialize toast
     $(".toast").toast({
         delay: 5000
     });
 
     // initialize datatable
-    var dTable = $('#dIndexTable').DataTable({
+    var dTable = $('#ciTable').DataTable({
         data: crudiAjax({}, "/client/index/table", "POST"),
-        pageLength: 5, // set to display 5 items
+        // pageLength: 5, // set to display 5 items
         lengthMenu: [5, 10, 25, 50, 100] // entries per page options
     })
 
@@ -34,3 +33,4 @@ function initializeTable(dTable){
     var newData = crudiAjax({}, "/client/index/table", "POST");
     dTable.clear().rows.add(newData).draw();
 }
+
