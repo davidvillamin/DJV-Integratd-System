@@ -9,11 +9,13 @@ function editRepair(id){
                 $('#tihvreRecieveDate').val(moment(currentTransaction.RecieveDate).format('YYYY-MM-DD') )
                 $('#tihvreDevice').val(currentTransaction.Device)
                 $('#tihvreSerial').val(currentTransaction.SerialNumber)
+                // this option will be not available until the technician db is created
+                // $('#tihvreTechnician').val(currentTransaction.Technician)
             })
 
 
             //update repair accordion
-            $('#tihvrEdit').on('submit',function(e){
+            $('#tihvrEdit').on('submit',async function(e){
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
                     var data = {}
@@ -28,16 +30,18 @@ function editRepair(id){
                     }
                     // alert($('#tihvrTechnician option:selected').val())
                     if ( $('#tihvreTechnician option:selected').val() != 'Technician'){
-                        data.data.TempStatus.push("In Progress")
+                        data.data.TempStatus.push("InProgress")
                     }
                     data.id = id
+                    //save data
+                    var toastMessage = await crudiAjax(data, "/transaction/inhouse/edit", 'Post');
                     // clear data
                     $('#tihvrEdit')[0].reset();
                     // close modal   
                     $('#tihvrEditModal').modal('toggle'); // fix modal toggle method
                     $('.modal-backdrop').remove(); // ensure backdrop is remove
                     // show toast
-                    $(".toast").toast("show").find(".toast-body").text("You have successfuly edited a transaction!")
+                    $(".toast").toast("show").find(".toast-body").text(toastMessage)
                     $(".toast").find(".toast-title").text("Edit transaction")
                     resolve()
                 }

@@ -1,7 +1,7 @@
 <!-- Prefiex Legend -->
 <!-- tihv = Transaction In-house View -->
 <%- include("../../partials/header") %>
-
+<%- include("../../partials/loading") %>
 <%- include("../../partials/header-sidebar") %>
 <main id="main" class="main">
     <div class="pagetitle">
@@ -53,9 +53,6 @@
                         <span class="badge bg-success">Repeased</span>    
                         <span class="badge bg-success">Paid</span>     
                         <span class="badge bg-success">OverDue</span>     -->
-
-                        <!-- edit tags -->
-                        <i class="bi bi-pencil-square hover-effect" data-bs-toggle="modal" data-bs-target="#tihvtEditModal"></i>
                     </div>
 
                     <!-- client information -->
@@ -99,7 +96,6 @@
                 <div class="card">
                     <!-- show/hide client info -->
                      <div class="mx-3 mt-2 d-flex flex-row-reverse">
-                        <!-- <i id="tihvMaxMinDisplay" class="bi bi-fullscreen hover-effect"></i> -->
                         <div class="dropdown">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu">
@@ -119,6 +115,18 @@
                                     <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihviAddModal">
                                         <i class="bx bxs-image-add me-2"></i>
                                         Image
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihvtEditModal">
+                                        <i class="bx bxs-purchase-tag me-2"></i>
+                                        Tags
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#">
+                                        <i class="bx bxs-report me-2"></i>
+                                        Report
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
@@ -158,12 +166,12 @@
                                     <div class="accordion-body">
                                         <!-- ====================================================== -->
                                         <!-- parts -->
-                                         Parts
+                                        <h6 class="card-title">Parts</h6>
                                         <div class="d-flex flex-row-reverse mb-2">
-                                            <button class="btn btn-primary" id="addRowBtn"><i class="bi bi-plus-square"></i>  Parts</button>
+                                            <button class="btn btn-primary" id="addRowBtn" data-bs-toggle="modal" data-bs-target="#tihvbpAddModal"><i class="bi bi-plus-square"></i>  Parts</button>
                                         </div>
-                                        <!-- tihvp = Transaction In House View Parts -->
-                                        <table class="table" id="tihvpTable">
+                                        <!-- tihvbp = Transaction In House View Billing Parts -->
+                                        <table class="table" id="tihvbpTable">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Description</th>
@@ -492,22 +500,17 @@
                                     <div class="accordion-body">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                Image List
-                                                <div class="list-group">
-                                                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                                                      The current button
-                                                    </button>
-                                                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
-                                                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                                                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-                                                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+                                                <!-- tihvi = Transaction In House View Image -->
+                                                <div class="list-group" id="tihviList">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <img id="loadImage" src="/assets/img/no-image.jpg" class="img-thumbnail w-auto">
-                                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                        <img id="tihviPreview" src="/assets/img/no-image.jpg" class="img-thumbnail w-auto mt-3">
+                                                        <p id="tihviDescription" class="card-text">
+                                                            Description
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -524,17 +527,7 @@
                                 </h2>
                                 <div id="flush-collapseNotes" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
                                     <div class="accordion-body">
-                                        <div class="card">
-                                            <div class="card-body pt-3">
-                                                <div class="d-flex justify-content-between">
-                                                    <h5 class="card-title">Notes</h5>
-                                                    <a class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#tihvPrintModal">Print</a>
-                                                </div>
-                                                <div class="row">
-                                                    <div id="tihvNotes"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div id="tihvNotes"></div>
                                     </div>
                                 </div>
                             </div>
@@ -546,48 +539,72 @@
     </section>
 
 </main><!-- End #main -->    
-<!-- edit client modal -->
-<%- include("../../client/modal/edit") %>
-<!-- for print of report -->
-<%- include("modal/print") %>
-<!-- =======================================
-repair 
-======================================= -->
-<!-- view repair modal -->
-<%- include("modal/view-repair") %>
-<!-- edit repair modal -->
-<%- include("modal/edit-repair") %>
-<!-- =======================================
-release
-======================================= -->
-<!-- create/edit release modal -->
-<%- include("modal/release") %>
-<!-- =======================================
-images
-======================================= -->
-<!-- create/edit release modal -->
-<%- include("modal/image") %>
-
 
 <!-- =======================================
-Tags 
+Modals
 ======================================= -->
-<!-- edit tags modal -->
-<%- include("modal/edit-tags") %>
+<!-- billing -->
+<%- include("modal/billing/add-parts") %>
+<%- include("modal/billing/add-payment") %>
+<%- include("modal/billing/add-serviceCharge") %>
+<%- include("modal/billing/add-transportation") %>
 
- <!-- toaster notification -->
+
+<!-- dropDown -->
+<!-- closeTransaction -->
+
+ <!-- image -->
+ <%- include("modal/dropDown/image/add-image") %>
+ <!-- release -->
+ <%- include("modal/dropDown/release/release") %>
+ <!-- repairDetails -->
+ <%- include("modal/dropDown/repairDetails/view-repair") %>
+ <%- include("modal/dropDown/repairDetails/edit-repair") %>
+ <!-- reports -->
+ <%- include("modal/dropDown/reports/print") %>
+ <!-- saveChanges -->
+
+ <!-- tags -->
+ <%- include("modal/dropDown/tags/edit-tags") %>
+
+
+ <!-- =======================================
+Scripts and accessories
+======================================= -->
 <%- include("../../partials/toaster") %>
-<!-- essential scripts -->
 <%- include("../../partials/script") %>
 
 
-<!-- for edit client modal -->
-<script src="../../../assets/js/client/crud/edit.js"></script>
-<!-- for edit repair modal -->
-<script src="../../../assets/js/transaction/inhouse/accordion/edit-repair.js"></script>
-<!-- for edit tags modal -->
-<script src="../../../assets/js/transaction/inhouse/tags/edit-tags.js"></script>
-<!-- inhouse transaction view script -->
+ <!-- =======================================
+Scripts
+======================================= -->
+<!-- main script -->
 <script src="../../../assets/js/transaction/inhouse/view.js"></script>
-<%- include("../../partials/footer") %>
 
+<!-- modals -->
+<!-- billing -->
+<script src="../../../assets/js/transaction/inhouse/modal/billing/add-parts.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/billing/add-payment.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/billing/add-serviceCharge.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/billing/add-transportation.js"></script>
+
+<!-- dropDown -->
+<!-- close Transaction -->
+
+<!-- image -->
+<script src="../../../assets/js/transaction/inhouse/modal/dropDown/image/add-image.js"></script>
+<!-- release -->
+
+<!-- repairDetails -->
+<script src="../../../assets/js/transaction/inhouse/modal/dropDown/repairDetials/edit-repair.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/dropDown/repairDetials/view-repair.js"></script>
+<!-- reports -->
+
+<!-- saveChanges -->
+
+<!-- tags -->
+<script src="../../../assets/js/transaction/inhouse/modal/dropDown/tags/edit-tags.js"></script>
+<!-- client -->
+<script src="../../../assets/js/client/crud/edit.js"></script>
+
+<%- include("../../partials/footer") %>

@@ -1,0 +1,44 @@
+<!-- tihvi = Transaction In House View Image -->
+<div class="modal fade" id="tihviAddModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Images</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="tihviAdd" novalidate enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="mb-3">
+                                <label for="tihviImageTitle" class="form-label">Image Title</label>
+                                <input type="text" class="form-control" id="tihviImageTitle" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" id="tihviImage" accept="image/*" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tihviDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="tihviDescription" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card">
+                                <h6 class="card-text ms-3 mt-3">Preview</h6>
+                                <div class="card-body">
+                                    <img id="tihviPreview" src="/assets/img/no-image.jpg" class="img-thumbnail w-auto">
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save image</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        

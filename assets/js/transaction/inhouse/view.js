@@ -73,7 +73,7 @@ $(function(){
 
 
     //======================================================
-    // Repair Accordion
+    // Repair Details
     //======================================================
     editRepair(id).then(function(){
         //update all client info
@@ -81,26 +81,12 @@ $(function(){
     })
 
     // upload image 
-    
-    $("#inputGroupFile01").on('change', function(e) {
-        var file = e.target.files[0];
-        var reader = new FileReader();
-        reader.onloadend = function() {
-            var base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-            base64String = 'data:image/png;base64,' + base64String
-            var data = {
-                image: base64String,
-                id: id
-            };
-            // crudiAjax(data, '/transaction/inhouse/upload/image', 'Post');
-            // // show toast
-            // $(".toast").toast("show").find(".toast-body").text("Image uploaded successfully!");
-            // $(".toast").find(".toast-title").text("Upload Image");
-            document.getElementById('loadImage').src = base64String;
-        };
-        reader.readAsDataURL(file);
-        console.log(reader)
-    });
+    // image preview
+    addImagePreview()
+    addImage().then(function(){
+        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
+    })
+
     //======================================================
     // billing Accordion
     //======================================================
@@ -137,21 +123,8 @@ function tihvPopulateData(data,quill) {
         $("#tihvteSwitch input[name=" + status + "]").prop('checked', true); //  check the checkbox on edit tags
     })
 
-    //======================================================
-    // Repair Details
-    //======================================================
-    //edit details
-    $('#tihvrJobOrder').text(data.JobOrder);
-    $('#tihvrRecieveDate').text(moment(data.RecieveDate).format("YYYY-MM-DD"));
-    $('#tihvrDevice').text(data.Device);
-    $('#tihvrSerial').text(data.SerialNumber);
-    $('#tihvrServiceCharge').text(data.ServiceCharge);
-    
-    if (data.Technician){ //if there is a technician in the db.
-        $('#tihvrTechnician').text(data.Technician);
-    } 
-
     quill.setContents(data.Notes); // job order notes
+
     //======================================================
     // Client Details / Profile Image/ Contact Numbers / Edit Client Modal target
     //======================================================
@@ -187,5 +160,30 @@ function tihvPopulateData(data,quill) {
             $('#tihvClientContactNumbers').append('<li><strong>' + detail.ContactPerson + ':</strong> ' + detail.ContactNumber + ' </li>');
         });
     }
+
+    //======================================================
+    // DropDown
+    //======================================================
+    // view Repair
+    viewRepair(data)
+
+    //======================================================
+    // Accordion 
+    //======================================================
+    // images
+    // clear all images first on list
+    $('#tihviList').empty();
+    // Populate images
+    data.Images.forEach(function image(img,i){
+        $('#tihviList').append("<button type='button' class='list-group-item list-group-item-action tihviListItem' aria-current='true' data-b64=" + img.base64String + " data-desc=" + img.Description + ">" + img.Title + "</button>")
+    })
+    // add click function on each image
+    $('.tihviListItem').on('click', function() {
+        $('#tihviPreview').attr('src', $(this).attr('data-b64'));
+        $('#tihviDescription').text($(this).attr('data-desc'));
+    })
+
+    // billing
+    addParts()
 }
 

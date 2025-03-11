@@ -15,6 +15,7 @@ var transactionDbSchema = new mongoose.Schema({
     Notes: Object,
     Images: [
         {
+            Title: String,
             Description: String,
             base64String: String
         }

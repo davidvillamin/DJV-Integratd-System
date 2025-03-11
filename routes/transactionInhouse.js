@@ -1,6 +1,6 @@
 var express                             = require("express"),
     mongoose                            = require("mongoose");
-    Transaction                  = require("../models/transaction"),
+    Transaction                         = require("../models/transaction"),
     PartsInformation                    = require("../models/partinformation"),
     Parts                               = require("../models/part")
     Client                              = require("../models/client"),
@@ -32,16 +32,26 @@ router.post("/transaction/inhouse/create/ajax",async function(req, res){
 })
 
 //update
-router.post("/transaction/inhouse/edit/ajax",async function(req, res){
+router.post("/transaction/inhouse/edit",async function(req, res){
     //convet string to date
     req.body.data.data.RecieveDate = new Date(req.body.data.data.RecieveDate)
     await Transaction.findByIdAndUpdate(req.body.data.id,req.body.data.data)
-    var transaction = await Transaction.findById(req.body.data.id)
-        .populate('Client')
-        .lean()
-    res.send(transaction)
+    // populate transaction
+    // var transaction = await Transaction.findById(req.body.data.id)
+    //     .populate('Client')
+    //     .lean()
+    res.send('You have successfuly edited a transaction!')
 })
 
+// add image
+router.post("/transaction/inhouse/edit/image/add",async function(req, res){
+    // find transaction
+    var transaction = await Transaction.findById(req.body.data.id)
+    // add image to transaction
+    transaction.Images.push(req.body.data.data)
+    await transaction.save()
+    res.send('You have successfuly added an image!')
+})
 
 // get client list for add transaction
 router.post("/transaction/inhouse/create/clientList", async function(req, res){
