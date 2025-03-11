@@ -1,0 +1,73 @@
+<!-- Prefix Legends -->
+
+<!-- ci - Client Index -->
+<%- include("../partials/header") %>
+<%- include("../partials/loading") %>
+<%- include("../partials/header-sidebar") %>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+    <h1>Accounting</h1>
+    <nav>
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Accounting</li>
+        </ol>
+    </nav>
+    </div><!-- End Page Title -->
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="card info-card sales-card d-flex justify-content-center ">
+
+                        <h1 class="col-12ard-title d-flex justify-content-center">Customers Overview</h1>
+                        <div class="col-12 d-flex justify-content-around gap-lg-5">
+                            <div class="align-items-center">
+                                <h9 class="d-flex justify-content-center">Customers</h9>
+                                <h2 class="d-flex justify-content-center">Customer Count</h2>
+                            </div>
+                            <div class="align-content-center">
+                                <h9 class="d-flex justify-content-center">Total Revenue</h9>
+                                <h2 class="d-flex justify-content-center">Revenue Amount</h2>
+                            </div>
+                            <div class="align-content-center">
+                                <h9 class="d-flex justify-content-center">Average revenue by customer</h9>
+                                <h2 class="d-flex justify-content-center">Average Revenue</h2>
+                            </div>
+                        </div>
+                        <table id="ciTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="PnL"></div>
+    </section>
+    
+    
+
+</main><!-- End #main -->
+<!-- modal -->
+
+<!-- notification -->
+<%- include("../partials/toaster") %>
+
+<!-- dependencies -->
+<%- include("../partials/script") %>
+
+<!-- table -->
+
+
+<!-- JS -->
+<script src="/assets/js/accounting/index.js"></script>
+
+<%- include("../partials/footer") %>
