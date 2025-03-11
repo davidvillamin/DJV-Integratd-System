@@ -7,6 +7,8 @@ $(function(){
         $("#loadingScreen").attr('style', 'display: none !important');
     });
     
+    //remove class collapsed after click on sidebar
+    $("#sbdevice").removeClass("collapsed");
     // initialize toast
     $(".toast").toast({
         delay: 5000
@@ -14,28 +16,21 @@ $(function(){
 
     // initialize datatable
     var dTable = $('#dIndexTable').DataTable({
-        // data: crudiAjax({}, "/device/populate/index/table", "POST"),
+        data: crudiAjax({}, "/client/index/table", "POST"),
         pageLength: 5, // set to display 5 items
-        lengthMenu: [5, 10, 25, 50, 100], // entries per page options
+        lengthMenu: [5, 10, 25, 50, 100] // entries per page options
     })
 
-    //create parts information
-    $('#dCreate :submit').on('click',function(e){
-        if ($(this).closest('form').is(':valid') === true){
-            e.preventDefault();
-            var data = {
-                Brand: $('#dcBrand').val(),
-                Model: $('#dcModel').val(),
-                Description: $('#dcDescription').val(),
-            }
-            dTable.clear().rows.add(crudiAjax(data, "/device/deviceinformation/create", "Post")).draw()
-            $('#dCreate')[0].reset();
 
-            $('#dCreateModal').modal('toggle'); // fix modal toggle method
-            $('.modal-backdrop').remove(); // ensure backdrop is removed
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfuly created a device information!")
-            $(".toast").find(".toast-title").text("New device information")
-        }
+    //add eventlistener on click to launch the create client function on client\crud\create.js
+    // TODO: fix promise for create client on initialize table.
+    $("#ciCreate").on('click', async function(){
+        createClient(dTable)
     })
 })
+
+function initializeTable(dTable){
+    // populate table
+    var newData = crudiAjax({}, "/client/index/table", "POST");
+    dTable.clear().rows.add(newData).draw();
+}

@@ -7,7 +7,7 @@ $(function(){
         $("#loadingScreen").attr('style', 'display: none !important');
     });
     
-    $("#sbClient").removeClass("collapsed");
+    $("#sbaccounting").removeClass("collapsed");
     // initialize toast
     $(".toast").toast({
         delay: 5000

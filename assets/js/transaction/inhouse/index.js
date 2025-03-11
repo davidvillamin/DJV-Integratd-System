@@ -7,6 +7,7 @@ $(function(){
         $("#loadingScreen").attr('style', 'display: none !important');
     });
     
+    //remove class collapsed after click on sidebar
     $("#sbinhouse").removeClass("collapsed");
     
     var quill = quillInit("tihcNotes")

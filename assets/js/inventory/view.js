@@ -17,51 +17,51 @@ $(async function(){
     pvPopulateData(partsinformationData); // populate data
 
     // initialize datatable (for serial list on view)
-    var dTable = $('#pViewTable').DataTable({
+    var dTable = $('#ivViewTable').DataTable({
         data: crudiAjax(id, "/parts/view/populate/serial/table", "POST"),
         pageLength: 5, // set to display 5 items
         lengthMenu: [5, 10, 25, 50, 100], // entries per page options
     })
 
     //initialize bDTable for add serial
-    $('#pscSerialTable').bootstrapTable()
+    $('#ivcSerialTable').bootstrapTable()
 
     //on enter or click on add (add serial on the list)
     // enter
-    $('#pscSerial').on('keypress',function(k){
+    $('#ivcSerial').on('keypress',function(k){
         if (k.which == 13) {
-            pvcsAddTableData(partsinformationData)
+            ivcsAddTableData(partsinformationData)
         }
     })
 
     // add button 
-    $('#pscAdd').on('click',function(){
-        pvcsAddTableData(partsinformationData)
+    $('#ivcAdd').on('click',function(){
+        ivcsAddTableData(partsinformationData)
     })
 
     //disable enter event on form
-    $('#psCreate').on('keypress',function(e){
+    $('#ivCreate').on('keypress',function(e){
         if (e.which === 13 && e.target.nodeName !== 'text' && e.target.type !== 'submit') {
             e.preventDefault();
         } 
     })
 
     //save serial
-    $('#psCreate :submit').on('click',function(e){
+    $('#ivCreate :submit').on('click',function(e){
         if ($(this).closest('form').is(':valid') === true){
             e.preventDefault();
             var data = {}
 
             //get data on bBTable
-            data.data = $('#pscSerialTable').bootstrapTable('getData')
+            data.data = $('#ivcSerialTable').bootstrapTable('getData')
             data.id = id
 
             dTable.clear().rows.add(crudiAjax(data, "/parts/serial/create", "Post")).draw()
-            $('#psCreate')[0].reset();
+            $('#ivCreate')[0].reset();
             //reset table
-            $('#pscSerialTable').bootstrapTable('removeAll')
+            $('#ivcSerialTable').bootstrapTable('removeAll')
 
-            $('#psCreateModal').modal('toggle'); // fix modal toggle method
+            $('#ivCreateModal').modal('toggle'); // fix modal toggle method
             $('.modal-backdrop').remove(); // ensure backdrop is removed
             // show toast
             $(".toast").toast("show").find(".toast-body").text("You have successfuly created a parts information!")
@@ -72,7 +72,7 @@ $(async function(){
 //create serial (list )
 function pvcsAddTableData(partsInfo){
     // prevent empty data
-    var inputs = ["#pscSuppliersPrice", "#pscRetailPrice", "#pscSerial"];
+    var inputs = ["#ivcSuppliersPrice", "#ivcRetailPrice", "#ivcSerial"];
     var allFilled = true
 
     inputs.forEach(function(input){
@@ -82,20 +82,20 @@ function pvcsAddTableData(partsInfo){
     });
 
     if (allFilled){
-        $('#pscSerialTable').bootstrapTable('append',{
+        $('#ivcSerialTable').bootstrapTable('append',{
             Brand: partsInfo.Brand,
             Model: partsInfo.Model,
             Description: partsInfo.Description,
             partinformation: id,
-            Serial: $('#pscSerial').val(),
-            SupplierPrice: $('#pscSuppliersPrice').val(),
-            RetailPrice: $('#pscRetailPrice').val()
+            Serial: $('#ivcSerial').val(),
+            SupplierPrice: $('#ivcSuppliersPrice').val(),
+            RetailPrice: $('#ivcRetailPrice').val()
         })
-        $('#pscSerial').val('') //reset value of serial
+        $('#ivcSerial').val('') //reset value of serial
     }
 }
 
 function pvPopulateData(data){
-    $('.pivName').text(data.Brand + ' ' + data.Model )
-    $('#pivDescription').text(data.Description)
+    $('.ivName').text(data.Brand + ' ' + data.Model )
+    $('#ivDescription').text(data.Description)
 }
