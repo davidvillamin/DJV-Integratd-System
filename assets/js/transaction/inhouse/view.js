@@ -185,5 +185,8 @@ function tihvPopulateData(data,quill) {
 
     // billing
     addParts()
+
+    
+    addTranspoTable()
 }
 

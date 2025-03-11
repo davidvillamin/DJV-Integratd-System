@@ -1,7 +1,8 @@
 function addImagePreview(){
     $("#tihviImage").on('change',async function(e) {
-        var base64String = await img2b64(e.target.files[0])
-        $("#tihviPreview").attr('src', base64String);
+        await img2b64(e.target.files[0]).then(function(base64String){
+            $("#tihviPreviewModal").attr('src', base64String);
+        })
     });
 }
 
