@@ -9,11 +9,11 @@ $(function(){
     
     $("#sbdashboard").removeClass("collapsed");
     
-    var quill = quillInit("tihcNotes")
-    // initialize toast
-    $(".toast").toast({
-        delay: 5000
-    });
+    // var quill = quillInit("tihcNotes")
+    // // initialize toast
+    // $(".toast").toast({
+    //     delay: 5000
+    // });
 
     
 })

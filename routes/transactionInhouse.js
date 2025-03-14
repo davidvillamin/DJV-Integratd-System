@@ -1,8 +1,8 @@
 var express                             = require("express"),
     mongoose                            = require("mongoose");
     Transaction                         = require("../models/transaction"),
-    PartsInformation                    = require("../models/partinformation"),
-    Parts                               = require("../models/part")
+    PartsInformation                    = require("../models/itemInformation"),
+    Serial                              = require("../models/serial")
     Client                              = require("../models/client"),
     router                              = express.Router();
 
@@ -21,7 +21,7 @@ router.post("/transaction/inhouse/create/ajax",async function(req, res){
   // Find the client by ID from the request body
   var foundClient = await Client.findById(req.body.data.Client);
   // Add the newly created transaction to the client's transactions
-  foundClient.Transaction.push(newlyCreatedTransaction);
+  foundClient.Transaction.push(newlyCreatedTransaction._id);
   // Save the updated client information
   await foundClient.save();
 
@@ -128,6 +128,7 @@ router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/add", asyn
 module.exports = router;
 
 async function populateTable(){
+    // tih = transaction in house 
     var tihList = [];
     var transactioninhouseList = await Transaction.find()
         .populate({ path: 'Client', select: 'Name' }) // only retrieve the name field from Client

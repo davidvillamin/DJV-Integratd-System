@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
-var partSchema = new mongoose.Schema({
-    partinformation:{ 
+var serialSchema = new mongoose.Schema({
+    ItemInformation:{ 
         type: mongoose.Schema.Types.ObjectId,
-        ref: "partInformation"
+        ref: "itemInformation"
     },
     Brand: String,
     Model: String,
@@ -14,4 +14,4 @@ var partSchema = new mongoose.Schema({
     //supplier Detials 
 });
 
-module.exports = mongoose.model("part", partSchema);
+module.exports = mongoose.model("serial", serialSchema);

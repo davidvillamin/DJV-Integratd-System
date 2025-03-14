@@ -13,62 +13,27 @@ $(async function(){
     });
 
     //population of data
-    var partsinformationData = await crudiAjax({id: id}, "/parts/partsinformation/view/populate", 'Post');
-    pvPopulateData(partsinformationData); // populate data
+    var itemInformationData = await crudiAjax({id: id}, "/inventory/iteminformation/view/populate", 'Post');
+    pvPopulateData(itemInformationData); // populate data
 
     // initialize datatable (for serial list on view)
-    var dTable = $('#ivViewTable').DataTable({
-        data: crudiAjax(id, "/parts/view/populate/serial/table", "POST"),
+    var dTable = $('#iviiTable').DataTable({
+        data: crudiAjax(id, "/inventory/view/populate/serial/table", "POST"),
         pageLength: 5, // set to display 5 items
         lengthMenu: [5, 10, 25, 50, 100], // entries per page options
     })
 
-    //initialize bDTable for add serial
-    $('#ivcSerialTable').bootstrapTable()
-
-    //on enter or click on add (add serial on the list)
-    // enter
-    $('#ivcSerial').on('keypress',function(k){
-        if (k.which == 13) {
-            ivcsAddTableData(partsinformationData)
-        }
-    })
-
-    // add button 
-    $('#ivcAdd').on('click',function(){
-        ivcsAddTableData(partsinformationData)
-    })
-
-    //disable enter event on form
-    $('#ivCreate').on('keypress',function(e){
-        if (e.which === 13 && e.target.nodeName !== 'text' && e.target.type !== 'submit') {
-            e.preventDefault();
-        } 
-    })
-
+    // ==================================================================================
+    // Serial
+    // ==================================================================================
+    // Initialize add serial
+    //inventory / serial / crud / create
+    initializeAddSerial()
+    // save serial
+    addSerial()
     //save serial
-    $('#ivCreate :submit').on('click',function(e){
-        if ($(this).closest('form').is(':valid') === true){
-            e.preventDefault();
-            var data = {}
-
-            //get data on bBTable
-            data.data = $('#ivcSerialTable').bootstrapTable('getData')
-            data.id = id
-
-            dTable.clear().rows.add(crudiAjax(data, "/parts/serial/create", "Post")).draw()
-            $('#ivCreate')[0].reset();
-            //reset table
-            $('#ivcSerialTable').bootstrapTable('removeAll')
-
-            $('#ivCreateModal').modal('toggle'); // fix modal toggle method
-            $('.modal-backdrop').remove(); // ensure backdrop is removed
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfuly created a parts information!")
-            $(".toast").find(".toast-title").text("New parts information")
-        }
-    })
 })
+
 //create serial (list )
 function pvcsAddTableData(partsInfo){
     // prevent empty data
@@ -96,6 +61,6 @@ function pvcsAddTableData(partsInfo){
 }
 
 function pvPopulateData(data){
-    $('.ivName').text(data.Brand + ' ' + data.Model )
-    $('#ivDescription').text(data.Description)
+    $('.iviiptName').text(data.Brand + ' ' + data.Model )
+    $('#iviiDescription').text(data.Description)
 }

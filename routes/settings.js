@@ -1,6 +1,6 @@
 var express                             = require("express"),
-    PartInformation                     = require("../models/partinformation"),
-    Parts                               = require("../models/part"),
+    PartInformation                     = require("../models/itemInformation"),
+    Serial                               = require("../models/serial"),
     router                              = express.Router();
 
 router.get("/settings", function(req, res){

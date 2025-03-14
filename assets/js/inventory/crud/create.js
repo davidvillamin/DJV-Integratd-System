@@ -1,64 +1,28 @@
-function createClient(dTable){
 
-    listenerContactNumberAdd();
-    listenerContactNumberDelete();
-    
-    $('#ivCreate :submit').on('click',function(e){
-        if ($(this).closest('form').is(':valid') === true){
-            e.preventDefault();
-            var contactNumbers = [];
-            // populate all contact number and compress it to an array
-            $('.ivContactNumber').each(function() {
-                contactNumbers.push($(this).val());
-            });
-    
-            var data = {
-                Name:$('#ivName').val(),
-                Address:$('#ivAddress').val(),
-                Email:$('#ivEmail').val(),
-                isIndividual:true,
-                isMale:$('input[name="ivGender"]:checked').val(),
-                Notes: $("#ivNotes").val(),
-                ContactDetails: contactNumbers,
-            }
-    
-            // save data on a variable for confirmation
-            var crudiAjaxResult = crudiAjax(data, "/parts/create", "Post")
-            // re initialize table
-            initializeTable(dTable)
-            // clear form
-            $('#ivCreateIndividual')[0].reset();
-            // close modal   
-            $('#ivCreateModal').modal('toggle'); // fix modal toggle method
-            $('.modal-backdrop').remove(); // ensure backdrop is removed
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text(crudiAjaxResult)
-            $(".toast").find(".toast-title").text("New inventory")
+// ivii = inventory view item information
+function createItemInformation(){
+    return new Promise(function(resolve, reject){
+        try {
+            $('#iiiCreate').on('submit',function(e){
+                if ($(this).closest('form').is(':valid') === true){
+                    e.preventDefault();
+                    var data = {
+                        Brand: $('#iiiBrand').val(),
+                        Model: $('#iiiModel').val(),
+                        Description: $('#iiiDescription').val(),
+                    }
+                    var toastMessage = crudiAjax(data, "/inventory/iteminformation/create", 'Post');
+                    $('#iiiCreate')[0].reset();
+                    $('#iiiCreateModal').modal('toggle'); // fix modal toggle method
+                    $('.modal-backdrop').remove(); // ensure backdrop is removed
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text(toastMessage)
+                    $(".toast").find(".toast-title").text("New parts information")
+                    resolve()
+                }
+            })
+        } catch (error) {
+            reject(error)
         }
     })
-
-    //==================================================================
-    // for Individual
-    function listenerContactNumberAdd() {
-        //cciContactNumberAdd = Client Create Individual Contact Number
-        $(".ivContactNumberAdd").off('click').on('click', function(){
-            var newContactGroup = $('.ivContactNumberGroup').first().clone();
-            newContactGroup.find('input').val('');
-            newContactGroup.insertBefore($(this).closest('.ivContactNumberGroup'));
-            listenerContactNumberAdd(); // re-attach listener to new elements
-            listenerContactNumberDelete(); // re-attach delete listener to new elements
-        });
-    }
-
-    function listenerContactNumberDelete() {
-        // cciContactNumberDelete = Client Create Indivial Contact Number Delete
-        $(".ivContactNumberDelete").off('click').on('click', function(){
-            if ($('.ivContactNumberGroup').length > 1) {
-                $(this).closest('.ivContactNumberGroup').remove();
-        }
-    });
 }
-
-}
-
-

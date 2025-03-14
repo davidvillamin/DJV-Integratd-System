@@ -17,12 +17,14 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">All Items</h5>
-                    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#piCreateModal">
+                    <!-- iii = inventory item information -->
+                    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#iiiCreateModal">
                         <i class="bi bi-file-earmark-plus"></i> Create
                     </button>
                 </div>
                 <!-- Table with stripped rows -->
-                <table id="ivIndexTable">
+                <!-- iiii = Inventory index item Information -->
+                <table id="iiiiIndexTable">
                     <thead>
                         <tr>
                             <th>Brand</th>
@@ -38,10 +40,13 @@
     </section>
 
 </main><!-- End #main -->
-<%- include("../partials/toaster") %>
-<!-- modal -->
 <%- include("modal/create") %>
+
+<%- include("../partials/toaster") %>
 <%- include("../partials/script") %>
+
 <script src="../../assets/js/inventory/index.js"></script>
+<script src="../../assets/js/inventory/crud/create.js"></script>
+
 
 <%- include("../partials/footer") %>

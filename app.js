@@ -21,7 +21,7 @@ var express                         = require("express"),
     transactionSalesRoutes          = require("./routes/transactionSales"),
     transactionProjectRoutes        = require("./routes/transactionProject"),
     //parts
-    partsRoutes                     = require("./routes/parts"),
+    inventoryRoutes                 = require("./routes/inventory"),
     //device
     deviceRoutes                    = require("./routes/device"),
     //settings
@@ -97,7 +97,7 @@ app.use(transactionInhouseRoutes);
 app.use(transactionOnSiteRoutes);
 app.use(transactionProjectRoutes);
 app.use(transactionSalesRoutes);
-app.use(partsRoutes);
+app.use(inventoryRoutes);
 app.use(deviceRoutes);
 app.use(accountingRoutes);
 app.use(settingsRoutes);
