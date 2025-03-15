@@ -90,8 +90,14 @@ $(function(){
     //======================================================
     // billing Accordion
     //======================================================
-    // billing
-    // $('#tihvpTable').bootstrapTable()
+    // parts
+    $('#tihvbpTable').bootstrapTable()
+    // transporation
+    $('#tihvbtTable').bootstrapTable()
+    // service charge
+    $('#tihvbscTable').bootstrapTable()
+    // payment
+    $('#tihvbpayTable').bootstrapTable()
 });
 
 
