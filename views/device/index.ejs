@@ -17,17 +17,18 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">All Devices</h5>
-                    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#dCreateModal">
+                    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#diCreateModal">
                         <i class="bi bi-file-earmark-plus"></i> Create
                     </button>
                 </div>
                 <!-- Table with stripped rows -->
-                <table id="dIndexTable">
+                 <!-- di = device index -->
+                <table id="diTable">
                     <thead>
                         <tr>
+                            <th>Serial</th>
                             <th>Brand</th>
                             <th>Model</th>
-                            <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,5 +44,5 @@
 <%- include("modal/create") %>
 <%- include("../partials/script") %>
 <script src="../../assets/js/device/index.js"></script>
-
+<script src="../../assets/js/device/crud/create.js"></script>
 <%- include("../partials/footer") %>

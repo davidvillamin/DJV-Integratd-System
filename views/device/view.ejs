@@ -11,7 +11,7 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/parts">Parts</a></li>
+                <li class="breadcrumb-item"><a href="/Device">Device</a></li>
                 <li class="breadcrumb-item active dvName"></li>
             </ol>
         </nav>
@@ -30,12 +30,7 @@
                             </h2>
                             <i id="dvEdit" class="bi bi-pencil-square pencil-icon" data-bs-toggle="modal" data-bs-target=""></i>
                         </div>
-                        <p class="mb-1"><strong>Description:</strong>
-                            <span id="dvDescription">
-                                <span class="placeholder col-12"></span>
-                            </span>
-                        </p>
-                    </div>
+                   </div>
                 </div>
             </div>
 
@@ -57,11 +52,12 @@
                           <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                                     <div class="d-flex flex-row-reverse">
-                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#psCreateModal">
+                                        <!--=========== ds = device serial ===========-->
+                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#dvsCreateModal">
                                             Add
                                         </button>
                                     </div>
-                                    <table class="table" id="pViewTable">
+                                    <table class="table" id="diViewTable">
                                         <thead>
                                             <td>Serial Number</td>
                                             <td>Action</td>
@@ -82,9 +78,10 @@
     </section>
 </main><!-- End #main -->
 <%- include("../partials/toaster") %>
-<%- include("serial/create") %>
+
 <!-- modal -->
 <%- include("../partials/script") %>
-<script src="/../../assets/js/device/view.js"></script>
-<script src="/../../assets/js/deivice/serial/create.js"></script>
+<script src="../../assets/js/device/view.js"></script>
+<script src="../../assets/js/device/serial/create.js"></script>
+
 <%- include("../partials/footer") %>

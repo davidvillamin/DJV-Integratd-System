@@ -28,7 +28,7 @@ router.post('/inventory/index/populate/table', async function(req, res){
 // View Route
 //====================================================================================================
 
-//view parts infromation
+//view parts information
 router.get('/inventory/iteminformation/view/:id', function(req, res){
     res.render('inventory/view')
 })

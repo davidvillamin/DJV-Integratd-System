@@ -6,7 +6,8 @@ var deviceSchema = new mongoose.Schema({
         },
     Brand: String,
     Model: String,
-    Description: String,
+    Serial: String,
+    Notes: String,
     
      
 });

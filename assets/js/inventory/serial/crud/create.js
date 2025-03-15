@@ -1,7 +1,7 @@
 
 function initializeAddSerial(){
     //initialize bDTable for add serial
-    $('#ivcSerialTable').bootstrapTable()
+    $('#iviiTable').bootstrapTable()
 
     //on enter or click on add (add serial on the list)
     // enter
@@ -36,7 +36,7 @@ function addSerial(){
                     data.data = $('#ivcSerialTable').bootstrapTable('getData')
                     data.id = id
         
-                    dTable.clear().rows.add(crudiAjax(data, "/parts/serial/create", "Post")).draw()
+                    dTable.clear().rows.add(crudiAjax(data, "/inventory/serial/create", "Post")).draw()
                     $('#ivCreate')[0].reset();
                     //reset table
                     $('#ivcSerialTable').bootstrapTable('removeAll')

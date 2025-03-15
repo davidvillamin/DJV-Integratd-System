@@ -1,4 +1,5 @@
 $(function(){
+    
     //======================================================
     // Loading Screen
     //======================================================
@@ -15,22 +16,28 @@ $(function(){
     });
 
     // initialize datatable
-    var dTable = $('#dIndexTable').DataTable({
-        data: crudiAjax({}, "/client/index/table", "POST"),
-        pageLength: 5, // set to display 5 items
-        lengthMenu: [5, 10, 25, 50, 100] // entries per page options
+    var dTable = $('#diTable').DataTable({
+        data: crudiAjax({}, "/device/deviceinformation/table", "POST"),
+        // pageLength: 5, // set to display 5 items
+        // lengthMenu: [5, 10, 25, 50, 100] // entries per page options
     })
 
 
     //add eventlistener on click to launch the create client function on client\crud\create.js
-    // TODO: fix promise for create client on initialize table.
-    $("#ciCreate").on('click', async function(){
-        createClient(dTable)
+    $("#diCreate").on('click', async function(){
+        deviceCreate(dTable)
     })
+
+    // Call deviceCreate function
+    
+
+    
 })
 
 function initializeTable(dTable){
     // populate table
-    var newData = crudiAjax({}, "/client/index/table", "POST");
+    var newData = crudiAjax({}, "/device/deviceinformation/table", "POST");
     dTable.clear().rows.add(newData).draw();
+    
 }
+
