@@ -6,7 +6,9 @@ var express                             = require("express"),
     Client                              = require("../models/client"),
     router                              = express.Router();
 
-
+//===============================================================================================================
+// index
+//===============================================================================================================
 // get index
 router.get("/transaction/inhouse", function(req, res){
     res.render("transaction/Inhouse/index")
@@ -31,7 +33,10 @@ router.post("/transaction/inhouse/create/ajax",async function(req, res){
   res.send(tableData);
 })
 
-//update
+//===============================================================================================================
+// view
+//===============================================================================================================
+// edit inhouse transaction
 router.post("/transaction/inhouse/edit",async function(req, res){
     //convet string to date
     req.body.data.data.RecieveDate = new Date(req.body.data.data.RecieveDate)

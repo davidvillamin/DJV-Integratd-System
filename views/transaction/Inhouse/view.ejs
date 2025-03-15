@@ -164,85 +164,165 @@
                                 </h2>
                                 <div id="flush-collapseBilling" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
                                     <div class="accordion-body">
-                                        <!-- ====================================================== -->
-                                        <!-- parts -->
-                                        <div>
-                                            <h6 class="card-title">Parts</h6>
-                                            <div class="d-flex flex-row-reverse mb-2">
-                                                <button class="btn btn-primary" id="addRowBtn" data-bs-toggle="modal" data-bs-target="#tihvbpAddModal"><i class="bi bi-plus-square"></i>  Parts</button>
+                                        <!-- tabs -->
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                              <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary" type="button" role="tab" aria-controls="summary" aria-selected="true">Summary</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                              <button class="nav-link" id="parts-tab" data-bs-toggle="tab" data-bs-target="#parts" type="button" role="tab" aria-controls="parts" aria-selected="false">Parts</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                              <button class="nav-link" id="transportation-tab" data-bs-toggle="tab" data-bs-target="#transportation" type="button" role="tab" aria-controls="transportation" aria-selected="false">Transportation</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                              <button class="nav-link" id="serviceCharge-tab" data-bs-toggle="tab" data-bs-target="#serviceCharge" type="button" role="tab" aria-controls="serviceCharge" aria-selected="false">Service Charge</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                              <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">Payment</button>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                            <!-- summary -->
+                                            <div class="tab-pane fade show active" id="summary" role="tabpanel" aria-labelledby="summary-tab">
+                                                <table class="table"> 
+                                                    <thead>
+                                                        <th>Description</th>
+                                                        <th>Qty</th>
+                                                        <th>Unit Price</th>
+                                                        <th>Total</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th colspan="4">Parts Replacement</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Canon Cartridge</td>
+                                                            <td>1 pc</td>
+                                                            <td>Php. 1,500.00</td>
+                                                            <td>Php. 1,500.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4">Transportation</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Office To Trece Martires</td>
+                                                            <td>40 km</td>
+                                                            <td>Php. 10.00 / km</td>
+                                                            <td>Php. 400.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4">Service Charge</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Service Charge</td>
+                                                            <td>1 lot</td>
+                                                            <th>Php.1,000.00</th>
+                                                            <th>Php.1,000.00</th>
+                                                        </tr>
+                                                        <tr class="bg-warning">
+                                                            <th colspan="3">Total</th>
+                                                            <th>Php. 2,900.00</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="4">Payment</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Initial Payment</td>
+                                                            <td>2021-09-01</td>
+                                                            <td>Php. 1,000.00</td>
+                                                            <td>Php. 1,000.00</td>
+                                                        </tr>
+                                                        <tr class="bg-danger">
+                                                            <th colspan="3">Balance</th>
+                                                            <th>Php. 1,900.00</th>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <!-- tihvbp = Transaction In House View Billing Parts -->
-                                            <table class="table" id="tihvbpTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Description</th>
-                                                        <th scope="col">Serial</th>
-                                                        <th scope="col">SRP</th>
-                                                        <th scope="col">Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- ====================================================== -->
-                                        <!-- Transpo -->
-                                        <div>
-                                            Transportation
-                                            <div class="d-flex flex-row-reverse mb-2">
-                                                <button class="btn btn-primary" id="addRowBtn" data-bs-toggle="modal" data-bs-target="#tihvbtAddModal"><i class="bi bi-plus-square"></i>  Transportation</button>
+                                            <!-- parts -->
+                                            <div class="tab-pane fade" id="parts" role="tabpanel" aria-labelledby="parts-tab">
+                                                <div class="d-flex flex-row-reverse m-2">
+                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#"><i class="bi bi-plus-square pe-1"></i>Parts</button>
+                                                </div>
+                                                <!-- tihvbp = transaction in house view billing parts -->
+                                                <table id="tihvbpTable" class="table">
+                                                    <thead>
+                                                        <th>Description</th>
+                                                        <th>Qty</th>
+                                                        <th>Unit Price</th>
+                                                        <th>Total</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <i class="bi bi-trash text-danger"></i>
+                                                                <i class="bi bi-pencil-square text-warning"></i>
+                                                                Canon Cartridge
+                                                            </td>
+                                                            <td>1 pc</td>
+                                                            <td>Php. 1,000.00</td>
+                                                            <td>Php. 1,000.00</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <!-- tihvt = Transaction In House View Transportation -->
-                                            <table class="table" id="tihvtTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th data-field="Description">Description</th>
-                                                        <th data-field="Price">Price</th>
-                                                        <!-- <th data-field="Action">Actions</th> -->
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+                                            <!-- transportation -->
+                                            <div class="tab-pane fade" id="transportation" role="tabpanel" aria-labelledby="transportation-tab">
+                                                <div class="d-flex flex-row-reverse m-2">
+                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tihvbtAddModal"><i class="bi bi-plus-square"></i>  Transportation</button>
+                                                </div>
+                                                <!-- tihvbt = Transaction In House View Billing Transportation -->
+                                                <table class="table" id="tihvbtTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="Description">Description</th>
+                                                            <th data-field="Quantity">Qty</th>
+                                                            <th data-field="UnitPrice">Unit Price</th>
+                                                            <th data-field="Price">Price</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                            <!-- Service Charge -->
+                                            <div class="tab-pane fade" id="serviceCharge" role="tabpanel" aria-labelledby="serviceCharge-tab">
+                                                <div class="d-flex flex-row-reverse mb-2">
+                                                    <button class="btn btn-primary" id="addRowBtn"><i class="bi bi-plus-square"></i>  Service Charge</button>
+                                                </div>
+                                                <!-- tihvbsc = Transaction In House View Billing Service Charge -->
+                                                <table class="table" id="tihvbscTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Description</th>
+                                                            <th scope="col">Total</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- Payment -->
+                                            <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                                                <div class="d-flex flex-row-reverse mb-2">
+                                                    <button class="btn btn-primary" id="addRowBtn"><i class="bi bi-plus-square"></i>  Payment</button>
+                                                </div>
+                                                <!-- tihvbpay = Transaction In House Billing View Payment -->
+                                                <table class="table" id="tihvbpayTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Description</th>
+                                                            <th scope="col">Amount</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <!-- ====================================================== -->
-                                        <!-- Serice Charge -->
-                                        Service Charge
-                                        <div class="d-flex flex-row-reverse mb-2">
-                                            <button class="btn btn-primary" id="addRowBtn"><i class="bi bi-plus-square"></i>  Service Charge</button>
-                                        </div>
-                                        <!-- tihvsc = Transaction In House View Service Charge -->
-                                        <table class="table" id="tihvscTable">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Description</th>
-                                                    <th scope="col">Total</th>
-                                                    <th scope="col">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                        <!-- ====================================================== -->
-                                        <!-- Payment -->
-                                        Payment
-                                        <div class="d-flex flex-row-reverse mb-2">
-                                            <button class="btn btn-primary" id="addRowBtn"><i class="bi bi-plus-square"></i>  Payment</button>
-                                        </div>
-                                        <!-- tihvpay = Transaction In House View Payment -->
-                                        <table class="table" id="tihvpayTable">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Description</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                        <!-- ====================================================== -->
+
                                         <!-- <div class="d-flex flex-row-reverse mb-2">
                                             <button class="btn btn-primary" id="addRowBtn"><i class="bi bi-plus-square"></i> Add Row</button>
                                         </div>
