@@ -14,6 +14,18 @@ router.get("/transaction/inhouse", function(req, res){
     res.render("transaction/Inhouse/index")
 })
 
+// get client list for add transaction
+router.post("/transaction/inhouse/create/clientList", async function(req, res){
+    var clientList = await Client.find()
+        .select('_id Name')
+        .lean()
+    var tempStr = String
+    clientList.forEach(function(d){
+        tempStr += "<option value='" + d._id + "'>" + d.Name + "</option>"
+    })
+    res.send(tempStr)
+})
+
 // create inhouse transaction
 router.post("/transaction/inhouse/create/ajax",async function(req, res){
   // Convert the string date to a Date object
@@ -33,6 +45,12 @@ router.post("/transaction/inhouse/create/ajax",async function(req, res){
   res.send(tableData);
 })
 
+//universal get all client
+router.post("/transaction/inhouse/index/poplate/table", async function(req, res){
+    var tableData = await populateTable();
+    res.send(tableData);
+})
+
 //===============================================================================================================
 // view
 //===============================================================================================================
@@ -48,6 +66,14 @@ router.post("/transaction/inhouse/edit",async function(req, res){
     res.send('You have successfuly edited a transaction!')
 })
 
+// view inhouse transaction
+router.get("/transaction/inhouse/view/:id", function(req, res){
+    res.render("transaction/inhouse/view")
+})
+
+//===============================================================================================================
+// Dropdown
+//===============================================================================================================
 // add image
 router.post("/transaction/inhouse/edit/image/add",async function(req, res){
     // find transaction
@@ -58,23 +84,6 @@ router.post("/transaction/inhouse/edit/image/add",async function(req, res){
     res.send('You have successfuly added an image!')
 })
 
-// get client list for add transaction
-router.post("/transaction/inhouse/create/clientList", async function(req, res){
-    var clientList = await Client.find()
-        .select('_id Name')
-        .lean()
-    var tempStr = String
-    clientList.forEach(function(d){
-        tempStr += "<option value='" + d._id + "'>" + d.Name + "</option>"
-    })
-    res.send(tempStr)
-})
-
-// view inhouse transaction
-router.get("/transaction/inhouse/view/:id", function(req, res){
-    res.render("transaction/inhouse/view")
-})
-
 // get all inhouse transaction
 router.post("/transaction/inhouse/view/populate/transaction",async function(req, res){
     var transaction = await Transaction.findById(req.body.data.id)
@@ -82,6 +91,16 @@ router.post("/transaction/inhouse/view/populate/transaction",async function(req,
         .lean()
     res.send(transaction)
 })
+
+// Print
+router.get("/transaction/inhouse/view/:id/print", function(req, res){
+    res.render("transaction/inhouse/printReport/initial")
+})
+//===============================================================================================================
+// Accordion
+//===============================================================================================================
+
+// part information
 // get all inhouse view parts request list
 router.post("/transaction/inhouse/view/populate/partInformation",async function(req, res){
     // update table list (get only Partinformation)
@@ -92,17 +111,7 @@ router.post("/transaction/inhouse/view/populate/partInformation",async function(
     res.send(partsTable)
 })
 
-//universal get all client
-router.post("/transaction/inhouse/index/poplate/table", async function(req, res){
-    var tableData = await populateTable();
-    res.send(tableData);
-})
-
-// Print
-router.get("/transaction/inhouse/view/:id/print", function(req, res){
-    res.render("transaction/inhouse/printReport/initial")
-})
-
+// part Information
 //populate list of parts information
 router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/populate", async function(req, res){
     var partListStr = ''
@@ -114,6 +123,8 @@ router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/populate",
     res.send(partListStr)
 })
 
+
+//part information
 //save parts information to transaction
 router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/add", async function(req, res){
     // update transaction data
@@ -130,6 +141,21 @@ router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/add", asyn
 })
 
 
+//billing - Transporation save
+router.post("/transaction/inhouse/view/billing/transportation/add", async function(req, res){
+    // update transaction data
+    var transaction = await Transaction.findById(req.body.data.id)
+    transaction.Billing.Transporation.push(req.body.data.transportation)
+    await transaction.save()
+    res.send('You have successfuly added a transportation!')
+})
+
+//billing - transportation populate table
+router.post("/transaction/inhouse/view/billing/transporation/populte/table", async function(req, res){
+    var transportation = await Transaction.findById(req.body.data).select("Billing.Transporation").lean()
+    var transpoTable = await populateTableBillingTranspo(transportation.Billing.Transporation)
+    res.send(transpoTable)
+})
 module.exports = router;
 
 async function populateTable(){
@@ -171,4 +197,18 @@ async function populateTableParts(partsList){
         });
     });
     return mPartList
+}
+
+async function populateTableBillingTranspo(transpo){
+    var transpoList = []
+    transpo.forEach(function(trans){
+        transpoList.push({
+            Description: "<i class='bi bi-pencil-square text-white p-1 px-2 text-white bg-warning rounded tihvbtEdit'></i>\
+                        <i class='bi bi-trash text-white p-1 px-2 bg-danger rounded me-2 tihvbtDelete'></i>" + trans.Description,
+            Quantity: trans.Quantity,
+            UnitPrice: trans.UnitPrice,
+            Price: trans.Price
+        })
+    })
+    return transpoList
 }

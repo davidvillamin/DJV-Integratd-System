@@ -1,7 +1,7 @@
 
 var id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
-$(function(){
+$(async function(){
     //======================================================
     // Loading Screen
     //======================================================
@@ -38,16 +38,60 @@ $(function(){
     });
 
     //======================================================
-    // Edit tags 
+    // billing Accordion initialize table
     //======================================================
-    editTags()
+    // parts
+    var partsTbl = $('#tihvbpTable').bootstrapTable()
+    // transporation
+    var transpoTbl = $('#tihvbtTable').bootstrapTable()
+    // populate table
+    transpoTbl.bootstrapTable("destroy").bootstrapTable({
+        data: await crudiAjax(id,"/transaction/inhouse/view/billing/transporation/populte/table","post")
+    });
+    $("#tihvbtTable").on("click", ".tihvbtEdit", async function() {
+        var rowId = $(this).data("id"); // Assuming each edit button has a data-id attribute
+        var rowData = transpoTbl.bootstrapTable("getRowByUniqueId", rowId); // Get the row data by unique ID
+
+        console.log(rowId)
+        // Open a modal or form to edit the row data
+        // $("#editTranspoModal").modal("show");
+        // $("#editTranspoForm input[name='description']").val(rowData.description);
+        // $("#editTranspoForm input[name='amount']").val(rowData.amount);
+
+        // // Save changes
+        // $("#editTranspoSave").off("click").on("click", async function() {
+        //     var updatedData = {
+        //         id: rowId,
+        //         description: $("#editTranspoForm input[name='description']").val(),
+        //         amount: $("#editTranspoForm input[name='amount']").val()
+        //     };
+
+        //     // Update the data via AJAX
+        //     await crudiAjax(updatedData, "/transaction/inhouse/view/billing/transporation/update", "post");
+
+        //     // Refresh the table
+        //     transpoTbl.bootstrapTable("destroy").bootstrapTable({
+        //         data: await crudiAjax(id, "/transaction/inhouse/view/billing/transporation/populte/table", "post")
+        //     });
+
+        //     // Close the modal
+        //     $("#editTranspoModal").modal("hide");
+        });
+    // }); 
+    // service charge
+    var scTbl = $('#tihvbscTable').bootstrapTable()
+    // payment
+    var payTbl = $('#tihvbpayTable').bootstrapTable()
+
 
     //======================================================
     // Data Population
     //======================================================
     //population of data
     var currentTransaction = crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post');
-    tihvPopulateData(currentTransaction,quill); // populate data
+    tihvPopulateData(currentTransaction,quill,partsTbl,transpoTbl,scTbl,payTbl); // populate data
+
+
 
     //======================================================
     // Edit Client
@@ -59,49 +103,38 @@ $(function(){
             // input client id 
             clientEditIndividual(currentTransaction.Client._id).then(function() {
                 //update all client info
-                tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
+                tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
             });
         } else {
             clientEditCorporate(currentTransaction.Client._id).then(function() {
                 //update all client info
-                tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
+                tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
             });
         }
     });
     
-
-
-
     //======================================================
     // Repair Details
     //======================================================
     editRepair(id).then(function(){
         //update all client info
-        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
+        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
     })
 
     // upload image 
     // image preview
     addImagePreview()
     addImage().then(function(){
-        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill);
+        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
     })
 
     //======================================================
-    // billing Accordion
+    // Edit tags 
     //======================================================
-    // parts
-    $('#tihvbpTable').bootstrapTable()
-    // transporation
-    $('#tihvbtTable').bootstrapTable()
-    // service charge
-    $('#tihvbscTable').bootstrapTable()
-    // payment
-    $('#tihvbpayTable').bootstrapTable()
+    editTags()
 });
 
-
-function tihvPopulateData(data,quill) {
+function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
     //======================================================
     // Header with breadcumb
     //======================================================
@@ -192,7 +225,13 @@ function tihvPopulateData(data,quill) {
     // billing
     addParts()
 
+    // initialize table
     
-    addTranspoTable()
+    // billing transportation
+    addTransportation(id).then(async function(){
+        transpoTbl.bootstrapTable("destroy").bootstrapTable({
+            data: await crudiAjax(id,"/transaction/inhouse/view/billing/transporation/populte/table","post")
+        });
+    })
 }
 

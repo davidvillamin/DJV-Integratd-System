@@ -26,25 +26,44 @@ var transactionDbSchema = new mongoose.Schema({
     FixedStatus: Array, // Cancel Repair, Partial Approval,
     //Parts Request(Major), Parts Request(Minor), Parts Request(Major/Minor),
     // Parts Approve, Repaired, Released, Paid
-    ServiceCharge: [
-        {
-            Description: String,
-            Amount: Number
-        }
-    ],
     Technician: String,
-    PartInformation: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "partInformation"
-        }
-    ],
     Part: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "part"
         }
-    ]
+    ],
+    Billing: {
+        Parts: [
+            {
+                Description: String,
+                Quantity: Number,
+                UnitPrice: Number,
+                Total: Number
+            }
+        ],
+        Transporation: [
+            {
+                Description: String,
+                Quantity: Number,
+                UnitPrice: Number,
+                Price: Number
+            }
+        ],
+        ServiceCharge: [
+            {
+                Description: String,
+                Price: Number
+            }
+        ],
+        Payment: [
+            {
+                Date: Date,
+                Description: String,
+                Amount: Number,
+            }
+        ]
+    }
     
 });
 
