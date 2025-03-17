@@ -18,18 +18,20 @@ $(function(){
     // initialize datatable
     var dTable = $('#diTable').DataTable({
         data: crudiAjax({}, "/device/deviceinformation/table", "POST"),
-        // pageLength: 5, // set to display 5 items
-        // lengthMenu: [5, 10, 25, 50, 100] // entries per page options
+        pageLength: 5, // set to display 5 items
+        lengthMenu: [5, 10, 25, 50, 100] // entries per page options
     })
 
 
     //add eventlistener on click to launch the create client function on client\crud\create.js
-    $("#diCreate").on('click', async function(){
-        deviceCreate(dTable)
-    })
+    // $("#diCreate").on('click', async function(){
+        
+    // })
 
-    // Call deviceCreate function
-    
+    deviceCreate().then(function(){
+        // reload datatable
+        dTable.clear().rows.add(crudiAjax({}, "/inventory/index/populate/table", "POST")).draw();
+    })
 
     
 })
