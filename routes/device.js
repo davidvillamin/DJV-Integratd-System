@@ -42,11 +42,11 @@ router.post("/device/deviceinformation/view/name",async function(req, res){
 // View Serial table
 //====================================================================================================
 // View serial number 
-router.post("/device/serial/view", async function(req, res){
-    await Device.create(req.body.data)
-    res.send("You have successfully created a new device!")
-    res.render("device/view")
-});
+// router.post("/device/serial/view", async function(req, res){
+//     await Device.create(req.body.data)
+//     res.send("You have successfully created a new device!")
+//     res.render("device/view")
+// });
 
 //====================================================================================================
 // View Delete Table

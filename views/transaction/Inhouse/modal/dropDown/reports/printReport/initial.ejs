@@ -47,36 +47,37 @@
         <div class="service-report">
             <h1 class= "small text-center fw-bold fs-6" >INITIAL DIAGNOSTIC REPORT</h1>
             <div class="details">
-                <table class="table table-sm table-borderless">
+                <table class="table table-sm table-borderless"  id="tihvpInitialReportTable">
                     <tr>
                         <th class="small">Job Order:</th>
-                        <td class="small">W0001</td>
+                        <th id="tihvpJobOrder"></th>
                         <th class="small">Receive Date:</th>
-                        <td class="small">September 18, 2024</td>
-                    </tr>
-                    <tr>
-                        <th class="small">Client Name:</th>
-                        <td class="small">First Last Name</td>
-                        <th class="small">Serial Number:</th>
-                        <td class="small">123456789</td>
+                        <th id="tihvpReceivedDate"></th>
                     </tr>
                     <tr>
                         <th class="small">Device:</th>
-                        <td class="small">Device Test</td>
-                        <th class="small">Device Brand / Model / SN:</th>
-                        <td class="small">EPSON L120</td>
+                        <th id="tihvpDevice"></th>
+                        <th class="small">Serial Number:</th>
+                        <th id="tihvpSerialNumber"></th>
                     </tr>
                     <tr>
-                        <th class="small">Issue:</th>
-                        <td class="small">POOR PRINT MAGENTA</td>
-                        
+                        <th class="small">Client Name:</th>
+                        <th id="tihvpCLientName"></th>
+                        <th class="small">Contact Details:</th>
+                        <th id="tihvpContactDetails"></th>
                     </tr>
-                    
                     <tr>
-                        <th class="small">Recommendations:</th>
-                        <td class="small" colspan="3">Click or tap here to enter text.</td>
+                        <th class="small">Address:</th>
+                        <th id="tihvpAddress"></th>
+                        <th class="small">Email:</th>
+                        <th id="tihvpEmail"></th>
+                    </tr>
+                    <tr>
+                        <th class="small">Technical Notes:</th>
+                        <th id="tihvpNotes"></th>
                     </tr>
                 </table>
+
             </div>
         </div>
     </body>
@@ -137,5 +138,9 @@
         </div>
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../../../../../../assets/js/transaction/inhouse/modal/dropDown/reports/initial.js/initial.js"></script>
+    <script src="../../../../../../../assets/js/crud.js"></script>
+    <script type="text/javascript" src="/assets/vendor/quill/quill.js"></script>
 </html>

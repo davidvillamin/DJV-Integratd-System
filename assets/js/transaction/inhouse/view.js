@@ -112,27 +112,10 @@ $(async function(){
     //======================================================
     editTags()
 
-    //======================================================
-    // Save Nots 
-    //======================================================
-    // tihvnSave
-    $('#tihvnSave').on("click",async function(){
-        // get data form quill
-        var data = {
-            id: id,
-            Notes: quill.getContents()
-        }
-        
-        // save data
-        var crudiAjaxResult = await crudiAjax(data, '/transaction/inhouse/view/notes', 'put')
-
-        // show toast
-        $(".toast").toast("show").find(".toast-body").text(crudiAjaxResult)
-        $(".toast").find(".toast-title").text("Add transportation")
+    // print - Initial Report
+    $('#tihvpInitialReportTable').on('click',function(){
+        $(this).attr('href','/transaction/inhouse/view/print/initial/'+ id)
     })
-
-    // close transaction
-    closeTransaction(id)
 });
 
 function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
@@ -235,17 +218,7 @@ function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
         });
     })
 
-    // service charge
-    addServiceCharge(id).then(async function(){
-        scTbl.bootstrapTable("destroy").bootstrapTable({
-            data: await crudiAjax(id,"/transaction/inhouse/view/billing/serviceCharge/populte/table","post")
-        });
-    })
-    //Payment
-    addPayment(id).then(async function(){
-        payTbl.bootstrapTable("destroy").bootstrapTable({
-            data: await crudiAjax(id,"/transaction/inhouse/view/billing/payment/populte/table","post")
-        });
-    })
+    
+
 }
 
