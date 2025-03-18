@@ -1,5 +1,6 @@
 var express                             = require("express"),
     mongoose                            = require("mongoose");
+    moment                              = require("moment");
     Transaction                         = require("../models/transaction"),
     PartsInformation                    = require("../models/itemInformation"),
     Serial                              = require("../models/serial")
@@ -139,7 +140,11 @@ router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/add", asyn
     var partsTable = await populateTableParts(partsList)
     res.send(partsTable)
 })
-
+// release
+router.post("/transaction/inhouse/view/release/update", async function(req, res){
+    await Transaction.findByIdAndUpdate(req.body.data.id, { Release: req.body.data.data });
+    res.send("You have successfuly release date!")
+})
 
 //billing - Transporation save
 router.post("/transaction/inhouse/view/billing/transportation/add", async function(req, res){
@@ -152,9 +157,49 @@ router.post("/transaction/inhouse/view/billing/transportation/add", async functi
 
 //billing - transportation populate table
 router.post("/transaction/inhouse/view/billing/transporation/populte/table", async function(req, res){
-    var transportation = await Transaction.findById(req.body.data).select("Billing.Transporation").lean()
-    var transpoTable = await populateTableBillingTranspo(transportation.Billing.Transporation)
+    var transaction = await Transaction.findById(req.body.data).select("Billing.Transporation").lean()
+    var transpoTable = await populateTableBillingTranspo(transaction.Billing.Transporation)
     res.send(transpoTable)
+})
+
+//billing - service charge save
+router.post("/transaction/inhouse/view/billing/serviceCharge/add", async function(req, res){
+    // update transaction data
+    var transaction = await Transaction.findById(req.body.data.id)
+    transaction.Billing.ServiceCharge.push(req.body.data.ServiceCharge)
+    await transaction.save()
+    res.send('You have successfuly added a Service Charge!')
+})
+
+//billing - service charge populate table
+router.post("/transaction/inhouse/view/billing/serviceCharge/populte/table", async function(req, res){
+    var transaction = await Transaction.findById(req.body.data).select("Billing.ServiceCharge").lean()
+    var scTable = await populateTableBillingServiceCharge(transaction.Billing.ServiceCharge)
+    res.send(scTable)
+})
+
+//billing - payment save
+router.post("/transaction/inhouse/view/billing/payment/add", async function(req, res){
+    // update transaction data
+    var transaction = await Transaction.findById(req.body.data.id)
+    transaction.Billing.Payment.push(req.body.data.Payment)
+    await transaction.save()
+    res.send('You have successfuly added a Payment!')
+})
+
+//billing - payment populate table
+router.post("/transaction/inhouse/view/billing/payment/populte/table", async function(req, res){
+    // convert date
+    var transaction = await Transaction.findById(req.body.data).select("Billing.Payment").lean()
+    var payTable = await populateTableBillingPayment(transaction.Billing.Payment)
+    res.send(payTable)
+})
+
+
+// notes
+router.put("/transaction/inhouse/view/notes", async function(req, res){
+    await Transaction.findByIdAndUpdate(req.body.data.id, { Notes: req.body.data.Notes });
+    res.send("You have successfuly updated notes!")
 })
 module.exports = router;
 
@@ -211,4 +256,29 @@ async function populateTableBillingTranspo(transpo){
         })
     })
     return transpoList
+}
+
+async function populateTableBillingServiceCharge(serviceCharge){
+    var scList = []
+    serviceCharge.forEach(function(sc){
+        scList.push({
+            Description: "<i class='bi bi-pencil-square text-white p-1 px-2 text-white bg-warning rounded tihvbtEdit'></i>\
+                        <i class='bi bi-trash text-white p-1 px-2 bg-danger rounded me-2 tihvbtDelete'></i>" + sc.Description,
+            Price: sc.Price
+        })
+    })
+    return scList
+}
+
+async function populateTableBillingPayment(payment){
+    var payList = []
+    payment.forEach(function(pay){
+        payList.push({
+            Description: "<i class='bi bi-pencil-square text-white p-1 px-2 text-white bg-warning rounded tihvbtEdit'></i>\
+                        <i class='bi bi-trash text-white p-1 px-2 bg-danger rounded me-2 tihvbtDelete'></i>" + pay.Description,
+            Date: moment(pay.Date).format("MMM-DD-YYYY"),
+            Amount: pay.Amount
+        })
+    })
+    return payList
 }

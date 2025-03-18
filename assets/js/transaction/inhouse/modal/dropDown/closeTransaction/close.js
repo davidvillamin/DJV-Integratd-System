@@ -1,18 +1,18 @@
-function release(id){
-    return new Promise(function(resolve, reject){
+function closeTransaction(id){
+    return new Promise (function(resolve, reject){
         try {
-            $('#tihvrelUpdate').on('submit',async function(e){
+            $('#tihvctUpdate').on('submit',async function(e){
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
                     var data = {}
                     data.data = {
-                        Date:$('#tihvrelDate').val(),
-                        Technician:$('#tihvrelTechnician :selected').text(),
+                        Date:$('#tihvctDate').val(),
+                        Technician:$('#tihvctTechnician :selected').text(),
                     }
                     data.id = id
                     console.log(data)
                     //save data
-                    var toastMessage = await crudiAjax(data, "/transaction/inhouse/view/release/update", 'Post');
+                    // var toastMessage = await crudiAjax(data, "/transaction/inhouse/view/release/update", 'Post');
                     // clear data
                     $('#tihvrelUpdate')[0].reset();
                     // close modal   
@@ -25,7 +25,7 @@ function release(id){
                 }
             })
         } catch (error) {
-            reject(error)
+            reject()
         }
     })
 }

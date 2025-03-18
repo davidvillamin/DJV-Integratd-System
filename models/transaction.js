@@ -25,7 +25,7 @@ var transactionDbSchema = new mongoose.Schema({
     //Hold
     FixedStatus: Array, // Cancel Repair, Partial Approval,
     //Parts Request(Major), Parts Request(Minor), Parts Request(Major/Minor),
-    // Parts Approve, Repaired, Released, Paid
+    // Parts Approve, Repaired, Released, Paid, Closed
     Technician: String,
     Part: [
         {
@@ -33,6 +33,7 @@ var transactionDbSchema = new mongoose.Schema({
             ref: "part"
         }
     ],
+    Balance: Number,
     Billing: {
         Parts: [
             {
@@ -63,7 +64,17 @@ var transactionDbSchema = new mongoose.Schema({
                 Amount: Number,
             }
         ]
+    },
+    Release: {
+        Date: Date,
+        Technician: String
+    },
+    isClosed: Boolean,
+    CloseTransaction: {
+        Date: Date,
+        Technician: String
     }
+
     
 });
 
