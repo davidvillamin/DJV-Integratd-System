@@ -13,9 +13,10 @@ function deviceCreate() {
                         Serial:$('#dicSerial').val(),
                         Notes:$('#dicNotes').val(),
                     }
-                    console.log(data)   
                     // // save data on a variable for confirmation
                     var crudiAjaxResult = crudiAjax(data, "/device/create", "Post")
+                    // re initializeTable
+                    
                     // // clear form
                     $('#diCreate')[0].reset();
                     // // close modal   
