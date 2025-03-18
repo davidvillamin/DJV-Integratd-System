@@ -6,7 +6,7 @@ function addImagePreview(){
     });
 }
 
-function addImage(){
+function addImage(id){
     return new Promise(async function(resolve, reject){
         try {
             //update repair accordion

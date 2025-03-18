@@ -42,46 +42,23 @@ $(async function(){
     //======================================================
     // parts
     var partsTbl = $('#tihvbpTable').bootstrapTable()
+
     // transporation
     var transpoTbl = $('#tihvbtTable').bootstrapTable()
-    // populate table
     transpoTbl.bootstrapTable("destroy").bootstrapTable({
         data: await crudiAjax(id,"/transaction/inhouse/view/billing/transporation/populte/table","post")
     });
-    $("#tihvbtTable").on("click", ".tihvbtEdit", async function() {
-        var rowId = $(this).data("id"); // Assuming each edit button has a data-id attribute
-        var rowData = transpoTbl.bootstrapTable("getRowByUniqueId", rowId); // Get the row data by unique ID
 
-        console.log(rowId)
-        // Open a modal or form to edit the row data
-        // $("#editTranspoModal").modal("show");
-        // $("#editTranspoForm input[name='description']").val(rowData.description);
-        // $("#editTranspoForm input[name='amount']").val(rowData.amount);
-
-        // // Save changes
-        // $("#editTranspoSave").off("click").on("click", async function() {
-        //     var updatedData = {
-        //         id: rowId,
-        //         description: $("#editTranspoForm input[name='description']").val(),
-        //         amount: $("#editTranspoForm input[name='amount']").val()
-        //     };
-
-        //     // Update the data via AJAX
-        //     await crudiAjax(updatedData, "/transaction/inhouse/view/billing/transporation/update", "post");
-
-        //     // Refresh the table
-        //     transpoTbl.bootstrapTable("destroy").bootstrapTable({
-        //         data: await crudiAjax(id, "/transaction/inhouse/view/billing/transporation/populte/table", "post")
-        //     });
-
-        //     // Close the modal
-        //     $("#editTranspoModal").modal("hide");
-        });
-    // }); 
     // service charge
     var scTbl = $('#tihvbscTable').bootstrapTable()
+    scTbl.bootstrapTable("destroy").bootstrapTable({
+        data: await crudiAjax(id,"/transaction/inhouse/view/billing/serviceCharge/populte/table","post")
+    });
     // payment
     var payTbl = $('#tihvbpayTable').bootstrapTable()
+    payTbl.bootstrapTable("destroy").bootstrapTable({
+        data: await crudiAjax(id,"/transaction/inhouse/view/billing/payment/populte/table","post")
+    });
 
 
     //======================================================
@@ -124,9 +101,11 @@ $(async function(){
     // upload image 
     // image preview
     addImagePreview()
-    addImage().then(function(){
+    addImage(id).then(function(){
         tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
     })
+    // release
+    release(id)
 
     //======================================================
     // Edit tags 
