@@ -92,10 +92,23 @@ router.post("/transaction/inhouse/view/populate/transaction",async function(req,
     res.send(transaction)
 })
 
-// Print
-router.get("/transaction/inhouse/view/:id/print", function(req, res){
-    res.render("transaction/inhouse/printReport/initial")
+// initial print report
+router.get("/transaction/inhouse/view/print/initial/:id", async function(req, res){
+    res.render("transaction/inhouse/modal/dropDown/reports/printReport/initial")
 })
+// initial print report of  transaction data
+router.post("/transaction/report/initial", async function (req, res) {
+    var initialPrint = await Transaction.findById(req.body.data.id).populate('Client')
+    res.send(initialPrint)
+})
+// initial print report of client data
+// router.post("/transaction/report/initial/client", async function (req, res) {
+//     var initialClientPrint = await Client.findById(req.body.data.id)
+//     res.send(initialClientPrint)
+// })
+
+
+
 //===============================================================================================================
 // Accordion
 //===============================================================================================================
@@ -143,7 +156,7 @@ router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/add", asyn
 
 //billing - Transporation save
 router.post("/transaction/inhouse/view/billing/transportation/add", async function(req, res){
-    // update transaction data
+    // update transaction data  
     var transaction = await Transaction.findById(req.body.data.id)
     transaction.Billing.Transporation.push(req.body.data.transportation)
     await transaction.save()

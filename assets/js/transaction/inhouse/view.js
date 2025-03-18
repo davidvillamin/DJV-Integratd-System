@@ -132,6 +132,11 @@ $(async function(){
     // Edit tags 
     //======================================================
     editTags()
+
+    // print - Initial Report
+    $('#tihvpInitialReportTable').on('click',function(){
+        $(this).attr('href','/transaction/inhouse/view/print/initial/'+ id)
+    })
 });
 
 function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
@@ -233,5 +238,8 @@ function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
             data: await crudiAjax(id,"/transaction/inhouse/view/billing/transporation/populte/table","post")
         });
     })
+
+    
+
 }
 
