@@ -1,47 +1,47 @@
 
-function initializeAddSerial(){
+function initializeAddSerial(itemInformationData,id){
     //initialize bDTable for add serial
-    $('#iviiTable').bootstrapTable()
+    $('#iiisTable').bootstrapTable()
 
     //on enter or click on add (add serial on the list)
     // enter
-    $('#ivcSerial').on('keypress',function(k){
+    $('#iiisSerial').on('keypress',function(k){
         if (k.which == 13) {
-            ivcsAddTableData(itemInformationData)
+            iiisAddTableData(itemInformationData,id)
         }
     })
 
     // add button 
-    $('#ivcAdd').on('click',function(){
-        ivcsAddTableData(itemInformationData)
+    $('#iiisAdd').on('click',function(){
+        iiisAddTableData(itemInformationData,id)
     })
 
     //disable enter event on form
-    $('#ivCreate').on('keypress',function(e){
+    $('#iiisCreate').on('keypress',function(e){
         if (e.which === 13 && e.target.nodeName !== 'text' && e.target.type !== 'submit') {
             e.preventDefault();
         } 
     })
 }
 
-function addSerial(){
+function addSerial(dTable){
     return new Promise(function(resolve, reject){
         try {
-            $('#ivCreate :submit').on('click',function(e){
+            $('#iiisCreate :submit').on('click',function(e){
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
                     var data = {}
         
-                    //get data on bBTable
-                    data.data = $('#ivcSerialTable').bootstrapTable('getData')
+                    // Get data on bDTable including hidden rows
+                    data.data = $('#iiisTable').bootstrapTable('getData', { includeHiddenRows: true }); 
                     data.id = id
         
                     dTable.clear().rows.add(crudiAjax(data, "/inventory/serial/create", "Post")).draw()
-                    $('#ivCreate')[0].reset();
+                    $('#iiisCreate')[0].reset();
                     //reset table
-                    $('#ivcSerialTable').bootstrapTable('removeAll')
+                    $('#iiisTable').bootstrapTable('removeAll')
         
-                    $('#ivCreateModal').modal('toggle'); // fix modal toggle method
+                    $('#iiisCreateModal').modal('toggle'); // fix modal toggle method
                     $('.modal-backdrop').remove(); // ensure backdrop is removed
                     // show toast
                     $(".toast").toast("show").find(".toast-body").text("You have successfuly created a parts information!")
@@ -53,4 +53,30 @@ function addSerial(){
             reject(error)
         }
     })
+}
+
+//create serial (list )
+function iiisAddTableData(partsInfo,id){
+    // prevent empty data
+    var inputs = ["#iiisSuppliersPrice", "#iiisRetailPrice", "#iiisSerial"];
+    var allFilled = true
+
+    inputs.forEach(function(input){
+        if ($(input).val() === '') {
+          allFilled = false;
+        }
+    });
+
+    if (allFilled){
+        $('#iiisTable').bootstrapTable('append',{
+            Brand: partsInfo.Brand,
+            Model: partsInfo.Model,
+            Description: partsInfo.Description,
+            ItemInformation: id,
+            Serial: $('#iiisSerial').val(),
+            SupplierPrice: $('#iiisSuppliersPrice').val(),
+            RetailPrice: $('#iiisRetailPrice').val()
+        })
+        $('#iiisSerial').val('') //reset value of serial
+    }
 }

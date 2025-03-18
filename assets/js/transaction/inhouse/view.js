@@ -224,7 +224,7 @@ function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
     })
 
     // billing
-    addParts()
+    initializeAddParts()
 
     // initialize table
     

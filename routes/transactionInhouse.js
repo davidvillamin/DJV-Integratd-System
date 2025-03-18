@@ -2,8 +2,9 @@ var express                             = require("express"),
     mongoose                            = require("mongoose");
     moment                              = require("moment");
     Transaction                         = require("../models/transaction"),
-    PartsInformation                    = require("../models/itemInformation"),
-    Serial                              = require("../models/serial")
+    ItemInformation                     = require("../models/itemInformation"),
+    Serial                              = require("../models/serial"),
+    // ObjectId                            = mongoose.Types
     Client                              = require("../models/client"),
     router                              = express.Router();
 
@@ -103,25 +104,18 @@ router.get("/transaction/inhouse/view/:id/print", function(req, res){
 
 // part information
 // get all inhouse view parts request list
-router.post("/transaction/inhouse/view/populate/partInformation",async function(req, res){
+router.post("/transaction/inhouse/view/parts/add/partsInformation/serial/populate",async function(req, res){
     // update table list (get only Partinformation)
-    var partsList = await Transaction.findById(req.body.data)
-    .populate("PartInformation")
-    .select("PartInformation")
-    var partsTable = await populateTableParts(partsList)
-    res.send(partsTable)
+    var partsList = await Serial.find({ "ItemInformation": new mongoose.Types.ObjectId(req.body.data._id) })
+    .lean();
+    res.send(partsList)
 })
 
 // part Information
 //populate list of parts information
-router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/populate", async function(req, res){
-    var partListStr = ''
-    var partsList = await PartsInformation.find()
-    .select('_id Description')
-    partsList.forEach(function(part){
-        partListStr += "<option value='" + part._id + "'>" + part.Description + "</option>"
-    })
-    res.send(partListStr)
+router.post("/transaction/inhouse/view/parts/add/partsInfromation/populate", async function(req, res){
+    var itemData = await ItemInformation.find().lean()
+    res.send(itemData)
 })
 
 

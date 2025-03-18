@@ -1,15 +1,53 @@
-function addParts(){
+function initializeAddParts(){
+    // populate all item information
+    var partInformationList =  crudiAjax({},"/transaction/inhouse/view/parts/add/partsInfromation/populate","post")
 
-
-    $("#tihvbpaiTable").bootstrapTable({
-        data: [
-            ["Description", "Brand", "MOdel 1"],
-            ["Description", "Brand", "MOdel 1"],
-            ["Description", "Brand", "MOdel 1"],
+    if ($.fn.DataTable.isDataTable('#tihvbiisItemInformationTable')) {
+        $('#tihvbiisItemInformationTable').DataTable().clear().destroy();
+    }
+    var iiTable = $('#tihvbiisItemInformationTable').DataTable( {
+        data: partInformationList,
+        columns: [
+            { data: '_id' },
+            { data: 'Description' },
+            { data: 'Brand' },
+            { data: 'Model' }
         ]
-    })
-    $("#tihvbpaiTable").on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function (e, rows) {
-        var selectedRows = $("#tihvbpaiTable").bootstrapTable('getSelections');
-        console.log(selectedRows);
+    } );
+
+    var sTable = $("#tihvbiisSerialTable").DataTable()
+
+    $('#tihvbiisItemInformationTable tbody').on('click', 'tr', function () {
+        // var table = $('#tihvbiisItemInformationTable').DataTable();
+        // get the row data
+        var rowData = iiTable.row(this).data();
+        // Highlight the selected row with yellow background
+        $('#tihvbiisItemInformationTable tbody tr').css('background-color', '');
+        $(this).css('background-color', 'yellow');
+
+        var serialList = crudiAjax(rowData,"/transaction/inhouse/view/parts/add/partsInformation/serial/populate","post")
+        //destroy datatable
+        if ($.fn.DataTable.isDataTable('#tihvbiisSerialTable')) {
+            $('#tihvbiisSerialTable').DataTable().clear().destroy();
+        }
+        //populate table of serial
+
+        $("#tihvbiisSerialTable").DataTable({
+            data: serialList,
+            columns: [
+                {data: "_id"},
+                {data: "Serial"},
+                {data: "Description"}
+            ]
+        })
+        $('#tihvbiisSerialTable tbody').on('click', 'tr', function () {
+            var rowData = sTable.row(this).data();
+            // Highlight the selected row with yellow background
+            $('#tihvbiisSerialTable tbody tr').css('background-color', '');
+            $(this).css('background-color', 'yellow');
+        })
     });
-}
+
+
+
+}   
