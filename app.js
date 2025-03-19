@@ -28,6 +28,9 @@ var express                         = require("express"),
     settingsRoutes                    = require("./routes/settings"),
     //accounting
     accountingRoutes                = require("./routes/accounting"),
+    // employees
+    employeesRoutes                 = require("./routes/employees"),
+
 
     //loading screen
     // serviceRoutes                   = require("./routes/service"), 
@@ -101,6 +104,7 @@ app.use(inventoryRoutes);
 app.use(deviceRoutes);
 app.use(accountingRoutes);
 app.use(settingsRoutes);
+app.use(employeesRoutes);
 
 // app.use(serviceRoutes);
 // app.use(settingsRoutes);

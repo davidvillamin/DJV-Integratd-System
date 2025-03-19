@@ -1,0 +1,48 @@
+<%- include("../partials/header") %>
+<%- include("../partials/loading") %>
+<%- include("../partials/header-sidebar") %>
+<main id="main" class="main">
+    <div class="pagetitle">
+    <h1>Employees</h1>
+    <nav>
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Employees</li>
+        </ol>
+    </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">All Employees</h5>
+                    <!-- create client button -->
+                    <!-- location = \views\client\modal\create.ejs  -->
+                    <button id="ciCreate" type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#eCreateEmployee">
+                        <i class="bi bi-file-earmark"></i> Create
+                    </button><!-- end of client create button -->
+                </div>
+               
+                <!-- table for employees -->
+                <table id="eiTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Job</th>
+                        </tr>
+                    </thead>
+                </table>
+                <!-- End Table on list of clients -->
+            </div>
+        </div>
+    </section>
+</main><!-- End #main -->
+<%- include("../partials/toaster") %>
+<%- include("modal/create") %>
+<!-- modal -->
+
+<%- include("../partials/script") %>
+<script src="../../assets/js/employees/index.js"></script>
+<script src="../../assets/js/employees/modal/create.js"></script>
+<%- include("../partials/footer") %>

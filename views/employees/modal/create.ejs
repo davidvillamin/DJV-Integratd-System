@@ -1,0 +1,46 @@
+<!--========= e  = employee                  =========-->
+<!--========= ei = employee information      =========-->
+
+<div class="modal fade" id="eCreateEmployee" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Employee Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="eiCreate" novalidate enctype="multipart/form-data">
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-3">
+                            <label for="eicName" class="col-form-label">Name</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="text" id="eicName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-3">
+                            <label for="eicAddress" class="col-form-label">Address</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="text" id="eicAddress" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-3">
+                            <label for="eicJob" class="col-form-label">Job</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="text" id="eicJob" class="form-control"></input>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

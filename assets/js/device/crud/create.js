@@ -1,6 +1,4 @@
 function deviceCreate() {
-    
-    
     return new Promise(function(resolve, reject) {
         try {
             // create transaction
@@ -15,8 +13,6 @@ function deviceCreate() {
                     }
                     // // save data on a variable for confirmation
                     var crudiAjaxResult = crudiAjax(data, "/device/create", "Post")
-                    // re initializeTable
-                    
                     // // clear form
                     $('#diCreate')[0].reset();
                     // // close modal   

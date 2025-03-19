@@ -11,79 +11,16 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/parts">Parts</a></li>
+                <li class="breadcrumb-item"><a href="/parts">Settibgs</a></li>
                 <li class="breadcrumb-item active pivName"></li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
-    <section class="section profile">
-        <div class="row">
-            <div class="col-xl-4">
-                <div class="card">
-                    <!-- parts information -->
-                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center text-center placeholder-glow">
-                        <img id="pivProfile" src="/assets/img/product-2.jpg" alt="Profile" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
-                        <div class="d-flex align-items-center" >
-                            <h2 class="mb-1 pivName">
-                                <span class="placeholder col-12"></span>
-                            </h2>
-                            <i id="pivEdit" class="bi bi-pencil-square pencil-icon" data-bs-toggle="modal" data-bs-target=""></i>
-                        </div>
-                        <p class="mb-1"><strong>Description:</strong>
-                            <span id="pivDescription">
-                                <span class="placeholder col-12"></span>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-8">
-                <div class="card">
-                    <div class="card-body pt-3">
-                        <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
-                                    Inventory
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                                    Deployed
-                                </button>
-                            </li>
-                          </ul>
-                          <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                                    <div class="d-flex flex-row-reverse">
-                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#psCreateModal">
-                                            Add
-                                        </button>
-                                    </div>
-                                    <table class="table" id="pViewTable">
-                                        <thead>
-                                            <td>Serial Number</td>
-                                            <td>Action</td>
-                                        </thead>
-                                    </table>
-                                </div>
-                                
-                                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
-                                    
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 </main><!-- End #main -->
 <%- include("../partials/toaster") %>
 <%- include("serial/create") %>
 <!-- modal -->
 <%- include("../partials/script") %>
-<script src="/../../assets/js/parts/view.js"></script>
-<script src="/../../assets/js/parts/serial/create.js"></script>
 <%- include("../partials/footer") %>

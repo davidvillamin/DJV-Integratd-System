@@ -4,7 +4,6 @@ var express                             = require("express"),
     Transaction                         = require("../models/transaction"),
     ItemInformation                     = require("../models/itemInformation"),
     Serial                              = require("../models/serial"),
-    // ObjectId                            = mongoose.Types
     Client                              = require("../models/client"),
     router                              = express.Router();
 
