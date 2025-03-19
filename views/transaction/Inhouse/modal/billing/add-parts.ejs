@@ -1,26 +1,56 @@
+<!-- tihvbiis = Transaction Inhouse View Billing Item Information -->
+<div class="modal fade" id="tihvbiiAddModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Item Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- tihvbpa = Transaction Inhouse View Billing Parts Add -->
+                <table id="tihvbiisItemInformationTable">
+                    <thead>
+                        <th data-visible="false" >Id</th>
+                        <th>Description</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                    </thead>
+                </table>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- tihvbiis = Transaction Inhouse View Billing Item Information Serial -->
 <div class="modal fade" id="tihvbiisAddModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Parts</h5>
+                <h5 class="modal-title">Serial List</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="needs-validation" id="tihvbiisAdd" novalidate enctype="multipart/form-data">
-                    <!-- tihvbpa = Transaction Inhouse View Billing Parts Add -->
-                    <h6 class="card-title">Item Information</h6>
-                    
-                    <table id="tihvbiisItemInformationTable">
-                        <thead>
-                            <th data-visible="false" >Id</th>
-                            <th>Description</th>
-                            <th>Brand</th>
-                            <th>Model</th>
-                        </thead>
-                    </table>
-                    <hr>
-                    <h6 class="card-title">Serial List</h6>
+                    <div class="border p-2">
+                        <h6 class="card-title">Item Information</h6>
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <label for="tihvbiisBrand" class="fw-bold">Brand:</label>
+                                <h6 id="tihvbiisBrand"></h6>
+                            </div>
+                            <div class="col-4">
+                                <label for="tihvbiisModel" class="fw-bold">Model:</label>
+                                <h6 id="tihvbiisModel"></h6>
+                            </div>
+                            <div class="col-4">
+                                <label for="tihvbiisDescription" class="fw-bold">Description:</label>
+                                <h6 id="tihvbiisDescription"></h6>
+                            </div>
+                        </div>
+                    </div>
                     
                     <table id="tihvbiisSerialTable">
                         <thead>
@@ -30,8 +60,9 @@
                         </thead>
                     </table>
                     <div class="modal-footer">
-                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#">Add Serial</button>
+                        <button type="button" class="btn btn-secondary ms-auto" data-bs-toggle="modal" data-bs-target="#tihvbiiAddModal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
                     </div>
                 </form>
             </div>

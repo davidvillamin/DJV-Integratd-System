@@ -10,8 +10,7 @@ var serialSchema = new mongoose.Schema({
     Serial: String,
     SupplierPrice: Number,
     RetailPrice: Number,
-    hasSerial: Boolean
-    //supplier Detials 
+    isUsed: Boolean
 });
 
 module.exports = mongoose.model("serial", serialSchema);
