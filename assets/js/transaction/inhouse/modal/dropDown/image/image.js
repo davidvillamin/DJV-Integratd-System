@@ -1,9 +1,12 @@
-function addImagePreview(){
+function addImageInitialize(){
+    // add functionality when you select and image it will display a preview on the side
     $("#tihviImage").on('change',async function(e) {
         await img2b64(e.target.files[0]).then(function(base64String){
             $("#tihviPreviewModal").attr('src', base64String);
         })
     });
+
+
 }
 
 function addImage(id){
@@ -17,7 +20,7 @@ function addImage(id){
                     
                     data.data = {
                         Title:$('#tihviImageTitle').val(),
-                        Description:$('#tihviDescription').val(),
+                        Description:$('#tihviDescription').text(),
                         base64String: await img2b64($('#tihviImage')[0].files[0])
                     }
                     data.id = id

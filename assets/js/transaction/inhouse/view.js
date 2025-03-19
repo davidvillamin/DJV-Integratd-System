@@ -1,4 +1,3 @@
-
 var id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
 $(async function(){
@@ -20,10 +19,9 @@ $(async function(){
     });
 
     //======================================================
-    // initialize functionality
+    // Maximize and minimize functionality
     //======================================================
     // show or hide client info and maximize and minimize image chage 
-
     $('#tihvMaxMinDisplay').on('click', function() {
         if ($('.clientInformation').css('display') === 'none') { // Check if client information is hidden
             
@@ -38,31 +36,84 @@ $(async function(){
     });
 
     //======================================================
-    // billing Accordion initialize table
+    // Accordion 
     //======================================================
-    // parts
+    // table init
     var partsTbl = $('#tihvbpTable').bootstrapTable()
-    partsTbl.bootstrapTable("destroy").bootstrapTable({
-        data: await crudiAjax(id,"/transaction/inhouse/view/billing/parts/populte/table","post")
-    });
-
-    // transporation
     var transpoTbl = $('#tihvbtTable').bootstrapTable()
-    transpoTbl.bootstrapTable("destroy").bootstrapTable({
-        data: await crudiAjax(id,"/transaction/inhouse/view/billing/transporation/populte/table","post")
-    });
-
-    // service charge
     var scTbl = $('#tihvbscTable').bootstrapTable()
-    scTbl.bootstrapTable("destroy").bootstrapTable({
-        data: await crudiAjax(id,"/transaction/inhouse/view/billing/serviceCharge/populte/table","post")
-    });
-    // payment
     var payTbl = $('#tihvbpayTable').bootstrapTable()
-    payTbl.bootstrapTable("destroy").bootstrapTable({
-        data: await crudiAjax(id,"/transaction/inhouse/view/billing/payment/populte/table","post")
-    });
 
+    // billing parts
+    addParts(id).then( async function(){
+        partsTbl.bootstrapTable("destroy").bootstrapTable({
+            data: await crudiAjax(id,"/transaction/inhouse/view/billing/parts/populte/table","post")
+        });
+    })
+    
+    // billing transportation
+    addTransportation(id).then(async function(){
+        transpoTbl.bootstrapTable("destroy").bootstrapTable({
+            data: await crudiAjax(id,"/transaction/inhouse/view/billing/transporation/populte/table","post")
+        });
+    })
+
+    // billing Service Charge
+    addServiceCharge(id).then(async function(){
+        scTbl.bootstrapTable("destroy").bootstrapTable({
+            data: await crudiAjax(id,"/transaction/inhouse/view/billing/serviceCharge/populte/table","post")
+        });
+    })
+
+    // billing Payement
+    addPayment(id).then(async function(){
+        payTbl.bootstrapTable("destroy").bootstrapTable({
+            data: await crudiAjax(id,"/transaction/inhouse/view/billing/payment/populte/table","post")
+        });
+    })  
+    // images
+
+    // notes
+    $("#tihvnSave").on("click",async function(){
+        var data = {
+            notes: quill.getContents(),
+            id: id
+        }
+       
+        var crudiAjaxResult = await crudiAjax(data, "/transaction/inhouse/view/notes", 'put')
+        // show toast
+        $(".toast").toast("show").find(".toast-body").text(crudiAjaxResult)
+        $(".toast").find(".toast-title").text("Update Notes")
+    });
+        
+        
+    //======================================================
+    // Dropdown functionalities
+    //======================================================
+    // repair details edit
+    // Location - inhouse/modal/dropDown/repairDetails/edit-repair.js
+    editRepair(id).then(function(){
+        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
+    })
+
+    // upload image 
+    // add image (save)
+    addImage(id).then(function(){
+        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
+    })
+
+    // release (save)
+    release(id)
+
+    // tags
+    updateTags(id).then(function(){
+        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
+    })
+
+    // print - Initial Report
+    $('#tihvpInitialReportTable').on('click',function(){
+        $(this).attr('href','/transaction/inhouse/view/print/initial/'+ id)
+    })
 
     //======================================================
     // Data Population
@@ -71,10 +122,8 @@ $(async function(){
     var currentTransaction = crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post');
     tihvPopulateData(currentTransaction,quill,partsTbl,transpoTbl,scTbl,payTbl); // populate data
 
-
-
     //======================================================
-    // Edit Client
+    // Data Population - Edit Client
     //======================================================
     // populate edit client individual on click on edit
     $("#tihvClientEdit").on('click',async function() {
@@ -92,39 +141,11 @@ $(async function(){
             });
         }
     });
-    
-
-    //======================================================
-    // Repair Details
-    //======================================================
-    editRepair(id).then(function(){
-        //update all client info
-        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
-    })
-
-    // upload image 
-    // image preview
-    addImagePreview()
-    addImage(id).then(function(){
-        tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
-    })
-    // release
-    release(id)
-
-    //======================================================
-    // Edit tags 
-    //======================================================
-    editTags()
-
-    // print - Initial Report
-    $('#tihvpInitialReportTable').on('click',function(){
-        $(this).attr('href','/transaction/inhouse/view/print/initial/'+ id)
-    })
 });
 
-function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
+async function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
     //======================================================
-    // Header with breadcumb
+    // Populate Data on view
     //======================================================
     //header details
     $('#tihvTitleJobOrder').text(data.JobOrder);
@@ -133,24 +154,30 @@ function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
     // breadcrumbs
     $('#tihvbcJobOrder').text(data.JobOrder);
 
-    //======================================================
-    // Tags
-    //======================================================
-    //remove all badges first 
-    // is is not on edit
-    $('#tihvtStatus .badge').remove()
+    quill.setContents(data.Notes); // job order notes
 
-    //populate pill status 
-    // this one includes the initial status on edit
+    // tags    
+    $('#tihvtStatus .badge').remove() //remove all badges first 
+    //re initialize tags (Temporary Status)
     data.TempStatus.forEach(function(status){
-        // loop on all status to be included
-        $('#tihvtStatus').append("<span class='badge bg-warning text-dark'>" + status + "</span>")
-        // add also on edit tags (enable all data)
-        $("." + status).show(); // unhide tags
-        $("#tihvteSwitch input[name=" + status + "]").prop('checked', true); //  check the checkbox on edit tags
+        $('#tihvtStatus').append("<span class='badge bg-warning text-dark m-1'>" + status + "</span>")
+    })
+    //re initialize tags (Fixed Status)
+    data.FixedStatus.forEach(function(status){
+        $('#tihvtStatus').append("<span class='badge bg-success text-light m-1'>" + status + "</span>")
     })
 
-    quill.setContents(data.Notes); // job order notes
+
+    //======================================================
+    // Dropdown
+    //======================================================
+    //tags initialize
+    initializeEditTags(data)
+    // Location - inhouse/modal/dropDown/image/add-image.js
+    addImageInitialize() // image preview
+    // view Repair
+    viewRepair(data)
+    
 
     //======================================================
     // Client Details / Profile Image/ Contact Numbers / Edit Client Modal target
@@ -187,57 +214,59 @@ function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
             $('#tihvClientContactNumbers').append('<li><strong>' + detail.ContactPerson + ':</strong> ' + detail.ContactNumber + ' </li>');
         });
     }
-
-    //======================================================
-    // DropDown
-    //======================================================
-    // view Repair
-    viewRepair(data)
+    
 
     //======================================================
     // Accordion 
     //======================================================
     // images
     // clear all images first on list
-    $('#tihviList').empty();
+    // $('#tihviList').empty();
     // Populate images
     data.Images.forEach(function image(img,i){
-        $('#tihviList').append("<button type='button' class='list-group-item list-group-item-action tihviListItem' aria-current='true' data-b64=" + img.base64String + " data-desc=" + img.Description + ">" + img.Title + "</button>")
-    })
+        $('#tihviList').append("<li class='list-group-item list-group-item-action tihviListItem d-flex justify-content-between' data-b64=" + img.base64String + " data-desc=" + img.Description + ">"
+                + img.Title + 
+                "<span>\
+                    <i class='bi bi-pencil-square text-white p-1 px-2 text-white bg-warning rounded tihvbtEdit'></i>\
+                    <i class='bi bi-trash text-white p-1 px-2 bg-danger rounded mx-1 tihvbtDelete'></i>\
+                </span>\
+            </li>")
+
+            
+})
     // add click function on each image
     $('.tihviListItem').on('click', function() {
+        $('.tihviListItem').removeClass('bg-primary');
+        $(this).addClass('bg-primary')
         $('#tihviPreview').attr('src', $(this).attr('data-b64'));
         $('#tihviDescription').text($(this).attr('data-desc'));
     })
 
     // billing parts
     initializeAddParts()
-    addParts(id).then( async function(){
-        partsTbl.bootstrapTable("destroy").bootstrapTable({
-            data: await crudiAjax(id,"/transaction/inhouse/view/billing/parts/populte/table","post")
-        });
-    })
-    
-    // billing transportation
-    addTransportation(id).then(async function(){
-        transpoTbl.bootstrapTable("destroy").bootstrapTable({
-            data: await crudiAjax(id,"/transaction/inhouse/view/billing/transporation/populte/table","post")
-        });
-    })
 
-    // billing Service Charge
-    addServiceCharge(id).then(async function(){
-        scTbl.bootstrapTable("destroy").bootstrapTable({
-            data: await crudiAjax(id,"/transaction/inhouse/view/billing/serviceCharge/populte/table","post")
-        });
-    })
 
-    // billing Payement
-    addPayment(id).then(async function(){
-        payTbl.bootstrapTable("destroy").bootstrapTable({
-            data: await crudiAjax(id,"/transaction/inhouse/view/billing/payment/populte/table","post")
-        });
-    })
+    //======================================================
+    // billing Accordion initialize table
+    //======================================================
+    // parts
+    partsTbl.bootstrapTable("destroy").bootstrapTable({
+        data: await crudiAjax(id,"/transaction/inhouse/view/billing/parts/populte/table","post")
+    });
+
+    // transporation
+    transpoTbl.bootstrapTable("destroy").bootstrapTable({
+        data: await crudiAjax(id,"/transaction/inhouse/view/billing/transporation/populte/table","post")
+    });
+
+    // service charge
+    scTbl.bootstrapTable("destroy").bootstrapTable({
+        data: await crudiAjax(id,"/transaction/inhouse/view/billing/serviceCharge/populte/table","post")
+    });
+    // payment
+    payTbl.bootstrapTable("destroy").bootstrapTable({
+        data: await crudiAjax(id,"/transaction/inhouse/view/billing/payment/populte/table","post")
+    });
 }
 
 
