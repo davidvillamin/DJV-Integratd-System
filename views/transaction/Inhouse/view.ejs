@@ -1,8 +1,8 @@
+<%- include("../../partials/header") %>
+<%- include("../../partials/header-sidebar") %>
+<%- include("../../partials/loading") %>
 <!-- Prefiex Legend -->
 <!-- tihv = Transaction In-house View -->
-<%- include("../../partials/header") %>
-<%- include("../../partials/loading") %>
-<%- include("../../partials/header-sidebar") %>
 <main id="main" class="main">
     <div class="pagetitle">
         <h1 class="placeholder-glow">
@@ -317,13 +317,14 @@
                                             <div class="col-md-6">
                                                 <!-- tihvi = Transaction In House View Image -->
                                                 <div class="list-group" id="tihviList">
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <img id="tihviPreview" src="/assets/img/no-image.jpg" class="img-thumbnail w-auto mt-3">
-                                                        <p id="tihviDescription" class="card-text">
+                                                        <p id="tihviDescription" class="card-text pt-3">
                                                             Description
                                                         </p>
                                                     </div>
@@ -367,15 +368,11 @@ Modals
 <%- include("modal/billing/add-payment") %>
 <%- include("modal/billing/add-serviceCharge") %>
 <%- include("modal/billing/add-transportation") %>
-<!-- client edit  -->
-<%- include("../../client/modal/edit.ejs") %>
-
-
 <!-- dropDown -->
 <!-- closeTransaction -->
 <%- include("modal/dropDown/closeTransaction/close") %>
 <!-- image -->
- <%- include("modal/dropDown/image/add-image") %>
+ <%- include("modal/dropDown/image/image") %>
  <!-- release -->
  <%- include("modal/dropDown/release/release") %>
  <!-- repairDetails -->
@@ -383,10 +380,12 @@ Modals
  <%- include("modal/dropDown/repairDetails/edit-repair") %>
  <!-- reports -->
  <%- include("modal/dropDown/reports/print") %>
- <!-- saveChanges -->
-
  <!-- tags -->
- <%- include("modal/dropDown/tags/edit-tags") %>
+ <%- include("modal/dropDown/tags/tags") %>
+ 
+ <!-- client -->
+ <!-- client edit  -->
+ <%-  include("../../client/modal/edit")  %>
 
 
  <!-- =======================================
@@ -403,7 +402,7 @@ Scripts
 <script src="../../../assets/js/transaction/inhouse/view.js"></script>
 
 <!-- modals -->
- <script src="../../client/modal/edit.ejs"></script>
+ <!-- <script src="../../client/modal/edit.ejs"></script> -->
 <!-- billing -->
 <script src="../../../assets/js/transaction/inhouse/modal/billing/add-parts.js"></script>
 <script src="../../../assets/js/transaction/inhouse/modal/billing/add-payment.js"></script>
@@ -414,22 +413,19 @@ Scripts
 <!-- close Transaction -->
 <script src="../../../assets/js/transaction/inhouse/modal/dropDown/closeTransaction/close.js"></script>
 <!-- image -->
-<script src="../../../assets/js/transaction/inhouse/modal/dropDown/image/add-image.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/dropDown/image/image.js"></script>
 <!-- release -->
 <script src="../../../assets/js/transaction/inhouse/modal/dropDown/release/release.js"></script>
-
 <!-- repairDetails -->
 <script src="../../../assets/js/transaction/inhouse/modal/dropDown/repairDetials/edit-repair.js"></script>
 <script src="../../../assets/js/transaction/inhouse/modal/dropDown/repairDetials/view-repair.js"></script>
 <!-- reports -->
 <script src="../../../assets/js/transaction/inhouse/modal/dropDown/reports/report.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/dropDown/reports/initial/initial.js"></script>
-
-<!-- saveChanges -->
-
+<!-- <script src="../../../assets/js/transaction/inhouse/modal/dropDown/reports/initial/initial.js"></script> -->
 <!-- tags -->
-<script src="../../../assets/js/transaction/inhouse/modal/dropDown/tags/edit-tags.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/dropDown/tags/tags.js"></script>
 <!-- print -->
+
 <!-- client -->
 <script src="../../../assets/js/client/crud/edit.js"></script>
 

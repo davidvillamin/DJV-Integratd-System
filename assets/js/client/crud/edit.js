@@ -6,18 +6,10 @@
 
 
 function clientEditIndividual(id) { // client id
-    //======================================================
-    // Loading Screen
-    //======================================================
-    // hide loading screen
-    $(window).on('load', function() {
-        $("#loadingScreen").attr('style', 'display: none !important');
-    });
     return new Promise(async (resolve, reject) => {
         try {
             // get client data
             var clientData = await crudiAjax({ id: id }, "/client/view/ajax", 'Post');
-            console.log(clientData);
 
             //population of data edit client
             $('#cieName').val(clientData.Name);
@@ -94,7 +86,6 @@ function clientEditCorporate(id) { // client id
         try {
             // get client data
             var clientData = await crudiAjax({ id: id }, "/client/view/ajax", 'Post');
-            console.log(clientData);
 
             //population of data edit client
             $('#cceName').val(clientData.Name);

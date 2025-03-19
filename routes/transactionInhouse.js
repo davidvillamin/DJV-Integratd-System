@@ -102,11 +102,6 @@ router.post("/transaction/report/initial", async function (req, res) {
     var initialPrint = await Transaction.findById(req.body.data.id).populate('Client')
     res.send(initialPrint)
 })
-// initial print report of client data
-// router.post("/transaction/report/initial/client", async function (req, res) {
-//     var initialClientPrint = await Client.findById(req.body.data.id)
-//     res.send(initialClientPrint)
-// })
 
 // part 
 // release
@@ -115,6 +110,17 @@ router.post("/transaction/inhouse/view/release/update", async function(req, res)
     res.send("You have successfuly release date!")
 })
 
+//tags
+
+router.post("/transaction/inhouse/view/tags/update", async function(req, res){
+    req.body.data.tagsTempList = req.body.data.tagsTempList || [];
+    req.body.data.tagsFixedList = req.body.data.tagsFixedList || [];
+    await Transaction.findByIdAndUpdate(req.body.data.id, {
+        TempStatus: req.body.data.tagsTempList,
+        FixedStatus: req.body.data.tagsFixedList
+    })
+    res.send("You have successfuly upated the tags!")
+})
 
 //===============================================================================================================
 // Accordion
@@ -144,7 +150,6 @@ router.post("/transaction/inhouse/view/billing/parts/add", async function(req, r
     );
     transaction.Billing.Parts.push(req.body.data.Parts)
     await transaction.save()
-    console.log(transaction.Billing.Parts)
     res.send("You have successfuly add parts!")
 })
 
@@ -213,9 +218,10 @@ router.post("/transaction/inhouse/view/billing/payment/populte/table", async fun
 
 // notes
 router.put("/transaction/inhouse/view/notes", async function(req, res){
-    await Transaction.findByIdAndUpdate(req.body.data.id, { Notes: req.body.data.Notes });
+    await Transaction.findByIdAndUpdate(req.body.data.id, { Notes: req.body.data.notes });
     res.send("You have successfuly updated notes!")
 })
+
 module.exports = router;
 
 async function populateTable(){
