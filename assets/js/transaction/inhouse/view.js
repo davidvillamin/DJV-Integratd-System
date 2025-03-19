@@ -74,22 +74,23 @@ $(async function(){
     // Edit Client
     //======================================================
     // populate edit client individual on click on edit
-    $("#tihvClientEdit").on('click', function() {
+    $("#tihvClientEdit").on('click',async function() {
         // check if individual or corporate
         if  (currentTransaction.Client.isIndividual){
             // input client id 
-            clientEditIndividual(currentTransaction.Client._id).then(function() {
+            clientEditIndividual(currentTransaction.Client._id).then( function() {
                 //update all client info
-                tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
+                tihvPopulateData.clear().rows.add(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
             });
         } else {
-            clientEditCorporate(currentTransaction.Client._id).then(function() {
+            clientEditCorporate(currentTransaction.Client._id).then( function() {
                 //update all client info
-                tihvPopulateData(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
+                tihvPopulateData.clear().rows.add(crudiAjax({id: id}, "/transaction/inhouse/view/populate/transaction", 'Post'),quill,partsTbl,transpoTbl,scTbl,payTbl);
             });
         }
     });
     
+
     //======================================================
     // Repair Details
     //======================================================
@@ -221,4 +222,5 @@ function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
     
 
 }
+
 

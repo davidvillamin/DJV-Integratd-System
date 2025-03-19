@@ -68,12 +68,12 @@
                             <div class="d-flex justify-content-between"> 
                                 <h5 class="card-title">Profile Details</h5>
                                 <!-- Edit Client -->
-                                <i id="tihvClientEdit" class="bi bi-pencil-square hover-effect align-self-center" data-bs-toggle="modal" data-bs-target=""></i>
+                                <i id="tihvClientEdit" class="bi bi-pencil-square hover-effect align-self-center" data-bs-toggle="modal" data-bs-target="#ciEditModal"></i>
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Address</div>
-                                <div id="tihvClientAddress" class="col-lg-9 col-md-8"></div>
+                                <div class="col-lg-6 col-md-4 label">Address</div>
+                                <div id="tihvClientAddress" class="col-lg-6 col-md-8"></div>
                             </div>
                             <!-- for contact person template  -->
                             <!-- <div class="row">
@@ -82,8 +82,8 @@
                             </div> -->
 
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Contact Number</div>
-                                <div id="tihvClientContactNumbers" class="col-lg-9 col-md-8"></div>
+                                <div class="col-lg-6 col-md-4 label">Contact Number</div>
+                                <div id="tihvClientContactNumbers" class="col-lg-6 col-md-8"></div>
                             </div>
                             <h5 class="card-title">Notes</h5>
                             <p id="tihCreateNotes" class="small fst-italic"></p>
@@ -626,6 +626,8 @@ Modals
 <%- include("modal/billing/add-payment") %>
 <%- include("modal/billing/add-serviceCharge") %>
 <%- include("modal/billing/add-transportation") %>
+<!-- client edit  -->
+<%- include("../../client/modal/edit.ejs") %>
 
 
 <!-- dropDown -->
@@ -660,6 +662,7 @@ Scripts
 <script src="../../../assets/js/transaction/inhouse/view.js"></script>
 
 <!-- modals -->
+ <script src="../../client/modal/edit.ejs"></script>
 <!-- billing -->
 <script src="../../../assets/js/transaction/inhouse/modal/billing/add-parts.js"></script>
 <script src="../../../assets/js/transaction/inhouse/modal/billing/add-payment.js"></script>

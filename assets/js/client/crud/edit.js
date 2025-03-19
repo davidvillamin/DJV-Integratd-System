@@ -4,6 +4,7 @@
 //individual client edit populate
 // prefix legend: cie = client individual edit
 
+
 function clientEditIndividual(id) { // client id
     //======================================================
     // Loading Screen
@@ -136,8 +137,10 @@ function clientEditCorporate(id) { // client id
                     });
                     clientData.id = id;
 
+
                     //save updated client
                     await crudiAjax(clientData, "/client/edit", 'Post')
+
 
                     // close modal   
                     $('#ccEditModal').modal('toggle'); // fix modal toggle method
