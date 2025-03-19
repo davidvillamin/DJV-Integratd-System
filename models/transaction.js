@@ -27,20 +27,12 @@ var transactionDbSchema = new mongoose.Schema({
     //Parts Request(Major), Parts Request(Minor), Parts Request(Major/Minor),
     // Parts Approve, Repaired, Released, Paid, Closed
     Technician: String,
-    Part: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "part"
-        }
-    ],
     Balance: Number,
     Billing: {
         Parts: [
             {
-                Description: String,
-                Quantity: Number,
-                UnitPrice: Number,
-                Total: Number
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "serial"
             }
         ],
         Transporation: [

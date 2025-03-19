@@ -14,7 +14,7 @@ $(async function(){
 
     //population of data
     var itemInformationData = await crudiAjax({id: id}, "/inventory/iteminformation/view/populate", 'Post');
-    pvPopulateData(itemInformationData); // populate data
+    ivPopulateData(itemInformationData); // populate data
 
     // initialize datatable (for serial list on view)
     var dTable = $('#iviiTable').DataTable({
@@ -27,40 +27,14 @@ $(async function(){
     // Serial
     // ==================================================================================
     // Initialize add serial
-    //inventory / serial / crud / create
-    initializeAddSerial()
+    initializeAddSerial(itemInformationData,id)
     // save serial
-    addSerial()
+    addSerial(dTable)
     //save serial
 })
 
-//create serial (list )
-function pvcsAddTableData(partsInfo){
-    // prevent empty data
-    var inputs = ["#ivcSuppliersPrice", "#ivcRetailPrice", "#ivcSerial"];
-    var allFilled = true
-
-    inputs.forEach(function(input){
-        if ($(input).val() === '') {
-          allFilled = false;
-        }
-    });
-
-    if (allFilled){
-        $('#ivcSerialTable').bootstrapTable('append',{
-            Brand: partsInfo.Brand,
-            Model: partsInfo.Model,
-            Description: partsInfo.Description,
-            partinformation: id,
-            Serial: $('#ivcSerial').val(),
-            SupplierPrice: $('#ivcSuppliersPrice').val(),
-            RetailPrice: $('#ivcRetailPrice').val()
-        })
-        $('#ivcSerial').val('') //reset value of serial
-    }
-}
-
-function pvPopulateData(data){
+// iv = inventory view
+function ivPopulateData(data){
     $('.iviiptName').text(data.Brand + ' ' + data.Model )
     $('#iviiDescription').text(data.Description)
 }

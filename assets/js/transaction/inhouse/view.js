@@ -42,6 +42,9 @@ $(async function(){
     //======================================================
     // parts
     var partsTbl = $('#tihvbpTable').bootstrapTable()
+    partsTbl.bootstrapTable("destroy").bootstrapTable({
+        data: await crudiAjax(id,"/transaction/inhouse/view/billing/parts/populte/table","post")
+    });
 
     // transporation
     var transpoTbl = $('#tihvbtTable').bootstrapTable()
@@ -207,10 +210,13 @@ function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
         $('#tihviDescription').text($(this).attr('data-desc'));
     })
 
-    // billing
-    addParts()
-
-    // initialize table
+    // billing parts
+    initializeAddParts()
+    addParts(id).then( async function(){
+        partsTbl.bootstrapTable("destroy").bootstrapTable({
+            data: await crudiAjax(id,"/transaction/inhouse/view/billing/parts/populte/table","post")
+        });
+    })
     
     // billing transportation
     addTransportation(id).then(async function(){
@@ -219,8 +225,19 @@ function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
         });
     })
 
-    
+    // billing Service Charge
+    addServiceCharge(id).then(async function(){
+        scTbl.bootstrapTable("destroy").bootstrapTable({
+            data: await crudiAjax(id,"/transaction/inhouse/view/billing/serviceCharge/populte/table","post")
+        });
+    })
 
+    // billing Payement
+    addPayment(id).then(async function(){
+        payTbl.bootstrapTable("destroy").bootstrapTable({
+            data: await crudiAjax(id,"/transaction/inhouse/view/billing/payment/populte/table","post")
+        });
+    })
 }
 
 

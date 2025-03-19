@@ -2,8 +2,9 @@ var express                             = require("express"),
     mongoose                            = require("mongoose");
     moment                              = require("moment");
     Transaction                         = require("../models/transaction"),
-    PartsInformation                    = require("../models/itemInformation"),
-    Serial                              = require("../models/serial")
+    ItemInformation                     = require("../models/itemInformation"),
+    Serial                              = require("../models/serial"),
+    // ObjectId                            = mongoose.Types
     Client                              = require("../models/client"),
     router                              = express.Router();
 
@@ -108,56 +109,58 @@ router.post("/transaction/report/initial", async function (req, res) {
 //     res.send(initialClientPrint)
 // })
 
-
-
-//===============================================================================================================
-// Accordion
-//===============================================================================================================
-
-// part information
-// get all inhouse view parts request list
-router.post("/transaction/inhouse/view/populate/partInformation",async function(req, res){
-    // update table list (get only Partinformation)
-    var partsList = await Transaction.findById(req.body.data)
-    .populate("PartInformation")
-    .select("PartInformation")
-    var partsTable = await populateTableParts(partsList)
-    res.send(partsTable)
-})
-
-// part Information
-//populate list of parts information
-router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/populate", async function(req, res){
-    var partListStr = ''
-    var partsList = await PartsInformation.find()
-    .select('_id Description')
-    partsList.forEach(function(part){
-        partListStr += "<option value='" + part._id + "'>" + part.Description + "</option>"
-    })
-    res.send(partListStr)
-})
-
-
-//part information
-//save parts information to transaction
-router.post("/transaction/inhouse/view/:id/parts/add/partsInfromation/add", async function(req, res){
-    // update transaction data
-    var transaction = await Transaction.findById(req.body.data.id)
-    transaction.PartInformation.push(req.body.data.PartInformation)
-    await transaction.save()
-
-    // update table list (get only Partinformation)
-    var partsList = await Transaction.findById(req.body.data.id)
-    .populate("PartInformation")
-    .select("PartInformation")
-    var partsTable = await populateTableParts(partsList)
-    res.send(partsTable)
-})
+// part 
 // release
 router.post("/transaction/inhouse/view/release/update", async function(req, res){
     await Transaction.findByIdAndUpdate(req.body.data.id, { Release: req.body.data.data });
     res.send("You have successfuly release date!")
 })
+
+
+//===============================================================================================================
+// Accordion
+//===============================================================================================================
+// Billing - Parts
+//populate list of parts information
+router.post("/transaction/inhouse/view/parts/add/partsInfromation/populate", async function(req, res){
+    var itemData = await ItemInformation.find().lean()
+    res.send(itemData)
+})
+
+// Billing - Parts
+// populate list of serial base on selected parts information
+router.post("/transaction/inhouse/view/parts/add/partsInformation/serial/populate",async function(req, res){
+    // update table list (get only Partinformation)
+    // transfer only the id
+    var partsList = await Serial.find({ "ItemInformation": new mongoose.Types.ObjectId(req.body.data) })
+    .lean();
+    res.send(partsList)
+})
+
+// Billing - Parts
+//save serial to transaction
+router.post("/transaction/inhouse/view/billing/parts/add", async function(req, res){
+    var transaction = await Transaction.findById(
+        req.body.data.id,
+    );
+    transaction.Billing.Parts.push(req.body.data.Parts)
+    await transaction.save()
+    console.log(transaction.Billing.Parts)
+    res.send("You have successfuly add parts!")
+})
+
+//billing - parts populate table
+router.post("/transaction/inhouse/view/billing/parts/populte/table", async function(req, res){
+    var transaction = await Transaction.findById(req.body.data)
+        .populate({
+            path: "Billing.Parts",
+            model: "serial"
+        })
+        .lean();
+    var partsTable = await populateTableBillingParts(transaction.Billing.Parts)
+    res.send(partsTable)
+})
+
 
 //billing - Transporation save
 router.post("/transaction/inhouse/view/billing/transportation/add", async function(req, res){
@@ -237,21 +240,16 @@ async function populateTable(){
     return tihList;
 }
 
-async function populateTableParts(partsList){
+async function populateTableBillingParts(partsList){
     var mPartList = []
     
-    partsList.PartInformation.forEach(function(part) {
+    partsList.forEach(function(part) {
         mPartList.push({
-            id: part._id,
-            Description: part.Description,
-            Action: "<div class='d-flex justify-content-center'>\
-                <a class='btn btn-success mx-1'>\
-                    <i class='bi bi-plus-square'></i>\
-                </a>\
-                <a class='btn btn-danger mx-1'>\
-                    <i class='bi bi-trash'></i>\
-                </a>\
-            </div>"
+            _id: part._id,
+            Description: "<i class='bi bi-pencil-square text-white p-1 px-2 text-white bg-warning rounded tihvbtEdit'></i>\
+                        <i class='bi bi-trash text-white p-1 px-2 bg-danger rounded me-2 tihvbtDelete'></i>" + part.Description,
+            Serial: part.Serial,
+            Price: part.RetailPrice
         });
     });
     return mPartList
