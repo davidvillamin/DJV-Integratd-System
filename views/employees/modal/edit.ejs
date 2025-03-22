@@ -9,313 +9,317 @@
             <div class="modal-body">
                 <div class="accordion mt-3" id="profileInformationAccordion">
                     <div class="accordion-item">
+
+                        <!--================== PERSONAL DATA ACCORDION =========================-->
                         <h2 class="accordion-header" id="personalDataHeading">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalDataCollapse" aria-expanded="true" aria-controls="personalDataCollapse">
                                 Personal Data
                             </button>
-                        </h2>
+                            <div class="accordion-item">
+                                <div id="personalDataCollapse" class="collapse " data-bs-parent="#personalDataAccordion">
+                                    <div class="accordion-body">
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="row align-items-center">
+                                                <div class="col-8">
+                                                    <label for="eiName" style="font-size: 0.875rem;">Name</label>
+                                                    <input type="text" class="form-control " id="eiName" placeholder="Name">
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="eiJob" style="font-size: 0.875rem;">Job</label>
+                                                    <input type="text" class="form-control" id="eiAge" placeholder="Job">
+                                                </div>
+                                            </div>
+                                            <div class="input-group my-3 eiAddress">
+                                                <span class="input-group-text">Address</span>
+                                                <input type="number" class="form-control eiAddress" required>
+                                                <button class="btn btn-success eiAddressAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                <button class="btn btn-danger eiAddressDelete" type="button"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                            <div class="input-group my-3 eiContactNumber">
+                                                <span class="input-group-text">Contact Number</span>
+                                                <input type="number" class="form-control eiContactNumber" required>
+                                                <button class="btn btn-success eiContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                <button class="btn btn-danger eiContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-3">
+                                                    <label for="eiPlaceofBirth" style="font-size: 0.875rem;">Place of Birth</label>
+                                                    <input type="text" class="form-control" id="eiPlaceofBirth" placeholder="Place of Birth">
+                                                </div>
+                                                <div class="col-3">
+                                                    <label for="eiDateofBirth" style="font-size: 0.875rem;">Date of Birth</label>
+                                                    <input type="date" class="form-control" id="eiDateofBirth" placeholder="">
+                                                </div>
+                                                <div class="col-2">
+                                                    <label for="eiAge" style="font-size: 0.875rem;">Age</label>
+                                                    <input type="number" class="form-control" id="eiAge" placeholder="Age">
+                                                </div>
+                                                
+                                                <div class="col-2">
+                                                    <label for="eiHeight" style="font-size: 0.875rem;">Height</label>
+                                                    <input type="number" class="form-control" id="eiHeight" placeholder="Height">
+                                                </div>
+                                                <div class="col-2">
+                                                    <label for="eiWeight" style="font-size: 0.875rem;">Weight</label>
+                                                    <input type="number" class="form-control" id="eiWeight" placeholder="Height">
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-3">
+                                                    <label for="eiReligion" style="font-size: 0.875rem;">Religion</label>
+                                                    <input type="text" class="form-control" id="eiReligion" placeholder="Religion">
+                                                </div>
+                                                <div class="col-3">
+                                                    <label for="eiCitizenship" style="font-size: 0.875rem;">Citizenship</label>
+                                                    <input type="text" class="form-control" id="eiCitizenship" placeholder="Citizenship">
+                                                </div>
+                                                <div class="col-3">
+                                                    <label for="eiCivilStatus" style="font-size: 0.875rem;">Civil Status</label>
+                                                    <select class="form-control" id="eiCivilStatus">
+                                                        <option value="" disabled selected>Select status</option>
+                                                        <option value="Single">Single</option>
+                                                        <option value="Married">Married</option>
+                                                        <option value="Divorced">Divorced</option>
+                                                        <option value="Widowed">Widowed</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-3">
+                                                    <label for="eiGender" style="font-size: 0.875rem;">Gender</label>
+                                                    <select class="form-control" id="eiGender">
+                                                        <option value="" disabled selected>Select Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-4">
+                                                    <label for="eiSpouse" style="font-size: 0.875rem;">Spouse</label>
+                                                    <input type="text" class="form-control" id="eiSpouse" placeholder="Spouse">
+                                                </div>
+                                                <div class="col-8">
+                                                    <label for="eiChildrenNames" style="font-size: 0.875rem;">Children</label>
+                                                    <input type="text" class="form-control" id="eiChildrenNames" placeholder="Children">
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-8">
+                                                    <label for="eiFatherName" style="font-size: 0.875rem;">Father's Name</label>
+                                                    <input type="text" class="form-control" id="eiFatherName" placeholder="Father's name">
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="eiFatherOccupation" style="font-size: 0.875rem;">Occupation</label>
+                                                    <input type="text" class="form-control" id="eiFatherOccupation" placeholder="Occupation">
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-8">
+                                                    <label for="eiMotherName" style="font-size: 0.875rem;">Mother's Name</label>
+                                                    <input type="text" class="form-control" id="eiMotherName" placeholder="Mother's Name">
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="eiChildrenNames" style="font-size: 0.875rem;">Occupation</label>
+                                                    <input type="text" class="form-control" id="eiChildrenNames" placeholder="Occupation">
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-9">
+                                                    <label for="eiParentAddress" style="font-size: 0.875rem;">Parent's Address</label>
+                                                    <input type="text" class="form-control" id="eiParentAddress" placeholder="Parent's Address">
+                                                </div>
+                                                <div class="col-3">
+                                                    <label for="eiParentContactNumber" style="font-size: 0.875rem;">Contact number</label>
+                                                    <input type="number" class="form-control" id="eiParentContactNumber" placeholder="Contact number">
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-8">
+                                                    <label for="eiContactPersonName" style="font-size: 0.875rem;">Contact Person</label>
+                                                    <input type="text" class="form-control" id="eiContactPersonName" placeholder="Contact Person Name">
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="eiContactPersonNumber" style="font-size: 0.875rem;">Contact Person Number</label>
+                                                    <input type="number" class="form-control" id="eiContactPersonNumber" placeholder="Contact Person number">
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-12">
+                                                    <label for="eiContactPersonAddress" style="font-size: 0.875rem;">Contact Address</label>
+                                                    <input type="text" class="form-control" id="x" placeholder="Contact Person Address">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button id="ciCreate" type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#cCreateModal">
+                                            <i class="bi bi-file-earmark"></i> Create
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </h2><!-- end of PERSONAL DATA ACCORDION -->
+
+                        <!--================== EDUCATIONAL BACKGROUND ACCORDION =========================-->
                         <h2 class="accordion-header" id="educationalBackgroundHeading">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#educationalBackgroundCollapse" aria-expanded="false" aria-controls="educationalBackgroundCollapse">
                                 Educational Background
                             </button>
-                        </h2>
+                            <div class="accordion-item">
+                                <div id="educationalBackgroundCollapse" class="collapse " data-bs-parent="#profileInformationAccordion">
+                                    <div class="accordion-body">
+                                        <div class="tab-content" id="myTabContent">
+    
+                                            <div class="row align-items-center">
+                                                <div class="col-6">
+                                                    <label for="eiElementaryName" style="font-size: 0.875rem;">Elementary</label>
+                                                    <input type="text" class="form-control" id="eiElementaryName" placeholder="School Name">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="eiElementaryAddress" style="font-size: 0.875rem;">Address</label>
+                                                    <input type="text" class="form-control" id="eiElementaryAddress" placeholder="Address">
+                                                </div>
+                                            </div>
+    
+                                            <div class="row align-items-center">
+                                                <div class="col-6">
+                                                    <label for="eiJuniorHighSchoolName" style="font-size: 0.875rem;">Junior Highschool</label>
+                                                    <input type="text" class="form-control" id="eiJuniorHighSchoolName" placeholder="School Name">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="eiJuniorHighSchoolAddress" style="font-size: 0.875rem;">Address</label>
+                                                    <input type="text" class="form-control" id="eiJuniorHighSchoolAddress" placeholder="Address">
+                                                </div>
+                                            </div>
+    
+                                            <div class="row align-items-center">
+                                                <div class="col-6">
+                                                    <label for="eiSeniorHighSchoolName" style="font-size: 0.875rem;">Senior Highschool</label>
+                                                    <input type="text" class="form-control" id="eiSeniorHighSchoolName" placeholder="School Name">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="eiSeniorHighSchoolAddress" style="font-size: 0.875rem;">Address</label>
+                                                    <input type="text" class="form-control" id="eiSeniorHighSchoolAddress" placeholder="Address">
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-6">
+                                                    <label for="eiCollegeName" style="font-size: 0.875rem;">College</label>
+                                                    <input type="text" class="form-control" id="eiCollegeName" placeholder="School Name">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="eiCollegeAddress" style="font-size: 0.875rem;">Address</label>
+                                                    <input type="text" class="form-control" id="eiCollegeAddress" placeholder="Address">
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <div class="col-12">
+                                                    <label for="eiCourseName" style="font-size: 0.875rem;">College Course</label>
+                                                    <input type="text" class="form-control" id="eiCourseName" placeholder="School Name">
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h2><!-- end of EDUCATIONAL BACKGROUND ACCORDION -->
+
+                        <!--================== EMPLOYMENT RECORD ACCORDION =========================-->
                         <h2 class="accordion-header" id="employeeRecordHeading">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#employeeRecordCollapse" aria-expanded="false" aria-controls="educationalBackgroundCollapse">
                                 Employee Record
                             </button>
-                        </h2>
+                            <div class="accordion-item">
+                                <div id="employeeRecordCollapse" class="collapse " data-bs-parent="#profileInformationAccordion">
+                                    <div class="accordion-body">
+                                        <div class="tab-content justify-content-evenly" id="myTabContent">
+                                            
+                                            <div class="row align-content-end ">
+                                                <div class="col-xl-3">
+                                                    <label for="eiPreferenceName" style="font-size: 0.875rem;">Company</label>
+                                                    <input type="text" class="form-control" id="eiCompanyName" placeholder="Name">
+                                                </div>
+                                                <div class="col-xl-3">
+                                                    <label for="eiPreferenceOccupation" style="font-size: 0.875rem;">Position</label>
+                                                    <input type="text" class="form-control" id="eiPreferenceOccupation" placeholder="Job">
+                                                </div>
+                                                <!-- ==== er: Employment Record ========== -->
+                                                <div class="col-xl-2">
+                                                    <label for="eierFrom" style="font-size: 0.875rem;">From</label>
+                                                    <input type="date" class="form-control" id="eierFrom" placeholder="Job">
+                                                </div>
+                                                <!-- ==== er: Employment Record ========== -->
+                                                <div class="col-xl-2">
+                                                    <label for="eierTo" style="font-size: 0.875rem;">To</label>
+                                                    <input type="date" class="form-control" id="eierTo" placeholder="Job">
+                                                </div>
+                                                
+                                                <div class="col-xl-2 align-content-end">
+                                                    <div class="d-flex justify-content-center">
+                                                        <button class="btn btn-success eiAddressAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                        <button class="btn btn-danger eiAddressDelete" type="button"><i class="bi bi-trash"></i></button>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+    
+    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h2><!-- end of EMPLOYMENT RECORD ACCORDION -->
+
+
+                        <!--================== EMPLOYMENT RECORD ACCORDION =========================-->
                         <h2 class="accordion-header" id="characterReferenceHeading">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#characterReferenceCollapse" aria-expanded="false" aria-controls="educationalBackgroundCollapse">
                                 Character Reference
                             </button>
-                        </h2>
-                        <!-- ========  PERSONAL DATA  ============-->
-                        <form>
-                            <div id="personalDataCollapse" class="collapse " data-bs-parent="#personalDataAccordion">
-                                <div class="accordion-body">
-                                    <div class="tab-content" id="myTabContent">
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <label for="eiName">Name</label>
-                                                <input type="text" class="form-control" id="eiName" placeholder="Name">
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="eiJob">Job</label>
-                                                <input type="text" class="form-control" id="eiAge" placeholder="Job">
-                                            </div>
-                                        </div>
-                                        <div class="input-group my-3 eiAddress">
-                                            <span class="input-group-text">Address</span>
-                                            <input type="number" class="form-control eiAddress" required>
-                                            <button class="btn btn-success eiAddressAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                            <button class="btn btn-danger eiAddressDelete" type="button"><i class="bi bi-trash"></i></button>
-                                        </div>
-                                        <div class="input-group my-3 eiContactNumber">
-                                            <span class="input-group-text">Contact Number</span>
-                                            <input type="number" class="form-control eiContactNumber" required>
-                                            <button class="btn btn-success eiContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                            <button class="btn btn-danger eiContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-3">
-                                                <label for="eiPlaceofBirth">Place of Birth</label>
-                                                <input type="text" class="form-control" id="eiPlaceofBirth" placeholder="Place of Birth">
-                                            </div>
-                                            <div class="col-3">
-                                                <label for="eiDateofBirth">Date of Birth</label>
-                                                <input type="date" class="form-control" id="eiDateofBirth" placeholder="">
-                                            </div>
-                                            <div class="col-2">
-                                                <label for="eiAge">Age</label>
-                                                <input type="number" class="form-control" id="eiAge" placeholder="Age">
-                                            </div>
-                                            
-                                            <div class="col-2">
-                                                <label for="eiHeight">Height</label>
-                                                <input type="number" class="form-control" id="eiHeight" placeholder="Height">
-                                            </div>
-                                            <div class="col-2">
-                                                <label for="eiWeight">Weight</label>
-                                                <input type="number" class="form-control" id="eiWeight" placeholder="Height">
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-3">
-                                                <label for="eiReligion">Religion</label>
-                                                <input type="text" class="form-control" id="eiReligion" placeholder="Religion">
-                                            </div>
-                                            <div class="col-3">
-                                                <label for="eiCitizenship">Citizenship</label>
-                                                <input type="text" class="form-control" id="eiCitizenship" placeholder="Citizenship">
-                                            </div>
-                                            <div class="col-3">
-                                                <label for="eiCivilStatus">Civil Status</label>
-                                                <select class="form-control" id="eiCivilStatus">
-                                                    <option value="" disabled selected>Select status</option>
-                                                    <option value="Single">Single</option>
-                                                    <option value="Married">Married</option>
-                                                    <option value="Divorced">Divorced</option>
-                                                    <option value="Widowed">Widowed</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-3">
-                                                <label for="eiGender">Gender</label>
-                                                <select class="form-control" id="eiGender">
-                                                    <option value="" disabled selected>Select Gender</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-4">
-                                                <label for="eiSpouse">Spouse</label>
-                                                <input type="text" class="form-control" id="eiSpouse" placeholder="Spouse">
-                                            </div>
-                                            <div class="col-8">
-                                                <label for="eiChildrenNames">Children</label>
-                                                <input type="text" class="form-control" id="eiChildrenNames" placeholder="Children">
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <label for="eiFatherName">Father's Name</label>
-                                                <input type="text" class="form-control" id="eiFatherName" placeholder="Father's name">
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="eiFatherOccupation">Occupation</label>
-                                                <input type="text" class="form-control" id="eiFatherOccupation" placeholder="Occupation">
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <label for="eiMotherName">Mother's Name</label>
-                                                <input type="text" class="form-control" id="eiMotherName" placeholder="Mother's Name">
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="eiChildrenNames">Occupation</label>
-                                                <input type="text" class="form-control" id="eiChildrenNames" placeholder="Occupation">
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-9">
-                                                <label for="eiParentAddress">Parent's Address</label>
-                                                <input type="text" class="form-control" id="eiParentAddress" placeholder="Parent's Address">
-                                            </div>
-                                            <div class="col-3">
-                                                <label for="eiParentContactNumber">Contact number</label>
-                                                <input type="number" class="form-control" id="eiParentContactNumber" placeholder="Contact number">
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <label for="eiContactPersonName">Contact Person</label>
-                                                <input type="text" class="form-control" id="eiContactPersonName" placeholder="Contact Person Name">
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="eiContactPersonNumber">Contact Person Number</label>
-                                                <input type="number" class="form-control" id="eiContactPersonNumber" placeholder="Contact Person number">
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-12">
-                                                <label for="eiContactPersonAddress">Contact Address</label>
-                                                <input type="text" class="form-control" id="eiContactPersonAddress" placeholder="Contact Person Address">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <button id="ciCreate" type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#cCreateModal">
-                                        <i class="bi bi-file-earmark"></i> Create
-                                    </button><!-- end of client create button -->
-                                </div>
-                            </div>  
-                        </form>
-                        
-                        <!-- ========  Educational Background  ============-->
-                        <form>
-                            
-                            <div id="educationalBackgroundCollapse" class="collapse " data-bs-parent="#profileInformationAccordion">
-                                <div class="accordion-body">
-                                    <div class="tab-content" id="myTabContent">
-
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <label for="eiElementaryName">Elementary</label>
-                                                <input type="text" class="form-control" id="eiElementaryName" placeholder="School Name">
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="eiElementaryAddress">Address</label>
-                                                <input type="text" class="form-control" id="eiElementaryAddress" placeholder="Address">
-                                            </div>
-                                        </div>
-
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <label for="eiJuniorHighSchoolName">Junior Highschool</label>
-                                                <input type="text" class="form-control" id="eiJuniorHighSchoolName" placeholder="School Name">
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="eiJuniorHighSchoolAddress">Address</label>
-                                                <input type="text" class="form-control" id="eiJuniorHighSchoolAddress" placeholder="Address">
-                                            </div>
-                                        </div>
-
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <label for="eiSeniorHighSchoolName">Senior Highschool</label>
-                                                <input type="text" class="form-control" id="eiSeniorHighSchoolName" placeholder="School Name">
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="eiSeniorHighSchoolAddress">Address</label>
-                                                <input type="text" class="form-control" id="eiSeniorHighSchoolAddress" placeholder="Address">
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <label for="eiCollegeName">College</label>
-                                                <input type="text" class="form-control" id="eiCollegeName" placeholder="School Name">
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="eiCollegeAddress">Address</label>
-                                                <input type="text" class="form-control" id="eiCollegeAddress" placeholder="Address">
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-12">
-                                                <label for="eiCourseName">College Course</label>
-                                                <input type="text" class="form-control" id="eiCourseName" placeholder="School Name">
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                        <!-- ========  Employment Record  ============-->
-                        <form>
-                            
-                            <div id="employeeRecordCollapse" class="collapse " data-bs-parent="#profileInformationAccordion">
-                                <div class="accordion-body">
-                                    <div class="tab-content justify-content-evenly" id="myTabContent">
-                                        
-                                        <div class="row align-content-end ">
-                                            <div class="col-xl-3">
-                                                <label for="eiPreferenceName">Company</label>
-                                                <input type="text" class="form-control" id="eiCompanyName" placeholder="Name">
-                                            </div>
-                                            <div class="col-xl-3">
-                                                <label for="eiPreferenceOccupation">Position</label>
-                                                <input type="text" class="form-control" id="eiPreferenceOccupation" placeholder="Job">
-                                            </div>
-                                            <!-- ==== er: Employment Record ========== -->
-                                            <div class="col-xl-2">
-                                                <label for="eierFrom">From</label>
-                                                <input type="date" class="form-control" id="eierFrom" placeholder="Job">
-                                            </div>
-                                            <!-- ==== er: Employment Record ========== -->
-                                            <div class="col-xl-2">
-                                                <label for="eierTo">To</label>
-                                                <input type="date" class="form-control" id="eierTo" placeholder="Job">
-                                            </div>
-                                            
-                                            <div class="col-xl-2 align-content-end">
-                                                <div class="d-flex justify-content-center">
-                                                    <button class="btn btn-success eiAddressAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                                    <button class="btn btn-danger eiAddressDelete" type="button"><i class="bi bi-trash"></i></button>
+                            <div class="accordion-item">
+                                <div id="characterReferenceCollapse" class="collapse " data-bs-parent="#profileInformationAccordion">
+                                    <div class="accordion-body">
+                                        <div class="tab-content" id="myTabContent">
+    
+                                            <div class="row align-content-end ">
+                                                <div class="col-xl-4">
+                                                    <label for="eiPreferenceName" style="font-size: 0.875rem;">Name</label>
+                                                    <input type="text" class="form-control" id="eiCompanyName" placeholder="Name">
+                                                </div>
+                                                <div class="col-xl-4">
+                                                    <label for="eiPreferenceOccupation" style="font-size: 0.875rem;">Occupation</label>
+                                                    <input type="text" class="form-control" id="eiPreferenceOccupation" placeholder="Job">
+                                                </div>
+                                                <div class="col-xl-2">
+                                                    <label for="eiPreferenceContact" style="font-size: 0.875rem;">Contact</label>
+                                                    <input type="number" class="form-control" id="eiPreferenceContact" placeholder="Job">
+                                                </div>
+                                                
+                                                <div class="col-xl-2 align-content-end">
+                                                    <div class="d-flex justify-content-center">
+                                                        <button class="btn btn-success eiAddressAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                        <button class="btn btn-danger eiAddressDelete" type="button"><i class="bi bi-trash"></i></button>
+                                                    </div>
+                                                    
                                                 </div>
                                                 
                                             </div>
-                                            
+    
+    
+    
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </h2><!-- end of EMPLOYMENT RECORD ACCORDION -->
+
+
 
                         <!-- ========  Character reference  ============-->
-                        <form>
-                            
-                            <div id="characterReferenceCollapse" class="collapse " data-bs-parent="#profileInformationAccordion">
-                                <div class="accordion-body">
-                                    <div class="tab-content" id="myTabContent">
-
-                                        <div class="row align-content-end ">
-                                            <div class="col-xl-4">
-                                                <label for="eiPreferenceName">Name</label>
-                                                <input type="text" class="form-control" id="eiCompanyName" placeholder="Name">
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <label for="eiPreferenceOccupation">Occupation</label>
-                                                <input type="text" class="form-control" id="eiPreferenceOccupation" placeholder="Job">
-                                            </div>
-                                            <div class="col-xl-2">
-                                                <label for="eiPreferenceContact">Contact</label>
-                                                <input type="number" class="form-control" id="eiPreferenceContact" placeholder="Job">
-                                            </div>
-                                            
-                                            <div class="col-xl-2 align-content-end">
-                                                <div class="d-flex justify-content-center">
-                                                    <button class="btn btn-success eiAddressAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                                    <button class="btn btn-danger eiAddressDelete" type="button"><i class="bi bi-trash"></i></button>
-                                                </div>
-                                                
-                                            </div>
-                                            
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        
                         
 
                     </div>

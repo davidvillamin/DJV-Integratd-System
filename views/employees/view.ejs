@@ -41,196 +41,243 @@
             </div>
                 
             <!-- Profile Details -->
-            <div class="col-lg-9">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body pt-3">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="card-title">Profile Information</h5>
-                            <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#eEditEmployee">
-                                <i class="bi bi-file-earmark-plus"></i> Edit
-                            </button>
-                        </div>
-                        
-                        
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                              <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary" type="button" role="tab" aria-controls="summary" aria-selected="true">Update</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                              <button class="nav-link" id="parts-tab" data-bs-toggle="tab" data-bs-target="#parts" type="button" role="tab" aria-controls="parts" aria-selected="false">Parts</button>
-                            </li>
-                        </ul>
-                        
-                        
-    
-                        <!--============== PROFILE INFORMATION ACCORDION ================-->
-                        <div class="accordion mt-3" id="profileInformationAccordion">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="personalDataHeading">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalDataCollapse" aria-expanded="false" aria-controls="personalDataCollapse">
-                                        Personal Data
-                                    </button>
-                                </h2>
-                                <h2 class="accordion-header" id="educationalBackgroundHeading">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#educationalBackgroundCollapse" aria-expanded="false" aria-controls="educationalBackgroundCollapse">
-                                        Educational Background
-                                    </button>
-                                </h2>
-                                <h2 class="accordion-header" id="employeeRecordHeading">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#employeeRecordCollapse" aria-expanded="false" aria-controls="employeeRecordCollapse">
-                                        Employee Record
-                                    </button>
-                                </h2>
-                                <h2 class="accordion-header" id="characterReferenceHeading">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#characterReferenceCollapse" aria-expanded="false" aria-controls="characterReferenceCollapse">
-                                        Character Reference
-                                    </button>
-                                </h2>
-                            </div>
+             
+            <div class="accordion col-lg-9" id="accordionExample">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">Profile Information</h5>
+                    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#eEditEmployee">
+                        <i class="bi bi-file-earmark-plus"></i> Edit
+                    </button>
+                </div>
 
-                            <form>
-                                <div id="personalDataCollapse" class="collapse " data-bs-parent="#personalDataAccordion">
-                                    <div class="accordion-body">
-                                        <div class="tab-content" id="myTabContent">
-                                            <div class="card p-3">
-                                                <div class="row mb-2">
-                                                    <div class="col-md-5">
-                                                        <strong>Name:</strong>
-                                                        <span class="form-control-plaintext" id="eiName">Luke</span>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <strong>Job:</strong>
-                                                        <span class="form-control-plaintext" id="eiJob">Intern</span>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <strong>Age:</strong>
-                                                        <span class="form-control-plaintext" id="eiAge">13</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <strong>Address:</strong>
-                                                        <span class="form-control-plaintext" id="eiAddress">Imus</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <strong>Contact Number:</strong>
-                                                        <span class="form-control-plaintext" id="eiContactNumber">0123</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <strong>Place of Birth:</strong>
-                                                        <span class="form-control-plaintext" id="eiPlaceofBirth">0123</span>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <strong>Date of Birth:</strong>
-                                                        <span class="form-control-plaintext" id="eiDateofBirth">0123</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <strong>Height:</strong>
-                                                        <span class="form-control-plaintext" id="eiHeight">0123</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <strong>Weight:</strong>
-                                                        <span class="form-control-plaintext" id="eiWeight">0123</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <strong>Religion:</strong>
-                                                        <span class="form-control-plaintext" id="eiReligion">0123</span>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <strong>Citizenship:</strong>
-                                                        <span class="form-control-plaintext" id="eiCitizenship">0123</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <strong>Civil Status:</strong>
-                                                        <span class="form-control-plaintext" id="eiCivilStatus">0123</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <strong>Gender:</strong>
-                                                        <span class="form-control-plaintext" id="eiGender">0123</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <strong>Spouse:</strong>
-                                                        <span class="form-control-plaintext" id="eiSpouse">0123</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <strong>Children:</strong>
-                                                        <span class="form-control-plaintext" id="eiChildrenNames">0123</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <strong>Mother's Name:</strong>
-                                                        <span class="form-control-plaintext" id="eiMotherName">0123</span>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <strong>Occupation:</strong>
-                                                        <span class="form-control-plaintext" id="eiMotherOccupation">0123</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <strong>Father's Name:</strong>
-                                                        <span class="form-control-plaintext" id="eiFatherName">0123</span>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <strong>Occupation:</strong>
-                                                        <span class="form-control-plaintext" id="eiFatherOccupation">0123</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <strong>Parent's Address:</strong>
-                                                        <span class="form-control-plaintext" id="eiParentAddress">0123</span>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <strong>Contact Number:</strong>
-                                                        <span class="form-control-plaintext" id="eiParentContactNumber">0123</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <strong>Contact Person:</strong>
-                                                        <span class="form-control-plaintext" id="eiContactPersonName">0123</span>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <strong>Contact Person Number:</strong>
-                                                        <span class="form-control-plaintext" id="eiContactPersonNumber">0123</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <strong>Contact Address:</strong>
-                                                        <span class="form-control-plaintext" id="eiContactPersonAddress">0123</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                            
-                                        </div>
-                                    </div>       
-                                </div>  
-                            </form>
+                <!--================== PERSONAL DATA ACCORDION =========================-->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#personalDataAccordion" aria-expanded="true" aria-controls="personalDataAccordion">
+                        Personal Data
+                    </button>
+                    </h2>
+                    <div id="personalDataAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="card p-3">
+                                <div class="row mb-2 ">
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Name: </strong><p id="eiName">Luke</p></p>
+                                    </div>
+                                    <div class="col-md-3 d-flex align-content-end">
+                                        <p><strong>Age: </strong><p id="eiAge">23</p></p>
+                                    </div>
+                                    <div class="col-md-3 d-flex align-content-end">
+                                        <p><strong>Job: </strong><p id="eiJob">Ojt</p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 d-flex align-content-end">
+                                        <p><strong>Address: </strong><p id="eiAddress">Imus</p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 d-flex align-content-end">
+                                        <p><strong>Contact Number: </strong><p id="eiContactNumber">0123</p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Place of Birth: </strong><p id="eiPlaceofBirth">0123</p></p>
+                                    </div>
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Date of Birth: </strong><p id="eiDateofBirth">0123</p></p>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Gender: </strong><p id="eiGender">0123</p></p>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Height: </strong><p id="eiHeight">0123</p></p>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Weight: </strong><p id="eiWeight">0123</p></p>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Religion: </strong><p id="eiReligion">0123</p></p>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Citizenship: </strong><p id="eiCitizenship">0123</p></p>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Civil Status: </strong><p id="eiCivilStatus">0123</p></p>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 d-flex align-content-end">
+                                        <p><strong>Spouse: </strong><p id="eiSpouse">0123</p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 d-flex align-content-end">
+                                        <p><strong>Children: </strong><p id="eiChildrenNames">0123</p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Mother's Name: </strong><p id="eiMotherName">0123</p></p>
+                                    </div>
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Occupation: </strong><p id="eiMotherOccupation">0123</p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Father's Name: </strong><p id="eiFatherName">0123</p></p>
+                                    </div>
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Occupation: </strong><p id="eiFatherOccupation">0123</p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Parent's Address: </strong><p id="eiParentAddress">0123</p></p>
+                                    </div>
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Contact Number: </strong><p id="eiParentContactNumber">0123</p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Contact Person: </strong><p id="eiContactPersonName">0123</p></p>
+                                    </div>
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Contact Person Number: </strong><p id="eiContactPersonNumber">0123</p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 d-flex align-content-end">
+                                        <p><strong>Contact Address: </strong><p id="eiContactPersonAddress">0123</p></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    
-    
+                
+                <!--================== EDUCATIONAL BACKGROUND ACCORDION =========================-->
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#educationalBackgroundAccordion" aria-expanded="false" aria-controls="collapseTwo">
+                      Educational Background
+                    </button>
+                  </h2>
+                  <div id="educationalBackgroundAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="card p-3">
+                            <div class="row mb-3">
+                                <div class="col-md-6 d-flex ">
+                                    <p><strong>Elementary: </strong><p id="eiElementaryName">brime</p></p>
+                                </div>
+                                <div class="col-md-6 d-flex align-content-end">
+                                    <p><strong>Address: </strong><p id="eiElementaryAddress">Imus</p></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6 d-flex align-content-center">
+                                    <p><strong>Junior Highschool: </strong><p id="eiJuniorHighSchoolName">brime</p></p>
+                                </div>
+                                <div class="col-md-6 d-flex align-content-end">
+                                    <p><strong>Address: </strong><p id="eiJuniorHighSchoolAddress">Imus</p></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6 d-flex align-content-end">
+                                    <p><strong>Senior Highschool: </strong><p id="eiSeniorHighSchoolName">brime</p></p>
+                                </div>
+                                <div class="col-md-6 d-flex align-content-end">
+                                    <p><strong>Address: </strong><p id="eiSeniorHighSchoolAddress"> </p></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6 d-flex align-content-end">
+                                    <p><strong>College: </strong><p id="eiCollegeName">brime</p></p>
+                                </div>
+                                <div class="col-md-6 d-flex align-content-end">
+                                    <p><strong>Address: </strong><p id="eiCollegeAddress">Imus</p></p>
+                                </div>
+                            </div>
+                            <div class="row mb-12">
+                                <div class="col-md-12 d-flex align-content-end">
+                                    <p><strong>Course: </strong><p id="eiCourseName">brime</p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
 
+                <!--================== EMPLOYMENT RECORD ACCORDION =========================-->
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#employeeRecordAccordion" aria-expanded="false" aria-controls="collapseThree">
+                      Employment Record
+                    </button>
+                    </h2>
+                    <div id="employeeRecordAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="row mb-3">
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Company: </strong><p id="eiCompanyName">brime</p></p>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Position: </strong><p id="eiPreferenceOccupation">Imus</p></p>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-content-end">
+                                        <p><strong>From: </strong><p id="eierFrom">brime</p></p>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-content-end">
+                                        <p><strong>To: </strong><p id="eierTo">Imus</p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+                </div>
+
+                <!--================== CHARACTER REFERENCE ACCORDION =========================-->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#characterReferenceAccordion" aria-expanded="false" aria-controls="collapseThree">
+                        Character Reference
+                      </button>
+                    </h2>
+                    <div id="characterReferenceAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="row mb-3">
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Name: </strong><p id="eiCompanyName">Marites</p></p>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Occupation: </strong><p id="eiPreferenceOccupation">BPO Agent</p></p>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-content-end">
+                                        <p><strong>Contact: </strong><p id="eierFrom">09260283410</p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+                </div>
+
+
+            </div>
+    </section>
 </main><!-- End #main -->
 <%- include("../partials/toaster") %>
 <!-- modal -->

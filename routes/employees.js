@@ -34,13 +34,13 @@ async function populateIndexTable(){
 
     var empList = [];
         var employeeInformationList = await Employees.find()
-            .select('Name Address Job Email _id')
+            .select('Name ContactNumber Address Job  _id')
             .lean();
         // convert data to string
         employeeInformationList.forEach(function(employees){
             empList.push([
                 "<a href='/employees/view/"+ employees._id +"' > "+ employees.Name +" </a>",
-                employees.Email,
+                employees.ContactNumber,
                 employees.Address,
                 employees.Job,
             ]);

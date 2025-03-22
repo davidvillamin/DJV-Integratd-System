@@ -6,6 +6,7 @@ function createEmployee() {
                     e.preventDefault();
                     var data = {
                         Name:$('#eicName').val(),
+                        ContactNumber:$('#eicContactNumber').val(),
                         Address:$('#eicAddress').val(),
                         Job:$('#eicJob').val()
                     }

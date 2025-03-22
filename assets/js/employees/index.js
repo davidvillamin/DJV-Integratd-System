@@ -15,12 +15,12 @@ $(function(){
 
     // initialize datatable
     var dTable = $('#eiTable').DataTable({
-        data: crudiAjax({},"employees/populate/table", "POST"),
+        data: crudiAjax({},"/employees/populate/table", "POST"),
         pageLength: 5, // set to display 5 items
         lengthMenu: [5, 10, 25, 50, 100] // entries per page options
     })
 
-    // createEmployee()
+    createEmployee()
 
     //add eventlistener on click to launch the create client function on client\crud\create.js
     // TODO: fix promise for create client on initialize table.
