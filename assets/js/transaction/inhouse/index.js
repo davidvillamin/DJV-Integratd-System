@@ -28,10 +28,6 @@ $(function(){
     
     // save transaction
     createTransactionInhouse(quill).then(function(){
-        initializeTable(dTable)
+        dTable.clear().rows.add(crudiAjax({}, "/transaction/inhouse/index/poplate/table", "POST")).draw()
     })
 })
-
-function initializeTable(dTable){
-    dTable.clear().rows.add(crudiAjax({}, "/transaction/inhouse/index/poplate/table", "POST")).draw()
-}

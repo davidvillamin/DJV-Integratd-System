@@ -20,10 +20,14 @@ router.post("/transaction/inhouse/create/clientList", async function(req, res){
     var clientList = await Client.find()
         .select('_id Name')
         .lean()
-    var tempStr = String
-    clientList.forEach(function(d){
-        tempStr += "<option value='" + d._id + "'>" + d.Name + "</option>"
-    })
+
+    if (Array.isArray(clientList) && clientList.length > 0) {
+        clientList.forEach(function(d){
+            tempStr += "<option value='" + d._id + "'>" + d.Name + "</option>"
+        });
+    } else {
+        tempStr = "<option value=''>No Client's</option>";
+    }       
     res.send(tempStr)
 })
 

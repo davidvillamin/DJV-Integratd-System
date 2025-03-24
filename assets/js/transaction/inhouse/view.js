@@ -86,9 +86,9 @@ $(async function(){
     });
 
     // images
-    saveEditImage().then(function(){
+    // saveEditImage().then(function(){
             
-    })
+    // })
         
     //======================================================
     // Dropdown functionalities
