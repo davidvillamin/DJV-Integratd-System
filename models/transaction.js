@@ -10,6 +10,7 @@ var transactionDbSchema = new mongoose.Schema({
         }
     ,
     RecieveDate: Date,
+    Recieve: String,
     Device: String,
     SerialNumber: String,
     Notes: Object,

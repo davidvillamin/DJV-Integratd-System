@@ -361,7 +361,7 @@ function quillInit(id){
         ["direction", {
           align: []
         }],
-        ["link", "image", "video"],
+        // ["link", "image", "video"],
         ["clean"]
       ]
     },
@@ -369,4 +369,3 @@ function quillInit(id){
   });
   return quill
 }
-

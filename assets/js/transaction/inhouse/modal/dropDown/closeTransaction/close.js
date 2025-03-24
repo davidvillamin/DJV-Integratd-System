@@ -10,7 +10,6 @@ function closeTransaction(id){
                         Technician:$('#tihvctTechnician :selected').text(),
                     }
                     data.id = id
-                    console.log(data)
                     //save data
                     // var toastMessage = await crudiAjax(data, "/transaction/inhouse/view/release/update", 'Post');
                     // clear data
