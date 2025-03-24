@@ -20,7 +20,6 @@ $(function(){
         lengthMenu: [5, 10, 25, 50, 100] // entries per page options
     })
 
-    createEmployee()
 
     //add eventlistener on click to launch the create client function on client\crud\create.js
     // TODO: fix promise for create client on initialize table.

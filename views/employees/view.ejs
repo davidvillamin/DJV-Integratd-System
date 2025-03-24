@@ -41,11 +41,10 @@
             </div>
                 
             <!-- Profile Details -->
-             
             <div class="accordion col-lg-9" id="accordionExample">
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">Profile Information</h5>
-                    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#eEditEmployee">
+                    <button id="eiEditModal" type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#eEditEmployee">
                         <i class="bi bi-file-earmark-plus"></i> Edit
                     </button>
                 </div>
@@ -53,7 +52,7 @@
                 <!--================== PERSONAL DATA ACCORDION =========================-->
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#personalDataAccordion" aria-expanded="true" aria-controls="personalDataAccordion">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#personalDataAccordion" aria-expanded="false" aria-controls="personalDataAccordion">
                         Personal Data
                     </button>
                     </h2>
@@ -63,103 +62,103 @@
                             <div class="card p-3">
                                 <div class="row mb-2 ">
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Name: </strong><p id="eiName">Luke</p></p>
+                                        <p><strong>Name: </strong><p id="eiName"></p></p>
                                     </div>
                                     <div class="col-md-3 d-flex align-content-end">
-                                        <p><strong>Age: </strong><p id="eiAge">23</p></p>
+                                        <p><strong>Age: </strong><p id="eiAge"></p></p>
                                     </div>
                                     <div class="col-md-3 d-flex align-content-end">
-                                        <p><strong>Job: </strong><p id="eiJob">Ojt</p></p>
+                                        <p><strong>Job: </strong><p id="eiJob"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 d-flex align-content-end">
-                                        <p><strong>Address: </strong><p id="eiAddress">Imus</p></p>
+                                        <p><strong>Address: </strong><p id="eiAddress"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 d-flex align-content-end">
-                                        <p><strong>Contact Number: </strong><p id="eiContactNumber">0123</p></p>
+                                        <p><strong>Contact Number: </strong><p id="eiContactNumber"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Place of Birth: </strong><p id="eiPlaceofBirth">0123</p></p>
+                                        <p><strong>Place of Birth: </strong><p id="eiPlaceofBirth"></p></p>
                                     </div>
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Date of Birth: </strong><p id="eiDateofBirth">0123</p></p>
+                                        <p><strong>Date of Birth: </strong><p id="eiDateofBirth"></p></p>
                                     </div>
                                     
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 d-flex align-content-end">
-                                        <p><strong>Gender: </strong><p id="eiGender">0123</p></p>
+                                        <p><strong>Gender: </strong><p id="eiGender"></p></p>
                                     </div>
                                     <div class="col-md-4 d-flex align-content-end">
-                                        <p><strong>Height: </strong><p id="eiHeight">0123</p></p>
+                                        <p><strong>Height: </strong><p id="eiHeight"></p></p>
                                     </div>
                                     <div class="col-md-4 d-flex align-content-end">
-                                        <p><strong>Weight: </strong><p id="eiWeight">0123</p></p>
+                                        <p><strong>Weight: </strong><p id="eiWeight"></p></p>
                                     </div>
                                     
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 d-flex align-content-end">
-                                        <p><strong>Religion: </strong><p id="eiReligion">0123</p></p>
+                                        <p><strong>Religion: </strong><p id="eiReligion"></p></p>
                                     </div>
                                     <div class="col-md-4 d-flex align-content-end">
-                                        <p><strong>Citizenship: </strong><p id="eiCitizenship">0123</p></p>
+                                        <p><strong>Citizenship: </strong><p id="eiCitizenship"></p></p>
                                     </div>
                                     <div class="col-md-4 d-flex align-content-end">
-                                        <p><strong>Civil Status: </strong><p id="eiCivilStatus">0123</p></p>
+                                        <p><strong>Civil Status: </strong><p id="eiCivilStatus"></p></p>
                                     </div>
                                     
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 d-flex align-content-end">
-                                        <p><strong>Spouse: </strong><p id="eiSpouse">0123</p></p>
+                                        <p><strong>Spouse: </strong><p id="eiSpouse"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 d-flex align-content-end">
-                                        <p><strong>Children: </strong><p id="eiChildrenNames">0123</p></p>
+                                        <p><strong>Children: </strong><p id="eiChildrenNames"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Mother's Name: </strong><p id="eiMotherName">0123</p></p>
+                                        <p><strong>Mother's Name: </strong><p id="eiMotherName"></p></p>
                                     </div>
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Occupation: </strong><p id="eiMotherOccupation">0123</p></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Father's Name: </strong><p id="eiFatherName">0123</p></p>
-                                    </div>
-                                    <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Occupation: </strong><p id="eiFatherOccupation">0123</p></p>
+                                        <p><strong>Occupation: </strong><p id="eiMotherOccupation"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Parent's Address: </strong><p id="eiParentAddress">0123</p></p>
+                                        <p><strong>Father's Name: </strong><p id="eiFatherName"></p></p>
                                     </div>
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Contact Number: </strong><p id="eiParentContactNumber">0123</p></p>
+                                        <p><strong>Occupation: </strong><p id="eiFatherOccupation"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Contact Person: </strong><p id="eiContactPersonName">0123</p></p>
+                                        <p><strong>Parent's Address: </strong><p id="eiParentAddress"></p></p>
                                     </div>
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Contact Person Number: </strong><p id="eiContactPersonNumber">0123</p></p>
+                                        <p><strong>Contact Number: </strong><p id="eiParentContactNumber"></p></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Contact Person: </strong><p id="eiContactPersonName"></p></p>
+                                    </div>
+                                    <div class="col-md-6 d-flex align-content-end">
+                                        <p><strong>Contact Person Number: </strong><p id="eiContactPersonNumber"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 d-flex align-content-end">
-                                        <p><strong>Contact Address: </strong><p id="eiContactPersonAddress">0123</p></p>
+                                        <p><strong>Contact Address: </strong><p id="eiContactPersonAddress"></p></p>
                                     </div>
                                 </div>
                             </div>
@@ -284,4 +283,5 @@
 <%- include("../partials/script") %>
 <%- include("modal/edit") %>
 <script src="../../assets/js/employees/view.js"></script>
+<script src="../../assets/js/employees/modal/edit.js"></script>
 <%- include("../partials/footer") %>
