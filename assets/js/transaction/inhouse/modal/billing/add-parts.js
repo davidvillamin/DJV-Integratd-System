@@ -19,7 +19,6 @@ function initializeAddParts(){
 
     $('#tihvbiisItemInformationTable tbody').on('click', 'tr',async function () {
         var rowData = iiTable.row(this).data();
-        console.log(rowData)
         // add higlight effect on selected table
         // Remove 'selected' class from all rows
         $('#tihvbiisItemInformationTable tbody tr').removeClass('selected');

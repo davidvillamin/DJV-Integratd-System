@@ -20,10 +20,14 @@ router.post("/transaction/inhouse/create/clientList", async function(req, res){
     var clientList = await Client.find()
         .select('_id Name')
         .lean()
-    var tempStr = String
-    clientList.forEach(function(d){
-        tempStr += "<option value='" + d._id + "'>" + d.Name + "</option>"
-    })
+
+    if (Array.isArray(clientList) && clientList.length > 0) {
+        clientList.forEach(function(d){
+            tempStr += "<option value='" + d._id + "'>" + d.Name + "</option>"
+        });
+    } else {
+        tempStr = "<option value=''>No Client's</option>";
+    }       
     res.send(tempStr)
 })
 
@@ -31,19 +35,12 @@ router.post("/transaction/inhouse/create/clientList", async function(req, res){
 router.post("/transaction/inhouse/create/ajax",async function(req, res){
   // Convert the string date to a Date object
   req.body.data.RecieveDate = new Date(req.body.data.RecieveDate);
-  // Create a new transaction with the data from the request body
   var newlyCreatedTransaction = await Transaction.create(req.body.data);
-  // Find the client by ID from the request body
   var foundClient = await Client.findById(req.body.data.Client);
-  // Add the newly created transaction to the client's transactions
   foundClient.Transaction.push(newlyCreatedTransaction._id);
   // Save the updated client information
   await foundClient.save();
-
-  // Populate the table with the updated data
-  var tableData = await populateTable();
-  // Send the populated table data as the response
-  res.send(tableData);
+  res.send("You have successfuly created a new transaction!" );
 })
 
 //universal get all client
@@ -89,17 +86,28 @@ router.post("/transaction/inhouse/edit/image/add",async function(req, res){
 router.post("/transaction/inhouse/view/populate/transaction",async function(req, res){
     var transaction = await Transaction.findById(req.body.data.id)
         .populate('Client')
+        .populate({
+            path: "Billing.Parts",
+            model: "serial"
+        })
         .lean()
     res.send(transaction)
 })
 
 // initial print report
-router.get("/transaction/inhouse/view/print/initial/:id", async function(req, res){
-    res.render("transaction/inhouse/modal/dropDown/reports/printReport/initial")
+router.get("/transaction/inhouse/view/print/serviceReport/:id", async function(req, res){
+    res.render("transaction/inhouse/modal/dropDown/reports/serviceReport")
 })
+
 // initial print report of  transaction data
-router.post("/transaction/report/initial", async function (req, res) {
-    var initialPrint = await Transaction.findById(req.body.data.id).populate('Client')
+router.post("/transaction/report/serviceReport", async function (req, res) {
+    var initialPrint = await Transaction.findById(req.body.data.id)
+    .populate('Client')
+    .populate({
+        path: "Billing.Parts",
+        model: "serial"
+    })
+    .lean()
     res.send(initialPrint)
 })
 
@@ -220,6 +228,31 @@ router.post("/transaction/inhouse/view/billing/payment/populte/table", async fun
 router.put("/transaction/inhouse/view/notes", async function(req, res){
     await Transaction.findByIdAndUpdate(req.body.data.id, { Notes: req.body.data.notes });
     res.send("You have successfuly updated notes!")
+})
+
+// images edit
+router.post("/transaction/inhouse/edit/image/edit",async function(req, res){
+    // console.log(req.body.data)
+
+    // find transaction
+    var transaction = await Transaction.findById(req.body.data.id)
+    // add image to transaction
+    // Find the index of the image to be removed
+    var imageIndex = transaction.Images.findIndex(function(image){
+        image._id.toString() === req.body.data.data._id
+    })
+    console.log(imageIndex)
+    // Remove the image if it exists
+    if (imageIndex !== -1) {
+        transaction.Images.splice(imageIndex, 1);
+        // await transaction.save();
+        res.send('You have successfully removed the image!');
+    } else {
+        res.status(404).send('Image not found!');
+    }
+    // transaction.Images.push(req.body.data.data)
+    // await transaction.save()
+    // res.send('You have successfuly added an image!')
 })
 
 module.exports = router;

@@ -13,6 +13,7 @@ $(async function(){
     // Initialize Quill/Toast
     //======================================================
     var quill = quillInit("tihvNotes")
+
     // initialize toast
     $(".toast").toast({
         delay: 5000
@@ -71,7 +72,6 @@ $(async function(){
             data: await crudiAjax(id,"/transaction/inhouse/view/billing/payment/populte/table","post")
         });
     })  
-    // images
 
     // notes
     $("#tihvnSave").on("click",async function(){
@@ -79,13 +79,16 @@ $(async function(){
             notes: quill.getContents(),
             id: id
         }
-       
         var crudiAjaxResult = await crudiAjax(data, "/transaction/inhouse/view/notes", 'put')
         // show toast
         $(".toast").toast("show").find(".toast-body").text(crudiAjaxResult)
         $(".toast").find(".toast-title").text("Update Notes")
     });
-        
+
+    // images
+    // saveEditImage().then(function(){
+            
+    // })
         
     //======================================================
     // Dropdown functionalities
@@ -111,9 +114,11 @@ $(async function(){
     })
 
     // print - Initial Report
-    $('#tihvpInitialReportTable').on('click',function(){
-        $(this).attr('href','/transaction/inhouse/view/print/initial/'+ id)
+    $('#tihvdReport').on('click',function(){
+        $(this).attr('href','/transaction/inhouse/view/print/serviceReport/'+ id)
     })
+
+    
 
     //======================================================
     // Data Population
@@ -174,7 +179,7 @@ async function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
     //tags initialize
     initializeEditTags(data)
     // Location - inhouse/modal/dropDown/image/add-image.js
-    addImageInitialize() // image preview
+    addImageInitialize("tihviImage","tihviPreviewModal") // image preview
     // view Repair
     viewRepair(data)
     
@@ -221,26 +226,33 @@ async function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
     //======================================================
     // images
     // clear all images first on list
-    // $('#tihviList').empty();
+    $('#tihviList').empty();
     // Populate images
-    data.Images.forEach(function image(img,i){
-        $('#tihviList').append("<li class='list-group-item list-group-item-action tihviListItem d-flex justify-content-between' data-b64=" + img.base64String + " data-desc=" + img.Description + ">"
-                + img.Title + 
-                "<span>\
-                    <i class='bi bi-pencil-square text-white p-1 px-2 text-white bg-warning rounded tihvbtEdit'></i>\
-                    <i class='bi bi-trash text-white p-1 px-2 bg-danger rounded mx-1 tihvbtDelete'></i>\
-                </span>\
-            </li>")
 
-            
-})
-    // add click function on each image
-    $('.tihviListItem').on('click', function() {
-        $('.tihviListItem').removeClass('bg-primary');
-        $(this).addClass('bg-primary')
-        $('#tihviPreview').attr('src', $(this).attr('data-b64'));
-        $('#tihviDescription').text($(this).attr('data-desc'));
-    })
+    if (!data.Images || data.Images.length === 0) { // if images is empty
+        $("#tihvImage").hide();
+    } else {
+        data.Images.forEach(function image(img, i) {
+            var sanitizedTitle = img.Title.replace(/ /g, '&nbsp;'); // Replace spaces with non-breaking spaces
+            var sanitizedDescription = img.Description.replace(/ /g, '&nbsp;'); // Replace spaces with non-breaking spaces
+            $('#tihviList').append("<li class='list-group-item list-group-item-action tihviListItem d-flex justify-content-between' data-title='" + sanitizedTitle + "' data-id='" + img._id + "' data-b64='" + img.base64String + "' data-desc='" + sanitizedDescription + "'>"
+                + sanitizedTitle + 
+                "<span>\
+                    <i class='bi bi-pencil-square text-white p-1 px-2 text-white bg-warning rounded tihviEdit' data-bs-toggle='modal' data-bs-target='#tihviEditModal'></i>\
+                    <i class='bi bi-trash text-white p-1 px-2 bg-danger rounded mx-1 tihviDelete'></i>\
+                </span>\
+            </li>");
+        })
+        // images
+        // add click function on each image
+        $('.tihviListItem').on('click', function() {
+            $('.tihviListItem').removeClass('bg-primary');
+            $(this).addClass('bg-primary')
+            $('#tihviPreview').attr('src', $(this).attr('data-b64'));
+            $('#tihviDescription').text($(this).attr('data-desc'));
+        })
+        initializeEditImage()
+    }
 
     // billing parts
     initializeAddParts()
@@ -267,6 +279,7 @@ async function tihvPopulateData(data,quill,partsTbl,transpoTbl,scTbl,payTbl) {
     payTbl.bootstrapTable("destroy").bootstrapTable({
         data: await crudiAjax(id,"/transaction/inhouse/view/billing/payment/populte/table","post")
     });
+
+    // billing summary auto compute with table build
+    billingSummary(data.Billing,"tihvbsTable")
 }
-
-
