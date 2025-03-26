@@ -7,79 +7,84 @@ var employeesSchema = new mongoose.Schema({
     Name:           String,
     Email:          String,
     Address:        String,
-    Job:            String,
+    JobTitle:       String,
     PlaceofBirth:   String,
     Religion:       String,
     Citizenship:    String,   
     CivilStatus:    String,
     Age:            Number,
-    ContactNumber:  Number,
+
+    ContactDetails: [{
+        ContactNumber: Number
+    }],
+
     Height:         Number,
     Weight:         Number,
     isMale:         Boolean,
     DateofBirth:    Date,
-    Spouse: [
+    Spouse:         String,
+    Children: [
         {
-            Spouse:         String,
             ChildrenName:   String
         }
     ],
-    Parents: [
-        {
-            FathersName:            String,
-            FathersOccupation:      String,
-            MothersName:            String,
-            MothersOccupation:      String,
-            ParentsAddress:         String,
-            ParentsContactNumber:   Number
-        }
-    ],
-    ContactPersonName:      String,
-    ContactPersonAddress:   String,
-    ContactPersonNumber:    Number,
+    
+    FathersName:            String,
+    FathersOccupation:      String,
+    MothersName:            String,
+    MothersOccupation:      String,
+    ParentsAddress:         String,
+    ParentsContactNumber:   Number,
+
+    EmergencyDetail: [{
+        Name:      String,
+        Address:   String,
+        ContactNumber:    Number,
+        Relationship:    String
+    }],
+    
     // ===============================================
     //              Educational Background
     // ===============================================
-    EducationalBackground: {
-        Elementary: [
-            {
-                ElementaryName:     String,
-                ElementaryAddress:  String
-            }
-        ],
+    
+    ElementaryName:             String,
+    ElementaryAddress:          String,
+    ElementarySchoolYearStart:  Date,
+    ElementarySchoolYearEnd:    Date,
 
-        JuniorHighSchool: [
-            {
-                JuniorHighschoolName:       String,
-                JuniorHighschoolAddress:    String
-            }
-        ],
 
-        SeniorHighSchool: [
-            {
-                SeniorHighschoolName:       String,
-                SeniorHighschoolAddress:    String
-            }
-        ],
-        
-        College: [
-            {
-                CollegeName:    String,
-                CollegeAddress: String
-            }
-        ],
-        CollegeCourse: String
-    },
+
+    JuniorHighschoolName:       String,
+    JuniorHighschoolAddress:    String,
+    JuniorHighSchoolYearStart:  Date,
+    JuniorHighSchoolYearEnd:    Date,
+
+    SeniorHighschoolName:       String,
+    SeniorHighschoolAddress:    String,
+    SeniorHighSchoolYearStart:  Date,
+    SeniorHighSchoolYearEnd:    Date,
+    
+    
+    
+    
+    CollegeName:        String,
+    CollegeAddress:     String,
+    CollegeYearStart:   Date,
+    CollegeYearEnd:     Date,
+    
+          
+    CollegeCourse: String,
+    
     // ===============================================
     //              Employment Record
     // ===============================================
     // -------- er = Employment Record  --------
     Employment :[
         {
+            erCompany:  String,
+            erPosition: String,
             erFrom:     Date,
             erTo:       Date,
-            erPosition: String,
-            erCompany:  String,
         }
     ],
     // ===============================================
@@ -90,7 +95,7 @@ var employeesSchema = new mongoose.Schema({
         {
         crName:         String,
         crOccupation:   String,
-        crAddress:      String
+        crContactNumber:      String
         }
     ]
 });

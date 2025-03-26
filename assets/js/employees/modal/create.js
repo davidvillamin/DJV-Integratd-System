@@ -1,7 +1,7 @@
 function createEmployee() {
     return new Promise(function(resolve, reject) {
         try {
-            $('#eiCreate').on('submit',function(e){
+            $('#eicCreate').on('submit',function(e){
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
                     var data = {
@@ -10,9 +10,10 @@ function createEmployee() {
                         Address:$('#eicAddress').val(),
                         Job:$('#eicJob').val()
                     }
+                    
 
                     var crudiAjaxResult = crudiAjax(data, "/employees/create", "Post")
-                    $('#eiCreate')[0].reset();
+                    $('#eicCreate')[0].reset();
                     // // close modal   
                     $('#eCreateEmployee').modal('toggle'); // fix modal toggle method
                     $('.modal-backdrop').remove(); // ensure backdrop is removed

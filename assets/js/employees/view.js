@@ -14,18 +14,27 @@ $(function(){
         delay: 5000
     });
 
-    var employee = crudiAjax({id:id},"/employees/view/populate/ajax", "POST")
+    // var employee = crudiAjax({id:id},"/employees/view/populate/ajax", "POST")
+
+    // var employee = crudiAjax({}, "/employees/populate/table/view", 'POST')
+    // employeeData(employee);
+    editEmployee()
     
     // View Populate Data   
-    $('#eiName').text(employee.Name)
-    $('#eiAddress').text(employee.Address)
-    $('#eiJob').text(employee.Job)
-    $('#eiContactNumber').text(employee.ContactNumber)
+
+    // $('#eiName').val(employee.Name)
+    // $('#eiJob').val(employee.Job)
+    // $('#eiContactNumber').val(employee.ContactNumber)
+    // $('#eiAddress').val(employee.Address)
     
-    // Edit Modal Populate Data
+
+    
+    
+    // // // Edit Modal Populate Data
    
-    $('#eieName').val(employee.Name)
-    $('#eieJob').val(employee.Job)
-    $('#eieContactNumber').val(employee.ContactNumber)
-    $('#eieAddress').val(employee.Address)
+    // $('#eieName').val(employee.Name)
+    // $('#eieJob').val(employee.Job)
+    // $('#eieContactNumber').val(employee.ContactNumber)
+    // $('#eieAddress').val(employee.Address)
 })
+

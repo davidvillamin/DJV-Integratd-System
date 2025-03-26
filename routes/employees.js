@@ -17,15 +17,23 @@ router.get("/employees/view/:id", function(req, res){
     res.render("employees/view");
 });
 
-router.post("/employees/view/populate/ajax", async function (req,res){
-    var employeeData = await Employees.findById(req.body.data.id)
-    res.send(employeeData)
-})
 
-router.post("/employees/edit", async function(req, res){
-    await Employees.findByIdAndUpdate(req.body.data.id, req.body.data.data)
-    res.send("success")
-})
+
+// router.post("/employees/edit", async function(req, res){
+//     await Employees.findByIdAndUpdate(req.body.data.id, req.body.data.data)
+//     res.send("success")
+// })
+
+router.post("/employees/create", async function(req, res){
+    await Employees.create(req.body.data)
+    res.send("You have successfully created a new device!")
+});
+
+router.post("/employees/create/view", async function(req, res){
+    await Employees.create(req.body.data)
+    console.log(req.body.data);
+    res.send("You have successfully created a new device!")
+});
 
 
 router.post("/employees/populate/table", async function (req, res) {
@@ -33,11 +41,15 @@ router.post("/employees/populate/table", async function (req, res) {
     res.send(employeeData)   
 })
 
+
+
+// router.post("/employees/view/populate/ajax", async function (req,res){
+//     var employeeData = await Employees.find(req.body.data)
+//     res.send(employeeData)
+// })
+
 // successfully created employee
-router.post("/employees/create", async function(req, res){
-    await Employees.create(req.body.data)
-    res.send("You have successfully created a new device!")
-});
+
 
 
 
@@ -61,3 +73,5 @@ async function populateIndexTable(){
     
         return empList;
 }
+
+
