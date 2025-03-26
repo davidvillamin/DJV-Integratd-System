@@ -20,7 +20,7 @@ var employeesSchema = new mongoose.Schema({
 
     Height:         Number,
     Weight:         Number,
-    isMale:         Boolean,
+    isMale:         String,
     DateofBirth:    Date,
     Spouse:         String,
     Children: [
@@ -37,10 +37,10 @@ var employeesSchema = new mongoose.Schema({
     ParentsContactNumber:   Number,
 
     EmergencyDetail: [{
-        Name:      String,
-        Address:   String,
-        ContactNumber:    Number,
-        Relationship:    String
+        eeName:             String,
+        eeAddress:          String,
+        eeContactNumber:    Number,
+        eeRelationship:     String
     }],
     
     // ===============================================
@@ -79,14 +79,14 @@ var employeesSchema = new mongoose.Schema({
     //              Employment Record
     // ===============================================
     // -------- er = Employment Record  --------
-    Employment :[
-        {
-            erCompany:  String,
-            erPosition: String,
-            erFrom:     Date,
-            erTo:       Date,
-        }
-    ],
+    // Employment :[
+    //     {
+    //         erCompany:  String,
+    //         erPosition: String,
+    //         erFrom:     Date,
+    //         erTo:       Date,
+    //     }
+    // ],
     // ===============================================
     //              Character Reference
     // ===============================================

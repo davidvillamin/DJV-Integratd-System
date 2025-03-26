@@ -11,67 +11,66 @@ var express                             = require("express"),
 router.get("/employees", async function(req, res){
     res.render("employees/index")
 });
-
+// ============================================================
+// Employee View
+// ============================================================
 // initialize employee page (view)
 router.get("/employees/view/:id", function(req, res){
     res.render("employees/view");
 });
 
-
-
-// router.post("/employees/edit", async function(req, res){
-//     await Employees.findByIdAndUpdate(req.body.data.id, req.body.data.data)
-//     res.send("success")
-// })
-
+// ============================================================
+// Employee Create
+// ============================================================
 router.post("/employees/create", async function(req, res){
     await Employees.create(req.body.data)
     res.send("You have successfully created a new device!")
 });
-
-router.post("/employees/create/view", async function(req, res){
-    await Employees.create(req.body.data)
+// ============================================================
+// Employee Edit
+// ============================================================
+router.put("/employees/employeesinformation/view", async function(req, res){   
+    await Employees.findByIdAndUpdate(req.body.data.id, req.body.data)
     console.log(req.body.data);
-    res.send("You have successfully created a new device!")
-});
-
-
-router.post("/employees/populate/table", async function (req, res) {
-    var employeeData = await populateIndexTable();
-    res.send(employeeData)   
+    res.send("success")
 })
 
+// ============================================================
+// Employee ID
+// ============================================================
+router.post("/employee/view/ajax", async function(req, res){
+    var foundEmployees = await Employees.findById(req.body.data.id)
+    console.log(foundEmployees);
+    
+    res.send(foundEmployees)
+});
 
-
-// router.post("/employees/view/populate/ajax", async function (req,res){
-//     var employeeData = await Employees.find(req.body.data)
-//     res.send(employeeData)
-// })
-
-// successfully created employee
-
-
-
+router.post("/employees/populate/table", async function(req, res) {
+    var employeeID = await populateIndexTable()
+    res.send(employeeID);
+});
 
 module.exports = router;
 
-async function populateIndexTable(){
-
-    var empList = [];
-        var employeeInformationList = await Employees.find()
-            .select('Name ContactNumber Address Job  _id')
-            .lean();
-        // convert data to string
-        employeeInformationList.forEach(function(employees){
-            empList.push([
-                "<a href='/employees/view/"+ employees._id +"' > "+ employees.Name +" </a>",
-                employees.ContactNumber,
-                employees.Address,
-                employees.Job,
-            ]);
-        });
+async function populateIndexTable() {
     
-        return empList;
+    const empList = [];
+    const employeeInformationList = await Employees.find()
+        .select('Name ContactDetails Address JobTitle _id')
+        .lean();
+
+    // Transform data into the desired format
+    employeeInformationList.forEach((employee) => {
+        empList.push([
+            `<a href='/employees/view/${employee._id}'>${employee.Name}</a>`,
+            employee.ContactDetails?.[0]?.ContactNumber || "N/A",
+            employee.Address || "N/A",
+            employee.JobTitle || "N/A",
+        ]);
+    });
+
+    return empList;
+    
 }
 
 

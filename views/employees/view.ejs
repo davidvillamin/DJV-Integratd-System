@@ -5,12 +5,16 @@
 <!--================ ei = employee =================information -->
 <main id="main" class="main">
     <div class="pagetitle">
-    <h1>Employees</h1>
+        <h1 class="placeholder-glow">
+            <span class="evName">
+                <span class="placeholder col-1"></span>
+            </span>
+        </h1>
     <nav>
         <ol class="breadcrumb">
         <li class="breadcrumb-item"> <a href="/">Home</a></li>
         <li class="breadcrumb-item"> <a href="/employees">Employees</a></li>
-        <li class="breadcrumb-item active">Employees</li>
+        <li class="breadcrumb-item active evName"></li>
         </ol>
     </nav>
     </div><!-- End Page Title -->
@@ -68,7 +72,7 @@
                                         <p><strong>Age: </strong><p id="eiAge"></p></p>
                                     </div>
                                     <div class="col-md-3 d-flex align-content-end">
-                                        <p><strong>Job: </strong><p id="eiJob"></p></p>
+                                        <p><strong>Job Title: </strong><p id="eiJob"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -95,10 +99,10 @@
                                         <p><strong>Gender: </strong><p id="eiGender"></p></p>
                                     </div>
                                     <div class="col-md-4 d-flex align-content-end">
-                                        <p><strong>Height: </strong><p id="eiHeight"></p></p>
+                                        <p><strong>Height(cm): </strong><p id="eiHeight"></p></p>
                                     </div>
                                     <div class="col-md-4 d-flex align-content-end">
-                                        <p><strong>Weight: </strong><p id="eiWeight"></p></p>
+                                        <p><strong>Weight(kg): </strong><p id="eiWeight"></p></p>
                                     </div>
                                     
                                 </div>
@@ -150,15 +154,18 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Contact Person: </strong><p id="eiContactPersonName"></p></p>
+                                        <p><strong>Emergency Contact Name: </strong><p id="eiEmergencyContactName"></p></p>
                                     </div>
                                     <div class="col-md-6 d-flex align-content-end">
-                                        <p><strong>Contact Person Number: </strong><p id="eiContactPersonNumber"></p></p>
+                                        <p><strong>Contact Number: </strong><p id="eimergencyContactNumber"></p></p>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12 d-flex align-content-end">
-                                        <p><strong>Contact Address: </strong><p id="eiContactPersonAddress"></p></p>
+                                    <div class="col-md-7 d-flex align-content-end">
+                                        <p><strong>Address: </strong><p id="eimergencyContactAddress"></p></p>
+                                    </div>
+                                    <div class="col-md-5 d-flex align-content-end">
+                                        <p><strong>Relationship: </strong><p id="eimergencyContactRelationship"></p></p>
                                     </div>
                                 </div>
                             </div>
@@ -178,34 +185,69 @@
                     <div class="accordion-body">
                         <div class="card p-3">
                             <div class="row mb-3">
-                                <div class="col-md-6 d-flex ">
+                                <div class="col-md-6 d-flex">
                                     <p><strong>Elementary: </strong><p id="eiElementaryName">brime</p></p>
                                 </div>
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Address: </strong><p id="eiElementaryAddress">Imus</p></p>
+                                
+                                <div class="col-md-3 d-flex align-content-end">
+                                    <p><strong>Year Start: </strong><p id="eiElementaryYearStart"></p></p>
+                                </div>
+                                <div class="col-md-3 d-flex align-content-end">
+                                    <p><strong>Year End: </strong><p id="eiElementaryYearEnd"></p></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-md-6 d-flex align-content-center">
+                                <div class="col-md-12 d-flex align-content-end">
+                                    <p><strong>Address: </strong><p id="eiElementaryAddress">Imus</p></p>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6 d-flex">
                                     <p><strong>Junior Highschool: </strong><p id="eiJuniorHighSchoolName">brime</p></p>
                                 </div>
-                                <div class="col-md-6 d-flex align-content-end">
+                                <div class="col-md-3 d-flex align-content-end">
+                                    <p><strong>Year Start: </strong><p id="eiJuniorHighSchoolYearStart"></p></p>
+                                </div>
+                                <div class="col-md-3 d-flex align-content-end">
+                                    <p><strong>Year End: </strong><p id="eiJuniorHighSchoolYearEnd"></p></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4 d-flex align-content-end">
                                     <p><strong>Address: </strong><p id="eiJuniorHighSchoolAddress">Imus</p></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-md-6 d-flex align-content-end">
+                                <div class="col-md-6 d-flex">
                                     <p><strong>Senior Highschool: </strong><p id="eiSeniorHighSchoolName">brime</p></p>
                                 </div>
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Address: </strong><p id="eiSeniorHighSchoolAddress"> </p></p>
+                                <div class="col-md-3 d-flex align-content-end">
+                                    <p><strong>Year Start: </strong><p id="eiSeniorHighSchoolYearStart"></p></p>
+                                </div>
+                                <div class="col-md-3 d-flex align-content-end">
+                                    <p><strong>Year End: </strong><p id="eiSeniorHighSchoolYearEnd"></p></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-md-6 d-flex align-content-end">
+                                <div class="col-md-12 d-flex align-content-end">
+                                    <p><strong>Address: </strong><p id="eiSeniorHighSchoolAddress"></p></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6 d-flex">
                                     <p><strong>College: </strong><p id="eiCollegeName">brime</p></p>
                                 </div>
-                                <div class="col-md-6 d-flex align-content-end">
+                                
+                                <div class="col-md-3 d-flex align-content-end">
+                                    <p><strong>Year Start: </strong><p id="eiCollegeYearStart"></p></p>
+                                </div>
+                                <div class="col-md-3 d-flex align-content-end">
+                                    <p><strong>Year End: </strong><p id="eiCollegeYearEnd"></p></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-12 d-flex align-content-end">
                                     <p><strong>Address: </strong><p id="eiCollegeAddress">Imus</p></p>
                                 </div>
                             </div>
@@ -233,15 +275,13 @@
                                     <div class="col-md-4 d-flex align-content-end">
                                         <p><strong>Company: </strong><p id="eiCompanyName">brime</p></p>
                                     </div>
-                                    <div class="col-md-4 d-flex align-content-end">
+                                    <div class="col-md-3 d-flex align-content-end">
                                         <p><strong>Position: </strong><p id="eiPreferenceOccupation">Imus</p></p>
                                     </div>
-                                    <div class="col-md-2 d-flex align-content-end">
-                                        <p><strong>From: </strong><p id="eierFrom">brime</p></p>
+                                    <div class="col-md-5 d-flex align-content-end">
+                                        <p><strong>From: </strong><p id="eierFrom">March 25</p><p> until </p><p id="eierTo"> October 25</p></p>
                                     </div>
-                                    <div class="col-md-2 d-flex align-content-end">
-                                        <p><strong>To: </strong><p id="eierTo">Imus</p></p>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

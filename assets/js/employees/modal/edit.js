@@ -13,33 +13,33 @@ function editEmployee() {
                         Citizenship:                $('#eieCitizenship').val(),
                         CivilStatus:                $('#eieCivilStatus').val(),
                         Age:                        Number($('#eieAge').val()),
-                        Height:                     $('#eieHeight').val(),
-                        Weight:                     $('#eieWeight').val(),
-                        // isMale:                     $('#eieGender').val(),
-                        DateofBirth:                $('#eieDateofBirth').val(),
+                        Height:                     Number($('#eieHeight').val()),
+                        Weight:                     Number($('#eieWeight').val()),
+                        isMale:                     $('#eieGender').val(), // Updated to match the select element
+                        DateofBirth:                new Date($('#eieDateofBirth').val()).toDateString(),
                         Spouse:                     $('#eieSpouse').val(),
                         FathersName:                $('#eieFatherName').val(),
                         FathersOccupation:          $('#eieFatherOccupation').val(),
                         MothersName:                $('#eieMotherName').val(),
                         MothersOccupation:          $('#eieMotherOccupation').val(),
                         ParentsAddress:             $('#eieParentAddress').val(),
-                        ParentsContactNumber:       $('#eieParentContactNumber').val(),
+                        ParentsContactNumber:       Number($('#eieParentContactNumber').val()),
                         ElementaryName:             $('#eieElementaryName').val(),
                         ElementaryAddress:          $('#eieElementaryAddress').val(),
-                        ElementarySchoolYearStart:  $('#eiElemStart').val(),
-                        ElementarySchoolYearEnd:    $('#eiElemEnd').val(),
-                        JuniorHighschoolName:       $('#eiJuniorHighSchoolName').val(),
+                        ElementarySchoolYearStart:  new Date($('#eiElemStart').val()).toDateString(),
+                        ElementarySchoolYearEnd:    new Date($('#eiElemEnd').val()).toDateString(),
+                        JuniorHighschoolName:       $('#eieJuniorHighSchoolName').val(),
                         JuniorHighschoolAddress:    $('#eieJuniorHighSchoolAddress').val(),
-                        JuniorHighSchoolYearStart:  $('#eiElemStart').val(),
-                        JuniorHighSchoolYearEnd:    $('#eiElemEnd').val(),
+                        JuniorHighSchoolYearStart:  new Date($('#eieJuniorHighStart').val()).toDateString(),
+                        JuniorHighSchoolYearEnd:    new Date($('#eieJuniorHighEnd').val()).toDateString(),
                         SeniorHighschoolName:       $('#eieSeniorHighSchoolName').val(),
                         SeniorHighschoolAddress:    $('#eieSeniorHighSchoolAddress').val(),
-                        SeniorHighSchoolYearStart:  $('#eiElemStart').val(),
-                        SeniorHighSchoolYearEnd:    $('#eiElemEnd').val(),
+                        SeniorHighSchoolYearStart:  new Date($('#eieSeniorHighStart').val()).toDateString(),
+                        SeniorHighSchoolYearEnd:    new Date($('#eieSeniorHighEnd').val()).toDateString(),
                         CollegeName:                $('#eieCollegeName').val(),
                         CollegeAddress:             $('#eieCollegeAddress').val(),
-                        CollegeYearStart:           $('#eiElemStart').val(),
-                        CollegeYearEnd:             $('#eiElemEnd').val(),
+                        CollegeYearStart:           new Date($('#eiCollegeStart').val()).toDateString(),
+                        CollegeYearEnd:             new Date($('#eiCollegeEnd').val()).toDateString(),
                         CollegeCourse:              $('#eieCourseName').val(),
                         ContactDetails:             [],
                         Children:                   [],
@@ -48,9 +48,9 @@ function editEmployee() {
                         Employment:                 []   
                         
                     }
-                    $('.eieContactNumber').each(function(detail, index) {
+                    $('.eieContactNumber').each(function() {
                         employeedata.ContactDetails.push({
-                            ContactNumber: $(this).find('.eiePersonalContactNumber').val()
+                            ContactNumber: Number($(this).find('.eicContactNumber').val())
                         });
                     });
                     $('.eieChildren').each(function() {
@@ -63,7 +63,7 @@ function editEmployee() {
                         employeedata.EmergencyDetail.push({
                             Name: $(this).find('.eieeName').val(),
                             Address: $(this).find('.eieeAddress').val(),
-                            ContactNumber: $(this).find('.eieeContactNumber').val(),
+                            ContactNumber: Number($(this).find('.eieeContactNumber').val()),
                             Relationship: $(this).find('.eieeRelationship').val()
                         })
                     });
@@ -72,8 +72,8 @@ function editEmployee() {
                         employeedata.Employment.push({
                             erCompany: $(this).find('.eierCompanyName').val(),
                             erPosition:  $(this).find('.eierPosition').val(),
-                            erFrom: $(this).find('.eierFrom').val(),
-                            erTo: $(this).find('.eierTo').val(),
+                            erFrom: new Date($(this).find('.eierFrom').val()).toDateString(),
+                            erTo: new Date($(this).find('.eierTo').val()).toDateString(),
                         })
                         
                     });
@@ -81,19 +81,21 @@ function editEmployee() {
                         employeedata.CharacterReference.push({
                             crName: $(this).find('.eiReferenceName').val(),
                             eiReferenceOccupation: $(this).find('.eiReferenceOccupation').val(),
-                            crContactNumber: $(this).find('.eiReferenceContact').val()
+                            crContactNumber: Number($(this).find('.eiReferenceContact').val())
                         })
                     });
                     console.log(employeedata);
+
+                    employeedata.id = id;
                     
-                    // var crudiAjaxResult = crudiAjax(employeedata, "/employees/create/view", "Post")
+                    crudiAjax(employeedata, "/employees/employeesinformation/view", "PUT")
                     // $('#eicEdit')[0].reset();
                     // // // close modal   
-                    // $('#eEditEmployee').modal('toggle'); // fix modal toggle method
-                    // $('.modal-backdrop').remove(); // ensure backdrop is removed
-                    // // // show toast
-                    // $(".toast").toast("show").find(".toast-body").text(crudiAjaxResult)
-                    // $(".toast").find(".toast-title").text("New Client")
+                    $('#eEditEmployee').modal('toggle'); // fix modal toggle method
+                    $('.modal-backdrop').remove(); // ensure backdrop is removed
+                    // // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfuly added a new client!")
+                    $(".toast").find(".toast-title").text("New Client")
 
                     resolve()
                 }

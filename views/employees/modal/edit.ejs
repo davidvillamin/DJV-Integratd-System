@@ -48,7 +48,7 @@
                                                 </div>
                                                 <div class="col-3">
                                                     <label for="eieDateofBirth" style="font-size: 0.875rem;">Date of Birth</label>
-                                                    <input type="date" class="form-control" id="eieDateofBirth" placeholder="">
+                                                    <input type="date" class="form-control" id="eieDateofBirth" placeholder="Date of Birth" value="2001-01-01">
                                                 </div>
                                                 <div class="col-2">
                                                     <label for="eieAge" style="font-size: 0.875rem;">Age</label>
@@ -61,7 +61,7 @@
                                                 </div>
                                                 <div class="col-2">
                                                     <label for="eieWeight" style="font-size: 0.875rem;">Weight</label>
-                                                    <input type="number" class="form-control" id="eieWeight" placeholder="Height" value=59>
+                                                    <input type="number" class="form-control" id="eieWeight" placeholder="Weight" value=59>
                                                 </div>
                                             </div>
                                             <div class="row align-items-center">
@@ -86,8 +86,8 @@
                                                 <div class="col-3">
                                                     <label for="eieGender" style="font-size: 0.875rem;">Gender</label>
                                                     <select class="form-control" id="eieGender">
-                                                        <option value="" disabled selected>Select Gender</option>
-                                                        <option value="Male">Male</option>
+                                                        <option value="">Select Gender</option>
+                                                        <option value="Male" selected>Male</option>
                                                         <option value="Female">Female</option>
                                                         <option value="Other">Other</option>
                                                     </select>
@@ -138,9 +138,9 @@
 
                                             <div class="input-group my-3 eieEmergency">
                                                 <span class="input-group-text">Emergency Contact</span>
-                                                <input  type="text" class="form-control eieeName" placeholder="Name" value="Marites">
-                                                <input  type="text" class="form-control eieeAddress" placeholder="Address" value="Imus">
-                                                <input  type="number" class="form-control eieeContactNumber" placeholder="Contact Number" value="09260283410">
+                                                <input  type="text" class="form-control eieeName" placeholder="Name" value="Pia">
+                                                <input  type="text" class="form-control eieeAddress" placeholder="Address" value="Bacoor">
+                                                <input  type="number" class="form-control eieeContactNumber" placeholder="Contact Number" value=09260283410>
                                                 <input  type="text" class="form-control eieeRelationship" placeholder="Relationship" value="Kabet">
                                                 <button class="btn btn-success eiContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
                                                 <button class="btn btn-danger eiContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
@@ -174,12 +174,12 @@
                                                     <input type="text" class="form-control" id="eieElementaryAddress" placeholder="Address"value="Elem School address">
                                                 </div>
                                                 <div class="col-2">
-                                                    <label for="eiElemStart" style="font-size: 0.875rem;">From</label>
-                                                    <input type="date" class="form-control" id="eiElemStart" placeholder="Address">
+                                                    <label for="eiElemStart" style="font-size: 0.875rem;">Year Start</label>
+                                                    <input type="date" class="form-control" id="eiElemStart" placeholder="Year Start" value="2010-01-01">
                                                 </div>
                                                 <div class="col-2">
-                                                    <label for="eiElemEnd" style="font-size: 0.875rem;">To</label>
-                                                    <input type="date" class="form-control" id="eiElemEnd" placeholder="Address">
+                                                    <label for="eiElemEnd" style="font-size: 0.875rem;">Year End</label>
+                                                    <input type="date" class="form-control" id="eiElemEnd" placeholder="Year End" value="2015-01-01">
                                                 </div>
                                             </div>
     
@@ -193,12 +193,12 @@
                                                     <input type="text" class="form-control" id="eieJuniorHighSchoolAddress" placeholder="Address"value="Junior Highschool address">
                                                 </div>
                                                 <div class="col-2">
-                                                    <label for="eiElemStart" style="font-size: 0.875rem;">From</label>
-                                                    <input type="date" class="form-control" id="eiElemStart" placeholder="Address">
+                                                    <label for="eieJuniorHighStart" style="font-size: 0.875rem;">Year Start</label>
+                                                    <input type="date" class="form-control" id="eieJuniorHighStart" placeholder="Address" value="2015-01-01">
                                                 </div>
                                                 <div class="col-2">
-                                                    <label for="eiElemEnd" style="font-size: 0.875rem;">To</label>
-                                                    <input type="date" class="form-control" id="eiElemEnd" placeholder="Address">
+                                                    <label for="eieJuniorHighEnd" style="font-size: 0.875rem;">Year End</label>
+                                                    <input type="date" class="form-control" id="eieJuniorHighEnd" placeholder="Address" value="2019-01-01">
                                                 </div>
                                             </div>
     
@@ -212,12 +212,12 @@
                                                     <input type="text" class="form-control" id="eieSeniorHighSchoolAddress" placeholder="Address"value="Senior Highschool address">
                                                 </div>
                                                 <div class="col-2">
-                                                    <label for="eiElemStart" style="font-size: 0.875rem;">From</label>
-                                                    <input type="date" class="form-control" id="eiElemStart" placeholder="Address">
+                                                    <label for="eieSeniorHighStart" style="font-size: 0.875rem;">Year Start</label>
+                                                    <input type="date" class="form-control" id="eieSeniorHighStart" placeholder="Address" value="2019-01-01">
                                                 </div>
                                                 <div class="col-2">
-                                                    <label for="eiElemEnd" style="font-size: 0.875rem;">To</label>
-                                                    <input type="date" class="form-control" id="eiElemEnd" placeholder="Address">
+                                                    <label for="eieSeniorHighEnd" style="font-size: 0.875rem;">Year End</label>
+                                                    <input type="date" class="form-control" id="eieSeniorHighEnd" placeholder="Address" value="2021-01-01">
                                                 </div>
                                             </div>
                                             <div class="row align-items-center">
@@ -230,12 +230,12 @@
                                                     <input type="text" class="form-control" id="eieCollegeAddress" placeholder="Address" value="Dasma">
                                                 </div>
                                                 <div class="col-2">
-                                                    <label for="eiElemStart" style="font-size: 0.875rem;">From</label>
-                                                    <input type="date" class="form-control" id="eiElemStart" placeholder="Address">
+                                                    <label for="eiCollegeStart" style="font-size: 0.875rem;">Year Start</label>
+                                                    <input type="date" class="form-control" id="eiCollegeStart" placeholder="Address" value="2021-01-01">
                                                 </div>
                                                 <div class="col-2">
-                                                    <label for="eiElemEnd" style="font-size: 0.875rem;">To</label>
-                                                    <input type="date" class="form-control" id="eiElemEnd" placeholder="Address">
+                                                    <label for="eiCollegeEnd" style="font-size: 0.875rem;">Year End</label>
+                                                    <input type="date" class="form-control" id="eiCollegeEnd" placeholder="Address" value="2025-01-01">
                                                 </div>
                                             </div>
                                             <div class="row align-items-center">
@@ -265,8 +265,8 @@
                                                 <span class="input-group-text">Employment Record</span>
                                                 <input id="eierCompanyName" type="text" class="form-control eierCompanyName" placeholder="Company Name"value="Mcdo">
                                                 <input id="eierPosition" type="text" class="form-control eierPosition" placeholder="Position"value="Service crew">
-                                                <input id="eierFrom" type="date" class="form-control eierFrom" placeholder="From">
-                                                <input id="eierTo" type="date" class="form-control eierTo" placeholder="To">
+                                                <input id="eierFrom" type="date" class="form-control eierFrom" placeholder="Year Start" value="2021-01-01">
+                                                <input id="eierTo" type="date" class="form-control eierTo" placeholder="Year End" value="2021-01-01">
                                                 <button class="btn btn-success eiEmploymentRecordAdd" type="button"><i class="bi bi-plus-square"></i></button>
                                                 <button class="btn btn-danger eiEmploymentRecordDelete" type="button"><i class="bi bi-trash"></i></button>
                                             </div>

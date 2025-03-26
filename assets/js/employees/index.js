@@ -23,6 +23,7 @@ $(function(){
     createEmployee()
 
 
+
     //add eventlistener on click to launch the create client function on client\crud\create.js
     // TODO: fix promise for create client on initialize table.
     
