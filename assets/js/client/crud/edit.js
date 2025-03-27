@@ -40,7 +40,7 @@ function clientEditIndividual(id) { // client id
             });
 
             //update edit client individual
-            $('#ciEdit :submit').on('click', async function(e) {
+            $('#ciEdit :submit').on('click', function(e) {
                 if ($(this).closest('form').is(':valid') === true) {
                     e.preventDefault();
                     clientData.data = {
@@ -58,7 +58,7 @@ function clientEditIndividual(id) { // client id
                     clientData.id = id;
 
                     //save updated client
-                    await crudiAjax(clientData, "/client/edit", 'Post')
+                    crudiAjax(clientData, "/client/edit", 'Post')
 
                     // close modal   
                     $('#ciEditModal').modal('toggle'); // fix modal toggle method

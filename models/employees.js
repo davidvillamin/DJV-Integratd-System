@@ -69,7 +69,7 @@ var employeesSchema = new mongoose.Schema({
     
     CollegeName:        String,
     CollegeAddress:     String,
-    CollegeYearStart:   Date,
+    CollegeStart:   Date,
     CollegeYearEnd:     Date,
     
           
@@ -79,14 +79,14 @@ var employeesSchema = new mongoose.Schema({
     //              Employment Record
     // ===============================================
     // -------- er = Employment Record  --------
-    // Employment :[
-    //     {
-    //         erCompany:  String,
-    //         erPosition: String,
-    //         erFrom:     Date,
-    //         erTo:       Date,
-    //     }
-    // ],
+    Employment :[
+        {
+            erCompanyName:  String,
+            erPosition:     String,
+            erFrom:         Date,
+            erTo:           Date,
+        }
+    ],
     // ===============================================
     //              Character Reference
     // ===============================================

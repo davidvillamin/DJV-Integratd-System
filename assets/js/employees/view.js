@@ -57,11 +57,55 @@ function employeeData(employee) {
     $('#eiFatherOccupation').text(employee.FathersOccupation)
     $('#eiParentAddress').text(employee.ParentsAddress)
     $('#eiParentContactNumber').text(employee.ParentsContactNumber)
+    $('#eiEmergencyContactName').text(employee.EmergencyDetail[0].eeName)
+    $('#eiEmergencyContactAddress').text(employee.EmergencyDetail[0].eeAddress)
+    $('#eiEmergencyContactNumber').text(employee.EmergencyDetail[0].eeContactNumber)
+    $('#eiEmergencyContactRelationship').text(employee.EmergencyDetail[0].eeRelationship)
     
+    //================================================================================================
+    // Educational Background
+    //================================================================================================ 
+    $('#eiElementaryName').text(employee.ElementaryName)
+    $('#eiElementaryAddress').text(employee.ElementaryAddress)
+    $('#eiElementaryYearStart').text(moment(employee.ElementarySchoolYearStart).format("MMM-DD-YYYY"))
+    $('#eiElementaryYearEnd').text(moment(employee.ElementarySchoolYearEnd).format("MMM-DD-YYYY"))
+
+    $('#eiJHSName').text(employee.JuniorHighschoolName)
+    $('#eiJHSAddress').text(employee.JuniorHighschoolAddress)
+    $('#eiJHSYearStart').text(moment(employee.JuniorHighSchoolYearStart).format("MMM-DD-YYYY"))
+    $('#eiJHSYearEnd').text(moment(employee.JuniorHighSchoolYearEnd).format("MMM-DD-YYYY"))
+
+    $('#eiSeniorHighSchoolName').text(employee.SeniorHighschoolName)
+    $('#eiSeniorHighSchoolAddress').text(employee.SeniorHighschoolAddress)
+    $('#eiSeniorHighSchoolYearStart').text(moment(employee.SeniorHighSchoolYearStart).format("MMM-DD-YYYY"))
+    $('#eiSeniorHighSchoolYearEnd').text(moment(employee.SeniorHighSchoolYearEnd).format("MMM-DD-YYYY"))
+
+    $('#eiCollegeName').text(employee.CollegeName)
+    $('#eiCollegeAddress').text(employee.CollegeAddress)
+    $('#eiCollegeYearStart').text(moment(employee.CollegeYearStart).format("MMM-DD-YYYY"))
+    $('#eiCollegeYearEnd').text(moment(employee.CollegeYearEnd).format("MMM-DD-YYYY"))
+    
+    $('#eiCourseName').text(moment(employee.CollegeYearEnd).format("MMM-DD-YYYY"))
+    
+    //================================================================================================
+    // Employment History
+    //================================================================================================ 
+    
+    
+    $('#eierCompanyName').text(employee.Employment[0].erCompanyName)
+    $('#eierPosition').text(employee.Employment[0].erPosition)
+    $('#eierFrom').text(moment(employee.Employment[0].erFrom).format("MMM-DD-YYYY"))
+    $('#eierTo').text(moment(employee.Employment[0].erTo).format("MMM-DD-YYYY"))
+    
+    
+    //================================================================================================
+    // CHARACTER REFERENCE
+    //================================================================================================ 
+
+    $('#eivcrCompanyName').text(employee.CharacterReference[0].crName)
+    $('#eivcrReferenceOccupation').text(employee.CharacterReference[0].crOccupation)
+    $('#eicrNumber').text(employee.CharacterReference[0].crContactNumber)
 }
 
-// function populateCreatedData(data) {
-    // $('#eiAge').text(employee.Age);
-    
-// }
+
 

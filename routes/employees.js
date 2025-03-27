@@ -29,9 +29,10 @@ router.post("/employees/create", async function(req, res){
 // ============================================================
 // Employee Edit
 // ============================================================
-router.put("/employees/employeesinformation/view", async function(req, res){   
-    await Employees.findByIdAndUpdate(req.body.data.id, req.body.data)
+router.put("/employees/employeesinformation/edit", async function(req, res){ 
     console.log(req.body.data);
+    
+    await Employees.findByIdAndUpdate(req.body.data.id, req.body.data.data)
     res.send("success")
 })
 
@@ -40,8 +41,6 @@ router.put("/employees/employeesinformation/view", async function(req, res){
 // ============================================================
 router.post("/employee/view/ajax", async function(req, res){
     var foundEmployees = await Employees.findById(req.body.data.id)
-    console.log(foundEmployees);
-    
     res.send(foundEmployees)
 });
 
@@ -51,6 +50,10 @@ router.post("/employees/populate/table", async function(req, res) {
 });
 
 module.exports = router;
+
+// ============================================================
+// Functions
+// ============================================================
 
 async function populateIndexTable() {
     
