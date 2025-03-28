@@ -1,47 +1,11 @@
-var id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 function editEmployee() {
-    return new Promise(async(resolve, reject) =>{
+    employeeEditPopulate()
+    return new Promise(function(resolve, reject) {
         try {
-            var employeedata = await crudiAjax({id: id}, "/employee/view/ajax", 'Post')
-            
-            console.log(employeedata);
-
-            $('#eieName').val(employeedata.Name)
-            $('#eieJob').val(employeedata.JobTitle)
-            $('#eieAge').val(employeedata.Age)
-            $('#eieAddress').val(employeedata.Address)
-            $('#eieContactNumber').text(employeedata.ContactDetails[0].ContactNumber)
-            $('#eiePlaceofBirth').val(employeedata.PlaceofBirth)
-            $('#eieDateofBirth').val(moment(employeedata.DateofBirth).format("MMM-DD-YYYY")); // Set formatted date
-            $('#eieGender').val(employeedata.isMale)
-            $('#eieHeight').val(employeedata.Height)
-            $('#eieWeight').val(employeedata.Weight)
-            $('#eieReligion').val(employeedata.Religion)
-            $('#eieCitizenship').val(employeedata.Citizenship)
-            $('#eieCivilStatus').val(employeedata.CivilStatus)
-            $('#eieSpouse').val(employeedata.Spouse)
-            $('#eieChildrenName').val(employeedata.Children[0].ChildrenName)
-            $('#eieMotherName').val(employeedata.MothersName)
-            $('#eieMotherOccupation').val(employeedata.MothersOccupation)
-            $('#eieFatherName').val(employeedata.FathersName)
-            $('#eieFatherOccupation').val(employeedata.FathersOccupation)
-            $('#eieParentAddress').val(employeedata.ParentsAddress)
-            $('#eieParentContactNumber').val(employeedata.ParentsContactNumber)
-            $('#eieeName').val(employeedata.EmergencyDetail[0].eeName)
-            $('#eieeAddress').val(employeedata.EmergencyDetail[0].eeAddress)
-            $('#eieeContactNumber').val(employeedata.EmergencyDetail[0].eeContactNumber)
-            $('#eieeRelationship').val(employeedata.EmergencyDetail[0].eeRelationship)
-            
-
-            //population of data edit client
-            // $('#cieName').val(clientData.Name);
-            // $('#cieAddress').val(clientData.Address);
-            // $('#cieEmail').val(clientData.Email);
-            // $('#cieNotes').text(clientData.Notes);
             $('#eicEdit').on('submit', function(e){
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
-                    
+                    var employeedata = {}
                     employeedata.data = {
                         Name:                       $('#eieName').val(),
                         Address:                    $('#eieAddress').val(),
@@ -64,20 +28,20 @@ function editEmployee() {
                         ParentsContactNumber:       Number($('#eieParentContactNumber').val()),
                         ElementaryName:             $('#eieElementaryName').val(),
                         ElementaryAddress:          $('#eieElementaryAddress').val(),
-                        ElementarySchoolYearStart:  new Date($('#eiElemStart').val()).toDateString(),
-                        ElementarySchoolYearEnd:    new Date($('#eiElemEnd').val()).toDateString(),
+                        ElementarySchoolYearStart:  new Date($('#eieElemStart').val()).toDateString(),
+                        ElementarySchoolYearEnd:    new Date($('#eieElemEnd').val()).toDateString(),
                         JuniorHighschoolName:       $('#eieJuniorHighSchoolName').val(),
                         JuniorHighschoolAddress:    $('#eieJuniorHighSchoolAddress').val(),
                         JuniorHighSchoolYearStart:  Date($('#eieJHSYearStart').val()),
-                        JuniorHighSchoolYearEnd:    Date($('#eieJHSYearEndeieJHSYearEnd').val()),
+                        JuniorHighSchoolYearEnd:    Date($('#eieJHSYearEnd').val()),
                         SeniorHighschoolName:       $('#eieSeniorHighSchoolName').val(),
                         SeniorHighschoolAddress:    $('#eieSeniorHighSchoolAddress').val(),
                         SeniorHighSchoolYearStart:  new Date($('#eieSeniorHighStart').val()).toDateString(),
                         SeniorHighSchoolYearEnd:    new Date($('#eieSeniorHighEnd').val()).toDateString(),
                         CollegeName:                $('#eieCollegeName').val(),
                         CollegeAddress:             $('#eieCollegeAddress').val(),
-                        CollegeStart:           new Date($('#eiCollegeStart').val()).toDateString(),
-                        CollegeYearEnd:             new Date($('#eiCollegeEnd').val()).toDateString(),
+                        CollegeStart:           new Date($('#eieCollegeStart').val()).toDateString(),
+                        CollegeYearEnd:             new Date($('#eieCollegeEnd').val()).toDateString(),
                         CollegeCourse:              $('#eieCourseName').val(),
                         ContactDetails:             [],
                         Children:                   [],

@@ -30,8 +30,6 @@ router.post("/employees/create", async function(req, res){
 // Employee Edit
 // ============================================================
 router.put("/employees/employeesinformation/edit", async function(req, res){ 
-    console.log(req.body.data);
-    
     await Employees.findByIdAndUpdate(req.body.data.id, req.body.data.data)
     res.send("success")
 })

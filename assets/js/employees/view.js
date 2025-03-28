@@ -21,8 +21,7 @@ $(function () {
 
     editEmployee()
 
-    // var createdData = crudiAjax({id: id}, "/employees/get/created", "POST");
-    // populateCreatedData(createdData);
+    
 
     
 
@@ -50,7 +49,7 @@ function employeeData(employee) {
     $('#eiCitizenship').text(employee.Citizenship)
     $('#eiCivilStatus').text(employee.CivilStatus)
     $('#eiSpouse').text(employee.Spouse)
-    $('#eiChildrenNames').text(employee.Children[0].ChildrenName)
+    // $('#eiChildrenNames').text(employee.Children[0].ChildrenName)
     $('#eiMotherName').text(employee.MothersName)
     $('#eiMotherOccupation').text(employee.MothersOccupation)
     $('#eiFatherName').text(employee.FathersName)

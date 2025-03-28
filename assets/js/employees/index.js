@@ -20,6 +20,8 @@ $(function(){
         lengthMenu: [5, 10, 25, 50, 100] // entries per page options
     })
 
+    
+
     createEmployee()
 
 
