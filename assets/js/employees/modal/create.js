@@ -40,3 +40,14 @@ function createEmployee() {
         }
     })
 }
+// ei = Employee Information
+function eiContactNumberAdd() {
+    //cciContactNumberAdd = Client Create Individual Contact Number
+    $(".eiContactNumberAdd").off('click').on('click', function(){
+        var newEmployeeContactGroup = $('.eieContactDetails').first().clone();
+        newEmployeeContactGroup.find('input').val('');
+        newEmployeeContactGroup.insertBefore($(this).closest('.eieContactDetails'));
+        listenerContactNumberAdd(); // re-attach listener to new elements
+        listenerContactNumberDelete(); // re-attach delete listener to new elements
+    });
+}
