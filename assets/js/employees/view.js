@@ -49,17 +49,32 @@ function employeeData(employee) {
     $('#eiCitizenship').text(employee.Citizenship)
     $('#eiCivilStatus').text(employee.CivilStatus)
     $('#eiSpouse').text(employee.Spouse)
-    // $('#eiChildrenNames').text(employee.Children[0].ChildrenName)
+    
     $('#eiMotherName').text(employee.MothersName)
     $('#eiMotherOccupation').text(employee.MothersOccupation)
     $('#eiFatherName').text(employee.FathersName)
     $('#eiFatherOccupation').text(employee.FathersOccupation)
     $('#eiParentAddress').text(employee.ParentsAddress)
     $('#eiParentContactNumber').text(employee.ParentsContactNumber)
-    $('#eiEmergencyContactName').text(employee.EmergencyDetail[0].eeName)
-    $('#eiEmergencyContactAddress').text(employee.EmergencyDetail[0].eeAddress)
-    $('#eiEmergencyContactNumber').text(employee.EmergencyDetail[0].eeContactNumber)
-    $('#eiEmergencyContactRelationship').text(employee.EmergencyDetail[0].eeRelationship)
+
+
+    if (employee.EmergencyDetail && employee.EmergencyDetail.length > 0) {
+        $('#eiEmergencyContactName').text(employee.EmergencyDetail[0].eeName);
+        $('#eiEmergencyContactAddress').text(employee.EmergencyDetail[0].eeAddress);
+        $('#eiEmergencyContactNumber').text(employee.EmergencyDetail[0].eeContactNumber);
+        $('#eiEmergencyContactRelationship').text(employee.EmergencyDetail[0].eeRelationship);
+    } else {
+        $('#eiEmergencyContactName').text('N/A');
+        $('#eiEmergencyContactAddress').text('N/A');
+        $('#eiEmergencyContactNumber').text('N/A');
+        $('#eiEmergencyContactRelationship').text('N/A');
+    }
+
+    if (employee.Children && employee.Children.length > 0) {
+        $('#eiChildrenNames').text(employee.Children[0].ChildrenName);
+    } else {
+        $('#eiChildrenNames').text('N/A'); // Default value if no children data is available
+    }
     
     //================================================================================================
     // Educational Background
@@ -91,19 +106,32 @@ function employeeData(employee) {
     //================================================================================================ 
     
     
-    $('#eierCompanyName').text(employee.Employment[0].erCompanyName)
-    $('#eierPosition').text(employee.Employment[0].erPosition)
-    $('#eierFrom').text(moment(employee.Employment[0].erFrom).format("MMM-DD-YYYY"))
-    $('#eierTo').text(moment(employee.Employment[0].erTo).format("MMM-DD-YYYY"))
+    if (employee.Employment && employee.Employment.length > 0) {
+        $('#eierCompanyName').text(employee.Employment[0].erCompanyName);
+        $('#eierPosition').text(employee.Employment[0].erPosition);
+        $('#eierFrom').text(moment(employee.Employment[0].erFrom).format("MMM-DD-YYYY"));
+        $('#eierTo').text(moment(employee.Employment[0].erTo).format("MMM-DD-YYYY"));
+    } else {
+        $('#eierCompanyName').text('N/A');
+        $('#eierPosition').text('N/A');
+        $('#eierFrom').text('N/A');
+        $('#eierTo').text('N/A');
+    }
     
     
     //================================================================================================
     // CHARACTER REFERENCE
     //================================================================================================ 
 
-    $('#eivcrCompanyName').text(employee.CharacterReference[0].crName)
-    $('#eivcrReferenceOccupation').text(employee.CharacterReference[0].crOccupation)
-    $('#eicrNumber').text(employee.CharacterReference[0].crContactNumber)
+    if (employee.CharacterReference && employee.CharacterReference.length > 0) {
+        $('#eivcrCompanyName').text(employee.CharacterReference[0].crName);
+        $('#eivcrReferenceOccupation').text(employee.CharacterReference[0].crOccupation);
+        $('#eicrNumber').text(employee.CharacterReference[0].crContactNumber);
+    } else {
+        $('#eivcrCompanyName').text('N/A');
+        $('#eivcrReferenceOccupation').text('N/A');
+        $('#eicrNumber').text('N/A');
+    }
 }
 
 

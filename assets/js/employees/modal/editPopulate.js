@@ -3,6 +3,22 @@ var id = window.location.href.split('/')[window.location.href.split('/').length 
 function employeeEditPopulate(){
 
   eiContactNumberAdd()
+  eiContactNumberDelete()
+
+  // eiAddressAdd()
+
+
+  eiChildrenAdd()
+  eiChildrenDelete()
+
+  eiEmergencyAdd()  
+  eiEmergencyDelete()
+
+  eiEmploymentAdd()
+  eiEmploymentDelete()
+
+  eiReferenceAdd()
+  eiReferenceDelete()
     
   var employeedata =  crudiAjax({id: id}, "/employee/view/ajax", 'Post')
           
@@ -89,7 +105,7 @@ function employeeEditPopulate(){
   // CHARACTER REFERENCE
   //================================================================================================ 
   
-  $('.eiCharacterReference').each(function(index) {
+  $('.eieCharacterReference').each(function(index) {
     if(employeedata.CharacterReference[index]){
       $(this).find('.eicrReferenceName').val(employeedata.CharacterReference[index].crName),
       $(this).find('.eicrReferenceOccupation').val(employeedata.CharacterReference[index].crOccupation)

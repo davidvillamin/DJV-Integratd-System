@@ -79,7 +79,7 @@ function editEmployee() {
                         })
                     });
 
-                    $('.eiCharacterReference').each(function() {
+                    $('.eieCharacterReference').each(function() {
                         employeedata.data.CharacterReference.push({
                             crName: $(this).find('.eicrReferenceName').val(),
                             crOccupation: $(this).find('.eicrReferenceOccupation').val(),
@@ -108,14 +108,125 @@ function editEmployee() {
         }
     })
 }
+// ==================================================================
+// Add and Delete for Contact Number
+// ==================================================================
 
 function eiContactNumberAdd() {
     //cciContactNumberAdd = Client Create Individual Contact Number
-    $(".eiContactNumberAdd").off('click').on('click', function(){
+    $(".eieContactNumberAdd").off('click').on('click', function(){
         var newEmployeeContactGroup = $('.eieContactDetails').first().clone();
         newEmployeeContactGroup.find('input').val('');
         newEmployeeContactGroup.insertBefore($(this).closest('.eieContactDetails'));
         eiContactNumberAdd(); // re-attach listener to new elements
+        eiContactNumberDelete(); // re-attach delete listener to new elements
+    });
+}
+function eiContactNumberDelete() {
+    // cciContactNumberDelete = Client Create Indivial Contact Number Delete
+    $(".eieContactNumberDelete").off('click').on('click', function(){
+        if ($('.eieContactDetails').length > 1) {
+            $(this).closest('.eieContactDetails').remove();
+        }
+    });
+}
+
+// ==================================================================
+// Add and Delete for Children
+// ==================================================================
+
+function eiChildrenAdd() {
+    $(".eieChildrenAdd").off('click').on('click', function(){
+        var newChildrenGroup = $('.eieChildren').first().clone();
+        newChildrenGroup.find('input').val('');
+        newChildrenGroup.insertBefore($(this).closest('.eieChildren'));
+        eiChildrenAdd(); // re-attach listener to new elements
+        eiChildrenDelete(); // re-attach delete listener to new elements
+    });
+}
+function eiChildrenDelete() {
+    // cciContactNumberDelete = Client Create Indivial Contact Number Delete
+    $(".eieChildrenDelete").off('click').on('click', function(){
+        if ($('.eieChildren').length > 1) {
+            $(this).closest('.eieChildren').remove();
+        }
+    });
+}
+
+// ==================================================================
+// Add and Delete for Address
+// ==================================================================
+function eiAddressAdd() {
+    $(".eieAddressAdd").off('click').on('click', function(){
+        var newEmployeeAddressGroup = $('.eieAddressDetails').first().clone();
+        newEmployeeAddressGroup.find('input').val('');
+        newEmployeeAddressGroup.insertBefore($(this).closest('.eieAddressDetails'));
+        eiAddressAdd(); // re-attach listener to new elements
         // eiContactNumberAdd(); // re-attach delete listener to new elements
+    });
+}
+
+// ==================================================================
+// Add and Delete for Emergency Contact
+// ==================================================================
+
+function eiEmergencyAdd() {
+    $(".eiEmergencyContactAdd").off('click').on('click', function(){
+        var newEmergencyContactGroup = $('.eieEmergency').first().clone();
+        newEmergencyContactGroup.find('input').val('');
+        newEmergencyContactGroup.insertBefore($(this).closest('.eieEmergency'));
+        eiEmergencyAdd(); // re-attach listener to new elements
+        eiEmergencyDelete(); // re-attach delete listener to new elements
+    });
+}
+function eiEmergencyDelete() {
+    // cciContactNumberDelete = Client Create Indivial Contact Number Delete
+    $(".eiEmergencyContactDelete").off('click').on('click', function(){
+        if ($('.eieEmergency').length > 1) {
+            $(this).closest('.eieEmergency').remove();
+        }
+    });
+}
+
+// ==================================================================
+// Add and Delete for Employment
+// ==================================================================
+function eiEmploymentAdd() {
+    $(".eierEmploymentRecordAdd").off('click').on('click', function(){
+        var newEmploymentGroup = $('.eierEmploymentRecord').first().clone();
+        newEmploymentGroup.find('input').val('');
+        newEmploymentGroup.insertBefore($(this).closest('.eierEmploymentRecord'));
+        eiEmploymentAdd(); // re-attach listener to new elements
+        eiEmploymentDelete(); // re-attach delete listener to new elements
+    });
+}
+function eiEmploymentDelete() {
+    // cciContactNumberDelete = Client Create Indivial Contact Number Delete
+    $(".eierEmploymentRecordDelete").off('click').on('click', function(){
+        if ($('.eierEmploymentRecord').length > 1) {
+            $(this).closest('.eierEmploymentRecord').remove();
+        }
+    });
+}
+
+// ==================================================================
+// Add and Delete for Character Reference
+// ==================================================================
+function eiReferenceAdd() {
+    $(".eieCharacterReferenceAdd").off('click').on('click', function(){
+        var newReferenceGroup = $('.eieCharacterReference').first().clone();
+        newReferenceGroup.find('input').val('');
+        newReferenceGroup.insertBefore($(this).closest('.eieCharacterReference'));
+        eiReferenceAdd(); // re-attach listener to new elements
+        eiReferenceDelete(); // re-attach delete listener to new elements
+    });
+}
+
+function eiReferenceDelete() {
+    // cciContactNumberDelete = Client Create Indivial Contact Number Delete
+    $(".eieCharacterReferenceDelete").off('click').on('click', function(){
+        if ($('.eieCharacterReference').length > 1) {
+            $(this).closest('.eieCharacterReference').remove();
+        }
     });
 }

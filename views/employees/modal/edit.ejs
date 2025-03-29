@@ -29,17 +29,17 @@
                                                     <input type="text" class="form-control" id="eieJob" placeholder="Job" >
                                                 </div>
                                             </div>
-                                            <div class="input-group my-3 eiAddress">
-                                                <span class="input-group-text">Address</span>
-                                                <input id="eieAddress" type="text" class="form-control eiAddress" >
-                                                <button class="btn btn-success eiAddressAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                                <button class="btn btn-danger eiAddressDelete" type="button"><i class="bi bi-trash"></i></button>
+                                            <label style="font-size: 0.875rem;">Address</label>
+                                            <div class="input-group eieAddressDetails">
+                                                <input type="text" class="form-control eieAddress" >
+                                                <button class="btn btn-success eieAddressAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                <button class="btn btn-danger eieAddressDelete" type="button"><i class="bi bi-trash"></i></button>
                                             </div>
-                                            <div class="input-group my-3 eieContactDetails">
-                                                <span class="input-group-text">Contact Number</span>
+                                            <label style="font-size: 0.875rem;">Contact Number</label>
+                                            <div class="input-group eieContactDetails">
                                                 <input type="number" class="form-control eieContactNumber" >
-                                                <button class="btn btn-success eiContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                                <button class="btn btn-danger eiContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
+                                                <button class="btn btn-success eieContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                <button class="btn btn-danger eieContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
                                             </div>
                                             <div class="row align-items-center">
                                                 <div class="col-3">
@@ -99,11 +99,11 @@
                                                     <input type="text" class="form-control" id="eieSpouse" placeholder="Spouse" value="Mia">
                                                 </div>
                                             </div>
-                                            <div class="input-group my-3 eieChildren">
-                                                <span class="input-group-text">Children</span>
-                                                <input id="eieChildrenName" type="text" class="form-control eieChildrenName" value="Matt">
-                                                <button class="btn btn-success eiChildrenAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                                <button class="btn btn-danger eiChildrenDelete" type="button"><i class="bi bi-trash"></i></button>
+                                            <span style="font-size: 0.875rem;">Children</span>
+                                            <div class="input-group eieChildren">
+                                                <input type="text" class="form-control eieChildrenName" value="Matt">
+                                                <button class="btn btn-success eieChildrenAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                <button class="btn btn-danger eieChildrenDelete" type="button"><i class="bi bi-trash"></i></button>
                                             </div>
                                             <div class="row align-items-center">
                                                 <div class="col-8">
@@ -135,15 +135,14 @@
                                                     <input type="number" class="form-control" id="eieParentContactNumber" placeholder="Contact number" value=09260283410>
                                                 </div>
                                             </div>
-
-                                            <div class="input-group my-3 eieEmergency">
-                                                <span class="input-group-text">Emergency Contact</span>
+                                            <label style="font-size: 0.875rem;">Emergency Contact Person</label>
+                                            <div class="input-group eieEmergency">
                                                 <input  type="text" class="form-control eieeName" placeholder="Name" value="Pia">
                                                 <input  type="text" class="form-control eieeAddress" placeholder="Address" value="Bacoor">
                                                 <input  type="number" class="form-control eieeContactNumber" placeholder="Contact Number" value=09260283410>
                                                 <input  type="text" class="form-control eieeRelationship" placeholder="Relationship" value="Kabet">
-                                                <button class="btn btn-success eiContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                                <button class="btn btn-danger eiContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
+                                                <button class="btn btn-success eiEmergencyContactAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                <button class="btn btn-danger eiEmergencyContactDelete" type="button"><i class="bi bi-trash"></i></button>
                                             </div>
                                             
                                             
@@ -260,18 +259,15 @@
                                 <div id="employeeRecordCollapse" class="collapse " data-bs-parent="#profileInformationAccordion">
                                     <div class="accordion-body">
                                         <div class="tab-content justify-content-evenly" id="myTabContent">
-                                            
-                                            <div class="input-group my-3 eierEmploymentRecord">
-                                                <span class="input-group-text">Employment Record</span>
+                                            <label style="font-size: 0.875rem;">Employment Record</label>
+                                            <div class="input-group eierEmploymentRecord">
                                                 <input type="text" class="form-control eierCompanyName" placeholder="Company Name"value="Mcdo">
                                                 <input type="text" class="form-control eierPosition" placeholder="Position"value="Service crew">
                                                 <input type="date" class="form-control eierFrom" placeholder="Year Start" value="2021-01-01">
                                                 <input type="date" class="form-control eierTo" placeholder="Year End" value="2021-01-01">
-                                                <button class="btn btn-success eiEmploymentRecordAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                                <button class="btn btn-danger eiEmploymentRecordDelete" type="button"><i class="bi bi-trash"></i></button>
+                                                <button class="btn btn-success eierEmploymentRecordAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                <button class="btn btn-danger eierEmploymentRecordDelete" type="button"><i class="bi bi-trash"></i></button>
                                             </div>
-    
-    
                                         </div>
                                     </div>
                                 </div>
@@ -287,18 +283,14 @@
                                 <div id="characterReferenceCollapse" class="collapse " data-bs-parent="#profileInformationAccordion">
                                     <div class="accordion-body">
                                         <div class="tab-content" id="myTabContent">
-    
-                                            <div class="input-group my-3 eiCharacterReference">
-                                                <span class="input-group-text">Character Reference</span>
+                                            <label style="font-size: 0.875rem;">Character Reference</label>
+                                            <div class="input-group eieCharacterReference">
                                                 <input type="text" class="form-control eicrReferenceName" placeholder="Name" value="Andre">
                                                 <input type="text" class="form-control eicrReferenceOccupation" placeholder="Occupation" value="Quality Assurance">
                                                 <input type="number" class="form-control eicrReferenceContact" placeholder="Contact"value=09123456789>
-                                                <button class="btn btn-success eiCharacterReferenceAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                                <button class="btn btn-danger eiCharacterReferenceDelete" type="button"><i class="bi bi-trash"></i></button>
+                                                <button class="btn btn-success eieCharacterReferenceAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                                                <button class="btn btn-danger eieCharacterReferenceDelete" type="button"><i class="bi bi-trash"></i></button>
                                             </div>
-    
-    
-    
                                         </div>
                                     </div>
                                 </div>

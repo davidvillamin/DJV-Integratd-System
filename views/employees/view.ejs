@@ -45,267 +45,481 @@
             </div>
                 
             <!-- Profile Details -->
-            <div class="accordion col-lg-9" id="accordionExample">
+            <div class="container my-5 col-lg-9">
                 <div class="d-flex justify-content-between">
-                    <h5 class="card-title">Profile Information</h5>
-                    <button id="eieEdit" type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#eEditEmployee">
-                        <i class="bi bi-file-earmark-plus"></i> Edit
-                    </button>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist" >
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#evStaffBioTab" type="button" role="tab" aria-controls="evStaffBioTab" aria-selected="true">Employee Bio</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#evAccountSettings" type="button" role="tab" aria-controls="evAccountSettings" aria-selected="false">Account settings</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#evTransactions" type="button" role="tab" aria-controls="evTransactions" aria-selected="false">Contact</button>
+                        </li>
+                      </ul>
+                    
                 </div>
+                <!-- ================= TAB CONTENTS ========================= -->
+                <div class="tab-content mt-3" id="myTabContent">
+                    <div class="tab-pane fade show active" id="evStaffBioTab" role="tabpanel" aria-labelledby="staffBioTab">
+                        <!--================== PERSONAL DATA ACCORDION ==================================-->
+                        <div class="tab-pane fade show active" id="personalDataTab" role="tabpanel" aria-labelledby="PersonalData-tab">
+                            <ul class="nav nav-tabs" id="personalDataTab" role="tablist">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalDataAccordion" aria-controls="collapseTwo">
+                                    Personal Data
+                                </button>
+                            </ul>
+                            <div id="personalDataAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="row mb-2 ">
+                                            <div class="col-md-6 d-flex align-content-end">
+                                                <p><strong>Name: </strong><p id="eiName"></p></p>
+                                            </div>
+                                            <div class="col-md-3 d-flex align-content-end">
+                                                <p><strong>Age: </strong><p id="eiAge"></p></p>
+                                            </div>
+                                            <div class="col-md-3 d-flex align-content-end">
+                                                <p><strong>Job Title: </strong><p id="eiJob"></p></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 d-flex align-content-end">
+                                                <p><strong>Address: </strong><p id="eiAddress"></p></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 d-flex align-content-end">
+                                                <p><strong>Contact Number: </strong><p id="eiContactNumber"></p></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 d-flex align-content-end">
+                                                <p><strong>Place of Birth: </strong><p id="eiPlaceofBirth"></p></p>
+                                            </div>
+                                            <div class="col-md-6 d-flex align-content-end">
+                                                <p><strong>Date of Birth: </strong><p id="eiDateofBirth"></p></p>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex align-content-end">
+                                                <p><strong>Gender: </strong><p id="eiGender"></p></p>
+                                            </div>
+                                            <div class="col-md-4 d-flex align-content-end">
+                                                <p><strong>Height(cm): </strong><p id="eiHeight"></p></p>
+                                            </div>
+                                            <div class="col-md-4 d-flex align-content-end">
+                                                <p><strong>Weight(kg): </strong><p id="eiWeight"></p></p>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex align-content-end">
+                                                <p><strong>Religion: </strong><p id="eiReligion"></p></p>
+                                            </div>
+                                            <div class="col-md-4 d-flex align-content-end">
+                                                <p><strong>Citizenship: </strong><p id="eiCitizenship"></p></p>
+                                            </div>
+                                            <div class="col-md-4 d-flex align-content-end">
+                                                <p><strong>Civil Status: </strong><p id="eiCivilStatus"></p></p>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 d-flex align-content-end">
+                                                <p><strong>Spouse: </strong><p id="eiSpouse"></p></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 d-flex align-content-end">
+                                                <p><strong>Children: </strong><p id="eiChildrenNames"></p></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 d-flex align-content-end">
+                                                <p><strong>Mother's Name: </strong><p id="eiMotherName"></p></p>
+                                            </div>
+                                            <div class="col-md-6 d-flex align-content-end">
+                                                <p><strong>Occupation: </strong><p id="eiMotherOccupation"></p></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 d-flex align-content-end">
+                                                <p><strong>Father's Name: </strong><p id="eiFatherName"></p></p>
+                                            </div>
+                                            <div class="col-md-6 d-flex align-content-end">
+                                                <p><strong>Occupation: </strong><p id="eiFatherOccupation"></p></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 d-flex align-content-end">
+                                                <p><strong>Parent's Address: </strong><p id="eiParentAddress"></p></p>
+                                            </div>
+                                            <div class="col-md-6 d-flex align-content-end">
+                                                <p><strong>Contact Number: </strong><p id="eiParentContactNumber"></p></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-7 d-flex align-content-end">
+                                                <p><strong>Emergency Contact Name: </strong><p id="eiEmergencyContactName"></p></p>
+                                            </div>
+                                            <div class="col-md-5 d-flex align-content-end">
+                                                <p><strong>Contact Number: </strong><p id="eiEmergencyContactNumber"></p></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-7 d-flex align-content-end">
+                                                <p><strong>Address: </strong><p id="eiEmergencyContactAddress"></p></p>
+                                            </div>
+                                            <div class="col-md-5 d-flex align-content-end">
+                                                <p><strong>Relationship: </strong><p id="eiEmergencyContactRelationship"></p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--================== EDUCATIONAL BACKGROUND ACCORDION =========================-->
+                        <div class="tab-pane fade show active" id="educationalBackgroundTab" role="tabpanel" aria-labelledby="educationalBackground-Tab">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#educationalBackgroundAccordion" aria-expanded="false" aria-controls="collapseTwo">
+                                    Educational Background
+                                  </button>
+                                </h2>
+                                <div id="educationalBackgroundAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                      <div class="row mb-3">
+                                          <div class="col-md-6 d-flex">
+                                              <p><strong>Elementary: </strong><p id="eiElementaryName"></p></p>
+                                          </div>
+                                          
+                                          <div class="col-md-3 d-flex align-content-end">
+                                              <p><strong>Year Start: </strong><p id="eiElementaryYearStart"></p></p>
+                                          </div>
+                                          <div class="col-md-3 d-flex align-content-end">
+                                              <p><strong>Year End: </strong><p id="eiElementaryYearEnd"></p></p>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                          <div class="col-md-12 d-flex align-content-end">
+                                              <p><strong>Address: </strong><p id="eiElementaryAddress"></p></p>
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="row mb-3">
+                                          <div class="col-md-6 d-flex">
+                                              <p><strong>Junior Highschool: </strong><p id="eiJHSName"></p></p>
+                                          </div>
+                                          <div class="col-md-3 d-flex align-content-end">
+                                              <p><strong>Year Start: </strong><p id="eiJHSYearStart"></p></p>
+                                          </div>
+                                          <div class="col-md-3 d-flex align-content-end">
+                                              <p><strong>Year End: </strong><p id="eiJHSYearEnd"></p></p>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                          <div class="col-md-4 d-flex align-content-end">
+                                              <p><strong>Address: </strong><p id="eiJHSAddress"></p></p>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                          <div class="col-md-6 d-flex">
+                                              <p><strong>Senior Highschool: </strong><p id="eiSeniorHighSchoolName">brime</p></p>
+                                          </div>
+                                          <div class="col-md-3 d-flex align-content-end">
+                                              <p><strong>Year Start: </strong><p id="eiSeniorHighSchoolYearStart"></p></p>
+                                          </div>
+                                          <div class="col-md-3 d-flex align-content-end">
+                                              <p><strong>Year End: </strong><p id="eiSeniorHighSchoolYearEnd"></p></p>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                          <div class="col-md-12 d-flex align-content-end">
+                                              <p><strong>Address: </strong><p id="eiSeniorHighSchoolAddress"></p></p>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                          <div class="col-md-6 d-flex">
+                                              <p><strong>College: </strong><p id="eiCollegeName">brime</p></p>
+                                          </div>
+                                          
+                                          <div class="col-md-3 d-flex align-content-end">
+                                              <p><strong>Year Start: </strong><p id="eiCollegeYearStart"></p></p>
+                                          </div>
+                                          <div class="col-md-3 d-flex align-content-end">
+                                              <p><strong>Year End: </strong><p id="eiCollegeYearEnd"></p></p>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                          <div class="col-md-12 d-flex align-content-end">
+                                              <p><strong>Address: </strong><p id="eiCollegeAddress">Imus</p></p>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-12">
+                                          <div class="col-md-12 d-flex align-content-end">
+                                              <p><strong>Course: </strong><p id="eiCourseName">brime</p></p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <!--================== EMPLOYMENT RECORD ACCORDION =========================-->
+                        <div class="tab-pane fade show active" id="employmentRecordTab" role="tabpanel" aria-labelledby="employmentRecord-Tab">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#employeeRecordAccordion" aria-expanded="false" aria-controls="collapseThree">
+                                    Employment Record
+                                  </button>
+                                  </h2>
+                                  <div id="employeeRecordAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                      <div class="accordion-body">
+                                          <div class="row mb-3">
+                                              <div id="" class="col-md-5 d-flex align-content-end">
+                                                  <p><strong>Company: </strong><p id="eierCompanyName">brime</p></p>
+                                              </div>
+                                              <div class="col-md-3 d-flex align-content-end">
+                                                  <p><strong>Position: </strong><p id="eierPosition">Imus</p></p>
+                                              </div>
+                                              <div class="col-md-4 d-flex align-content-end">
+                                                  <p ><strong>Date: </strong>
+                                                  <p id="eierFrom" style="margin-left: 8px;"></p>
+                                                  <p style="margin: 0 8px 0 8px;">-</p>
+                                                  <p id="eierTo"></p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--================== CHARACTER REFERENCE ACCORDION =========================-->
+                        <div class="tab-pane fade show active" id="characterReferenceTab" role="tabpanel" aria-labelledby="characterReference-Tab">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#characterReferenceAccordion" aria-expanded="false" aria-controls="collapseThree">
+                                    Character Reference
+                                  </button>
+                                </h2>
+                                <div id="characterReferenceAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="row mb-3">
+                                            <div class="col-md-4 d-flex align-content-end">
+                                                <p><strong>Name: </strong><p id="eivcrCompanyName"></p></p>
+                                            </div>
+                                            <div class="col-md-4 d-flex align-content-end">
+                                                <p><strong>Occupation: </strong><p id="eivcrReferenceOccupation"></p></p>
+                                            </div>
+                                            <div class="col-md-4 d-flex align-content-end">
+                                                <p><strong>Contact: </strong><p id="eicrNumber"></p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button id="eieEdit" type="button" class="btn btn-success m-3 " data-bs-toggle="modal" data-bs-target="#eEditEmployee">
+                                <i class="bi bi-file-earmark-plus"></i> Edit
+                            </button>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="tab-pane fade show " id="evAccountSettings" role="tabpanel" aria-labelledby="staffBioTab">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Username</label>
+                                <input type="text" class="form-control" placeholder="Enter your username">
+                            </div>
+                            <!-- Username (Non-editable) -->
+                            <div class="mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" placeholder="Enter your email">
+                            </div>
 
-                <!--================== PERSONAL DATA ACCORDION =========================-->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#personalDataAccordion" aria-expanded="false" aria-controls="personalDataAccordion">
-                        Personal Data
-                    </button>
-                    </h2>
-                    <div id="personalDataAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="row mb-2 ">
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Name: </strong><p id="eiName"></p></p>
-                                </div>
-                                <div class="col-md-3 d-flex align-content-end">
-                                    <p><strong>Age: </strong><p id="eiAge"></p></p>
-                                </div>
-                                <div class="col-md-3 d-flex align-content-end">
-                                    <p><strong>Job Title: </strong><p id="eiJob"></p></p>
+                            <!-- Current Password -->
+                            <div class="col-12 mb-3">
+                                <label class="form-label">Current Password</label>
+                                <input type="password" class="form-control" placeholder="Enter current password">
+                            </div>
+
+                            <!-- New Password with Toggle -->
+                            <div class="mb-3">
+                                <label class="form-label">New Password</label>
+                                <div class="input-group">
+                                    <input type="password" id="newPassword" class="form-control" placeholder="Enter new password">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="bi bi-eye-slash"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3 d-flex align-content-end">
-                                    <p><strong>Address: </strong><p id="eiAddress"></p></p>
-                                </div>
+
+                            <!-- Confirm New Password -->
+                            <div class="mb-3">
+                                <label class="form-label">Confirm New Password</label>
+                                <input type="password" class="form-control" placeholder="Re-enter new password">
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 d-flex align-content-end">
-                                    <p><strong>Contact Number: </strong><p id="eiContactNumber"></p></p>
-                                </div>
+
+                            <!-- Buttons -->
+                            <div class="d-flex justify-content-between">
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                                <button type="submit" class="btn btn-success">Save Changes</button>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Place of Birth: </strong><p id="eiPlaceofBirth"></p></p>
-                                </div>
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Date of Birth: </strong><p id="eiDateofBirth"></p></p>
-                                </div>
-                                
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p><strong>Gender: </strong><p id="eiGender"></p></p>
-                                </div>
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p><strong>Height(cm): </strong><p id="eiHeight"></p></p>
-                                </div>
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p><strong>Weight(kg): </strong><p id="eiWeight"></p></p>
-                                </div>
-                                
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p><strong>Religion: </strong><p id="eiReligion"></p></p>
-                                </div>
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p><strong>Citizenship: </strong><p id="eiCitizenship"></p></p>
-                                </div>
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p><strong>Civil Status: </strong><p id="eiCivilStatus"></p></p>
-                                </div>
-                                
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 d-flex align-content-end">
-                                    <p><strong>Spouse: </strong><p id="eiSpouse"></p></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 d-flex align-content-end">
-                                    <p><strong>Children: </strong><p id="eiChildrenNames"></p></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Mother's Name: </strong><p id="eiMotherName"></p></p>
-                                </div>
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Occupation: </strong><p id="eiMotherOccupation"></p></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Father's Name: </strong><p id="eiFatherName"></p></p>
-                                </div>
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Occupation: </strong><p id="eiFatherOccupation"></p></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Parent's Address: </strong><p id="eiParentAddress"></p></p>
-                                </div>
-                                <div class="col-md-6 d-flex align-content-end">
-                                    <p><strong>Contact Number: </strong><p id="eiParentContactNumber"></p></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-7 d-flex align-content-end">
-                                    <p><strong>Emergency Contact Name: </strong><p id="eiEmergencyContactName"></p></p>
-                                </div>
-                                <div class="col-md-5 d-flex align-content-end">
-                                    <p><strong>Contact Number: </strong><p id="eiEmergencyContactNumber"></p></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-7 d-flex align-content-end">
-                                    <p><strong>Address: </strong><p id="eiEmergencyContactAddress"></p></p>
-                                </div>
-                                <div class="col-md-5 d-flex align-content-end">
-                                    <p><strong>Relationship: </strong><p id="eiEmergencyContactRelationship"></p></p>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                    </div>
-                </div>
+                    <div class="tab-pane fade show " id="evTransactions" role="tabpanel" aria-labelledby="staffBioTab">
+                        <div class="row d-flex">
+                            <div class="col-lg-6 md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h5 class="card-title">In-House <span>| This week</span></h5> <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                class="bi bi-three-dots"></i></a>
+                                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                    <li class="dropdown-header text-start">
+                                                        <h6>Filter</h6>
+                                                    </li>
                 
-                <!--================== EDUCATIONAL BACKGROUND ACCORDION =========================-->
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#educationalBackgroundAccordion" aria-expanded="false" aria-controls="collapseTwo">
-                      Educational Background
-                    </button>
-                  </h2>
-                  <div id="educationalBackgroundAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="row mb-3">
-                            <div class="col-md-5 d-flex">
-                                <p><strong>Elementary: </strong><p id="eiElementaryName"></p></p>
+                                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                                </ul>
+                                        </div>
+                                        
+                                        <div class="d-flex align-items-center" >
+                                            <div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-house-gear-fill" viewBox="0 0 16 16">
+                                                    <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708z"/>
+                                                    <path d="M11.07 9.047a1.5 1.5 0 0 0-1.742.26l-.02.021a1.5 1.5 0 0 0-.261 1.742 1.5 1.5 0 0 0 0 2.86 1.5 1.5 0 0 0-.12 1.07H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6 4.724 4.724a1.5 1.5 0 0 0-1.654 1.03"/>
+                                                    <path d="m13.158 9.608-.043-.148c-.181-.613-1.049-.613-1.23 0l-.043.148a.64.64 0 0 1-.921.382l-.136-.074c-.561-.306-1.175.308-.87.869l.075.136a.64.64 0 0 1-.382.92l-.148.045c-.613.18-.613 1.048 0 1.229l.148.043a.64.64 0 0 1 .382.921l-.074.136c-.306.561.308 1.175.869.87l.136-.075a.64.64 0 0 1 .92.382l.045.149c.18.612 1.048.612 1.229 0l.043-.15a.64.64 0 0 1 .921-.38l.136.074c.561.305 1.175-.309.87-.87l-.075-.136a.64.64 0 0 1 .382-.92l.149-.044c.612-.181.612-1.049 0-1.23l-.15-.043a.64.64 0 0 1-.38-.921l.074-.136c.305-.561-.309-1.175-.87-.87l-.136.075a.64.64 0 0 1-.92-.382ZM12.5 14a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                                  </svg>
+                                            </div>
+                                                
+                                            <div class="ps-3 ">
+                                                <h6>145</h6>
+                                                <span class="text-success small pt-1 fw-bold">12%</span> 
+                                                <span class="text-muted small pt-2 ps-1">increase</span>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div>          
+                                </div>       
                             </div>
-                            
-                            <div class="col-md-4 d-flex align-content-end">
-                                <p><strong>Year Start: </strong><p id="eiElementaryYearStart"></p></p>
-                            </div>
-                            <div class="col-md-3 d-flex align-content-end">
-                                <p><strong>Year End: </strong><p id="eiElementaryYearEnd"></p></p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-12 d-flex align-content-end">
-                                <p><strong>Address: </strong><p id="eiElementaryAddress"></p></p>
+                            <div class="col-lg-6 md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h5 class="card-title">On-site <span>| This week</span></h5> <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                                class="bi bi-three-dots"></i></a>
+                                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                    <li class="dropdown-header text-start">
+                                                        <h6>Filter</h6>
+                                                    </li>
+                
+                                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                                </ul>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-walking" viewBox="0 0 16 16">
+                                                    <path d="M9.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M6.44 3.752A.75.75 0 0 1 7 3.5h1.445c.742 0 1.32.643 1.243 1.38l-.43 4.083a1.8 1.8 0 0 1-.088.395l-.318.906.213.242a.8.8 0 0 1 .114.175l2 4.25a.75.75 0 1 1-1.357.638l-1.956-4.154-1.68-1.921A.75.75 0 0 1 6 8.96l.138-2.613-.435.489-.464 2.786a.75.75 0 1 1-1.48-.246l.5-3a.75.75 0 0 1 .18-.375l2-2.25Z"/>
+                                                    <path d="M6.25 11.745v-1.418l1.204 1.375.261.524a.8.8 0 0 1-.12.231l-2.5 3.25a.75.75 0 1 1-1.19-.914zm4.22-4.215-.494-.494.205-1.843.006-.067 1.124 1.124h1.44a.75.75 0 0 1 0 1.5H11a.75.75 0 0 1-.531-.22Z"/>
+                                                  </svg>
+                                            </div>
+                                            <div class="ps-3">
+                                                <h6>120</h6>
+                                                <span class="text-success small pt-1 fw-bold">25%</span> <span
+                                                    class="text-muted small pt-2 ps-1">increase</span>
+            
+                                            </div>
+                                        </div>
+                                    </div> 
+                                             
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="row mb-3">
-                            <div class="col-md-6 d-flex">
-                                <p><strong>Junior Highschool: </strong><p id="eiJHSName"></p></p>
-                            </div>
-                            <div class="col-md-3 d-flex align-content-end">
-                                <p><strong>Year Start: </strong><p id="eiJHSYearStart"></p></p>
-                            </div>
-                            <div class="col-md-3 d-flex align-content-end">
-                                <p><strong>Year End: </strong><p id="eiJHSYearEnd"></p></p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-4 d-flex align-content-end">
-                                <p><strong>Address: </strong><p id="eiJHSAddress"></p></p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6 d-flex">
-                                <p><strong>Senior Highschool: </strong><p id="eiSeniorHighSchoolName">brime</p></p>
-                            </div>
-                            <div class="col-md-3 d-flex align-content-end">
-                                <p><strong>Year Start: </strong><p id="eiSeniorHighSchoolYearStart"></p></p>
-                            </div>
-                            <div class="col-md-3 d-flex align-content-end">
-                                <p><strong>Year End: </strong><p id="eiSeniorHighSchoolYearEnd"></p></p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-12 d-flex align-content-end">
-                                <p><strong>Address: </strong><p id="eiSeniorHighSchoolAddress"></p></p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6 d-flex">
-                                <p><strong>College: </strong><p id="eiCollegeName">brime</p></p>
-                            </div>
-                            
-                            <div class="col-md-3 d-flex align-content-end">
-                                <p><strong>Year Start: </strong><p id="eiCollegeYearStart"></p></p>
-                            </div>
-                            <div class="col-md-3 d-flex align-content-end">
-                                <p><strong>Year End: </strong><p id="eiCollegeYearEnd"></p></p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-12 d-flex align-content-end">
-                                <p><strong>Address: </strong><p id="eiCollegeAddress">Imus</p></p>
-                            </div>
-                        </div>
-                        <div class="row mb-12">
-                            <div class="col-md-12 d-flex align-content-end">
-                                <p><strong>Course: </strong><p id="eiCourseName">brime</p></p>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h5 class="card-title">Service Requests <span>| This week</span></h5> <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                            class="bi bi-three-dots"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                                <li class="dropdown-header text-start">
+                                                    <h6>Filter</h6>
+                                                </li>
+            
+                                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                            </ul>
+                                    </div>
+
+                                    <!-- Line Chart -->
+                                    <div id="reportsChart"></div>
+
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", () => {
+                                            new ApexCharts(document.querySelector("#reportsChart"), {
+                                                series: [{
+                                                    name: 'In-House',
+                                                    data: [31, 40, 28, 51, 42, 82, 56],
+ 
+                                                }],
+                                                chart: {
+                                                    height: 350,
+                                                    type: 'area',
+                                                    toolbar: {
+                                                        show: false
+                                                    },
+                                                },
+                                                markers: {
+                                                    size: 4
+                                                },
+                                                colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                                fill: {
+                                                    type: "gradient",
+                                                    gradient: {
+                                                        shadeIntensity: 1,
+                                                        opacityFrom: 0.3,
+                                                        opacityTo: 0.4,
+                                                        stops: [0, 90, 100]
+                                                    }
+                                                },
+                                                dataLabels: {
+                                                    enabled: false
+                                                },
+                                                stroke: {
+                                                    curve: 'smooth',
+                                                    width: 2
+                                                },
+                                                xaxis: {
+                                                    type: 'datetime',
+                                                    categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                                                },
+                                                tooltip: {
+                                                    x: {
+                                                        format: 'dd/MM/yy HH:mm'
+                                                    },
+                                                }
+                                            }).render();
+                                        });
+                                    </script>
+                                    <!-- End Line Chart -->
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                  </div>
-                </div>
 
-                <!--================== EMPLOYMENT RECORD ACCORDION =========================-->
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#employeeRecordAccordion" aria-expanded="false" aria-controls="collapseThree">
-                      Employment Record
-                    </button>
-                    </h2>
-                    <div id="employeeRecordAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="row mb-3">
-                                <div id="" class="col-md-5 d-flex align-content-end">
-                                    <p><strong>Company: </strong><p id="eierCompanyName">brime</p></p>
-                                </div>
-                                <div class="col-md-3 d-flex align-content-end">
-                                    <p><strong>Position: </strong><p id="eierPosition">Imus</p></p>
-                                </div>
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p ><strong>Date: </strong>
-                                    <p id="eierFrom" style="margin-left: 8px;"></p>
-                                    <p style="margin: 0 8px 0 8px;">-</p>
-                                    <p id="eierTo"></p>
-                                </div>
-                            </div>
-                        </div>
-                  </div>
-                </div>
-
-                <!--================== CHARACTER REFERENCE ACCORDION =========================-->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#characterReferenceAccordion" aria-expanded="false" aria-controls="collapseThree">
-                        Character Reference
-                      </button>
-                    </h2>
-                    <div id="characterReferenceAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="row mb-3">
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p><strong>Name: </strong><p id="eivcrCompanyName"></p></p>
-                                </div>
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p><strong>Occupation: </strong><p id="eivcrReferenceOccupation"></p></p>
-                                </div>
-                                <div class="col-md-4 d-flex align-content-end">
-                                    <p><strong>Contact: </strong><p id="eicrNumber"></p></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
