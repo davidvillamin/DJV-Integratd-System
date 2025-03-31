@@ -5,18 +5,26 @@ function createEmployee() {
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
                     var data = {
-                        Name:$('#eicName').val(),
+                        Name:$('#eicName').val(),  
                         Address:$('#eicAddress').val(),
                         JobTitle:$('#eicJob').val(),
                         ContactDetails:  []
                     }
 
                     // Initialize ContactDetails as an empty array
-                    $('.eicContactNumber').each(function(){
-                        data.ContactDetails.push({
-                            ContactNumber: Number($(this).val()) // Corrected $(this).find().val() to $(this).val()
-                        });
-                    })
+                    $('.eieContactDetails').each(function() {
+                        let contactNumber = $(this).find('.eieContactNumber').val();
+                        contactNumber = cleanContactNumber(contactNumber); // Clean the input
+    
+                        if (contactNumber !== null) {
+                            employeedata.data.ContactDetails.push({
+                                ContactNumber: contactNumber
+                            });
+                        } else {
+                            reject("Invalid contact number format.  Use only numbers, +, (, and ).");
+                            return;
+                        }
+                    });
                     
                     console.log(data);
                     
@@ -41,13 +49,3 @@ function createEmployee() {
     })
 }
 // ei = Employee Information
-function eiContactNumberAdd() {
-    //cciContactNumberAdd = Client Create Individual Contact Number
-    $(".eiContactNumberAdd").off('click').on('click', function(){
-        var newEmployeeContactGroup = $('.eieContactDetails').first().clone();
-        newEmployeeContactGroup.find('input').val('');
-        newEmployeeContactGroup.insertBefore($(this).closest('.eieContactDetails'));
-        listenerContactNumberAdd(); // re-attach listener to new elements
-        listenerContactNumberDelete(); // re-attach delete listener to new elements
-    });
-}

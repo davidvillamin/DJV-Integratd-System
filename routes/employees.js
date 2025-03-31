@@ -47,6 +47,15 @@ router.post("/employees/populate/table", async function(req, res) {
     res.send(employeeID);
 });
 
+router.post("/employees/attendance", async function(req, res) {
+    try {
+        const attendanceData = await getAttendanceData(req.body.id); // Pass the employee ID
+        res.send(attendanceData);
+    } catch (error) {
+        console.error("Error fetching attendance data:", error);
+        res.status(500).send("Error fetching attendance data"); // Send an error response
+    }
+});
 module.exports = router;
 
 // ============================================================
@@ -72,6 +81,56 @@ async function populateIndexTable() {
 
     return empList;
     
+}
+
+async function getAttendanceData(employeeId) {
+    const attendanceList = [];
+    // const currentTime = new Date().toLocaleString(); // Don't need this here, get it from DB
+
+    //  Replace this with your database query to fetch attendance data
+    //  based on the employeeId.
+    // Example (using a hypothetical database library):
+    // const attendanceRecords = await db.query(
+    //   "SELECT * FROM attendance WHERE employee_id = ?",
+    //   [employeeId]
+    // );
+
+    // Placeholder data:
+    const attendanceRecords = [
+        {
+            Date: '2024-07-24',
+            MorningIn: '08:00',
+            MorningOut: '12:00',
+            AfternoonIn: '13:00',
+            AfternoonOut: '17:00',
+            TimeOut: '17:00',
+            Status: "Present"
+        },
+        {
+            Date: '2024-07-25',
+            MorningIn: '09:00',
+            MorningOut: '12:30',
+            AfternoonIn: '13:30',
+            AfternoonOut: '17:30',
+            TimeOut: '17:30',
+            Status: 'Present'
+        }
+    ];
+
+
+    attendanceRecords.forEach((attendance) => {
+        attendanceList.push([
+            attendance.Date,
+            attendance.MorningIn,
+            attendance.MorningOut,
+            attendance.AfternoonIn,
+            attendance.AfternoonOut,
+            attendance.TimeOut,
+            attendance.Status
+        ]);
+    });
+
+    return attendanceList;
 }
 
 

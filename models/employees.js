@@ -15,7 +15,7 @@ var employeesSchema = new mongoose.Schema({
     Age:            Number,
 
     ContactDetails: [{
-        ContactNumber: Number
+        ContactNumber: String
     }],
 
     Height:         Number,

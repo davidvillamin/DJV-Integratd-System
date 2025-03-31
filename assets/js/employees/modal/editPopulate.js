@@ -47,11 +47,13 @@ function employeeEditPopulate(){
   $('#eieParentAddress').val(employeedata.ParentsAddress)
   $('#eieParentContactNumber').val(employeedata.ParentsContactNumber)
 
-  $('.eieContactDetails').each(function() {
-    
-      $(this).find('.eieContactNumber').val(employeedata.ContactDetails[0].ContactNumber);
-    
-  });
+  if (employeedata.ContactDetails && employeedata.ContactDetails.length > 0) {
+    let contactNumbers = employeedata.ContactDetails.map(contact => contact.ContactNumber).join(', ');
+    $('#eiContactNumber').text(contactNumbers);
+  } else {
+    $('#eiContactNumber').text('N/A');
+  }
+
   $('.eieChildren').each(function(index) {
     if(employeedata.Children[index]){
       $(this).find('.eieChildrenName').val(employeedata.Children[index].ChildrenName);

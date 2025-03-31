@@ -52,7 +52,7 @@ function editEmployee() {
                     }
                     $('.eieContactDetails').each(function() {
                         employeedata.data.ContactDetails.push({
-                            ContactNumber: Number($(this).find('.eieContactNumber').val())
+                            ContactNumber: $(this).find('.eieContactNumber').val()
                         });
                     });
                     $('.eieChildren').each(function() {
@@ -88,6 +88,9 @@ function editEmployee() {
                     });
 
                     employeedata.id = id;
+
+                    console.log(employeedata.data.ContactDetails);
+                    
                     
                     crudiAjax(employeedata, "/employees/employeesinformation/edit", "PUT")
                     // $('#eicEdit')[0].reset();

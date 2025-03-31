@@ -16,17 +16,37 @@ $(function () {
 
     var currentEmployee = crudiAjax({id: id}, "/employee/view/ajax", 'Post')
     employeeData(currentEmployee);
-
     
-
+    
+    
     editEmployee()
-
     
-
+    var employeeAttendance = crudiAjax({id: id}, "/employees/attendance", 'Post')
+    populateAttendanceTable(employeeAttendance);
+    
+    
+    
+    
     
 
     
 })
+
+async function populateAttendanceTable(attendanceData) {
+    const attendanceList = await attendanceData;
+    $('#attendanceTable').DataTable({
+        data: attendanceList,
+        columns: [
+            { title: "Date" },
+            { title: "Morning In" },
+            { title: "Morning Out" },
+            { title: "Afternoon In" },
+            { title: "Afternoon Out" },
+            { title: "Time Out" },
+            { title: "Status" }
+        ]
+    });
+}
 
 function employeeData(employee) {
 
@@ -35,11 +55,13 @@ function employeeData(employee) {
     // Personal Data
     //================================================================================================ 
     $('.evName').text(employee.Name)
+    $('.eiProfileJobTitle').text(employee.JobTitle)
+    $('.evProfileName').text(employee.Name)
     $('#eiName').text(employee.Name)
     $('#eiJob').text(employee.JobTitle)
     $('#eiAge').text(employee.Age)
     $('#eiAddress').text(employee.Address)
-    $('#eiContactNumber').text(employee.ContactDetails[0].ContactNumber)
+    
     $('#eiPlaceofBirth').text(employee.PlaceofBirth)
     $('#eiDateofBirth').text(moment(employee.DateofBirth).format("MMM-DD-YYYY")); // Set formatted date
     $('#eiGender').text(employee.isMale)
@@ -56,6 +78,12 @@ function employeeData(employee) {
     $('#eiFatherOccupation').text(employee.FathersOccupation)
     $('#eiParentAddress').text(employee.ParentsAddress)
     $('#eiParentContactNumber').text(employee.ParentsContactNumber)
+
+    if (employee.ContactDetails && employee.ContactDetails.length > 0) {
+        $('#eiContactNumber').text(employee.ContactDetails[0].ContactNumber);
+    } else {
+        $('#eiContactNumber').text('N/A');
+    }
 
 
     if (employee.EmergencyDetail && employee.EmergencyDetail.length > 0) {
