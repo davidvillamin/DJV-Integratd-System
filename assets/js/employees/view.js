@@ -21,21 +21,20 @@ $(function () {
     
     editEmployee()
     
-    var employeeAttendance = crudiAjax({id: id}, "/employees/attendance", 'Post')
+    var employeeAttendance = crudiAjax({id: id}, "/employees/attendance", 'Post');
     populateAttendanceTable(employeeAttendance);
     
     
-    
+    timeInEmployee()
     
     
 
     
 })
 
-async function populateAttendanceTable(attendanceData) {
-    const attendanceList = await attendanceData;
+function populateAttendanceTable(attendanceData) {
     $('#attendanceTable').DataTable({
-        data: attendanceList,
+        data: attendanceData,
         columns: [
             { title: "Date" },
             { title: "Morning In" },
@@ -43,7 +42,14 @@ async function populateAttendanceTable(attendanceData) {
             { title: "Afternoon In" },
             { title: "Afternoon Out" },
             { title: "Time Out" },
-            { title: "Status" }
+            { title: "Status" },
+            {
+                title: "Current Time",
+                data: null,
+                render: function() {
+                    return new Date().toLocaleString(); // Add current time here
+                }
+            }// Add this column
         ]
     });
 }

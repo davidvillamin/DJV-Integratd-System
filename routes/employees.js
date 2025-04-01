@@ -47,6 +47,23 @@ router.post("/employees/populate/table", async function(req, res) {
     res.send(employeeID);
 });
 
+async function getAttendanceData(employeeId) {
+    // Your database logic to fetch attendance data
+    // Example:
+    // const attendance = await db.query('SELECT * FROM attendance WHERE employee_id = ?', [employeeId]);
+    // return attendance;
+    return []; //replace with your database logic.
+}
+
+async function insertTimeInData(employeeId, timeIn) {
+    // Your database logic to insert the time in data
+    // Example:
+    // await db.query('INSERT INTO attendance (employee_id, morning_in) VALUES (?, ?)', [employeeId, timeIn]);
+    // replace with your database logic.
+    return {success: true};
+
+}
+
 router.post("/employees/attendance", async function(req, res) {
     try {
         const attendanceData = await getAttendanceData(req.body.id); // Pass the employee ID
@@ -54,6 +71,16 @@ router.post("/employees/attendance", async function(req, res) {
     } catch (error) {
         console.error("Error fetching attendance data:", error);
         res.status(500).send("Error fetching attendance data"); // Send an error response
+    }
+});
+
+router.post("/employees/timein", async function(req, res) {
+    try {
+        await insertTimeInData(req.body.id, req.body.timeIn);
+        res.send({success: true});
+    } catch (error) {
+        console.error("Error saving time in:", error);
+        res.status(500).send({success: false, error: "Error saving time in"});
     }
 });
 module.exports = router;
