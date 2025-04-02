@@ -50,12 +50,13 @@ function editEmployee() {
                         Employment:                 [],   
                         
                     }
-                    $('.eieContactDetails').each(function() {
+                    $('.eieContactDetails').each(function(index) {
                         employeedata.data.ContactDetails.push({
-                            ContactNumber: $(this).find('.eieContactNumber').val()
+                            ContactNumber: $(this).find('.eieContactNumber').val(),
+                            
                         });
                     });
-                    $('.eieChildren').each(function() {
+                    $('.eieChildren').each(function(index) {
                         employeedata.data.Children.push({
                             ChildrenName: $(this).find('.eieChildrenName').val()
                         });
@@ -90,6 +91,10 @@ function editEmployee() {
                     employeedata.id = id;
 
                     console.log(employeedata.data.ContactDetails);
+                    console.log(employeedata.data.Children);
+                    
+
+
                     
                     
                     crudiAjax(employeedata, "/employees/employeesinformation/edit", "PUT")
@@ -116,23 +121,26 @@ function editEmployee() {
 // ==================================================================
 
 function eiContactNumberAdd() {
-    //cciContactNumberAdd = Client Create Individual Contact Number
-    $(".eieContactNumberAdd").off('click').on('click', function(){
+    // cciContactNumberAdd = Client Create Individual Contact Number
+    $(".eieContactNumberAdd").off('click').on('click', function() {
         var newEmployeeContactGroup = $('.eieContactDetails').first().clone();
         newEmployeeContactGroup.find('input').val('');
-        newEmployeeContactGroup.insertBefore($(this).closest('.eieContactDetails'));
+        newEmployeeContactGroup.insertAfter($(this).closest('.eieContactDetails'));
+        newEmployeeContactGroup.find('.eieContactNumber').val(''); // Clear the input field
         eiContactNumberAdd(); // re-attach listener to new elements
         eiContactNumberDelete(); // re-attach delete listener to new elements
     });
 }
 function eiContactNumberDelete() {
-    // cciContactNumberDelete = Client Create Indivial Contact Number Delete
-    $(".eieContactNumberDelete").off('click').on('click', function(){
+    // cciContactNumberDelete = Client Create Individual Contact Number Delete
+    $(".eieContactNumberDelete").off('click').on('click', function() {
         if ($('.eieContactDetails').length > 1) {
             $(this).closest('.eieContactDetails').remove();
         }
     });
 }
+
+
 
 // ==================================================================
 // Add and Delete for Children
@@ -142,7 +150,8 @@ function eiChildrenAdd() {
     $(".eieChildrenAdd").off('click').on('click', function(){
         var newChildrenGroup = $('.eieChildren').first().clone();
         newChildrenGroup.find('input').val('');
-        newChildrenGroup.insertBefore($(this).closest('.eieChildren'));
+        newChildrenGroup.insertAfter($(this).closest('.eieChildren'));
+        newChildrenGroup.find('.eieChildren').val(''); // Clear the input field
         eiChildrenAdd(); // re-attach listener to new elements
         eiChildrenDelete(); // re-attach delete listener to new elements
     });
@@ -163,7 +172,8 @@ function eiAddressAdd() {
     $(".eieAddressAdd").off('click').on('click', function(){
         var newEmployeeAddressGroup = $('.eieAddressDetails').first().clone();
         newEmployeeAddressGroup.find('input').val('');
-        newEmployeeAddressGroup.insertBefore($(this).closest('.eieAddressDetails'));
+        newEmployeeAddressGroup.insertAfter($(this).closest('.eieAddressDetails'));
+        newEmployeeAddressGroup.find('.eieAddress').val(''); // Clear the input field
         eiAddressAdd(); // re-attach listener to new elements
         // eiContactNumberAdd(); // re-attach delete listener to new elements
     });
@@ -177,7 +187,8 @@ function eiEmergencyAdd() {
     $(".eiEmergencyContactAdd").off('click').on('click', function(){
         var newEmergencyContactGroup = $('.eieEmergency').first().clone();
         newEmergencyContactGroup.find('input').val('');
-        newEmergencyContactGroup.insertBefore($(this).closest('.eieEmergency'));
+        newEmergencyContactGroup.insertAfter($(this).closest('.eieEmergency'));
+        newEmergencyContactGroup.find('.eieeName').val(''); // Clear the input field
         eiEmergencyAdd(); // re-attach listener to new elements
         eiEmergencyDelete(); // re-attach delete listener to new elements
     });
@@ -198,7 +209,8 @@ function eiEmploymentAdd() {
     $(".eierEmploymentRecordAdd").off('click').on('click', function(){
         var newEmploymentGroup = $('.eierEmploymentRecord').first().clone();
         newEmploymentGroup.find('input').val('');
-        newEmploymentGroup.insertBefore($(this).closest('.eierEmploymentRecord'));
+        newEmploymentGroup.insertAfter($(this).closest('.eierEmploymentRecord'));
+        newEmploymentGroup.find('.eierCompanyName').val(''); // Clear the input field
         eiEmploymentAdd(); // re-attach listener to new elements
         eiEmploymentDelete(); // re-attach delete listener to new elements
     });
@@ -219,7 +231,8 @@ function eiReferenceAdd() {
     $(".eieCharacterReferenceAdd").off('click').on('click', function(){
         var newReferenceGroup = $('.eieCharacterReference').first().clone();
         newReferenceGroup.find('input').val('');
-        newReferenceGroup.insertBefore($(this).closest('.eieCharacterReference'));
+        newReferenceGroup.insertAfter($(this).closest('.eieCharacterReference'));
+        newReferenceGroup.find('.eicrReferenceName').val(''); // Clear the input field
         eiReferenceAdd(); // re-attach listener to new elements
         eiReferenceDelete(); // re-attach delete listener to new elements
     });

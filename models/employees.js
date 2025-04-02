@@ -13,6 +13,7 @@ var employeesSchema = new mongoose.Schema({
     Citizenship:    String,   
     CivilStatus:    String,
     Age:            Number,
+    
 
     ContactDetails: [{
         ContactNumber: String

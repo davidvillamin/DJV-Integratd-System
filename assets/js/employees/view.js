@@ -17,42 +17,12 @@ $(function () {
     var currentEmployee = crudiAjax({id: id}, "/employee/view/ajax", 'Post')
     employeeData(currentEmployee);
     
-    
-    
     editEmployee()
-    
-    var employeeAttendance = crudiAjax({id: id}, "/employees/attendance", 'Post');
-    populateAttendanceTable(employeeAttendance);
-    
-    
-    timeInEmployee()
-    
-    
 
+    
     
 })
 
-function populateAttendanceTable(attendanceData) {
-    $('#attendanceTable').DataTable({
-        data: attendanceData,
-        columns: [
-            { title: "Date" },
-            { title: "Morning In" },
-            { title: "Morning Out" },
-            { title: "Afternoon In" },
-            { title: "Afternoon Out" },
-            { title: "Time Out" },
-            { title: "Status" },
-            {
-                title: "Current Time",
-                data: null,
-                render: function() {
-                    return new Date().toLocaleString(); // Add current time here
-                }
-            }// Add this column
-        ]
-    });
-}
 
 function employeeData(employee) {
 
@@ -86,29 +56,43 @@ function employeeData(employee) {
     $('#eiParentContactNumber').text(employee.ParentsContactNumber)
 
     if (employee.ContactDetails && employee.ContactDetails.length > 0) {
-        $('#eiContactNumber').text(employee.ContactDetails[0].ContactNumber);
+        $('#eiContactNumber').text(employee.ContactDetails.map(contact => contact.ContactNumber).join(', '));
     } else {
         $('#eiContactNumber').text('N/A');
     }
-
+    
+    if (employee.Children && employee.Children.length > 0) {
+        $('#eiChildrenNames').text(employee.Children.map(contact => contact.ChildrenName).join(', '));
+    } else {
+        $('#eiChildrenNames').text('N/A');
+    }
 
     if (employee.EmergencyDetail && employee.EmergencyDetail.length > 0) {
-        $('#eiEmergencyContactName').text(employee.EmergencyDetail[0].eeName);
-        $('#eiEmergencyContactAddress').text(employee.EmergencyDetail[0].eeAddress);
-        $('#eiEmergencyContactNumber').text(employee.EmergencyDetail[0].eeContactNumber);
-        $('#eiEmergencyContactRelationship').text(employee.EmergencyDetail[0].eeRelationship);
+        // Clear existing emergency details except the first one (if any)
+        $('.eiEmergencyDetail:not(:first)').remove();
+
+        // Loop through the EmergencyDetail and populate or add new fields
+        employee.EmergencyDetail.forEach(function(emergency, index) {
+            if (index > 0) {
+                var newEmergencyGroup = $('.eiEmergencyDetail').first().clone();
+                newEmergencyGroup.find('.eiEmergencyContactName').text(emergency.eeName);
+                newEmergencyGroup.find('.eiEmergencyContactAddress').text(emergency.eeAddress);
+                newEmergencyGroup.find('.eiEmergencyContactNumber').text(emergency.eeContactNumber);
+                newEmergencyGroup.find('.eiEmergencyContactRelationship').text(emergency.eeRelationship);
+                newEmergencyGroup.insertAfter($('.eiEmergencyDetail').last());
+            } else {
+                $('.eiEmergencyDetail').eq(index).find('.eiEmergencyContactName').text(emergency.eeName);
+                $('.eiEmergencyDetail').eq(index).find('.eiEmergencyContactAddress').text(emergency.eeAddress);
+                $('.eiEmergencyDetail').eq(index).find('.eiEmergencyContactNumber').text(emergency.eeContactNumber);
+                $('.eiEmergencyDetail').eq(index).find('.eiEmergencyContactRelationship').text(emergency.eeRelationship);
+            }
+        });
     } else {
-        $('#eiEmergencyContactName').text('N/A');
-        $('#eiEmergencyContactAddress').text('N/A');
-        $('#eiEmergencyContactNumber').text('N/A');
-        $('#eiEmergencyContactRelationship').text('N/A');
+        $('.eiEmergencyDetail').text('N/A');
     }
 
-    if (employee.Children && employee.Children.length > 0) {
-        $('#eiChildrenNames').text(employee.Children[0].ChildrenName);
-    } else {
-        $('#eiChildrenNames').text('N/A'); // Default value if no children data is available
-    }
+
+    
     
     //================================================================================================
     // Educational Background
@@ -141,16 +125,29 @@ function employeeData(employee) {
     
     
     if (employee.Employment && employee.Employment.length > 0) {
-        $('#eierCompanyName').text(employee.Employment[0].erCompanyName);
-        $('#eierPosition').text(employee.Employment[0].erPosition);
-        $('#eierFrom').text(moment(employee.Employment[0].erFrom).format("MMM-DD-YYYY"));
-        $('#eierTo').text(moment(employee.Employment[0].erTo).format("MMM-DD-YYYY"));
+        // Clear existing employment details except the first one (if any)
+        $('.eiEmploymentRecord:not(:first)').remove();
+
+        // Loop through the Employment and populate or add new fields
+        employee.Employment.forEach(function(employment, index) {
+            if (index > 0) {
+                var newEmploymentGroup = $('.eiEmploymentRecord').first().clone();
+                newEmploymentGroup.find('.eivCompanyName').text(employment.erCompanyName);
+                newEmploymentGroup.find('.eivPosition').text(employment.erPosition);
+                newEmploymentGroup.find('.eivFrom').text(moment(employment.erFrom).format("MMM-DD-YYYY"));
+                newEmploymentGroup.find('.eivTo').text(moment(employment.erTo).format("MMM-DD-YYYY"));
+                newEmploymentGroup.insertAfter($('.eiEmploymentRecord').last());
+            } else {
+                $('.eiEmploymentRecord').eq(index).find('.eivCompanyName').text(employment.erCompanyName);
+                $('.eiEmploymentRecord').eq(index).find('.eivPosition').text(employment.erPosition);
+                $('.eiEmploymentRecord').eq(index).find('.eivFrom').text(moment(employment.erFrom).format("MMM-DD-YYYY"));
+                $('.eiEmploymentRecord').eq(index).find('.eivTo').text(moment(employment.erTo).format("MMM-DD-YYYY"));
+            }
+        });
     } else {
-        $('#eierCompanyName').text('N/A');
-        $('#eierPosition').text('N/A');
-        $('#eierFrom').text('N/A');
-        $('#eierTo').text('N/A');
+        $('.eiEmploymentRecord').text('N/A');
     }
+
     
     
     //================================================================================================
@@ -158,15 +155,25 @@ function employeeData(employee) {
     //================================================================================================ 
 
     if (employee.CharacterReference && employee.CharacterReference.length > 0) {
-        $('#eivcrCompanyName').text(employee.CharacterReference[0].crName);
-        $('#eivcrReferenceOccupation').text(employee.CharacterReference[0].crOccupation);
-        $('#eicrNumber').text(employee.CharacterReference[0].crContactNumber);
+        // Clear existing character references except the first one (if any)
+        $('.eiCharacterReference:not(:first)').remove();
+
+        // Loop through the CharacterReference and populate or add new fields
+        employee.CharacterReference.forEach(function(reference, index) {
+            if (index > 0) {
+                var newReferenceGroup = $('.eiCharacterReference').first().clone();
+                newReferenceGroup.find('.eivcrCompanyName').text(reference.crName);
+                newReferenceGroup.find('.eivcrReferenceOccupation').text(reference.crOccupation);
+                newReferenceGroup.find('.eicrNumber').text(reference.crContactNumber);
+                newReferenceGroup.insertAfter($('.eiCharacterReference').last());
+            } else {
+                $('.eiCharacterReference').eq(index).find('.eivcrCompanyName').text(reference.crName);
+                $('.eiCharacterReference').eq(index).find('.eivcrReferenceOccupation').text(reference.crOccupation);
+                $('.eiCharacterReference').eq(index).find('.eicrNumber').text(reference.crContactNumber);
+            }
+        });
     } else {
-        $('#eivcrCompanyName').text('N/A');
-        $('#eivcrReferenceOccupation').text('N/A');
-        $('#eicrNumber').text('N/A');
+        $('.eiCharacterReference').text('N/A');
     }
+
 }
-
-
-

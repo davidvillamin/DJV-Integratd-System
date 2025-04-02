@@ -88,7 +88,6 @@
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
-                                        
                                     </table>
                                 </div>
                             </div>
@@ -194,20 +193,22 @@
                                                 <p><strong>Contact Number: </strong><p id="eiParentContactNumber"></p></p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-7 d-flex align-content-end">
-                                                <p><strong>Emergency Contact Name: </strong><p id="eiEmergencyContactName"></p></p>
+                                        <div class="eiEmergencyDetail">
+                                            <div class="row">
+                                                <div class="col-md-7 d-flex align-content-end">
+                                                    <p><strong>Emergency Contact Name: </strong><p class="eiEmergencyContactName"></p></p>
+                                                </div>
+                                                <div class="col-md-5 d-flex align-content-end">
+                                                    <p><strong>Contact Number: </strong><p class="eiEmergencyContactNumber"></p></p>
+                                                </div>
                                             </div>
-                                            <div class="col-md-5 d-flex align-content-end">
-                                                <p><strong>Contact Number: </strong><p id="eiEmergencyContactNumber"></p></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-7 d-flex align-content-end">
-                                                <p><strong>Address: </strong><p id="eiEmergencyContactAddress"></p></p>
-                                            </div>
-                                            <div class="col-md-5 d-flex align-content-end">
-                                                <p><strong>Relationship: </strong><p id="eiEmergencyContactRelationship"></p></p>
+                                            <div class="row">
+                                                <div class="col-md-7 d-flex align-content-end">
+                                                    <p><strong>Address: </strong><p class="eiEmergencyContactAddress"></p></p>
+                                                </div>
+                                                <div class="col-md-5 d-flex align-content-end">
+                                                    <p><strong>Relationship: </strong><p class="eiEmergencyContactRelationship"></p></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -304,27 +305,29 @@
                         <div class="tab-pane fade show" id="employmentRecordTab" role="tabpanel" aria-labelledby="employmentRecord-Tab">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#employeeRecordAccordion" aria-expanded="false" aria-controls="collapseThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#employeeRecordAccordion" aria-expanded="false" aria-controls="collapseThree">
                                     Employment Record
-                                  </button>
-                                  </h2>
-                                  <div id="employeeRecordAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                      <div class="accordion-body">
-                                          <div class="row mb-3">
-                                              <div id="" class="col-md-5 d-flex align-content-end">
-                                                  <p><strong>Company: </strong><p id="eierCompanyName">brime</p></p>
-                                              </div>
-                                              <div class="col-md-3 d-flex align-content-end">
-                                                  <p><strong>Position: </strong><p id="eierPosition">Imus</p></p>
-                                              </div>
-                                              <div class="col-md-4 d-flex align-content-end">
-                                                  <p ><strong>Date: </strong>
-                                                  <p id="eierFrom" style="margin-left: 8px;"></p>
-                                                  <p style="margin: 0 8px 0 8px;">-</p>
-                                                  <p id="eierTo"></p>
-                                              </div>
-                                          </div>
-                                      </div>
+                                </button>
+                                </h2>
+                                <div id="employeeRecordAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="eiEmploymentRecord">
+                                            <div class="row mb-3 ">
+                                                <div class="col-md-5 d-flex align-content-end">
+                                                    <p><strong>Company: </strong><p class="eivCompanyName"></p></p>
+                                                </div>
+                                                <div class="col-md-3 d-flex align-content-end">
+                                                    <p><strong>Position: </strong><p class="eivPosition"></p></p>
+                                                </div>
+                                                <div class="col-md-4 d-flex align-content-end">
+                                                    <p ><strong>Date: </strong>
+                                                    <p class="eivFrom" style="margin-left: 8px;"></p>
+                                                    <p style="margin: 0 8px 0 8px;">-</p>
+                                                    <p class="eivTo"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -338,15 +341,17 @@
                                 </h2>
                                 <div id="characterReferenceAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <div class="row mb-3">
-                                            <div class="col-md-4 d-flex align-content-end">
-                                                <p><strong>Name: </strong><p id="eivcrCompanyName"></p></p>
-                                            </div>
-                                            <div class="col-md-4 d-flex align-content-end">
-                                                <p><strong>Occupation: </strong><p id="eivcrReferenceOccupation"></p></p>
-                                            </div>
-                                            <div class="col-md-4 d-flex align-content-end">
-                                                <p><strong>Contact: </strong><p id="eicrNumber"></p></p>
+                                        <div class="eiCharacterReference">
+                                            <div class="row mb-3">
+                                                <div class="col-md-4 d-flex align-content-end">
+                                                    <p><strong>Name: </strong><p class="eivcrCompanyName"></p></p>
+                                                </div>
+                                                <div class="col-md-4 d-flex align-content-end">
+                                                    <p><strong>Occupation: </strong><p class="eivcrReferenceOccupation"></p></p>
+                                                </div>
+                                                <div class="col-md-4 d-flex align-content-end">
+                                                    <p><strong>Contact: </strong><p class="eicrNumber"></p></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
