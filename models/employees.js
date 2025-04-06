@@ -10,7 +10,6 @@ var employeesSchema = new mongoose.Schema({
     Time: [{
         TimeIn:      Date,
         TimeOut:     Date,
-        Status:      String
     }],
 
     Address:        [{

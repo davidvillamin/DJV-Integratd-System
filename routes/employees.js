@@ -56,7 +56,24 @@ router.post("/employees/populate/table", async function (req, res) {
 // Employee Time In and Out
 // ============================================================
 
+router.put("/employees/employeesinformation/time", async function (req, res) {
+    try {
+        await Employees.findByIdAndUpdate(
+            req.body.data.id,
+            { $push: { Time: req.body.data.Time[0] } },
+            { new: true }
+        );
+        res.send("success");
+    } catch (error) {
+        console.error("Error updating employee time:", error);
+        res.status(500).send("Error updating employee time");
+    }
+});
 
+router.post("/employees/time/table", async function (req, res) {
+    var employeeTime = await populateTimeTable()
+    res.send(employeeTime);
+});
 
 
 
@@ -86,7 +103,22 @@ async function populateIndexTable() {
     });
     return empList;
 }
+async function populateTimeTable() {
+    const timeList = [];
+    const timeTableList = await Employees.find()
+        .select('Time _id')
+        .lean();
 
-
-
-
+    timeTableList.forEach((employee) => {
+        if (employee.Time && employee.Time.length > 0) {
+            employee.Time.forEach((timeEntry) => {
+                timeList.push({
+                    date: timeEntry.TimeIn ? new Date(timeEntry.TimeIn).toLocaleDateString() : 'N/A',
+                    timeIn: timeEntry.TimeIn ? new Date(timeEntry.TimeIn).toLocaleTimeString() : 'N/A',
+                    timeOut: timeEntry.TimeOut ? new Date(timeEntry.TimeOut).toLocaleTimeString() : 'N/A',
+                });
+            });
+        }
+    });
+    return timeList;
+}
