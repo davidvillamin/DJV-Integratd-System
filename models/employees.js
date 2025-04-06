@@ -6,13 +6,24 @@ var employeesSchema = new mongoose.Schema({
     // ===============================================
     Name:           String,
     Email:          String,
-    Address:        String,
+
+    Time: [{
+        TimeIn:      Date,
+        TimeOut:     Date,
+        Status:      String
+    }],
+
+    Address:        [{
+        AddressLine: String
+    }],
+    
     JobTitle:       String,
     PlaceofBirth:   String,
     Religion:       String,
     Citizenship:    String,   
     CivilStatus:    String,
     Age:            Number,
+    
     
 
     ContactDetails: [{

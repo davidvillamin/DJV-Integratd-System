@@ -18,11 +18,23 @@ $(function () {
     employeeData(currentEmployee);
     
     editEmployee()
+    
+    var dTable = $('#attendanceTable').DataTable({
+        data: crudiAjax({},"/employees/populate/table", "POST"),
+        paging: false,
+        searching: false,
+    })
+
 
     
+    EmployeeTimeTable()
     
+    
+
 })
 
+
+        
 
 function employeeData(employee) {
 
@@ -36,7 +48,6 @@ function employeeData(employee) {
     $('#eiName').text(employee.Name)
     $('#eiJob').text(employee.JobTitle)
     $('#eiAge').text(employee.Age)
-    $('#eiAddress').text(employee.Address)
     
     $('#eiPlaceofBirth').text(employee.PlaceofBirth)
     $('#eiDateofBirth').text(moment(employee.DateofBirth).format("MMM-DD-YYYY")); // Set formatted date
@@ -55,6 +66,11 @@ function employeeData(employee) {
     $('#eiParentAddress').text(employee.ParentsAddress)
     $('#eiParentContactNumber').text(employee.ParentsContactNumber)
 
+    if (employee.Address && employee.Address.length > 0) {
+        $('#eiAddress').text(employee.Address.map(contact => contact.AddressLine).join(', '));
+    } else {
+        $('#eiAddress').text('N/A');
+    }
     if (employee.ContactDetails && employee.ContactDetails.length > 0) {
         $('#eiContactNumber').text(employee.ContactDetails.map(contact => contact.ContactNumber).join(', '));
     } else {

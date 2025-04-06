@@ -8,7 +8,6 @@ function editEmployee() {
                     var employeedata = {}
                     employeedata.data = {
                         Name:                       $('#eieName').val(),
-                        Address:                    $('#eieAddress').val(),
                         JobTitle:                   $('#eieJob').val(),
                         PlaceofBirth:               $('#eiePlaceofBirth').val(),
                         Religion:                   $('#eieReligion').val(),
@@ -43,6 +42,7 @@ function editEmployee() {
                         CollegeStart:           new Date($('#eieCollegeStart').val()).toDateString(),
                         CollegeYearEnd:             new Date($('#eieCollegeEnd').val()).toDateString(),
                         CollegeCourse:              $('#eieCourseName').val(),
+                        Address:                    [],
                         ContactDetails:             [],
                         Children:                   [],
                         EmergencyDetail:            [],
@@ -50,6 +50,12 @@ function editEmployee() {
                         Employment:                 [],   
                         
                     }
+                    $('.eieAddressDetails').each(function(index) {
+                        employeedata.data.Address.push({
+                            AddressLine: $(this).find('.eieAddressLine').val(),
+                            
+                        });
+                    });
                     $('.eieContactDetails').each(function(index) {
                         employeedata.data.ContactDetails.push({
                             ContactNumber: $(this).find('.eieContactNumber').val(),
@@ -93,10 +99,6 @@ function editEmployee() {
                     console.log(employeedata.data.ContactDetails);
                     console.log(employeedata.data.Children);
                     
-
-
-                    
-                    
                     crudiAjax(employeedata, "/employees/employeesinformation/edit", "PUT")
                     // $('#eicEdit')[0].reset();
                     // // // close modal   
@@ -117,9 +119,30 @@ function editEmployee() {
     })
 }
 // ==================================================================
-// Add and Delete for Contact Number
+// Add and Delete for Address
 // ==================================================================
 
+// ==================================================================
+// Add and Delete for Contact Number
+// ==================================================================
+function eiAddressAdd() {
+    $(".eieAddressAdd").off('click').on('click', function(){
+        var newEmployeeAddressGroup = $('.eieAddressDetails').first().clone();
+        newEmployeeAddressGroup.find('input').val('');
+        newEmployeeAddressGroup.insertAfter($(this).closest('.eieAddressDetails'));
+        newEmployeeAddressGroup.find('.eieAddressLine').val(''); // Clear the input field
+        eiAddressAdd(); // re-attach listener to new elements
+        eiAddressDelete();
+    });
+}
+function eiAddressDelete() {
+    // cciContactNumberDelete = Client Create Indivial Contact Number Delete
+    $(".eieAddressDelete").off('click').on('click', function(){
+        if ($('.eieAddressDetails').length > 1) {
+            $(this).closest('.eieAddressDetails').remove();
+        }
+    });
+}
 function eiContactNumberAdd() {
     // cciContactNumberAdd = Client Create Individual Contact Number
     $(".eieContactNumberAdd").off('click').on('click', function() {
@@ -139,9 +162,6 @@ function eiContactNumberDelete() {
         }
     });
 }
-
-
-
 // ==================================================================
 // Add and Delete for Children
 // ==================================================================
@@ -168,16 +188,28 @@ function eiChildrenDelete() {
 // ==================================================================
 // Add and Delete for Address
 // ==================================================================
-function eiAddressAdd() {
-    $(".eieAddressAdd").off('click').on('click', function(){
-        var newEmployeeAddressGroup = $('.eieAddressDetails').first().clone();
-        newEmployeeAddressGroup.find('input').val('');
-        newEmployeeAddressGroup.insertAfter($(this).closest('.eieAddressDetails'));
-        newEmployeeAddressGroup.find('.eieAddress').val(''); // Clear the input field
-        eiAddressAdd(); // re-attach listener to new elements
-        // eiContactNumberAdd(); // re-attach delete listener to new elements
+function eiContactNumberAdd() {
+    // cciContactNumberAdd = Client Create Individual Contact Number
+    $(".eieContactNumberAdd").off('click').on('click', function() {
+        var newEmployeeContactGroup = $('.eieContactDetails').first().clone();
+        newEmployeeContactGroup.find('input').val('');
+        newEmployeeContactGroup.insertAfter($(this).closest('.eieContactDetails'));
+        newEmployeeContactGroup.find('.eieContactNumber').val(''); // Clear the input field
+        eiContactNumberAdd(); // re-attach listener to new elements
+        eiContactNumberDelete(); // re-attach delete listener to new elements
     });
 }
+function eiContactNumberDelete() {
+    // cciContactNumberDelete = Client Create Individual Contact Number Delete
+    $(".eieContactNumberDelete").off('click').on('click', function() {
+        if ($('.eieContactDetails').length > 1) {
+            $(this).closest('.eieContactDetails').remove();
+        }
+    });
+}
+
+
+
 
 // ==================================================================
 // Add and Delete for Emergency Contact

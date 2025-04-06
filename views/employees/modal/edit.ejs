@@ -30,16 +30,16 @@
                                                 </div>
                                             </div>
                                             <label style="font-size: 0.875rem;">Address</label>
-                                            <div class="input-group eieAddressDetails">
-                                                <input type="text" class="form-control eieAddress" >
+                                            <div class="input-group my-2 eieAddressDetails">
+                                                <input type="text" class="form-control eieAddressLine" >
                                                 <button class="btn btn-success eieAddressAdd" type="button"><i class="bi bi-plus-square"></i></button>
                                                 <button class="btn btn-danger eieAddressDelete" type="button"><i class="bi bi-trash"></i></button>
                                             </div>
                                             <label style="font-size: 0.875rem;">Contact Number</label>
-                                            <div class="input-group eieContactDetails">
-                                                <input type="text" class="form-control eieContactNumber" >
+                                            <div class="input-group my-2 eieContactDetails">
+                                                <input type="text" class="form-control eieContactNumber" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 40 || event.charCode == 41 || event.charCode == 43">
                                                 <button class="btn btn-success eieContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                                <button class="btn btn-danger eieContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
+                                                <button class="btn btn-danger eieContactNumberDelete" type="button"><i class="bi bi-trash" ></i></button>
                                             </div>
                                             <div class="row align-items-center">
                                                 <div class="col-3">
@@ -99,8 +99,8 @@
                                                     <input type="text" class="form-control" id="eieSpouse" placeholder="Spouse" value="Mia">
                                                 </div>
                                             </div>
-                                            <span style="font-size: 0.875rem;">Children</span>
-                                            <div class="input-group eieChildren">
+                                            <label style="font-size: 0.875rem;">Children</label>
+                                            <div class="input-group my-2 eieChildren">
                                                 <input type="text" class="form-control eieChildrenName" value="Matt">
                                                 <button class="btn btn-success eieChildrenAdd" type="button"><i class="bi bi-plus-square"></i></button>
                                                 <button class="btn btn-danger eieChildrenDelete" type="button"><i class="bi bi-trash"></i></button>
@@ -131,15 +131,15 @@
                                                     <input type="text" class="form-control" id="eieParentAddress" placeholder="Parent's Address" value="Imus">
                                                 </div>
                                                 <div class="col-3">
-                                                    <label for="eieParentContactNumber" style="font-size: 0.875rem;">Contact number</label>
+                                                    <label for="eieParentContactNumber" style="font-size: 0.875rem;" pattern="^[0-9()]+$" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 40 || event.charCode == 41">Contact number</label>
                                                     <input type="number" class="form-control" id="eieParentContactNumber" placeholder="Contact number" value=09260283410>
                                                 </div>
                                             </div>
                                             <label style="font-size: 0.875rem;">Emergency Contact Person</label>
-                                            <div class="input-group eieEmergency">
+                                            <div class="input-group my-2 eieEmergency">
                                                 <input  type="text" class="form-control eieeName" placeholder="Name" value="Pia">
                                                 <input  type="text" class="form-control eieeAddress" placeholder="Address" value="Bacoor">
-                                                <input  type="number" class="form-control eieeContactNumber" placeholder="Contact Number" value=09260283410>
+                                                <input  type="number" class="form-control eieeContactNumber" placeholder="Contact Number" >
                                                 <input  type="text" class="form-control eieeRelationship" placeholder="Relationship" value="Kabet">
                                                 <button class="btn btn-success eiEmergencyContactAdd" type="button"><i class="bi bi-plus-square"></i></button>
                                                 <button class="btn btn-danger eiEmergencyContactDelete" type="button"><i class="bi bi-trash"></i></button>

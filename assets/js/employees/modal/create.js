@@ -5,27 +5,24 @@ function createEmployee() {
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
                     var data = {
-                        Name:$('#eicName').val(),  
-                        Address:$('#eicAddress').val(),
-                        JobTitle:$('#eicJob').val(),
-                        ContactDetails:  []
+                        Name:$('.eicName').val(),  
+                        Address:    [{
+                            AddressLine: String
+                        }],
+                        JobTitle:$('.eicJob').val(),
+                        ContactDetails:  [{
+                            ContactNumber: String
+                        }],
                     }
-
-                    // Initialize ContactDetails as an empty array
-                    $('.eieContactDetails').each(function() {
-                        let contactNumber = $(this).find('.eieContactNumber').val();
-                        contactNumber = cleanContactNumber(contactNumber); // Clean the input
-    
-                        if (contactNumber !== null) {
-                            employeedata.data.ContactDetails.push({
-                                ContactNumber: contactNumber
-                            });
-                        } else {
-                            reject("Invalid contact number format.  Use only numbers, +, (, and ).");
-                            return;
-                        }
+                    $('.eicContactNumber').each(function(index) {
+                        data.ContactDetails[index].ContactNumber = $(this).val();
+                    });
+                    $('.eicAddress').each(function(index) {
+                        data.Address[index].AddressLine = $(this).val(); 
+                            
                     });
                     
+
                     console.log(data);
                     
 

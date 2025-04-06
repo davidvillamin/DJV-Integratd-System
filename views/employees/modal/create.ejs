@@ -15,7 +15,7 @@
                             <label for="eicName" class="col-form-label">Name</label>
                         </div>
                         <div class="col-9">
-                            <input type="text" id="eicName" class="form-control" required>
+                            <input type="text" class="form-control eicName" required>
                         </div>
                     </div>
                     <div class="row g-3 mb-3 align-items-center">
@@ -23,7 +23,7 @@
                             <label for="eicContactNumber" class="col-form-label">Contact Number</label>
                         </div>
                         <div class="col-9">
-                            <input type="text" class="form-control eicContactNumber" pattern="^[0-9+()]*$" required>
+                            <input type="text" class="form-control eicContactNumber" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 40 || event.charCode == 41 || event.charCode == 43" required>
                         </div>
                     </div>
                     <div class="row g-3 mb-3 align-items-center">
@@ -31,7 +31,7 @@
                             <label for="eicAddress" class="col-form-label">Address</label>
                         </div>
                         <div class="col-9">
-                            <input type="text" id="eicAddress" class="form-control" required>
+                            <input type="text" class="form-control eicAddress" required>
                         </div>
                     </div>
                     <div class="row g-3 mb-3 align-items-center">
@@ -39,7 +39,7 @@
                             <label for="eicJob" class="col-form-label">Job</label>
                         </div>
                         <div class="col-9">
-                            <input type="text" id="eicJob" class="form-control" required></input>
+                            <input type="text"  class="form-control eicJob" required></input>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -51,4 +51,3 @@
         </div>
     </div>
 </div>
-

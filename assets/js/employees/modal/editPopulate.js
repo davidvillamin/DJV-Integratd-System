@@ -2,10 +2,11 @@
 var id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 function employeeEditPopulate(){
 
+  eiAddressAdd()
+  eiAddressDelete()
+  
   eiContactNumberAdd()
   eiContactNumberDelete()
-
-  // eiAddressAdd()
 
 
   eiChildrenAdd()
@@ -26,11 +27,10 @@ function employeeEditPopulate(){
   
   //================================================================================================
   // Personal Data
-  //================================================================================================
+  //===========================================================   =====================================
   $('#eieName').val(employeedata.Name)
   $('#eieJob').val(employeedata.JobTitle)
   $('#eieAge').val(employeedata.Age)
-  $('#eieAddress').val(employeedata.Address)
   $('#eieGender').val(employeedata.isMale)
   $('#eieHeight').val(employeedata.Height)
   $('#eieWeight').val(employeedata.Weight)
@@ -46,6 +46,24 @@ function employeeEditPopulate(){
   $('#eieFatherOccupation').val(employeedata.FathersOccupation)
   $('#eieParentAddress').val(employeedata.ParentsAddress)
   $('#eieParentContactNumber').val(employeedata.ParentsContactNumber)
+
+  if (employeedata.Address && employeedata.Address.length > 0) {
+    // Clear existing address details except the first one
+    $('.eieAddressDetails:not(:first)').remove();
+
+    // Loop through the Address and populate or add new fields
+    employeedata.Address.forEach(function(address, index) {
+        if (index > 0) {
+            var newAddressGroup = $('.eieAddressDetails').first().clone();
+            newAddressGroup.find('.eieAddressLine').val(address.AddressLine);
+            newAddressGroup.insertAfter($('.eieAddressDetails').last());
+        } else {
+            $('.eieAddressDetails').eq(index).find('.eieAddressLine').val(address.AddressLine);
+        }
+    });
+    
+}
+
 
   if (employeedata.ContactDetails && employeedata.ContactDetails.length > 0) {
     // Clear existing contact details except the first one

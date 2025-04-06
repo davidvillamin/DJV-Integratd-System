@@ -80,10 +80,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Date</th>
-                                                <th>Morning In</th>
-                                                <th>Morning Out</th>
-                                                <th>Afternoon In</th>
-                                                <th>Afternoon Out</th>
+                                                <th>Time In</th>
                                                 <th>Time Out</th>
                                                 <th>Status</th>
                                             </tr>
@@ -95,7 +92,7 @@
                         
                     </div>
                     <div class="tab-pane fade show " id="evStaffBioTab" role="tabpanel" aria-labelledby="staffBioTab">
-                        <!--================== PERSONAL DATA ACCORDION ==================================-->
+                        <!--================== PERSONAL DATA ACCORDION ==================================-->                        
                         <div class="tab-pane fade show" id="personalDataTab" role="tabpanel" aria-labelledby="PersonalData-tab">
                             <ul class="nav nav-tabs" id="personalDataTab" role="tablist">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalDataAccordion" aria-controls="collapseTwo">
@@ -104,7 +101,7 @@
                             </ul>
                             <div id="personalDataAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <div class="tab-content" id="myTabContent">
+                                    <div class="tab-content" id="personalDataContent">
                                         <div class="row mb-2 ">
                                             <div class="col-md-6 d-flex align-content-end">
                                                 <p><strong>Name: </strong><p id="eiName"></p></p>
@@ -218,7 +215,7 @@
                         <!--================== EDUCATIONAL BACKGROUND ACCORDION =========================-->
                         <div class="tab-pane fade show" id="educationalBackgroundTab" role="tabpanel" aria-labelledby="educationalBackground-Tab">
                             <div class="accordion-item">
-                                <h2 class="accordion-header">
+                                <h2 class="accordion-header" id="educationalBackgroundHeader">
                                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#educationalBackgroundAccordion" aria-expanded="false" aria-controls="collapseTwo">
                                     Educational Background
                                   </button>
@@ -304,7 +301,7 @@
                         <!--================== EMPLOYMENT RECORD ACCORDION =========================-->
                         <div class="tab-pane fade show" id="employmentRecordTab" role="tabpanel" aria-labelledby="employmentRecord-Tab">
                             <div class="accordion-item">
-                                <h2 class="accordion-header">
+                                <h2 class="accordion-header" id="employmentRecordHeader">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#employeeRecordAccordion" aria-expanded="false" aria-controls="collapseThree">
                                     Employment Record
                                 </button>
@@ -334,7 +331,7 @@
                         <!--================== CHARACTER REFERENCE ACCORDION =========================-->
                         <div class="tab-pane fade show" id="characterReferenceTab" role="tabpanel" aria-labelledby="characterReference-Tab">
                             <div class="accordion-item">
-                                <h2 class="accordion-header">
+                                <h2 class="accordion-header" id="characterReferenceHeader">
                                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#characterReferenceAccordion" aria-expanded="false" aria-controls="collapseThree">
                                     Character Reference
                                   </button>
@@ -422,4 +419,5 @@
 <script src="../../assets/js/employees/view.js"></script>
 <script src="../../assets/js/employees/modal/edit.js"></script>
 <script src="../../assets/js/employees/modal/editPopulate.js"></script>
+<script src="../../assets/js/employees/modal/time.js"></script>
 <%- include("../partials/footer") %>
