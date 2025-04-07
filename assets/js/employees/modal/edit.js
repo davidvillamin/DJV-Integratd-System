@@ -96,9 +96,6 @@ function editEmployee() {
 
                     employeedata.id = id;
 
-                    console.log(employeedata.data.ContactDetails);
-                    console.log(employeedata.data.Children);
-                    
                     crudiAjax(employeedata, "/employees/employeesinformation/edit", "PUT")
                     // $('#eicEdit')[0].reset();
                     // // // close modal   

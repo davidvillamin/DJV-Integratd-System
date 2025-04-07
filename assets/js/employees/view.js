@@ -20,7 +20,6 @@ $(function () {
     editEmployee()
     EmployeeTimeTable();
 
-    
     // var dTable = $('#attendanceTable').DataTable({
     //     data: crudiAjax({},"/employees/time/table", "POST"),
     //     paging: false,
@@ -30,23 +29,17 @@ $(function () {
     $('#attendanceTable').DataTable({
         data: crudiAjax({},"/employees/time/table", "POST"),
         columns: [
-            { data: 'date', title: 'Date' },
-            { data: 'timeIn', title: 'Time In' },
-            { data: 'timeOut', title: 'Time Out' },
+            { data: 'date' },
+            { data: 'timeIn' },
+            { data: 'timeOut' },
         ],
-        pageLength: 5,
-        lengthMenu: [5, 10, 25, 50, 100],
+        paging: false,
+        searching: false,
+        
     });
-
 })
 
-
-
-
-
 function employeeData(employee) {
-
-
     //================================================================================================
     // Personal Data
     //================================================================================================ 

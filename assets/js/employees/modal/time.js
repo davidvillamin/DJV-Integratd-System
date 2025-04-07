@@ -18,7 +18,7 @@ function EmployeeTimeTable() {
             data.Time.push({
                 TimeOut: moment().toDate(),
             });
-            button.text('Time In');
+            button.prop('disabled', true); // Disable the button after clicking "Time Out"
         }
     
         crudiAjax(data, "/employees/employeesinformation/time", 'PUT');

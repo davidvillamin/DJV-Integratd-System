@@ -104,21 +104,56 @@ async function populateIndexTable() {
     return empList;
 }
 async function populateTimeTable() {
+    // 1. Prepare an empty list to store our time table data.
     const timeList = [];
+  
+    // 2. Get the raw time data from the database.
+    //    - `Employees.find()`: Find all employees.
+    //    - `.select('Time _id')`: Only get the "Time" field and the employee's ID.
+    //    - `.lean()`: Get plain JavaScript objects, not Mongoose documents.
     const timeTableList = await Employees.find()
-        .select('Time _id')
-        .lean();
-
+    .select('Time _id')
+    .lean();
+  
+    // 3. Go through each employee's time data.
     timeTableList.forEach((employee) => {
-        if (employee.Time && employee.Time.length > 0) {
-            employee.Time.forEach((timeEntry) => {
-                timeList.push({
-                    date: timeEntry.TimeIn ? new Date(timeEntry.TimeIn).toLocaleDateString() : 'N/A',
-                    timeIn: timeEntry.TimeIn ? new Date(timeEntry.TimeIn).toLocaleTimeString() : 'N/A',
-                    timeOut: timeEntry.TimeOut ? new Date(timeEntry.TimeOut).toLocaleTimeString() : 'N/A',
-                });
+      // 4. Check if the employee has any "Time" entries.
+      if (employee.Time && employee.Time.length > 0) {
+        // 5. Go through each "Time" entry for this employee.
+        employee.Time.forEach((timeEntry) => {
+          // 6. Get the date from either TimeIn or TimeOut.
+          //    - `moment(...)`: Use the moment.js library to work with dates.
+          //    - `timeEntry.TimeIn || timeEntry.TimeOut`: If TimeIn is missing, use TimeOut.
+          //    - `.format("MMMM-DD-YYYY")`: Format the date as "Month-Day-Year" (e.g., "January-01-2024").
+          const date = moment(timeEntry.TimeIn || timeEntry.TimeOut).format("MMMM-DD-YYYY");
+  
+          // 7. Check if we already have an entry for this date in our timeList.
+          //    - `timeList.find(...)`: Look for an entry where the "date" matches the current date.
+          const existingEntry = timeList.find((entry) => entry.date === date);
+  
+          // 8. If we found an entry for this date...
+          if (existingEntry) {
+            // 9. Update the existing entry with the TimeIn or TimeOut.
+            if (timeEntry.TimeIn) {
+              existingEntry.timeIn = moment(timeEntry.TimeIn).format("hh:mm A"); // Format as "hour:minute AM/PM"
+            }
+            if (timeEntry.TimeOut) {
+              existingEntry.timeOut = moment(timeEntry.TimeOut).format("hh:mm A");
+            }
+          } else {
+            // 10. If there's no entry for this date, create a new one.
+            timeList.push({
+              date: date,
+              // 11. Set TimeIn and TimeOut, or "N/A" if they're missing.
+              timeIn: timeEntry.TimeIn ? moment(timeEntry.TimeIn).format("hh:mm A") : 'N/A',
+              timeOut: timeEntry.TimeOut ? moment(timeEntry.TimeOut).format("hh:mm A") : 'N/A',
             });
-        }
+          }
+        });
+      }
     });
+  
+    // 12. Return the completed time table list.
     return timeList;
-}
+  }
+  
