@@ -103,57 +103,100 @@ async function populateIndexTable() {
     });
     return empList;
 }
+var moment = require('moment'); // Assuming you're using moment.js
+
 async function populateTimeTable() {
-    // 1. Prepare an empty list to store our time table data.
-    const timeList = [];
-  
-    // 2. Get the raw time data from the database.
-    //    - `Employees.find()`: Find all employees.
-    //    - `.select('Time _id')`: Only get the "Time" field and the employee's ID.
-    //    - `.lean()`: Get plain JavaScript objects, not Mongoose documents.
-    const timeTableList = await Employees.find()
-    .select('Time _id')
-    .lean();
-  
-    // 3. Go through each employee's time data.
-    timeTableList.forEach((employee) => {
-      // 4. Check if the employee has any "Time" entries.
-      if (employee.Time && employee.Time.length > 0) {
-        // 5. Go through each "Time" entry for this employee.
-        employee.Time.forEach((timeEntry) => {
-          // 6. Get the date from either TimeIn or TimeOut.
-          //    - `moment(...)`: Use the moment.js library to work with dates.
-          //    - `timeEntry.TimeIn || timeEntry.TimeOut`: If TimeIn is missing, use TimeOut.
-          //    - `.format("MMMM-DD-YYYY")`: Format the date as "Month-Day-Year" (e.g., "January-01-2024").
-          const date = moment(timeEntry.TimeIn || timeEntry.TimeOut).format("MMMM-DD-YYYY");
-  
-          // 7. Check if we already have an entry for this date in our timeList.
-          //    - `timeList.find(...)`: Look for an entry where the "date" matches the current date.
-          const existingEntry = timeList.find((entry) => entry.date === date);
-  
-          // 8. If we found an entry for this date...
-          if (existingEntry) {
-            // 9. Update the existing entry with the TimeIn or TimeOut.
-            if (timeEntry.TimeIn) {
-              existingEntry.timeIn = moment(timeEntry.TimeIn).format("hh:mm A"); // Format as "hour:minute AM/PM"
-            }
-            if (timeEntry.TimeOut) {
-              existingEntry.timeOut = moment(timeEntry.TimeOut).format("hh:mm A");
-            }
-          } else {
-            // 10. If there's no entry for this date, create a new one.
-            timeList.push({
-              date: date,
-              // 11. Set TimeIn and TimeOut, or "N/A" if they're missing.
-              timeIn: timeEntry.TimeIn ? moment(timeEntry.TimeIn).format("hh:mm A") : 'N/A',
-              timeOut: timeEntry.TimeOut ? moment(timeEntry.TimeOut).format("hh:mm A") : 'N/A',
-            });
-          }
-        });
+  const timeList = [];
+  const timeTableList = await Employees.find()
+      .select('Time _id')
+      .lean();
+
+  function roundToNearest15(date) {
+      const minutes = date.minutes();
+      let roundedMinutes;
+
+      if (minutes >= 0 && minutes <= 7) {
+          roundedMinutes = 0;
+      } else if (minutes >= 8 && minutes <= 22) {
+          roundedMinutes = 15;
+      } else if (minutes >= 23 && minutes <= 37) {
+          roundedMinutes = 30;
+      } else if (minutes >= 38 && minutes <= 52) {
+          roundedMinutes = 45;
+      } else {
+          roundedMinutes = 0;
+          date.add(1, 'hour');
       }
-    });
-  
-    // 12. Return the completed time table list.
-    return timeList;
+
+      date.minutes(roundedMinutes);
+      date.seconds(0);
+      date.milliseconds(0);
+      return date;
   }
+
+  timeTableList.forEach((employee) => {
+      if (employee.Time && employee.Time.length > 0) {
+          employee.Time.forEach((timeEntry) => {
+              const date = moment(timeEntry.TimeIn || timeEntry.TimeOut).format("YYYY-MM-DD");
+              let status = "";
+              let time = "";
+              let statusClass = "";
+
+              if (timeEntry.TimeIn) {
+                  const timeInMoment = moment(timeEntry.TimeIn);
+                  const roundedTimeIn = roundToNearest15(timeInMoment);
+                  time = roundedTimeIn.format("hh:mm A");
+
+                  // Define the time ranges
+                  const onTimeStart = moment(date + " 08:00", "YYYY-MM-DD hh:mm");
+                  const onTimeEnd = moment(date + " 08:07", "YYYY-MM-DD hh:mm");
+                  const yellowStart = moment(date + " 08:08", "YYYY-MM-DD hh:mm");
+                  const yellowEnd = moment(date + " 08:59", "YYYY-MM-DD hh:mm");
+                  const orangeStart = moment(date + " 09:00", "YYYY-MM-DD hh:mm");
+                  const orangeEnd = moment(date + " 13:00", "YYYY-MM-DD hh:mm");
+
+                  if (roundedTimeIn.isBetween(onTimeStart, onTimeEnd, null, '[]')) {
+                      status = "Time In";
+                      statusClass = "on-time";
+                  } else if (roundedTimeIn.isBetween(yellowStart, yellowEnd, null, '[]')) {
+                      status = "Time In";
+                      statusClass = "late-yellow";
+                  } else if (roundedTimeIn.isBetween(orangeStart, orangeEnd, null, '[]')) {
+                      status = "Time In";
+                      statusClass = "late-orange";
+                  } else {
+                      status = "Time In";
+                      statusClass = "late-orange";
+                  }
+                  timeList.push({
+                      date: moment(date).format("MMMM-DD-YYYY"),
+                      status: `<span class="attendance-status ${statusClass}">${status}</span>`,
+                      time: time,
+                  });
+              }
+
+              if (timeEntry.TimeOut) {
+                  const timeOutMoment = moment(timeEntry.TimeOut);
+                  const roundedTimeOut = roundToNearest15(timeOutMoment);
+                  time = roundedTimeOut.format("hh:mm A");
+                  if (!timeEntry.TimeIn) {
+                      status = "Time Out";
+                      statusClass = "";
+                  }
+                  timeList.push({
+                      date: moment(date).format("MMMM-DD-YYYY"),
+                      status: status, 
+                      time: time,
+                  });
+              }
+          });
+      }
+  });
+
+  return timeList;
+}
+
+
+
+
   

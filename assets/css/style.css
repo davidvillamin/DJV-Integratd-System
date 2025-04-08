@@ -1241,3 +1241,44 @@ h6 {
 .hover-effect:hover {
   opacity: 1;
 }
+
+
+
+.status-indicator {
+  display: inline-block;
+  width: 15px; /* Adjust size as needed */
+  height: 15px; /* Adjust size as needed */
+  border-radius: 50%; /* Make it a circle */
+  margin-right: 5px; /* Add some space between the circle and the text */
+}
+
+.status-indicator.on-time {
+  background-color: green;
+}
+
+.status-indicator.late {
+  background-color: orange;
+}
+
+.status-indicator.half-day {
+  background-color: red;
+}
+.attendance-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: white;
+}
+
+.attendance-status.on-time {
+  background-color: green;
+}
+
+.attendance-status.late-yellow {
+  background-color: yellow;
+  color: black; /* Make text black for better visibility on yellow */
+}
+
+.attendance-status.late-orange {
+  background-color: orange;
+}

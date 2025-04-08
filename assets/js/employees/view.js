@@ -20,22 +20,17 @@ $(function () {
     editEmployee()
     EmployeeTimeTable();
 
-    // var dTable = $('#attendanceTable').DataTable({
-    //     data: crudiAjax({},"/employees/time/table", "POST"),
-    //     paging: false,
-    //     searching: false,
-    // })
     
     $('#attendanceTable').DataTable({
         data: crudiAjax({},"/employees/time/table", "POST"),
         columns: [
             { data: 'date' },
-            { data: 'timeIn' },
-            { data: 'timeOut' },
+            { data: 'status' },
+            { data: 'time' },
         ],
-        paging: false,
+        pageLength: 5, // set to display 5 items
         searching: false,
-        
+        order: [[0, 'desc']] // Order by date in descending order
     });
 })
 
