@@ -35,26 +35,9 @@
                 <div class="card">
                     <!-- badges -->
                     <!-- Prefiex Legend -->
-                    <!-- tihvt = Transaction In-house View Tags  -->
-                    <div id="tihvtStatus" class="container mt-2">
-                        <!-- <span class="badge bg-warning text-dark">Pending</span>
-                        <span class="badge bg-warning text-dark">Quotation</span>
-                        <span class="badge bg-warning text-dark">Pending Approval</span>
-                        <span class="badge bg-warning text-dark">For Release</span>
-                        <span class="badge bg-warning text-dark">Pending Payment</span>
-                        <span class="badge bg-warning text-dark">Incomplete Payment</span>
-                        <span class="badge bg-warning text-dark">Hold</span> -->
+                    <!-- tihv = Transaction In-house View  -->
+                    <div id="tihvTags" class="container mt-2">
 
-                        <!-- <span class="badge bg-success">Cancel Repair</span>    
-                        <span class="badge bg-success">Partial Approval</span>    
-                        <span class="badge bg-success">Parts Request</span>    
-                        <span class="badge bg-success">Parts Approved</span>    
-                        <span class="badge bg-success">Repaired</span>    
-                        <span class="badge bg-success">Released</span>    
-                        <span class="badge bg-success">Paid</span>     
-                        <span class="badge bg-success">Unrepairable</span>  
-                        <span class="badge bg-success">No Collection</span>  
-                        <span class="badge bg-success">OverDue</span>     -->
                     </div>
 
                     <!-- client information -->
@@ -102,9 +85,9 @@
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihvrViewModal">
+                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihReadModal">
                                         <i class="bx bx-detail me-2"></i>
-                                        Repair Details
+                                        Details
                                     </a>
                                 </li>
                                 <li>
@@ -114,7 +97,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihviAddModal">
+                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tiAddModal">
                                         <i class="bx bxs-image-add me-2"></i>
                                         Image
                                     </a>
@@ -180,73 +163,72 @@
                                         <div class="tab-content" id="myTabContent">
                                             <!-- summary -->
                                             <div class="tab-pane fade show active" id="summary" role="tabpanel" aria-labelledby="summary-tab">
-                                                <table id="tihvbsTable"> 
-                                                    <thead>
+                                                <table id="tihvbsTable" class="my-3"> 
+                                                    <!-- <thead>
                                                         <th data-field="Description">Description</th>
                                                         <th data-field="Quantity">Quantity</th>
                                                         <th data-field="UnitPrice">Unit Price</th>
                                                         <th data-field="Total">Total</th>
-                                                    </thead>
-                                                    <tbody>
+                                                    </thead> -->
                                                 </table>
                                             </div>
                                             <!-- parts -->
                                             <div class="tab-pane fade" id="parts" role="tabpanel" aria-labelledby="parts-tab">
                                                 <div class="d-flex flex-row-reverse m-2">
-                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tihvbiiAddModal"><i class="bi bi-plus-square pe-1"></i>Parts</button>
+                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tiiAddModal"><i class="bi bi-plus-square pe-1"></i>Parts</button>
                                                 </div>
                                                 <!-- tihvbp = transaction in house view billing parts -->
                                                 <table id="tihvbpTable" class="table">
-                                                    <thead>
+                                                    <!-- <thead>
                                                         <th data-field="_id" data-visible="false">id</th>
                                                         <th data-field="Description">Description</th>
                                                         <th data-field="Serial">Serial</th>
                                                         <th data-field="Price">Price</th>
-                                                    </thead>
+                                                    </thead> -->
                                                 </table>
                                             </div>
                                             <!-- transportation -->
                                             <div class="tab-pane fade" id="transportation" role="tabpanel" aria-labelledby="transportation-tab">
                                                 <div class="d-flex flex-row-reverse m-2">
-                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tihvbtAddModal"><i class="bi bi-plus-square me-3"></i>Transportation</button>
+                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ttAddModal"><i class="bi bi-plus-square me-3"></i>Transportation</button>
                                                 </div>
                                                 <!-- tihvbt = Transaction In House View Billing Transportation -->
                                                 <table class="table" id="tihvbtTable">
-                                                    <thead>
+                                                    <!-- <thead>
                                                         <tr>
                                                             <th data-field="Description">Description</th>
                                                             <th data-field="Quantity">Qty</th>
                                                             <th data-field="UnitPrice">Unit Price</th>
                                                             <th data-field="Price">Price</th>
                                                         </tr>
-                                                    </thead>
+                                                    </thead> -->
                                                 </table>
                                             </div>
                                             <!-- Service Charge -->
                                             <div class="tab-pane fade" id="serviceCharge" role="tabpanel" aria-labelledby="serviceCharge-tab">
                                                 <div class="d-flex flex-row-reverse m-2">
-                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tihvbscAddModal"><i class="bi bi-plus-square me-3"></i>Service Charge</button>
+                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tscAddModal"><i class="bi bi-plus-square me-3"></i>Service Charge</button>
                                                 </div>
                                                 <!-- tihvbsc = Transaction In House View Billing Service Charge -->
                                                 <table class="table" id="tihvbscTable">
-                                                    <thead>
+                                                    <!-- <thead>
                                                         <tr>
                                                             <th data-field="Description">Description</th>
                                                             <th data-field="Price">Price</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    </tbody>
+                                                    </tbody> -->
                                                 </table>
                                             </div>
                                             <!-- Payment -->
                                             <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
                                                 <div class="d-flex flex-row-reverse m-2">
-                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tihvbpayAddModal"><i class="bi bi-plus-square me-3"></i>Payment</button>
+                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tpayAddModal"><i class="bi bi-plus-square me-3"></i>Payment</button>
                                                 </div>
                                                 <!-- tihvbpay = Transaction In House Billing View Payment -->
                                                 <table class="table" id="tihvbpayTable">
-                                                    <thead>
+                                                    <!-- <thead>
                                                         <tr>
                                                             <th data-field="Description">Description</th>
                                                             <th data-field="Date">Date</th>
@@ -254,7 +236,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    </tbody>
+                                                    </tbody> -->
                                                 </table>
                                             </div>
                                         </div>
@@ -321,28 +303,28 @@
 Modals
 ======================================= -->
 <!-- billing -->
-<%- include("modal/billing/add-parts") %>
-<%- include("modal/billing/add-payment") %>
-<%- include("modal/billing/add-serviceCharge") %>
-<%- include("modal/billing/add-transportation") %>
+<%- include("../Utilities/Billing/parts/add-parts") %>
+<%- include("../Utilities/Billing/transportation/add-transportation") %>
+<%- include("../Utilities/Billing/serviceCharge/add-serviceCharge") %>
+<%- include("../Utilities/Billing/payment/add-payment") %>
 <!-- dropDown -->
 <!-- closeTransaction -->
-<%- include("modal/dropDown/closeTransaction/close") %>
+<%#- include("modal/dropDown/closeTransaction/close") %>
 <!-- image -->
- <%- include("modal/dropDown/image/image") %>
- <%- include("modal/images/edit-image") %>
+ <%- include("../Utilities/Images/add-image") %>
+ <%#- include("../Utilities/Images/edit-image") %>
  <!-- release -->
- <%- include("modal/dropDown/release/release") %>
+ <%#- include("modal/dropDown/release/release") %>
  <!-- repairDetails -->
- <%- include("modal/dropDown/repairDetails/view-repair") %>
- <%- include("modal/dropDown/repairDetails/edit-repair") %>
+ <%- include("modal/crud/read") %>
+ <%- include("modal/crud/edit") %>
  <!-- tags -->
- <%- include("modal/dropDown/tags/tags") %>
+ <%#- include("modal/dropDown/tags/tags") %>
  
  <!-- client -->
  <!-- client edit  -->
- <%-  include("../../client/modal/edit")  %>
-
+ <%#-  include("../../client/modal/edit")  %>
+ 
 
  <!-- =======================================
 Scripts and accessories
@@ -360,28 +342,33 @@ Scripts
 <!-- modals -->
  <!-- <script src="../../client/modal/edit.ejs"></script> -->
 <!-- billing -->
-<script src="../../../assets/js/transaction/inhouse/modal/billing/billingSummary.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/billing/add-parts.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/billing/add-payment.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/billing/add-serviceCharge.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/billing/add-transportation.js"></script>
+<script src="../../../assets/js/transaction/utilities/BillingDetails/billingSummary.js"></script>
+<script src="../../../assets/js/transaction/utilities/BillingDetails/Parts/parts.js"></script>
+<script src="../../../assets/js/transaction/utilities/BillingDetails/Parts/add-parts.js"></script>
+<script src="../../../assets/js/transaction/utilities/BillingDetails/Transportation/add-transportation.js"></script>
+<script src="../../../assets/js/transaction/utilities/BillingDetails/Transportation/transportation.js"></script>
+<script src="../../../assets/js/transaction/utilities/BillingDetails/ServiceCharge/add-serviceCharge.js"></script>
+<script src="../../../assets/js/transaction/utilities/BillingDetails/ServiceCharge/serviceCharge.js"></script>
+<script src="../../../assets/js/transaction/utilities/BillingDetails/Payment/add-payment.js"></script>
+<script src="../../../assets/js/transaction/utilities/BillingDetails/Payment/payment.js"></script>
 
 <!-- dropDown -->
 <!-- close Transaction -->
-<script src="../../../assets/js/transaction/inhouse/modal/dropDown/closeTransaction/close.js"></script>
+<!-- <script src="../../../assets/js/transaction/inhouse/modal/dropDown/closeTransaction/close.js"></script> -->
 <!-- image -->
-<script src="../../../assets/js/transaction/inhouse/modal/dropDown/image/image.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/images/edit-image.js"></script>
+<script src="../../../assets/js/transaction/utilities/Images/add-image.js"></script>
+<!-- <script src="../../../assets/js/transaction/utilities/Images/edit-image.js"></script> -->
 <!-- release -->
-<script src="../../../assets/js/transaction/inhouse/modal/dropDown/release/release.js"></script>
+<!-- <script src="../../../assets/js/transaction/inhouse/modal/dropDown/release/release.js"></script> -->
 <!-- repairDetails -->
-<script src="../../../assets/js/transaction/inhouse/modal/dropDown/repairDetials/edit-repair.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/dropDown/repairDetials/view-repair.js"></script>
+<script src="../../../assets/js/transaction/inhouse/crud/read.js"></script>
+<script src="../../../assets/js/transaction/inhouse/crud/edit.js"></script>
+<!-- <script src="../../../assets/js/transaction/inhouse/modal/dropDown/repairDetials/view-repair.js"></script> -->
 <!-- tags -->
-<script src="../../../assets/js/transaction/inhouse/modal/dropDown/tags/tags.js"></script>
+<!-- <script src="../../../assets/js/transaction/inhouse/modal/dropDown/tags/tags.js"></script> -->
 <!-- print -->
 
 <!-- client -->
-<script src="../../../assets/js/client/crud/edit.js"></script>
+<!-- <script src="../../../assets/js/client/crud/edit.js"></script> -->
 
 <%- include("../../partials/footer") %>
