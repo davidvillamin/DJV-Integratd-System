@@ -17,6 +17,32 @@ $(function () {
 
     var currentEmployee = crudiAjax({id: id}, "/employee/view/ajax", 'Post')
     employeeData(currentEmployee);
+    renderCalendar(currentEmployee)
+    
+
+    currentCalendarDate = moment(); // Initialize calendar date state using Moment.js
+
+    // Initial Render call
+    renderCalendar(currentCalendarDate.year(), currentCalendarDate.month());
+
+    // Event Listeners for Navigation using jQuery
+    // Ensure your prev/next buttons have these IDs in the HTML
+    const $prevMonthBtn = $('#prevMonthBtn');
+    const $nextMonthBtn = $('#nextMonthBtn');
+
+    if ($prevMonthBtn.length && $nextMonthBtn.length) {
+        $prevMonthBtn.on('click', () => {
+            currentCalendarDate.subtract(1, 'month');
+            renderCalendar(currentCalendarDate.year(), currentCalendarDate.month());
+        });
+
+        $nextMonthBtn.on('click', () => {
+            currentCalendarDate.add(1, 'month');
+            renderCalendar(currentCalendarDate.year(), currentCalendarDate.month());
+        });
+    } else {
+         console.warn("Previous (#prevMonthBtn) or Next (#nextMonthBtn) month button not found for calendar.");
+    }
 
     const today = moment();
     let todaysEntry = null;
@@ -80,6 +106,7 @@ $(function () {
             emptyTable: "No attendance records found." // Custom message
         }
     });
+    var currentCalendarDate;
 })
 
 function processTimeDataForTable(timeArray) {
@@ -193,6 +220,84 @@ function processTimeDataForTable(timeArray) {
     // Remove the temporary timestamp property before returning
     return timeList.map(({ timestamp, ...rest }) => rest);
 }
+
+
+
+function renderCalendar(year, month) {
+    const $calendarDaysContainer = $('#calendarDays');
+    const $calendarMonthYearElement = $('#calendarMonthYear'); // Assuming this ID exists for the month/year display
+
+
+    // Clear previous calendar days using jQuery
+    $calendarDaysContainer.empty();
+
+    const today = moment().startOf('day'); // Get today's date (start of day for accurate comparison)
+    const dateToRender = moment({ year: year, month: month }); // Moment object for the month to render
+    const firstDayOfMonth = dateToRender.clone().startOf('month');
+    const lastDayOfMonth = dateToRender.clone().endOf('month');
+    const daysInMonth = lastDayOfMonth.date();
+    const startDayOfWeek = firstDayOfMonth.day(); // 0 = Sunday, 1 = Monday, ... (Moment's default)
+
+    // Update Month/Year display using Moment's format
+    if ($calendarMonthYearElement.length) { // Check if the element exists
+         $calendarMonthYearElement.text(dateToRender.format('MMMM YYYY'));
+    } else {
+        console.warn("Element with ID #calendarMonthYear not found for calendar header.");
+    }
+
+
+    let currentDay = 1;
+    let calendarHtml = '<div class="row g-1">'; // Start the first row (using Bootstrap grid)
+
+    // Add empty cells for days before the 1st of the month
+    for (let i = 0; i < startDayOfWeek; i++) {
+        calendarHtml += `<div class="col text-center p-1"><span class="day prev-next-month-day"></span></div>`;
+    }
+
+    // Add cells for each day of the month
+    while (currentDay <= daysInMonth) {
+        const loopDate = moment({ year: year, month: month, day: currentDay });
+        const dayOfWeek = loopDate.day();
+
+        // Start a new row on Sunday (if it's not the very first day)
+        if (dayOfWeek === 0 && currentDay > 1) {
+            calendarHtml += '</div><div class="row g-1">'; // Close previous row, start new one
+        }
+
+        let dayClasses = 'col text-center p-1 border rounded day current-month-day';
+        // Highlight today's date using moment.isSame()
+        if (loopDate.isSame(today, 'day')) {
+            dayClasses += ' bg-primary text-white today';
+        }
+
+        // --- Potential Future Enhancement: Add Attendance Data ---
+        // Here you could potentially check `currentEmployee.Time` data
+        // for the `loopDate` and add classes like 'present', 'absent', 'late'
+        // Example (conceptual):
+        // const attendanceStatus = getAttendanceStatusForDate(loopDate, currentEmployee.Time);
+        // if (attendanceStatus === 'present') dayClasses += ' bg-success-light'; // Example class
+        // if (attendanceStatus === 'absent') dayClasses += ' bg-danger-light'; // Example class
+        
+        // ---------------------------------------------------------
+
+        calendarHtml += `<div class="${dayClasses}">${currentDay}</div>`;
+        currentDay++;
+    }
+
+    // Add empty cells for days after the last day of the month to fill the week
+    const remainingCells = (7 - ((startDayOfWeek + daysInMonth) % 7)) % 7;
+    for (let i = 0; i < remainingCells; i++) {
+         calendarHtml += `<div class="col text-center p-1"><span class="day prev-next-month-day"></span></div>`;
+    }
+
+    calendarHtml += '</div>'; // Close the last row
+
+    // Set the HTML using jQuery
+    $calendarDaysContainer.html(calendarHtml);
+}
+
+
+
 
 function employeeData(employee) {
     //================================================================================================

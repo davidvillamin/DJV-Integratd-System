@@ -13,27 +13,93 @@
     </div><!-- End Page Title -->
     <section class="section">
 
-        <!-- ===== START: Modified Weekly Attendance Card ===== -->
-        <div class="row col-md-8 mb-3">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="eiWeeklyAttendanceTable" class="table table-bordered table-striped table-hover w-100">
-                        <!-- Inside index.ejs -->
-                        <thead>
-                            <tr>
-                                <th style="width: 50px;">Employee</th> <!-- Keep width for Employee column -->
-                                
-                            </tr>
-                        </thead>
+        <div class="row my-3">
 
-                        <tbody>
-                        </tbody>
-                    </table>
+            <!-- ===== START: Modified Weekly Attendance Card ===== -->
+            <div class="row col-md-6">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="eiWeeklyAttendanceTable" class="table table-bordered table-striped table-hover w-100">
+                            <!-- Inside index.ejs -->
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">Employee</th> <!-- Keep width for Employee column -->
+                                    
+                                </tr>
+                            </thead>
+    
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <!-- ===== END: Modified Weekly Attendance Card ===== -->
+
+
+            <!-- ===== START: Pie Chart Card ===== -->
+            <div class="row col-md-6">
+                <div id="pieChart" class="echart "></div>
+
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  echarts.init(document.querySelector("#pieChart")).setOption({
+                    title: {
+                      text: 'Ticket Statistics',
+                      subtext: 'Weekly Attendance',
+                      left: 'center',
+                    },
+                    tooltip: {
+                      trigger: 'item'
+                    },
+                    legend: {
+                      orient: 'vertical',
+                      left: 'left'
+                    },
+                    series: [{
+                      name: 'Access From',
+                      type: 'pie',
+                      radius: '50%',
+                      data: [{
+                          value: 1048,
+                          name: 'Search Engine'
+                        },
+                        {
+                          value: 735,
+                          name: 'Direct'
+                        },
+                        {
+                          value: 580,
+                          name: 'Email'
+                        },
+                        {
+                          value: 484,
+                          name: 'Union Ads'
+                        },
+                        {
+                          value: 300,
+                          name: 'Video Ads'
+                        }
+                      ],
+                      emphasis: {
+                        itemStyle: {
+                          shadowBlur: 10,
+                          shadowOffsetX: 0,
+                          shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                      }
+                    }]
+                  });
+                });
+              </script>
+
+
+            </div>
+            <!-- ===== END: Pie Chart Card ===== -->
+    
+            <!-- ===== END: Modified Weekly Attendance Card ===== -->
         </div>
 
-        <!-- ===== END: Modified Weekly Attendance Card ===== -->
 
 
         <!-- ===== START: All Employees Card (Using Previous DataTable Code) ===== -->
