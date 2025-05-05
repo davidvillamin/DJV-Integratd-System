@@ -62,6 +62,8 @@
                 </div>
                 <!-- ================= TAB CONTENTS ========================= -->
                 <div class="tab-content mt-3" id="myTabContent">
+                    <!--================== ATTENDANCE =========================-->
+                    <!-- Attendance Record -->
                     <div class="tab-pane fade show active" id="evAttendance" role="tabpanel" aria-labelledby="staffBioTab">
                         <div class="card-profile">
                             <div class="row">
@@ -106,6 +108,9 @@
                         </div>
                         
                     </div>
+                    <!-- Attendance Record End -->
+                    <!--================== EMPLOYEE BIO =========================-->
+                    <!-- Employee Bio -->
                     <div class="tab-pane fade show " id="evStaffBioTab" role="tabpanel" aria-labelledby="staffBioTab">
                         <!--================== PERSONAL DATA ACCORDION ==================================-->                        
                         <div class="tab-pane fade show" id="personalDataTab" role="tabpanel" aria-labelledby="PersonalData-tab">
@@ -377,48 +382,48 @@
                         </div>
                         
                     </div>
+                    <!-- Employee Bio End -->
+                    <!--================== ACCOUNT SETTINGS =========================-->
+                    <!-- Account Settings -->
                     <div class="tab-pane fade show " id="evAccountSettings" role="tabpanel" aria-labelledby="staffBioTab">
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control" placeholder="Enter your username">
-                            </div>
-                            <!-- Username (Non-editable) -->
-                            <div class="mb-3">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" placeholder="Enter your email">
-                            </div>
-
-                            <!-- Current Password -->
-                            <div class="col-12 mb-3">
-                                <label class="form-label">Current Password</label>
-                                <input type="password" class="form-control" placeholder="Enter current password">
-                            </div>
-
-                            <!-- New Password with Toggle -->
-                            <div class="mb-3">
-                                <label class="form-label">New Password</label>
-                                <div class="input-group">
-                                    <input type="password" id="newPassword" class="form-control" placeholder="Enter new password">
-                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                        <i class="bi bi-eye-slash"></i>
+                        <div class="card">
+                            <div class="card-body my-3">
+                                <!-- Inside the #evAccountSettings tab in view.ejs -->
+                                <div class="mb-3">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" class="form-control" placeholder="Username" readonly>
+                                    <!-- Removed static value, added id -->
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" placeholder="Enter your email" readonly>
+                                </div>
+                                <!-- Current Password -->
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">Current Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter current password" readonly>
+                                </div>
+                                <!-- New Password with Toggle -->
+                                <div class="mb-3">
+                                    <label class="form-label">New Password</label>
+                                    <input type="password"  class="form-control" placeholder="Enter new password" readonly>
+                                </div>
+                                <!-- Confirm New Password -->
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control" placeholder="Re-enter new password" readonly>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <!-- eia = employee information account -->
+                                    <button id="eiaEdit" type="button" class="btn btn-success m-3 " data-bs-toggle="modal" data-bs-target="#eiaEditModal">
+                                        <i class="bi bi-file-earmark-plus"></i> Edit
                                     </button>
                                 </div>
                             </div>
-
-                            <!-- Confirm New Password -->
-                            <div class="mb-3">
-                                <label class="form-label">Confirm New Password</label>
-                                <input type="password" class="form-control" placeholder="Re-enter new password">
-                            </div>
-
-                            <!-- Buttons -->
-                            <div class="d-flex justify-content-between">
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
-                                <button type="submit" class="btn btn-success">Save Changes</button>
-                            </div>
-                        </form>
+                        </div>
+                        
                     </div>
+                    <!-- Account Settings End -->
                     
 
                 </div>
@@ -431,6 +436,7 @@
 <!-- modal -->
 <%- include("../partials/script") %>
 <%- include("modal/edit") %>
+<%- include("modal/account") %>
 <script src="../../assets/js/employees/view.js"></script>
 <script src="../../assets/js/employees/modal/edit.js"></script>
 <script src="../../assets/js/employees/modal/editPopulate.js"></script>

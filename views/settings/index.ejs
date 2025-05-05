@@ -1,6 +1,8 @@
 <%- include("../partials/header") %>
 <%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
+<!-- ===================== PREFIX LEGENDS =============================== -->
+<!-- ei = EMPLOYEE INFORMATION -->
 <main id="main" class="main">
     <div class="pagetitle">
     <h1>Settings</h1>
@@ -10,6 +12,69 @@
         <li class="breadcrumb-item active">Settings</li>
         </ol>
     </nav>
+    <section class="section">
+        <div class="card">
+            <div class="card-body p-4"> 
+                <h5 class="card-title pt-3">Employees' Working Hours</h5> 
+                <form id="timeForm">
+                    <div class="row g-3 mb-3"> 
+                        <div class="col-lg-6">
+                            
+                            <fieldset class="border p-3 rounded"> 
+                                <legend class="fs-6 fw-bold mb-3">Punctual</legend> 
+                                <div class="row">
+                                    <div class="col-md-6 mb-3"> 
+                                        <label for="startTime1" class="form-label">Start Time</label>
+                                        <input type="time" class="form-control" id="eiPunctualStartTime">
+                                    </div>
+                                    <div class="col-md-6 mb-3"> 
+                                        <label for="endTime1" class="form-label">End Time</label>
+                                        <input type="time" class="form-control" id="eiPunctualEndTime">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                             <fieldset class="border p-3 rounded">
+                                <legend class="fs-6 fw-bold mb-3">Late</legend> 
+                                <div class="row">
+                                    <div class="col-md-6 mb-3"> 
+                                        <label for="startTime2" class="form-label">Start Time</label>
+                                        <input type="time" class="form-control" id="eiLateStartTime">
+                                    </div>
+                                    <div class="col-md-6 mb-3"> 
+                                        <label for="endTime2" class="form-label">End Time</label>
+                                        <input type="time" class="form-control" id="eiLateEndTime">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div> 
+                    <div class="row g-3 mb-3">
+                        <div class="col-lg-6">
+                            <fieldset class="border p-3 rounded">
+                               <legend class="fs-6 fw-bold mb-3">Half-day</legend> 
+                               <div class="row">
+                                   <div class="col-md-6 mb-3"> 
+                                       <label for="startTime2" class="form-label">Start Time</label>
+                                       <input type="time" class="form-control" id="eiHalfDayStartTime">
+                                   </div>
+                                   <div class="col-md-6 mb-3"> 
+                                       <label for="endTime2" class="form-label">End Time</label>
+                                       <input type="time" class="form-control" id="eiHalfDayEndTime">
+                                   </div>
+                               </div>
+                           </fieldset>
+                       </div>
+                    </div>
+                    <div class="text-end mt-4"> 
+                        <button type="submit" class="btn btn-primary" id="saveEmployeeSettingsBtn">Save Changes</button> 
+                    </div>
+                </form>
+            </div> 
+        </div> 
+    </section>
+    
     </div><!-- End Page Title -->
     
     

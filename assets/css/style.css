@@ -1257,11 +1257,11 @@ h6 {
 }
 
 .status-indicator.late {
-  background-color: orange;
+  background-color: yellow;
 }
 
 .status-indicator.half-day {
-  background-color: red;
+  background-color: orange;
 }
 .attendance-status {
   display: inline-block;
@@ -1281,4 +1281,38 @@ h6 {
 
 .attendance-status.late-orange {
   background-color: orange;
+}
+
+/* CSS for Rotated Table Headers */
+#eiWeeklyAttendanceTable thead th.rotate-header {
+  /* Basic Rotation & Alignment */
+  height: 140px;         /* CRITICAL: Set height to accommodate longest day name */
+                         /* Adjust this value as needed! */
+  white-space: nowrap;   /* Prevent text wrapping */
+  vertical-align: bottom;/* Align TH content to the bottom */
+  text-align: left;      /* Align text to the left before rotation */
+  padding: 0;            /* Reset padding */
+  position: relative;    /* Needed for absolute positioning of the span */
+  width: 40px;           /* Set a fixed narrow width for the column */
+  min-width: 40px;
+  max-width: 40px;
+}
+
+#eiWeeklyAttendanceTable thead th.rotate-header > span {
+  /* The actual rotation and positioning */
+  display: block;        /* Make span a block element */
+  transform: rotate(-90deg);
+  transform-origin: left bottom; /* Rotate around bottom-left */
+  position: absolute;    /* Position relative to the TH */
+  bottom: 5px;           /* Adjust distance from bottom edge */
+  left: 50%;             /* Center horizontally (adjust if needed) */
+
+  /* Optional: Adjust width if needed, though nowrap should handle it */
+  /* width: 130px; */    /* Should match the parent TH height roughly */
+}
+
+/* Ensure non-rotated headers align nicely */
+#eiWeeklyAttendanceTable thead th:not(.rotate-header) {
+  vertical-align: bottom; /* Align Employee header to bottom */
+  padding-bottom: 10px;   /* Add some padding to match visually */
 }

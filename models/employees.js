@@ -10,6 +10,7 @@ var employeesSchema = new mongoose.Schema({
     Time: [{
         TimeIn:      Date,
         TimeOut:     Date,
+        Log:      String,
     }],
 
     Address:        [{
@@ -51,7 +52,7 @@ var employeesSchema = new mongoose.Schema({
     EmergencyDetail: [{
         eeName:             String,
         eeAddress:          String,
-        eeContactNumber:    Number,
+        eeContactNumber:    String,
         eeRelationship:     String
     }],
     

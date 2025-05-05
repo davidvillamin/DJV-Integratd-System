@@ -51,6 +51,28 @@ router.post("/employees/populate/table", async function (req, res) {
     res.send(employeeID);
 });
 
+// ============================================================
+// Employee Attendance Table
+// ============================================================
+
+router.post("/employees/populate/employee/attendance", async function (req, res) {
+    var employeeID = await populateAttendanceTable()
+    res.send(employeeID);
+});
+
+// ============================================================
+// Populate Weekly Attendance Table (Index Page) - NEW ROUTE
+// ============================================================
+router.post("/employees/populate/employee/weeklyAttendance", async function (req, res) {
+    try {
+        const weeklyData = await populateWeeklyAttendanceTable();
+        res.send(weeklyData);
+    } catch (error) {
+        console.error("Error populating weekly attendance table:", error);
+        res.status(500).send("Failed to load weekly attendance data.");
+    }
+});
+
 
 // ============================================================
 // Employee Time In and Out
@@ -69,12 +91,6 @@ router.put("/employees/employeesinformation/time", async function (req, res) {
         res.status(500).send("Error updating employee time");
     }
 });
-
-router.post("/employees/time/table", async function (req, res) {
-    var employeeTime = await populateTimeTable()
-    res.send(employeeTime);
-});
-
 
 
 
@@ -103,98 +119,81 @@ async function populateIndexTable() {
     });
     return empList;
 }
-var moment = require('moment'); // Assuming you're using moment.js
+const moment = require('moment'); // Make sure moment is required at the top of your file if not already
 
-async function populateTimeTable() {
-  const timeList = [];
-  const timeTableList = await Employees.find()
-      .select('Time _id')
-      .lean();
+async function populateAttendanceTable(){
 
-  function roundToNearest15(date) {
-      const minutes = date.minutes();
-      let roundedMinutes;
-
-      if (minutes >= 0 && minutes <= 7) {
-          roundedMinutes = 0;
-      } else if (minutes >= 8 && minutes <= 22) {
-          roundedMinutes = 15;
-      } else if (minutes >= 23 && minutes <= 37) {
-          roundedMinutes = 30;
-      } else if (minutes >= 38 && minutes <= 52) {
-          roundedMinutes = 45;
-      } else {
-          roundedMinutes = 0;
-          date.add(1, 'hour');
-      }
-
-      date.minutes(roundedMinutes);
-      date.seconds(0);
-      date.milliseconds(0);
-      return date;
-  }
-
-  timeTableList.forEach((employee) => {
-      if (employee.Time && employee.Time.length > 0) {
-          employee.Time.forEach((timeEntry) => {
-              const date = moment(timeEntry.TimeIn || timeEntry.TimeOut).format("YYYY-MM-DD");
-              let status = "";
-              let time = "";
-              let statusClass = "";
-
-              if (timeEntry.TimeIn) {
-                  const timeInMoment = moment(timeEntry.TimeIn);
-                  const roundedTimeIn = roundToNearest15(timeInMoment);
-                  time = roundedTimeIn.format("hh:mm A");
-
-                  // Define the time ranges
-                  const onTimeStart = moment(date + " 08:00", "YYYY-MM-DD hh:mm");
-                  const onTimeEnd = moment(date + " 08:07", "YYYY-MM-DD hh:mm");
-                  const yellowStart = moment(date + " 08:08", "YYYY-MM-DD hh:mm");
-                  const yellowEnd = moment(date + " 08:59", "YYYY-MM-DD hh:mm");
-                  const orangeStart = moment(date + " 09:00", "YYYY-MM-DD hh:mm");
-                  const orangeEnd = moment(date + " 13:00", "YYYY-MM-DD hh:mm");
-
-                  if (roundedTimeIn.isBetween(onTimeStart, onTimeEnd, null, '[]')) {
-                      status = "Time In";
-                      statusClass = "on-time";
-                  } else if (roundedTimeIn.isBetween(yellowStart, yellowEnd, null, '[]')) {
-                      status = "Time In";
-                      statusClass = "late-yellow";
-                  } else if (roundedTimeIn.isBetween(orangeStart, orangeEnd, null, '[]')) {
-                      status = "Time In";
-                      statusClass = "late-orange";
-                  } else {
-                      status = "Time In";
-                      statusClass = "late-orange";
-                  }
-                  timeList.push({
-                      date: moment(date).format("MMMM-DD-YYYY"),
-                      status: `<span class="attendance-status ${statusClass}">${status}</span>`,
-                      time: time,
-                  });
-              }
-
-              if (timeEntry.TimeOut) {
-                  const timeOutMoment = moment(timeEntry.TimeOut);
-                  const roundedTimeOut = roundToNearest15(timeOutMoment);
-                  time = roundedTimeOut.format("hh:mm A");
-                  if (!timeEntry.TimeIn) {
-                      status = "Time Out";
-                      statusClass = "";
-                  }
-                  timeList.push({
-                      date: moment(date).format("MMMM-DD-YYYY"),
-                      status: status, 
-                      time: time,
-                  });
-              }
-          });
-      }
-  });
-
-  return timeList;
+    
+    const attendanceList = [];
+    const employeeAttendanceList = await Employees.find()
+        .select('Name _id')
+        .lean();
+    // Transform data into the desired format
+    employeeAttendanceList.forEach((employee) => {
+        attendanceList.push([
+            `<a href='/employees/view/${employee._id}'>${employee.Name}</a>`,
+            moment().format("MMMM DD, YYYY"),
+        ]);
+    });
+    return attendanceList;
 }
+
+async function populateWeeklyAttendanceTable() {
+    const weeklyData = [];
+    const today = moment().startOf('day'); // Use startOf('day') for reliable date comparisons
+    // Determine the start of the current week (Sunday) based on 'today'
+    const startOfWeek = moment(today).startOf('week'); // moment's default start of week is Sunday
+
+    const employees = await Employees.find()
+        .select('Name _id Time')
+        .lean();
+
+    for (const employee of employees) {
+        const employeeRow = [
+            // First column: Employee Name link
+            `<a href='/employees/view/${employee._id}'>${employee.Name || 'N/A'}</a>`,
+            // Initialize the rest of the columns for the days (will be filled below)
+            '-','-','-','-','-','-','-' // Placeholders for Sunday to Saturday
+        ];
+
+        const timeRecords = employee.Time || [];
+
+        // Loop through the 7 days of the *current* week, starting from Sunday
+        for (let i = 0; i < 7; i++) {
+            // Calculate the specific date for the current day of the week (Sunday + i days)
+            const currentDayInWeek = moment(startOfWeek).add(i, 'days').startOf('day'); // Ensure time is stripped for comparison
+
+            // Find the TimeIn record for the currentDayInWeek
+            const timeInRecord = timeRecords.find(record =>
+                record.TimeIn && moment(record.TimeIn).isSame(currentDayInWeek, 'day')
+            );
+
+            if (timeInRecord) {
+                dayStatus = 'P';
+            } else {
+                if (currentDayInWeek.day() === 0) { // Sunday is represented by 0
+                    dayStatus = ' '; // Set the status to '-' for Sunday
+                } else {
+                    // Only mark as Absent ('A') if the day is strictly *before* today AND no TimeIn record was found
+                    if (currentDayInWeek.isBefore(today, 'day')) {
+                        dayStatus = 'A'; // Absent
+                    } else {
+                        dayStatus = '-';
+                    }
+                }
+            }
+
+            // Place the status in the correct column index (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
+            // The employee name is at index 0, so days start from index 1.
+            employeeRow[i + 1] = dayStatus;
+        }
+        weeklyData.push(employeeRow);
+    }
+
+    return weeklyData;
+}
+
+
 
 
 

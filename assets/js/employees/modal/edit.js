@@ -72,7 +72,7 @@ function editEmployee() {
                         employeedata.data.EmergencyDetail.push({
                             eeName: $(this).find('.eieeName').val(),
                             eeAddress: $(this).find('.eieeAddress').val(),
-                            eeContactNumber: Number($(this).find('.eieeContactNumber').val()),
+                            eeContactNumber: $(this).find('.eieeContactNumber').val(),
                             eeRelationship: $(this).find('.eieeRelationship').val()
                         })
                     });
@@ -204,9 +204,6 @@ function eiContactNumberDelete() {
         }
     });
 }
-
-
-
 
 // ==================================================================
 // Add and Delete for Emergency Contact

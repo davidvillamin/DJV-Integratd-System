@@ -139,7 +139,7 @@
                                             <div class="input-group my-2 eieEmergency">
                                                 <input  type="text" class="form-control eieeName" placeholder="Name" value="Pia">
                                                 <input  type="text" class="form-control eieeAddress" placeholder="Address" value="Bacoor">
-                                                <input  type="number" class="form-control eieeContactNumber" placeholder="Contact Number" >
+                                                <input  type="text" class="form-control eieeContactNumber" placeholder="Contact Number" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 40 || event.charCode == 41 || event.charCode == 43">
                                                 <input  type="text" class="form-control eieeRelationship" placeholder="Relationship" value="Kabet">
                                                 <button class="btn btn-success eiEmergencyContactAdd" type="button"><i class="bi bi-plus-square"></i></button>
                                                 <button class="btn btn-danger eiEmergencyContactDelete" type="button"><i class="bi bi-trash"></i></button>

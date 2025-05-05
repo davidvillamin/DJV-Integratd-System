@@ -24,6 +24,7 @@ function employeeEditPopulate(){
   var employeedata =  crudiAjax({id: id}, "/employee/view/ajax", 'Post')
           
   console.log(employeedata);
+
   
   //================================================================================================
   // Personal Data

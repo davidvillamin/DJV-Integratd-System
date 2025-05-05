@@ -12,41 +12,71 @@
     </nav>
     </div><!-- End Page Title -->
     <section class="section">
-        <div class="card">
+
+        <!-- ===== START: Modified Weekly Attendance Card ===== -->
+        <div class="row col-md-8 mb-3">
             <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <h5 class="card-title">All Employees</h5>
-                    <!-- create client button -->
-                    <!-- location = \views\client\modal\create.ejs  -->
-                    <button id="eiCreate" type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#eCreateEmployee">
-                        <i class="bi bi-file-earmark"></i> Create
-                    </button><!-- end of client create button -->
-                </div>
-               
-                <!-- table for employees -->
-                <div >
-                    <table id="eiTable">
+                <div class="table-responsive">
+                    <table id="eiWeeklyAttendanceTable" class="table table-bordered table-striped table-hover w-100">
+                        <!-- Inside index.ejs -->
                         <thead>
+                            <tr>
+                                <th style="width: 50px;">Employee</th> <!-- Keep width for Employee column -->
+                                
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== END: Modified Weekly Attendance Card ===== -->
+
+
+        <!-- ===== START: All Employees Card (Using Previous DataTable Code) ===== -->
+        <div class="card shadow-sm">
+            <div class="card-body pt-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title p-0 m-0">All Employees</h5>
+                    <button id="eiCreate" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#eCreateEmployee">
+                        <i class="bi bi-plus-lg me-1"></i> Create New
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="eiTable" class="table table-bordered table-striped table-hover w-100">
+                        <thead class="table-light">
                             <tr>
                                 <th>Name</th>
                                 <th>Contact Number</th>
                                 <th>Address</th>
-                                <th>Job</th>
+                                <th>Job Title</th>
+                                <!-- <th>Actions</th> -->
                             </tr>
                         </thead>
+                        <tbody>
+                            <!-- Populated by DataTables -->
+                        </tbody>
                     </table>
                 </div>
 
-                <!-- End Table on list of clients -->
             </div>
         </div>
+         <!-- ===== END: All Employees Card ===== -->
+
     </section>
 </main><!-- End #main -->
+
 <%- include("../partials/toaster") %>
 <%- include("modal/create") %>
 <!-- modal -->
 
 <%- include("../partials/script") %>
+<!-- Make sure DataTables JS/CSS are included if you haven't already -->
 <script src="../../assets/js/employees/index.js"></script>
 <script src="../../assets/js/employees/modal/create.js"></script>
 <%- include("../partials/footer") %>

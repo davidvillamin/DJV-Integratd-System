@@ -15,5 +15,9 @@ $(function(){
         delay: 5000
     });
 
+    var settingsEmployee = crudiAjax({}, "/settings/employee", "POST")
+    console.log(settingsEmployee);
     
+
+    EmployeeTimeSettings()
 })
