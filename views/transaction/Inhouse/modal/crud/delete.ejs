@@ -1,0 +1,27 @@
+<div class="modal fade" id="tihDeleteModal" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete In-House Transaction</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="tihDelete" novalidate enctype="multipart/form-data">
+                    <input type="hidden" id="tihdId">
+                    <input type="hidden" id="tihdClientId">
+                    <div class="d-flex justify-content-center">
+                        <img src="/assets/img/delete-error.png" class="img-fluid" style="height: 100px;">
+                        <div class="modal-body">
+                            Are you sure you want to delete <strong id="tihdJobOrderNumber"></strong> transaction?
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        

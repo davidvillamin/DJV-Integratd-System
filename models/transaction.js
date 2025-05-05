@@ -10,7 +10,7 @@ var transactionDbSchema = new mongoose.Schema({
         }
     ,
     RecieveDate: Date,
-    Recieve: String,
+    RecievedBy: String,
     Device: String,
     SerialNumber: String,
     Notes: Object,
@@ -21,12 +21,7 @@ var transactionDbSchema = new mongoose.Schema({
             base64String: String
         }
     ],
-    TempStatus: Array, // Pending, In Progress, Quotation,
-    //Pending Approval, For Release, Pending Payment, Incomplete Payment,
-    //Hold
-    FixedStatus: Array, // Cancel Repair, Partial Approval,
-    //Parts Request(Major), Parts Request(Minor), Parts Request(Major/Minor),
-    // Parts Approve, Repaired, Released, Paid, Closed
+    Tags: Array, // temporary tags or fix tags
     Technician: String,
     Balance: Number,
     Billing: {
@@ -40,7 +35,6 @@ var transactionDbSchema = new mongoose.Schema({
             {
                 Description: String,
                 Quantity: Number,
-                UnitPrice: Number,
                 Price: Number
             }
         ],
@@ -58,7 +52,7 @@ var transactionDbSchema = new mongoose.Schema({
             }
         ]
     },
-    Release: {
+    ReleasedBy: {
         Date: Date,
         Technician: String
     },

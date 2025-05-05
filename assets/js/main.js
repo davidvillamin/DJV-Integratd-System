@@ -332,20 +332,6 @@ function quillInit(id){
         }],
         ["bold", "italic", "underline", "strike"],
         [{
-            color: []
-          },
-          {
-            background: []
-          }
-        ],
-        [{
-            script: "super"
-          },
-          {
-            script: "sub"
-          }
-        ],
-        [{
             list: "ordered"
           },
           {

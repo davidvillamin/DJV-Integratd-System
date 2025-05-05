@@ -26,17 +26,6 @@
                     <!-- Table with stripped rows -->
                     <!-- assets/js/transaction/inhouse/index.js -->
                     <table id="tihIndexTable">
-                        <thead>
-                        <tr>
-                            <th>Job Order</th>
-                            <th>Name</th>
-                            <th>Device</th>
-                            <th>Bill</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
                     </table>
                     <!-- End Table with stripped rows -->
                 </div>
@@ -46,6 +35,8 @@
     </a>
 <!-- modal -->
 <%- include("modal/crud/create") %>
+<%- include("modal/crud/edit") %>
+<%- include("modal/crud/delete") %>
 
 <%- include("../../partials/toaster") %>
 <%- include("../../partials/script") %>
@@ -53,4 +44,6 @@
 <!-- script -->
 <script src="../../../assets/js/transaction/inhouse/index.js"></script>
 <script src="../../../assets/js/transaction/inhouse/crud/create.js"></script>
+<script src="../../../assets/js/transaction/inhouse/crud/edit.js"></script>
+<script src="../../../assets/js/transaction/inhouse/crud/delete.js"></script>
 <%- include("../../partials/footer") %>

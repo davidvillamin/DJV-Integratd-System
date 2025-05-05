@@ -1,0 +1,114 @@
+<!-- tihvtEditModal - Transaction in House View Tags Edit Modal -->
+<div class="modal fade" id="tihvtEditModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Tags</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <!-- tihvtEdit - Transaction in House View Tags Edit -->
+                <form class="needs-validation" id="tihvtEdit" novalidate enctype="multipart/form-data">
+
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="row" id="tihvteSwitch">
+                                <div class="col-6">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsTemp" type="checkbox" role="switch" id="tihvtePending" name="Pending">
+                                        <label class="form-check-label" for="tihvtePending">Pending</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsTemp" type="checkbox" role="switch" id="tihvteInProgress" name="InProgress">
+                                        <label class="form-check-label" for="tihvteInProgress">In Progress</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsTemp" type="checkbox" role="switch" id="tihvteQuotation" name="Quotation">
+                                        <label class="form-check-label" for="tihvteQuotation">Quotation</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsTemp" type="checkbox" role="switch" id="tihvtePendingApproval" name="PendingApproval">
+                                        <label class="form-check-label" for="tihvtePendingApproval">Pending approval</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsTemp" type="checkbox" role="switch" id="tihvteForRelease" name="ForRelease">
+                                        <label class="form-check-label" for="tihvteForRelease">For Release</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsTemp" type="checkbox" role="switch" id="tihvtePendingPayment" name="PendingPayment">
+                                        <label class="form-check-label" for="tihvtePendingPayment">Pending Payment</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsTemp" type="checkbox" role="switch" id="tihvteIncompletePayment" name="IncompletePayemnt">
+                                        <label class="form-check-label" for="tihvteIncompletePayment">Incomplete Payment</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsTemp" type="checkbox" role="switch" id="tihvteHold" name="Hold">
+                                        <label class="form-check-label" for="tihvteHold">Hold</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsFixed" type="checkbox" role="switch" id="tihvteCancelRepair" name="CancelRepair">
+                                        <label class="form-check-label" for="tihvteCancelRepair">Cancel Repair</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsFixed" type="checkbox" role="switch" id="tihvtePartsRequest" name="PartsRequest">
+                                        <label class="form-check-label" for="tihvtePartsRequest">Parts Request</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsFixed" type="checkbox" role="switch" id="tihvtePartsApprove" name="PartsApprove">
+                                        <label class="form-check-label" for="tihvtePartsApprove">Parts Approve</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsFixed" type="checkbox" role="switch" id="tihvteRepaired" name="Repaired">
+                                        <label class="form-check-label" for="tihvteRepaired">Repaired</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsFixed" type="checkbox" role="switch" id="tihvteReleased" name="Released">
+                                        <label class="form-check-label" for="tihvteReleased">Released</label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input tagsFixed" type="checkbox" role="switch" id="tihvtePaid" name="Paid">
+                                        <label class="form-check-label" for="tihvtePaid">Paid</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="row" id="tihvteSample">
+                                <div class="col-6">
+                                    <!-- temporary status -->
+                                    <!-- tihvtes - Transaction InHouse View Tags Edit Sample -->
+                                    <span class="badge bg-warning text-dark Pending">Pending</span> <br>
+                                    <span class="badge bg-warning text-dark InProgress">In Progress</span> <br>
+                                    <span class="badge bg-warning text-dark Quotation">Quotation</span> <br>
+                                    <span class="badge bg-warning text-dark PendingApproval">Pending Approval</span> <br>
+                                    <span class="badge bg-warning text-dark ForRelease">For Release</span><br>
+                                    <span class="badge bg-warning text-dark PendingPayment">Pending Payment</span><br>
+                                    <span class="badge bg-warning text-dark IncompletePayemnt">Incomplete Payment</span><br>
+                                    <span class="badge bg-warning text-dark Hold">Hold</span> <br>
+                                </div>
+                                <div class="col-6">
+                                    <!-- tagsFixed status -->
+                                    <span class="badge bg-success CancelRepair">Cancel Repair</span>    <br>
+                                    <span class="badge bg-success PartsRequest">Parts Request</span>    <br>
+                                    <span class="badge bg-success PartsApprove">Parts Approve</span>  <br>  
+                                    <span class="badge bg-success Repaired">Repaired</span>    <br>
+                                    <span class="badge bg-success Released">Released</span>    <br>
+                                    <span class="badge bg-success Paid">Paid</span>    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        
