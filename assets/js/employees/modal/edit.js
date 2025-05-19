@@ -7,6 +7,9 @@ function editEmployee() {
                     e.preventDefault();
                     var employeedata = {}
                     employeedata.data = {
+                        
+                        // eie = Employee Information Edit
+
                         Name:                       $('#eieName').val(),
                         JobTitle:                   $('#eieJob').val(),
                         PlaceofBirth:               $('#eiePlaceofBirth').val(),

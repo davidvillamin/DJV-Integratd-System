@@ -116,6 +116,8 @@ function processTimeDataForTable(timeArray) {
     }
 
     // Helper function for rounding (ensure moment.js is loaded)
+
+    // Function to round a given date to the nearest 15 minutes
     function roundToNearest15(date) {
         if (!date) return null;
         const momentDate = moment(date);
@@ -220,6 +222,7 @@ function processTimeDataForTable(timeArray) {
     // Remove the temporary timestamp property before returning
     return timeList.map(({ timestamp, ...rest }) => rest);
 }
+
 
 
 

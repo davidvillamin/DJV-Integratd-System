@@ -2,6 +2,8 @@
 var id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 function employeeEditPopulate(){
 
+  // ===== ei = Employee Information =====
+
   eiAddressAdd()
   eiAddressDelete()
   
@@ -28,7 +30,10 @@ function employeeEditPopulate(){
   
   //================================================================================================
   // Personal Data
-  //===========================================================   =====================================
+  //================================================================================================
+
+  // eie = Employee Information Edit
+
   $('#eieName').val(employeedata.Name)
   $('#eieJob').val(employeedata.JobTitle)
   $('#eieAge').val(employeedata.Age)

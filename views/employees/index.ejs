@@ -19,6 +19,7 @@
             <div class="row col-md-6">
                 <div class="card-body">
                     <div class="table-responsive">
+                      <!-- ei = Employee information -->
                         <table id="eiWeeklyAttendanceTable" class="table table-bordered table-striped table-hover w-100">
                             <!-- Inside index.ejs -->
                             <thead>
@@ -46,7 +47,7 @@
                   echarts.init(document.querySelector("#pieChart")).setOption({
                     title: {
                       text: 'Ticket Statistics',
-                      subtext: 'Weekly Attendance',
+                      subtext: 'Attendance',
                       left: 'center',
                     },
                     tooltip: {
@@ -108,12 +109,14 @@
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="card-title p-0 m-0">All Employees</h5>
+                    <!-- ei = Employee information -->
                     <button id="eiCreate" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#eCreateEmployee">
                         <i class="bi bi-plus-lg me-1"></i> Create New
                     </button>
                 </div>
 
                 <div class="table-responsive">
+                  <!-- ei = Employee information -->
                     <table id="eiTable" class="table table-bordered table-striped table-hover w-100">
                         <thead class="table-light">
                             <tr>

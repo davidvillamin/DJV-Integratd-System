@@ -1,44 +1,60 @@
-<!--========= e  = employee                  =========-->
-<!--========= ei = employee information      =========-->
+<!-- e = employee -->
+<!-- ei = employee information -->
 
 <div class="modal fade" id="eCreateEmployee" tabindex="-1">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
+                <!-- Modal title for creating employee information -->
                 <h5 class="modal-title">Employee Information</h5>
+                <!-- Close button for the modal -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <!-- eic = Employee Information Create Form -->
                 <form class="needs-validation" id="eicCreate" novalidate enctype="multipart/form-data">
+                    <!-- Row for Name input -->
                     <div class="row g-3 mb-3 align-items-center">
                         <div class="col-3">
+                            <!-- Label for Name -->
                             <label for="eicName" class="col-form-label">Name</label>
                         </div>
                         <div class="col-9">
+                            <!-- Input field for Name -->
                             <input type="text" class="form-control eicName" required>
                         </div>
                     </div>
+                    <!-- Row for Contact Number input -->
                     <div class="row g-3 mb-3 align-items-center">
                         <div class="col-3">
+                            <!-- Label for Contact Number -->
                             <label for="eicContactNumber" class="col-form-label">Contact Number</label>
                         </div>
                         <div class="col-9">
+                            <!-- Input field for Contact Number -->
+                            <!-- onkeypress allows only numbers, parentheses, and plus sign -->
                             <input type="text" class="form-control eicContactNumber" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 40 || event.charCode == 41 || event.charCode == 43" required>
                         </div>
                     </div>
+                    <!-- Row for Address input -->
                     <div class="row g-3 mb-3 align-items-center">
                         <div class="col-3">
+                            <!-- Label for Address -->
                             <label for="eicAddress" class="col-form-label">Address</label>
                         </div>
                         <div class="col-9">
+                            <!-- Input field for Address -->
                             <input type="text" class="form-control eicAddress" required>
                         </div>
                     </div>
+                    <!-- Row for Job input -->
                     <div class="row g-3 mb-3 align-items-center">
                         <div class="col-3">
+                            <!-- Label for Job -->
                             <label for="eicJob" class="col-form-label">Job</label>
                         </div>
                         <div class="col-9">
+                            <!-- Input field for Job -->
                             <input type="text"  class="form-control eicJob" required></input>
                         </div>
                     </div>

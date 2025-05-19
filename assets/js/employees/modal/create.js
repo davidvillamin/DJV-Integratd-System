@@ -1,6 +1,9 @@
 function createEmployee() {
     return new Promise(function(resolve, reject) {
         try {
+
+            // eic = Employee Information Create
+            
             $('#eicCreate').on('submit',function(e){
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
