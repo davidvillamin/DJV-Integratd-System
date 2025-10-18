@@ -59,15 +59,20 @@ module.exports = router;
 async function populateTable(){
     var cList = [];
     var clientList = await Client.find()
-        .select('_id Name Address isIndividual') // specify the fields you want to retrieve
+        .select('_id FullName Address.FullAddress BusinessName') // specify the fields you want to retrieve
         .lean();
     // convert data to string
     clientList.forEach(function(c){
-        var clientType = c.isIndividual ? "<span class='badge bg-primary'>Individual</span>" : "<span class='badge bg-warning'>Corporate</span>";
+        var clientType = ''
+        if (c.BusinessName == '') {
+            clientType = "<span class='badge bg-primary'>Individual</span>"
+        } else {
+            clientType = "<span class='badge bg-warning'>Business</span>"
+        }
 
         cList.push([
-            "<a href='/client/view/" + c._id + "'>" + c.Name + "</a>",
-            c.Address,
+            "<a href='/client/view/" + c._id + "'>" + c.FullName + "</a>",
+            c.Address.FullAddress,
             clientType
         ]);
     });

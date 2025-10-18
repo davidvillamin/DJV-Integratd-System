@@ -222,14 +222,17 @@ h6 {
   border: none;
   border-radius: 5px;
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  font-family: "Poppins", sans-serif;
 }
 
 .card-header,
 .card-footer {
-  border-color: #ebeef4;
-  background-color: #fff;
-  color: #798eb3;
-  padding: 15px;
+  /* border-color: #ebeef4; */
+  /* background-color: #fff; */
+  color: #012970;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 15px;
 }
 
 .card-title {

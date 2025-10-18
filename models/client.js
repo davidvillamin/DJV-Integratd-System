@@ -1,11 +1,18 @@
 var mongoose = require("mongoose");
 var clientSchema = new mongoose.Schema({
-    Name: String,
-    Address: String,
-    ContactDetails: [],
+    CreatedDate: Date,
+    FirstName: String,
+    LastName: String,
+    FullName: String,
+    BusinessName: String,
     Email: String,
-    isMale: Boolean,
-    isIndividual: Boolean,
+    ContactDetails: [],
+    Address: {
+        FullAddress: String,
+        AddressLine: String,
+        City: String,
+        Zip: String,
+    },
     Notes: String,
     Transaction: [
         {

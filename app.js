@@ -41,7 +41,9 @@ var express                         = require("express"),
 //======================================================================================================
 var mongoose = require('mongoose');
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1/DJVIntegratedSystem';
+// mongodb://root:root@192.168.254.150:27017/?directConnection=true&authSource=admin
+// var mongoDB = 'mongodb://root:root@192.168.254.150:27017/DJVIntegratedSystem';
+var mongoDB = 'mongodb://root:root@192.168.254.150:27017/DJV?directConnection=true&authSource=admin';
 //Get the default connection
 // mongoose.connect(mongoDB, { useNewUrlParser: true });
 //connection with declaired pool size
