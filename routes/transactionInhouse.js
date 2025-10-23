@@ -2,8 +2,6 @@ var express                             = require("express"),
     mongoose                            = require("mongoose");
     moment                              = require("moment");
     Transaction                         = require("../models/transaction"),
-    ItemInformation                     = require("../models/itemInformation"),
-    Serial                              = require("../models/serial"),
     Client                              = require("../models/client"),
     router                              = express.Router();
 //===============================================================================================================

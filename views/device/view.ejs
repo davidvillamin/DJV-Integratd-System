@@ -1,80 +1,263 @@
 <%- include("../partials/header") %>
-<%#- include("../partials/loading") %>
+<%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
+<!-- dv - Device View -->
+ <!-- dvc - Device View Client -->
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1 class="placeholder-glow">
-            <span class="dvName">
-                <span class="placeholder col-1"></span>
-            </span>
-        </h1>
+        <h1 id="dvDeviceName"></h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="/Device">Device</a></li>
-                <li class="breadcrumb-item active dvName"></li>
+                <li class="breadcrumb-item active">Device Profile</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
     <section class="section profile">
         <div class="row">
-            <div class="col-xl-4">
+            <!-- =====================left side ===================-->
+            <div class="col-xl-3">
+                <!-- Device Information -->
                 <div class="card">
-                    <!-- parts information -->
-                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center text-center placeholder-glow">
-                        <img id="pivProfile" src="/assets/img/product-2.jpg" alt="Profile" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
-                        <div class="d-flex align-items-center" >
-                            <h2 class="mb-1 dvName">
-                                <span class="placeholder col-12"></span>
-                            </h2>
-                            <i id="dvEdit" class="bi bi-pencil-square pencil-icon" data-bs-toggle="modal" data-bs-target=""></i>
+                    <div class="card-header d-flex">
+                        <span class="me-auto">Device Information</span>
+                        <i class="bi bi-pencil-square mx-2"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                Type:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvType"></span>
+                            </div>
                         </div>
-                   </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Brand:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvBrand"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Model:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvModel"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Serial Number:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvSerial"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Created Date:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvCreatedDate"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Client Information -->
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span class="me-auto">Client Information</span>
+                        <i class="bi bi-pencil-square mx-2" data-bs-toggle="modal" data-bs-target="#cEditModal"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                Name:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvcName"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Email:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvcEmail"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Contact Number:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvcContactNumber"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Address:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvcAddress"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Created Date:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvcCreatedDate"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-xl-8">
+            <!-- =====================Ceneter Content===================-->
+
+            <div class="col-xl-6">
+                <!-- Tickets -->
                 <div class="card">
-                    <div class="card-body pt-3">
-                        <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
-                                    Inventory
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                                    Deployed
-                                </button>
-                            </li>
-                          </ul>
-                          <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                                    <div class="d-flex flex-row-reverse">
-                                        <!--=========== ds = device serial ===========-->
-                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#dvsCreateModal">
-                                            Add
-                                        </button>
-                                    </div>
-                                    <table class="table" id="diViewTable">
-                                        <thead>
-                                            <td>Serial Number</td>
-                                            <td>Brand</td>
-                                            <td>Model</td>
-                                            <!-- <td>Description</td> -->
-                                            <td>Action</td>
-                                            
-                                        </thead>
-                                        
-                                    </table>
-                                </div>
-                                
-                                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
-                                    
-                                </div>
-                            </div>
-                        </ul>
+                    <div class="card-header">
+                        Tickets
+                    </div>
+                    <div class="card-body">
+                        <table id="cvTicketTable" class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Subject</th>
+                                    <th>Created</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Tk-501</td>
+                                    <td>Security Alert – Possible Ransomware Detected</td>
+                                    <td>09-13-25</td>
+                                    <td>New</td>
+                                </tr>
+                                <tr>
+                                    <td>Tk-502</td>
+                                    <td>Slow Computer – Investigation Needed</td>
+                                    <td>09-13-25</td>
+                                    <td>In Progress</td>
+                                </tr>
+                                <tr>
+                                    <td>Tk-503</td>
+                                    <td>New Hire Onboarding – IT Setup Required</td>
+                                    <td>09-13-25</td>
+                                    <td>Waiting on Customer</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>  
+                </div>
+                <!-- Quotation -->
+                <div class="card">
+                    <div class="card-header">
+                        Quotations
+                    </div>
+                    <div class="card-body">
+                        <table id="cvTicketTable" class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Subject</th>
+                                    <th>Created</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Quo-222</td>
+                                    <td>Subject of Ticket</td>
+                                    <td>10/17/25</td>
+                                    <td>10,000.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Quo-4002</td>
+                                    <td>Subject of Ticket</td>
+                                    <td>10/18/25</td>
+                                    <td>20,000.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Quo-4003</td>
+                                    <td>Subject of ticket</td>
+                                    <td>10/16/25</td>
+                                    <td>30,000.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>  
+                </div>
+                <!-- Invoice -->
+                <div class="card">
+                    <div class="card-header">
+                        Incoices
+                    </div>
+                    <div class="card-body">
+                        <table id="cvTicketTable" class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Subject</th>
+                                    <th>Created</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Inv-222</td>
+                                    <td>Subject of Ticket</td>
+                                    <td>10/17/25</td>
+                                    <td>10,000.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Inv-4002</td>
+                                    <td>Subject of Ticket</td>
+                                    <td>10/18/25</td>
+                                    <td>20,000.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Inv-4003</td>
+                                    <td>Subject of ticket</td>
+                                    <td>10/16/25</td>
+                                    <td>30,000.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>  
+                </div>
+            </div>
+            <!-- =================right side ===================-->
+            <div class="col-xl-3">
+                <!-- Images -->
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span class="me-auto">Images</span>
+                        <i class="bi bi-plus-circle"></i>
+                        <i class="bi bi-pencil-square mx-2"></i>
+                    </div>
+                    <div class="card-body">
+                        <p class="fst-italic mb-0">No Images available.</p>
+                    </div>
+                </div>
+                <!-- Notes -->
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span class="me-auto">Notes</span>
+                        <i class="bi bi-pencil-square mx-2" data-bs-toggle="modal" data-bs-target="#dveNotesModal"></i>
+                    </div>
+                    <div class="card-body">
+                        <div id="dvNotes"></div>
                     </div>
                 </div>
             </div>
@@ -84,8 +267,12 @@
 <%- include("../partials/toaster") %>
 
 <!-- modal -->
+<%- include("modal/editNotes") %>
+<%- include("../client/modal/client/edit") %>
+
+
 <%- include("../partials/script") %>
 <script src="../../assets/js/device/view.js"></script>
-<script src="../../assets/js/device/serial/create.js"></script>
+<script src="../../assets/js/device/crud/editNotes.js"></script>
 
 <%- include("../partials/footer") %>

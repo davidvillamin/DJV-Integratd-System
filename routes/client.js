@@ -17,6 +17,14 @@ router.post("/client/index/table", async function(req, res){
     var tableData = await populateTable()
     res.send(tableData)
 });
+// ============================================================
+// Generic Populate Client
+// ============================================================
+router.post("/client/list", async function(req, res){
+    var clientList = await Client.find()
+        .lean();
+    res.send(clientList)
+})
 
 // ============================================================
 // Client Create
@@ -33,8 +41,8 @@ router.post("/client/create", async function(req, res){
 // Client Edit
 // ============================================================
 router.post("/client/edit", async function(req, res){
-    await Client.findByIdAndUpdate(req.body.data.id, req.body.data.data)
-    res.send('success')
+    await Client.findByIdAndUpdate(req.body.data.clientId, req.body.data.data)
+    res.send('You have successfuly updated the client information!')
 });
 
 // ============================================================
@@ -50,7 +58,9 @@ router.get("/client/view/:clntId", function(req, res){
 
 //get client info
 router.post("/client/view/ajax", async function(req, res){
-    var foundClient = await Client.findById(req.body.data.id)
+    var foundClient = await Client.findById(req.body.data.clientId)
+    .populate('Devices')
+    .lean();
     res.send(foundClient)
 });
 

@@ -1,6 +1,8 @@
 <%- include("../partials/header") %>
-<%- include("../partials/loading") %>
+<%#- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
+<!-- Prefix Legends
+ii - Inventory Index -->
 <main id="main" class="main">
     <div class="pagetitle">
     <h1>Inventory</h1>
@@ -14,33 +16,38 @@
     
     <section class="section">
         <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h5 class="card-title p-1 m-0 align-self-center">All Products </h5>
+                <!-- create device button -->
+                <!-- location = \views\device\modal\create.ejs -->
+                <button type="button" class="btn btn-success m-0 p-1" data-bs-toggle="modal" data-bs-target="#ipCreateModal">
+                    <i class="bi bi-plus-circle"></i> New
+                </button> <!-- end of device create button -->
+            </div>
             <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <h5 class="card-title">All Items</h5>
-                    <!-- iii = inventory item information -->
-                    <button type="button" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#iiiCreateModal">
-                        <i class="bi bi-file-earmark-plus"></i> Create
-                    </button>
-                </div>
-                <!-- Table with stripped rows -->
-                <!-- iiii = Inventory index item Information -->
-                <table id="iiiiIndexTable">
+                <!-- Table for list of inventory
+
+                This table is created by DataTable
+                location = \assets\js\device\index.js -->
+                <table id="iiTable">
                     <thead>
                         <tr>
-                            <th>Brand</th>
-                            <th>Model</th>
+                            <th>Code</th>
+                            <th>Name</th>
                             <th>Description</th>
+                            <th>Quantity</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
+                <!-- End Table on list of devices -->
             </div>
         </div>
     </section>
 
 </main><!-- End #main -->
-<%- include("modal/create") %>
+<%- include("modal/Product/create") %>
 
 <%- include("../partials/toaster") %>
 <%- include("../partials/script") %>

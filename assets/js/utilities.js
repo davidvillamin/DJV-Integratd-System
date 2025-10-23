@@ -91,7 +91,7 @@ async function iDataTable(tableName, tableHead, columnDefs ,tableData){
         }),
     });
 }
-
+// tableName, tableHead, hiddenColumns, dataField,  tableData, withSearch, editName, deleteName
 async function initBootstrapTable(tableName, tableHead, hiddenColumns, dataField,  tableData, withSearch, editName, deleteName){
     
     // Ensure the table element exists
@@ -215,47 +215,3 @@ function tagGenerator(tags) {
 
 }
 
-function autoComputeBilling(billing){
-    var parts = 0,
-        payment = 0,
-        serviceCharge = 0,
-        transportation = 0,
-        total = 0,
-        balance = 0; 
-
-    //check if Parts is empty 
-    if (billing.Parts.length !== 0){
-        //computer total parts
-        billing.Parts.forEach(function(part){
-            parts += part.RetailPrice
-        })
-    } 
-    
-    // check if Payment is empty.
-    if (billing.ServiceCharge.length !== 0){
-        // computer total service charge
-        billing.ServiceCharge.forEach(function(sc){
-            serviceCharge += sc.Price
-        })
-    }
-
-    if (billing.Transporation.length !== 0){
-        // computer total Transportation
-        billing.Transporation.forEach(function(transpo){
-            transportation += transpo.Price
-        })
-    }
-
-    total = parts + serviceCharge + transportation
-    
-    if (billing.Payment.length !== 0){
-        // computer total Payement
-        data.Payment.forEach(function(pay){
-            payment += pay.Amount
-        })
-    }
-
-    balance = total - payment
-    
-    return (formatCurrency(balance))
-}

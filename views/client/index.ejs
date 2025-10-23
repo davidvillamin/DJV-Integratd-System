@@ -2,7 +2,7 @@
 
 <!-- ci - Client Index -->
 <%- include("../partials/header") %>
-<%#- include("../partials/loading") %>
+<%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
 <main id="main" class="main">
     <!-- Title Page -->
@@ -18,12 +18,11 @@
     
     <section class="section">
         <div class="card">
-            
             <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title p-1 m-0 align-self-center">All Clients</h5>
                 <!-- create client button -->
                 <!-- location = \views\client\modal\create.ejs  -->
-                <button id="ciCreate" type="button" class="btn btn-success m-0 p-1" data-bs-toggle="modal" data-bs-target="#cCreateModal">
+                <button type="button" class="btn btn-success m-0 p-1" data-bs-toggle="modal" data-bs-target="#cCreateModal">
                     <i class="bi bi-plus-circle"></i> New
                 </button><!-- end of client create button -->
             </div>
@@ -49,7 +48,8 @@
 </main><!-- End #main -->
 
 <!-- modal -->
-<%- include("modal/create") %>
+<%- include("modal/client/create") %>
+
 <!-- notification -->
 <%- include("../partials/toaster") %>
 
@@ -58,6 +58,6 @@
 
 <!-- JS -->
 <script src="/assets/js/client/index.js"></script>
-<script src="/assets/js/client/crud/create.js"></script>
+<script src="/assets/js/client/crud/client/create.js"></script>
 
 <%- include("../partials/footer") %>

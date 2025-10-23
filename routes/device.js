@@ -1,5 +1,6 @@
 var express                             = require("express"),
     Device                              = require("../models/device"),
+    Client                              = require("../models/client"),
     router                              = express.Router();
 
 //====================================================================================================
@@ -9,14 +10,20 @@ var express                             = require("express"),
 router.get("/device", function(req, res){
     res.render("device/index")
 });
+
 // index populate table (ajax)
-router.post("/device/deviceinformation/table", async function(req, res){
+router.post("/device/index/table", async function(req, res){
     var foundDevice = await populateTable()
     res.send(foundDevice)
 });
+
 // successfully created new device
 router.post("/device/create", async function(req, res){
-    await Device.create(req.body.data)
+    var newlyCreatedDevice = await Device.create(req.body.data)
+    Client.findById(req.body.data.Client).then(async function(client){
+        client.Devices.push(newlyCreatedDevice._id);
+        await client.save();
+    })
     res.send("You have successfully created a new device!")
 });
 
@@ -27,16 +34,18 @@ router.get("/device/view/:id", function(req, res){
     res.render("device/view")
 });
 
-router.post("/device/deviceinformation/view/populate", async function(req, res){
-    var foundViewDevice = await populateViewTable()
-    res.send(foundViewDevice)
+router.post("/device/view/populate", async function(req, res){
+    var foundDevice = await Device.findById(req.body.data.id)
+    .populate('Client')
+    .lean()
+    res.send(foundDevice)
 })
 
-router.post("/device/deviceinformation/view/name",async function(req, res){
-    var deviceInformation = await Device.findById(req.body.data.id)
-    .lean()
-    res.send(deviceInformation)
-})
+// router.post("/device/deviceinformation/view/name",async function(req, res){
+//     var deviceInformation = await Device.findById(req.body.data.id)
+//     .lean()
+//     res.send(deviceInformation)
+// })
 
 //====================================================================================================
 // View Serial table
@@ -63,14 +72,15 @@ module.exports = router;
 async function populateTable(){
     var dList = [];
     var deviceList = await Device.find()
-        .select('Brand Model Serial _id') // specify the fields you want to retrieve
+        .populate('Client') // populate Client field with Name
+        .select('Client Name Type') // specify the fields you want to retrieve
         .lean();
     // convert data to string
     deviceList.forEach(function(device){
         dList.push([
-            "<a href='/device/view/" + device._id + "'>" + device.Serial + "</a>",
-            device.Brand,
-            device.Model
+            "<a href='/device/view/" + device._id + "'>" + device.Name + "</a>",
+            device.Client.FullName,
+            device.Type
         ]);
     });
 

@@ -1,19 +1,25 @@
+const { type } = require("jquery");
 var mongoose = require("mongoose");
 
 var transactionDbSchema = new mongoose.Schema({
-    TransactionType: String,
-    JobOrder: String,
+    TransactionType: String, // inhouse , onsite, sales , warranty , project
+    // inhouse - INHXXXX
+    // onsite - ONSXXXX
+    // sales - SALXXXX
+    // warranty - WARXXXX
+    // project - PROJXXXX
+    transactionCode: String, 
     Client: 
         { 
             type: mongoose.Schema.Types.ObjectId,
             ref: "client"
-        }
-    ,
-    RecieveDate: Date,
-    RecievedBy: String,
-    Device: String,
-    SerialNumber: String,
-    Notes: Object,
+        },
+    Device: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "device"
+    },
+    Notes: Object, // quill
+
     Images: [
         {
             Title: String,
@@ -21,47 +27,78 @@ var transactionDbSchema = new mongoose.Schema({
             base64String: String
         }
     ],
+
     Tags: Array, // temporary tags or fix tags
+    
     Technician: String,
-    Balance: Number,
-    Billing: {
-        Parts: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "serial"
-            }
-        ],
-        Transporation: [
-            {
-                Description: String,
-                Quantity: Number,
-                Price: Number
-            }
-        ],
-        ServiceCharge: [
-            {
-                Description: String,
-                Price: Number
-            }
-        ],
-        Payment: [
-            {
-                Date: Date,
-                Description: String,
-                Amount: Number,
-            }
-        ]
+    Supplies: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "supply"
+        }
+    ],
+
+    Running: {
+        Expense: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "running" // ledger
+        },
+        ServiceCharge: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "running" // ledger
+        },
+
+        Quotation: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "running" // ledger
+        },
+        PurchaseOrder: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "running" // ledger
+        },
+        Invoice: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "running" // ledger
+        }, 
+        Payment: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "running" // ledger
+        }
     },
+    Expense: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Expense" // ledger
+    },
+    ServiceCharge: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ServiceCharge" // ledger
+    },
+    Quotation: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "quotation" // ledger
+    },
+    PurchaseOrder: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "purchaseOrder" // ledger
+    },
+    Invoice: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "invoice" // ledger
+    },
+    Payment: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "payment" // ledger
+    },
+
     ReleasedBy: {
         Date: Date,
         Technician: String
     },
-    isClosed: Boolean,
-    CloseTransaction: {
+    RecievedBy: {
         Date: Date,
         Technician: String
-    }
-
+    },
+    isClosed: Boolean,
     
 });
 

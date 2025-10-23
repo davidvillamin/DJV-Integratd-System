@@ -1,3 +1,4 @@
+<!-- dc - device Create -->
 <div class="modal fade" id="diCreateModal" tabindex="-1">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -6,37 +7,39 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="needs-validation" id="diCreate" novalidate enctype="multipart/form-data">
-                    <div class="row g-3 mb-1 align-items-center">
-                        <div class="col-auto">
-                            <label for="dicBrand" class="col-form-label">Brand</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" id="dicBrand" class="form-control">
+                <form class="needs-validation" id="dCreateDevice" novalidate enctype="multipart/form-data">
+                    <div class="input-group input-group-sm mb-3">
+                        <input type="hidden" id="dcClientId">
+                        <span class="input-group-text">Client</span>
+                        <input class="form-control" list="dcClientList" id="dcClient" placeholder="Type to search client..." required>
+                        <datalist id="dcClientList">
+                        </datalist>
+                        <button class="btn btn-outline-secondary" type="button" id="dcClientCreate">Create</button>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="dcTypeLbl">Type</span>
+                        <input type="text" class="form-control" id="dcType" aria-label="Brand" aria-describedby="dcTypeLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="dcBrandLbl">Brand</span>
+                        <input type="text" class="form-control" id="dcBrand" aria-label="Brand" aria-describedby="dcBrandLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="dcModelLbl">Model</span>
+                        <input type="text" class="form-control" id="dcModel" aria-label="Model" aria-describedby="dcModelLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="dcSerialLbl">Serial</span>
+                        <input type="text" class="form-control" id="dcSerial" aria-label="Serial" aria-describedby="dcSerialLbl" required>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0 me-1" id="dcWithSerial" type="checkbox" value="">No Serial
                         </div>
                     </div>
-                    <div class="row g-3 mb-1 align-items-center">
-                        <div class="col-auto">
-                            <label for="dicModel" class="col-form-label">Model</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" id="dicModel" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row g-3 mb-1 align-items-center">
-                        <div class="col-auto">
-                            <label for="dicSerial" class="col-form-label">Serial</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" id="dicSerial" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row g-3 mb-1 align-items-center">
-                        <div class="col-auto">
-                            <label for="dicNotes" class="col-form-label">Notes</label>
-                        </div>
-                        <div class="col-9">
-                            <textarea type="text" id="dicNotes" class="form-control"></textarea>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="dcNameLbl">Name</span>
+                        <input type="text" class="form-control" id="dcName" aria-label="Brand" aria-describedby="dcNameLbl" required>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0 me-1" type="checkbox" id="dcDefaultName" value="">Default Name
                         </div>
                     </div>
                     <div class="modal-footer">

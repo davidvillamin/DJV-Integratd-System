@@ -1,5 +1,5 @@
-var id = window.location.href.split('/')[window.location.href.split('/').length - 1];
-$(async function(){
+var devId = window.location.href.split('/')[window.location.href.split('/').length - 1];
+$(function(){
     //======================================================
     // Loading Screen
     //======================================================
@@ -15,24 +15,36 @@ $(async function(){
         delay: 5000
     });
 
-    var dTable = $('#diViewTable').DataTable({
-        data: crudiAjax({}, "/device/deviceinformation/view/populate", "POST"),
-        pageLength: 5, // set to display 5 items
-        lengthMenu: [5, 10, 25, 50, 100] // entries per page options
-    }) 
-    var deviceInformationData = await crudiAjax({id: id}, "/device/deviceinformation/view/name", 'Post');   
-    dvPopulateData(deviceInformationData);
-
-    // $('#diViewTable .dvDeleteDevice').on('click', async function(){
-    //     // var deviceId = $(this).data('Serial');
-    //     var result = await crudiAjax({ id: id }, "/device/deviceinformation/delete", "POST");
-        // dTable.row($(this)).remove().draw();
-    // });
-    
+    //populate data
+    dvPopulateData();
 })
 
-function dvPopulateData(dTable){
-    $('.dvName').text(dTable.Brand + ' ' + dTable.Serial )
+async function dvPopulateData(dTable){
+    var deviceData = await crudiAjax({id: devId}, "/device/view/populate", 'Post');   
     
+    // populate device data
+    $('#dvDeviceName').text(deviceData.Name)
+    $('#dvType').text(deviceData.Type)
+    $('#dvBrand').text(deviceData.Brand)
+    $('#dvModel').text(deviceData.Model)
+    $('#dvSerial').text(deviceData.withSerial ? deviceData.Serial : 'Serial Not Available');
+    $('#dvCreatedDate').text(deviceData.CreatedDate ? moment(deviceData.CreatedDate).format("MMM-DD-YYYY  hh:mm A") : 'Created Date Not Available');
+
+    //populate client data
+    $('#dvcName').text(deviceData.Client.FullName ? deviceData.Client.FullName : 'Name Not Available');
+    $('#dvcEmail').text(deviceData.Client.Email ? deviceData.Client.Email : 'Email Not Available');
+    $('#dvcAddress').text(deviceData.Client.Address.FullAddress ? deviceData.Client.Address.FullAddress : 'Address Not Available');
+    $('#dvcCreatedDate').text(deviceData.Client.CreatedDate ? moment(deviceData.Client.CreatedDate).format("MMM-DD-YYYY  hh:mm A") : 'Created Date Not Available');
+    
+    deviceData.Client.ContactDetails.forEach(function(contact){
+        contact ? $('#dvcContactNumber').append(" " + contact): 'Contact Number Not Available';
+    });
+
+    // initialize device notes
+    let dvNotes = new Quill('#dvNotes', {
+        theme: 'snow',
+        modules: { toolbar: false },
+        readOnly: true
+    });
     
 }

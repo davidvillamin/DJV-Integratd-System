@@ -95,13 +95,13 @@
         </li><!-- End Dashboard Nav -->
     
         <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-journal-text"></i><span>Ticket</span><i class="bi bi-chevron-down ms-auto"></i>
+          <a class="nav-link collapsed" data-bs-target="#forms-nav-transaction" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-journal-text"></i><span>Transaction</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
-          <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <ul id="forms-nav-transaction" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
               <a id="sbtransaction" class="nav-link collapsed" href="/transaction">
-                <i class="bi bi-circle "></i><span>Ticket</span>
+                <i class="bi bi-circle "></i><span>Dashboard</span>
               </a>
             </li>
             <li>
@@ -135,55 +135,117 @@
 
         <li class="nav-item">
           <a id="sbClient" class="nav-link collapsed" href="/client">
-            <i class="bi bi-person"></i><span>Leads</span>
+            <i class="bi bi-people"></i><span>Leads</span>
           </a>
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
           <a id="sbClient" class="nav-link collapsed" href="/client">
-            <i class="bi bi-person"></i><span>Calendar</span>
+            <i class="bi bi-calendar-event"></i><span>Calendar</span>
           </a>
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
-          <a id="sbClient" class="nav-link collapsed" href="/client">
-            <i class="bi bi-person"></i><span>Reports</span>
+          <a class="nav-link collapsed" data-bs-target="#forms-nav-reports" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-journal-text"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
-        </li><!-- End Tables Nav -->
-
-        <li class="nav-item">
-          <a id="sbClient" class="nav-link collapsed" href="/client">
-            <i class="bi bi-person"></i><span>Invoice</span>
-          </a>
-        </li><!-- End Tables Nav -->
-
-        <li class="nav-item">
-          <a id="sbClient" class="nav-link collapsed" href="/client">
-            <i class="bi bi-person"></i><span>Assets</span>
-          </a>
-        </li><!-- End Tables Nav -->
+          <ul id="forms-nav-reports" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+              <a id="sbtransaction" class="nav-link collapsed" href="/reports">
+                <i class="bi bi-circle "></i><span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbinhouse" class="nav-link collapsed" href="/reports/invoice">
+                <i class="bi bi-circle"></i><span>Invoice</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbonsite" class="nav-link collapsed" href="/reports/po">
+                <i class="bi bi-circle"></i><span>Purchase Order</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbsales" class="nav-link collapsed" href="/reports/quotation">
+                <i class="bi bi-circle"></i><span>Quotation</span>
+              </a>
+            </li>
+          </ul>
+        </li><!-- End Forms Nav -->
 
         <li class="nav-item">
           <a id="sbdevice" class="nav-link collapsed" href="/device">
-            <i class="bi bi-list"></i><span>Device</span>
+            <i class="bi bi-laptop"></i><span>Device</span>
           </a>
         </li><!-- End Tables Nav -->
   
         <li class="nav-item">
           <a id="sbinventory" class="nav-link collapsed" href="/inventory">
-            <i class="bi bi-printer"></i><span>Inventory</span>
+            <i class="bi bi-database-gear"></i><span>Inventory</span>
           </a>
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
-          <a id="sbaccounting" class="nav-link collapsed" href="/accounting">
-            <i class="bi bi-printer"></i><span>Accounting</span>
+          <a class="nav-link collapsed" data-bs-target="#forms-nav-accounting" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-journal-text"></i><span>Accounting</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
-        </li><!-- End Tables Nav -->
+          <ul id="forms-nav-accounting" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+              <a id="sbtransaction" class="nav-link collapsed" href="/accounting">
+                <i class="bi bi-circle "></i><span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbinhouse" class="nav-link collapsed" href="/accounting/ledger/expenses">
+                <i class="bi bi-circle"></i><span>Expenses Ledger</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbonsite" class="nav-link collapsed" href="/accounting/ledger/inventory">
+                <i class="bi bi-circle"></i><span>Inventory Ledger</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbsales" class="nav-link collapsed" href="/accounting/ledger/invoice">
+                <i class="bi bi-circle"></i><span>Invoice Ledger</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/payments">
+                <i class="bi bi-circle"></i><span>Payments Ledger</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/po">
+                <i class="bi bi-circle"></i><span>Purchase Order Ledger</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/quotation">
+                <i class="bi bi-circle"></i><span>Quotation Ledger</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/running">
+                <i class="bi bi-circle"></i><span>Running Ledger</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/sales">
+                <i class="bi bi-circle"></i><span>Sales Ledger</span>
+              </a>
+            </li>
+            <li>
+              <a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/service">
+                <i class="bi bi-circle"></i><span>Service Ledger</span>
+              </a>
+            </li>
+          </ul>
+        </li>
 
         <li class="nav-item">
           <a id="sbemployees" class="nav-link collapsed" href="/employees">
-            <i class="bi bi-gear"></i><span>Employees</span>
+            <i class="bi bi-person-badge"></i><span>Employees</span>
           </a>
         </li><!-- End Tables Nav -->
 

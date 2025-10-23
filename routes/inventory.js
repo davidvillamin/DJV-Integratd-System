@@ -1,6 +1,7 @@
 var express                             = require("express"),
-    ItemInformation                     = require("../models/itemInformation"),
-    Serial                              = require("../models/serial"),
+    Product                             = require("../models/product"),
+    Supply                              = require("../models/supply"),
+    InventoryLedger                     = require("../models/ledgerInventory"),
     router                              = express.Router();
 //====================================================================================================
 // Index Route
@@ -11,15 +12,14 @@ router.get("/inventory", async function(req, res){
     res.render("inventory/index");
 });
 
-//inventory information create
-router.post('/inventory/iteminformation/create', async function(req, res){
-    console.log(req.body.data)
-    await ItemInformation.create(req.body.data)
-    res.send("You have successfuly created a item information!")
+//inventory product create
+router.post('/inventory/product/create', async function(req, res){
+    await Product.create(req.body.data)
+    res.send("You have successfuly created a product!")
 })
 
 //index table population
-router.post('/inventory/index/populate/table', async function(req, res){
+router.post('/inventory/index/table', async function(req, res){
     var tableData = await populateIndexTable();
     res.send(tableData);
 })
@@ -29,66 +29,61 @@ router.post('/inventory/index/populate/table', async function(req, res){
 //====================================================================================================
 
 //view parts information
-router.get('/inventory/iteminformation/view/:id', function(req, res){
+router.get('/inventory/product/view/:id', function(req, res){
     res.render('inventory/view')
 })
 
 //populate parts information view
-router.post('/inventory/iteminformation/view/populate',async function(req, res){
-    var itemInformation = await ItemInformation.findById(req.body.data.id)
+router.post('/inventory/product/view/populate',async function(req, res){
+    var productInformation = await Product.findById(req.body.data.id)
+    .populate('Supply')
     .lean()
-    res.send(itemInformation)
+    res.send(productInformation)
 })
 
-//====================================================================================================
-// Serial Route
-//====================================================================================================
+// add supply
+router.post('/inventory/supply/addSupply', async function(req, res){
+    // count how many data is inside InventoryLedger to create unique code
+    var ledgerCount = await InventoryLedger.countDocuments();
 
-//view part serial list
-router.post('/inventory/view/populate/serial/table', async function(req, res){
-    var tableData = await populateViewSerialTable(req.body.data);
-    res.send(tableData);
-})
-
-//save parts serial data
-router.post('/inventory/serial/create', async function(req, res){
-    await Serial.insertMany(req.body.data.data)
-    var tableData = await populateViewSerialTable(req.body.data.id)
-    res.send(tableData)
-})
+    var newlyCreatedSupply = await Supply.insertMany(req.body.data.data)
+    newlyCreatedSupply.forEach(async function(supply){
+        // ledger entry
+        var ledgerData = {
+            ledger: "Inventory",
+            code: "INV" + String(ledgerCount + 1).padStart(5, '0'), // simple unique code
+            product: req.body.data.id,
+            supply: supply._id,
+            status: "IN",
+            date: new Date(),
+            unitPrice: supply.Cost,
+            description: "New supply added to inventory."
+        }
+        ledgerCount += 1; // increment for next code
+        await InventoryLedger.create(ledgerData);
+        //=============================================
+        // Update product's supply information
+        var foundProduct = await Product.findById(req.body.data.id)
+        foundProduct.Supply.push(supply._id)
+        await foundProduct.save()
+    })
+    res.send("New supply added successfully!")
+});
 
 module.exports = router;
 
 async function populateIndexTable(){
-    var partList = [];
-    var itemInformationList = await ItemInformation.find()
-        .lean();
+    var products = await Product.find({})
+    .lean();
+    var partList = []
     // convert data to string
-    itemInformationList.forEach(function(item){
+    products.forEach(function(product){
         partList.push([
-            "<a>" + item.Brand + "</a>",
-            "<a href='/inventory/iteminformation/view/" + item._id + "'>" + item.Model + "</a>",
-            item.Description,
+            "<a href='/inventory/product/view/" + product._id + "'>" + product.Code + "</a>",
+            "<a href='/inventory/product/view/" + product._id + "'>" + product.Name + "</a>",
+            product.Description,
+            product.quantity
         ]);
     });
-
     return partList;
 }
-
-async function populateViewSerialTable(id){
-    var serialList = [];
-    var itemSerialList = await Serial.find({ItemInformation:id})
-        .lean();
-    // convert data to string
-    itemSerialList.forEach(function(item){
-        serialList.push([
-            "<a>" + item.Serial + "</a>",
-            // "<a href='/inventory/partsinformation/view/" + part._id + "'>" + part.Model + "</a>",
-            item.Description,
-        ]);
-    });
-
-    return serialList;
-}
-
-    

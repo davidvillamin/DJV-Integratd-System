@@ -1,0 +1,63 @@
+
+<!-- ipc = Inventory Product Create-->
+<div class="modal fade" id="ipCreateModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="ipCreate" novalidate enctype="multipart/form-data">
+                    <div class="form-check form-switch d-flex ">
+                        <input class="form-check-input ms-auto me-1" type="checkbox" id="ipcNewProduct" checked>
+                        <label class="form-check-label" for="ipcNewProduct">New Product</label>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipcCodeLbl">Code</span>
+                        <input type="text" class="form-control" id="ipcCode" aria-label="Brand" aria-describedby="ipcCodeLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipcNameLbl">Name</span>
+                        <input type="text" class="form-control" id="ipcName" aria-label="Brand" aria-describedby="ipcNameLbl" required>
+                    </div>
+                    <div class="form-check form-switch d-flex ">
+                        <input class="form-check-input ms-auto me-1" type="checkbox" id="ipcSameAsName" checked>
+                        <label class="form-check-label" for="ipcSameAsName">Same as Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="ipcDescription" style="height: 100px"></textarea>
+                        <label for="ipcDescription">Description</label>
+                    </div>
+                    <div class="form-check form-switch d-flex ">
+                        <input class="form-check-input ms-auto me-1" type="checkbox" id="ipcWithSerial" checked>
+                        <label class="form-check-label" for="ipcWithSerial">with Serial</label>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipcTypeLbl">Type</span>
+                        <input type="text" class="form-control" id="ipcType" aria-label="Brand" aria-describedby="ipcTypeLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipcBrandLbl">Brand</span>
+                        <input type="text" class="form-control" id="ipcBrand" aria-label="Brand" aria-describedby="ipcBrandLbl" required>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0 me-1" id="ipcWithBrand" type="checkbox" value="">No Brand
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipcModelLbl">Model</span>
+                        <input type="text" class="form-control" id="ipcModel" aria-label="Brand" aria-describedby="ipcModelLbl" required>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0 me-1" id="ipcWithModel" type="checkbox" value="">No Model
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
