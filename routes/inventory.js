@@ -132,8 +132,17 @@ router.post('/inventory/product/image/delete', async function(req, res){
 module.exports = router;
 
 async function populateIndexTable(){
+    // find all products
     var products = await Product.find({})
     .lean();
+    // count all supplies base on product code to get quantity that is Available via for loop
+    for (let i = 0; i < products.length; i++) {
+        var supplyCount = await Supply.countDocuments({
+            ProductCode: products[i].Code,
+            Status: "Available"
+        });
+        products[i].quantity = supplyCount;
+    }    
     var partList = []
     // convert data to string
     products.forEach(function(product){
