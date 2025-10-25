@@ -16,7 +16,7 @@ var supplySchema = new mongoose.Schema({
         ORDate: Date,
         Warranty: String,
         Notes: String,
-        Image: String // for OR
+        // Image: String // for OR
     },
 
     // Accounting Information

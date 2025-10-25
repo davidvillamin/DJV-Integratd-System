@@ -1,0 +1,55 @@
+
+<!-- ipe = Inventory Product Edit-->
+<div class="modal fade" id="ipEditModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="ipEdit" novalidate enctype="multipart/form-data">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipeCodeLbl">Code</span>
+                        <input type="text" class="form-control" id="ipeCode" aria-label="Brand" aria-describedby="ipeCodeLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipeNameLbl">Name</span>
+                        <input type="text" class="form-control" id="ipeName" aria-label="Brand" aria-describedby="ipeNameLbl" required>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="ipeDescription" style="height: 100px"></textarea>
+                        <label for="ipeDescription">Description</label>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipeIdealPricingLbl">Ideal Pricing</span>
+                        <input type="text" class="form-control" id="ipeIdealPricing" aria-label="Brand" aria-describedby="ipeIdealPricingLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipeTypeLbl">Type</span>
+                        <input type="text" class="form-control" id="ipeType" aria-label="Brand" aria-describedby="ipeTypeLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipeBrandLbl">Brand</span>
+                        <input type="text" class="form-control" id="ipeBrand" aria-label="Brand" aria-describedby="ipeBrandLbl" required>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0 me-1" id="ipeWithBrand" type="checkbox" value="">No Brand
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ipeModelLbl">Model</span>
+                        <input type="text" class="form-control" id="ipeModel" aria-label="Brand" aria-describedby="ipeModelLbl" required>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0 me-1" id="ipeWithModel" type="checkbox" value="">No Model
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

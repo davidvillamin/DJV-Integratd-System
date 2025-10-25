@@ -17,8 +17,8 @@ $(function(){
 
 // iv = inventory view
 async function ivPopulateData(){
-    var data = crudiAjax({id:productId},"/inventory/product/view/populate","POST")
-    console.log(data)
+    var data = await crudiAjax({id:productId},"/inventory/product/view/populate","POST")
+
     $('#ivProductName').text(data.Name)
     $('#ivProductCode').text(data.Code)
     $('#ivType').text(data.Type)
@@ -26,11 +26,21 @@ async function ivPopulateData(){
     $('#ivModel').text(data.Model)
     $('#ivDescription').text(data.Description)
     $('#ivWithSerial').text(data.withSerial ? 'Yes' : 'No')
+    $('#ivIdealPrice').text(data.idealPrice ? formatCurrency(data.idealPrice) : 'No Ideal Price set');
+
+    // populate details 
+    $('#dvNotes').text(data.Notes ? data.Notes : 'No Notes available');
     
     //set add supply modal
     // set modal target based on whether product uses serials or not
-    var target = data.withSerial ? '#isaWithSerialModal' : '#isaWithoutSerialModal';
-    $('#ivAddSupply').attr('data-bs-target', target).attr('data-target', target);
+    var addTarget = data.withSerial ? '#isaWithSerialModal' : '#isaWithoutSerialModal';
+    $('#ivAddSupply').attr('data-bs-target', addTarget).attr('data-target', addTarget);
+
+
+    //set edit supply modal
+    // set modal target based on whether product uses serials or not
+    var editTarget = data.withSerial ? '#iseWithSerialModal' : '#iseWithoutSerialModal';
+    $('#ivEditSupply').attr('data-bs-target', editTarget).attr('data-target', editTarget);
     
     // supply with serial number functions
     if (data.withSerial){
@@ -41,144 +51,104 @@ async function ivPopulateData(){
         populateIvWithoutSerialSupplyTable(data.Supply)
     }
 
+    // initialize product notes modal
+    initializeProductNotesEdit(data.Notes, productId).then( function(){
+        ivPopulateData()
+    });
+
+    // initialize image modal
+    initImageEditModal(data.Images, productId).then( function(){
+        ivPopulateData()
+    });
+
+    // populate image list
+    if (data.Images.length === 0) {
+        $('#ivImageList').html('<p class="text-muted">No images available.</p>');
+    } else {
+        // clear existing images
+        $('#ivImageList').empty();
+        data.Images.forEach(function(image) {
+            $('#ivImageList').append('<img src="' + image.base64String + '" class="img-thumbnail" />');
+        });
+    }
+
+    // initialize edit product modal
+    initProductEditModal(data,productId).then( function(){
+        ivPopulateData()
+    });
+
+    // for edit supply modal, populate serial numbers dropdown
+    initEditSupplyModal(data.Supply).then( function(){
+        ivPopulateData()
+    });
 }
-    
 // populate inventory view supply table
-function populateIvWithSerialSupplyTable(supplyData){
-    // Apply hover and cursor styles directly to table rows
-    $('#ivSupplyTable tbody tr').css({
-        'cursor': 'pointer'
+async function populateIvWithSerialSupplyTable(supplyData){
+    // change data format for bootstrap table
+    supplyData = supplyData.map(function(item){
+        item.DateAcquired = moment(item.DateAcquired).format("MMM DD YYYY");
+        return item;
+    })
+    await initBootstrapTable(
+        "#ivSupplyTable",                                                             // tableName
+        ["Date", "Serial", "Status", "id","Cost","Product", "ProductCode", ],         // tableHead
+        ["id", "Cost", "Product", "ProductCode"],                                     // hiddenColumns (hide ID column)
+        ["DateAcquired", "Serial", "Status", "id","Cost","Product", "ProductCode"],   // dataField
+        supplyData,                                                                   // tableData
+        true,                                                                         // withSearch (enable search)
+    );
+
+    // add click event listener for row clicks
+    $("#ivSupplyTable").on('click-row.bs.table', function (e, row, $element) {
+        // change background color of selected row
+        $element.siblings().css('background-color', '');
+        $element.css('background-color', '#e9f5ff');
+        $('#ivSupplyId').val(row._id);
+        $('#ivSupplierName').text(row.Supplier.Name ? row.Supplier.Name : 'No Supplier Name available');
+        $('#ivSupplierAddress').text(row.Supplier.Address ? row.Supplier.Address : 'No Supplier Address available');
+        $('#ivORNumber').text(row.Supplier.OR ? row.Supplier.OR : 'No OR Number available');
+        $('#ivDate').text(row.Supplier.ORDate ? moment(row.Supplier.ORDate).format("MMM/DD/YYYY") : 'No Date available');
+        $('#ivWarranty').text(row.Supplier.Warranty ? row.Supplier.Warranty : 'No Warranty available');
+        $('#ivCost').text(formatCurrency(row.Cost) ? formatCurrency(row.Cost) : 'No Cost available');
+        $('#ivNotes').text(row.Supplier.Notes ? row.Supplier.Notes : 'No Notes available');
+        $('#ivSerialNumber').text(row.Serial);
+
+        // unhide edit supply button
+        $('#ivEditSupply').attr('hidden', false);
     });
-
-    // Add hover event handlers for dynamic styling
-    $('#ivSupplyTable').on('mouseenter', 'tbody tr', function() {
-        if (!$(this).hasClass('table-selected')) {
-            $(this).css('background-color', '#f8f9fa');
-        }
-    }).on('mouseleave', 'tbody tr', function() {
-        if (!$(this).hasClass('table-selected')) {
-            $(this).css('background-color', '');
-        }
-    });
-
-    // delegated click handler so it works for rows added later
-    $('#ivSupplyTable').on('click', 'tbody tr', function () {
-        // toggle selection (single-select)
-        $(this).addClass('table-selected').siblings().removeClass('table-selected');
-        
-        // Apply selected styling
-        $(this).css('background-color', '#e9f5ff');
-        $(this).siblings().css('background-color', '');
-        // populate supply details panel
-        $('#ivSupplierName').text($(this).data('suppliername') || 'No Supplier Name available');
-        $('#ivSupplierAddress').text($(this).data('supplieraddress') || 'No Supplier Address available');
-        $('#ivORNumber').text($(this).data('supplieror') || 'No OR Number available');
-        $('#ivDate').text($(this).data('supplierordate') ? moment($(this).data('supplierordate')).format("MMM/DD/YYYY") : 'No Date available');
-        $('#ivWarranty').text($(this).data('supplierwarranty') || 'No Warranty available');
-        $('#ivCost').text(formatCurrency($(this).data('cost')) || 'No Cost available');
-        $('#ivNotes').text($(this).data('notes') || 'No Notes available');
-
-        $('#ivSerialNumber').text($(this).data('serial') || 'No Serial available');
-    });
-
-    var table = $('#ivSupplyTable');
-    table.append("<thead>\
-            <tr>\
-                <th>Purchased Date</th>\
-                <th>Serial Number</th>\
-                <th>Status</th>\
-            </tr>\
-        </thead><tbody></tbody>");
-    if (supplyData.length === 0){
-        table.find("tbody").append("<tr><td colspan='3' class='text-center'>No Data Available</td></tr>");
-    } else {
-        supplyData.forEach(function(item){
-            var row = "<tr \
-                data-serial='"+item.Serial+"' \
-                data-acquired-date='"+moment(item.DateAcquired).format("MMM/DD/YYYY")+"'\
-                data-supplierName='"+item.Supplier.Name+"' \
-                data-supplierAddress='"+item.Supplier.Address+"'\
-                data-supplierOR='"+item.Supplier.OR+"'\
-                data-supplierORDate='"+item.Supplier.ORDate+"'\
-                data-supplierWarranty='"+item.Supplier.Warranty+"'\
-                data-supplierNotes='"+item.Supplier.Notes+"'\
-                data-cost='"+item.Cost+"'\
-                data-status='"+item.Status+"'>\
-                <td>"+moment(item.DateAcquired).format("MMM/DD/YYYY")+"</td>\
-                <td>"+item.Serial+"</td>\
-                <td>"+item.Status+"</td>\
-            </tr>";
-            table.find("tbody").append(row);
-        });
-    }
 }
 
-function populateIvWithoutSerialSupplyTable(supplyData){
-    // Apply hover and cursor styles directly to table rows
-    $('#ivSupplyTable tbody tr').css({
-        'cursor': 'pointer'
+async function populateIvWithoutSerialSupplyTable(supplyData){
+    // change data format for bootstrap table
+    supplyData = supplyData.map(function(item){
+        item.DateAcquired = moment(item.DateAcquired).format("MMM DD YYYY");
+        return item;
+    })
+    await initBootstrapTable(
+        "#ivSupplyTable",                                                   // tableName
+        ["Date", "Status", "id","Cost","Product", "ProductCode", ],         // tableHead
+        ["id", "Cost", "Product", "ProductCode"],                           // hiddenColumns (hide ID column)
+        ["DateAcquired", "Status", "id","Cost","Product", "ProductCode"],   // dataField
+        supplyData,                                                         // tableData
+        true,                                                               // withSearch (enable search)
+    );
+    // add click event listener for row clicks
+    $("#ivSupplyTable").on('click-row.bs.table', function (e, row, $element) {
+        // change background color of selected row
+        $element.siblings().css('background-color', '');
+        $element.css('background-color', '#e9f5ff');
+        $('#ivSupplyId').val(row._id);
+        $('#ivSupplierName').text(row.Supplier.Name ? row.Supplier.Name : 'No Supplier Name available');
+        $('#ivSupplierAddress').text(row.Supplier.Address ? row.Supplier.Address : 'No Supplier Address available');
+        $('#ivORNumber').text(row.Supplier.OR ? row.Supplier.OR : 'No OR Number available');
+        $('#ivDate').text(row.Supplier.ORDate ? moment(row.Supplier.ORDate).format("MMM/DD/YYYY") : 'No Date available');
+        $('#ivWarranty').text(row.Supplier.Warranty ? row.Supplier.Warranty : 'No Warranty available');
+        $('#ivCost').text(formatCurrency(row.Cost) ? formatCurrency(row.Cost) : 'No Cost available');
+        $('#ivNotes').text(row.Supplier.Notes ? row.Supplier.Notes : 'No Notes available');
+        $('#ivSerialNumber').text("No Serial Available");
+
+        // unhide edit supply button
+        $('#ivEditSupply').attr('hidden', false);
     });
-
-    // Add hover event handlers for dynamic styling
-    $('#ivSupplyTable').on('mouseenter', 'tbody tr', function() {
-        if (!$(this).hasClass('table-selected')) {
-            $(this).css('background-color', '#f8f9fa');
-        }
-    }).on('mouseleave', 'tbody tr', function() {
-        if (!$(this).hasClass('table-selected')) {
-            $(this).css('background-color', '');
-        }
-    });
-
-    // delegated click handler so it works for rows added later
-    $('#ivSupplyTable').on('click', 'tbody tr', function () {
-        // toggle selection (single-select)
-        $(this).addClass('table-selected').siblings().removeClass('table-selected');
-        
-        // Apply selected styling
-        $(this).css('background-color', '#e9f5ff');
-        $(this).siblings().css('background-color', '');
-        // populate supply details panel
-        $('#ivSupplierName').text($(this).data('suppliername') || 'No Supplier Name available');
-        $('#ivSupplierAddress').text($(this).data('supplieraddress') || 'No Supplier Address available');
-        $('#ivORNumber').text($(this).data('supplieror') || 'No OR Number available');
-        $('#ivDate').text($(this).data('supplierordate') ? moment($(this).data('supplierordate')).format("MMM/DD/YYYY") : 'No Date available');
-        $('#ivWarranty').text($(this).data('supplierwarranty') || 'No Warranty available');
-        $('#ivCost').text(formatCurrency($(this).data('cost')) || 'No Cost available');
-        $('#ivNotes').text($(this).data('notes') || 'No Notes available');
-
-        $('#ivSerialNumber').text('No Serial available');
-    });
-
-
-
-    var table = $('#ivSupplyTable');
-    table.append("<thead>\
-            <tr>\
-                <th>Purchased Date</th>\
-                <th>Status</th>\
-            </tr>\
-        </thead><tbody></tbody>");
-    if (supplyData.length === 0){
-        table.find("tbody").append("<tr><td colspan='2' class='text-center'>No Data Available</td></tr>");
-    } else {
-        supplyData.forEach(function(item){
-            var row = "<tr\
-                data-serial='"+item.Serial+"' \
-                data-acquired-date='"+moment(item.DateAcquired).format("MMM/DD/YYYY")+"'\
-                data-supplierName='"+item.Supplier.Name+"' \
-                data-supplierAddress='"+item.Supplier.Address+"'\
-                data-supplierOR='"+item.Supplier.OR+"'\
-                data-supplierORDate='"+item.Supplier.ORDate+"'\
-                data-supplierWarranty='"+item.Supplier.Warranty+"'\
-                data-supplierNotes='"+item.Supplier.Notes+"'\
-                data-cost='"+item.Cost+"'\
-                data-status='"+item.Status+"'>\
-                <td>"+moment(item.DateAcquired).format("MMM/DD/YYYY")+"</td>\
-                <td>"+item.Status+"</td>\
-            </tr>";
-            table.find("tbody").append(row);
-        });
-    }
 }
 

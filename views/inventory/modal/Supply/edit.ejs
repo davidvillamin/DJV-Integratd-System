@@ -1,0 +1,118 @@
+<!-- Prefix Legend -->
+<!-- ise - Inventory Supply Edit-->
+
+<!-- with serial modal -->
+<div class="modal fade" id="iseWithSerialModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Supply</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- isew - inventory supply edit with serial -->
+                <form class="needs-validation" id="iseWithSerialForm" novalidate enctype="multipart/form-data">
+                    <h6>Serials:</h6>
+                    <div class="input-group input-group-sm mb-3 isewSerialGroup">
+                        <span class="input-group-text">Serial</span>
+                        <input type="text" class="form-control" id="isewSerial" aria-label="Brand" required>
+                    </div>
+                    <h6>Supplier Information:</h6>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewProductCodeLbl">Product Code</span>
+                        <input type="text" class="form-control" id="isewProductCode" aria-label="Brand" aria-describedby="isewProductCodeLbl" disabled>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewNameLbl">Name</span>
+                        <input type="text" class="form-control" id="isewName" aria-label="Brand" aria-describedby="isewNameLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewAddressLbl">Address</span>
+                        <input type="text" class="form-control" id="isewAddress" aria-label="Brand" aria-describedby="isewAddressLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewORLbl">OR #</span>
+                        <input type="text" class="form-control" id="isewOR" aria-label="Brand" aria-describedby="isewORLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewORDateLbl">OR Date</span>
+                        <input type="date" class="form-control" id="isewORDate" aria-label="Brand" aria-describedby="isewORDateLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewWarrantyLbl">Warranty</span>
+                        <input type="text" class="form-control" id="isewWarranty" aria-label="Brand" aria-describedby="isewWarrantyLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewNotesLbl">Notes</span>
+                        <input type="text" class="form-control" id="isewNotes" aria-label="Brand" aria-describedby="isewNotesLbl" required>
+                    </div>
+                    <h6>Accounting Information:</h6>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewUnitCostLbl">Unit Cost</span>
+                        <input type="number" class="form-control" id="isewCost" aria-label="Brand" aria-describedby="isewUnitCostLbl" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- without serial modal -->
+<!-- prefix isewo - inventory supply edit without serial -->
+<div class="modal fade" id="iseWithoutSerialModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Supply</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="iseAddSerialForm" novalidate enctype="multipart/form-data">
+                    <h6>Supplier Information:</h6>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewoProductCodeLbl">Product Code</span>
+                        <input type="text" class="form-control" id="isewoProductCode" aria-label="Brand" aria-describedby="isewoProductCodeLbl" disabled>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewoNameLbl">Name</span>
+                        <input type="text" class="form-control" id="isewoName" aria-label="Brand" aria-describedby="isewoNameLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewoAddressLbl">Address</span>
+                        <input type="text" class="form-control" id="isewoAddress" aria-label="Brand" aria-describedby="isewoAddressLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewoORLbl">OR #</span>
+                        <input type="text" class="form-control" id="isewoOR" aria-label="Brand" aria-describedby="isewoORLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewoORDateLbl">OR Date</span>
+                        <input type="date" class="form-control" id="isewoORDate" aria-label="Brand" aria-describedby="isewoORDateLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewoWarrantyLbl">Warranty</span>
+                        <input type="text" class="form-control" id="isewoWarranty" aria-label="Brand" aria-describedby="isewoWarrantyLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewoNotesLbl">Notes</span>
+                        <input type="text" class="form-control" id="isewoNotes" aria-label="Brand" aria-describedby="isewoNotesLbl" required>
+                    </div>
+                    <h6>Accounting Information:</h6>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="isewoUnitCostLbl">Unit Cost</span>
+                        <input type="number" class="form-control" id="isewoCost" aria-label="Brand" aria-describedby="isewoUnitCostLbl" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

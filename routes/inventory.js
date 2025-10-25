@@ -70,6 +70,65 @@ router.post('/inventory/supply/addSupply', async function(req, res){
     res.send("New supply added successfully!")
 });
 
+// edit supply
+router.put('/inventory/supply/editSupply', async function(req, res){
+    await Supply.findByIdAndUpdate(req.body.data.supplyId, req.body.data.data)
+    res.send("Supply information updated successfully!")
+});
+
+// edit product information
+router.put('/inventory/product/edit', async function(req, res){
+    await Product.findByIdAndUpdate(req.body.data.productId, req.body.data.data)
+    res.send("Product information updated successfully!")
+})
+
+// Product Notes edit
+router.post('/inventory/product/notes/edit', async function(req, res){
+    await Product.findByIdAndUpdate(req.body.data.ProductId, {
+        Notes: req.body.data.Notes
+    });
+    res.send("Product notes updated successfully!")
+});
+
+// Product Image edit
+router.post('/inventory/product/image/edit', async function(req, res){
+
+    var newlyfoundProduct = await Product.findById(req.body.data.ProductId);
+    // on the newlyfoundcreatedproduct.Images._id find the image and update else add new image
+    var imageIndex = newlyfoundProduct.Images.findIndex(function(img) {
+        console.log("Comparing: ", img._id.toString(), " with ", req.body.data.ImageId);
+        return img._id.toString() === req.body.data.ImageId;
+    });
+    console.log("Found Image Index: ", imageIndex);
+    if (imageIndex == -1){
+        // add new image
+        await Product.findByIdAndUpdate(req.body.data.ProductId, {
+            $push: { Images: req.body.data.data }
+        });
+    } else {
+        // update existing image
+        newlyfoundProduct.Images[imageIndex] = {
+            Title: req.body.data.data.Title,
+            Description: req.body.data.data.Description,
+            base64String: req.body.data.data.base64String
+        }   
+        await newlyfoundProduct.save();
+    }
+    res.send("Product image updated successfully!")
+});
+
+// product image delete
+router.post('/inventory/product/image/delete', async function(req, res){
+    var foundProduct = await Product.findById(req.body.data.ProductId);
+    var imageIndex = foundProduct.Images.findIndex(function(image){
+        console.log("Comparing: ", image._id.toString(), " with ", req.body.data.ImageId);
+        return image._id.toString() === req.body.data.ImageId;
+    });
+    console.log("Image Index to delete: ", imageIndex);
+    foundProduct.Images.splice(imageIndex, 1);
+    await foundProduct.save();
+    res.send("Product image deleted successfully!")
+});
 module.exports = router;
 
 async function populateIndexTable(){

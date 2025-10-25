@@ -22,6 +22,8 @@ function formatCurrency(amount) {
 }
 
 // convert input image to base 64 string
+// how to use:
+// await img2b64($('#input')[0].files[0])
 function img2b64(file){
     return new Promise((resolve, reject) => {
         var reader = new FileReader();
@@ -91,8 +93,34 @@ async function iDataTable(tableName, tableHead, columnDefs ,tableData){
         }),
     });
 }
-// tableName, tableHead, hiddenColumns, dataField,  tableData, withSearch, editName, deleteName
-async function initBootstrapTable(tableName, tableHead, hiddenColumns, dataField,  tableData, withSearch, editName, deleteName){
+
+
+// How to use iBootstrapTable
+// tableName: Name of table (String) example: "#myTable"
+// tableHead: Array of table headers (Array) example: ["Name", "Age", "Location"]
+// hiddenColumns: Array of columns to hide (Array) example: ["Age"]
+// dataField: Array of data field names corresponding to tableHead (Array) example: ["name", "age", "location"]
+// tableData: Data to populate the table (Array) example: [{name: "John", age: 30, location: "New York"}, ...]
+// withSearch: Boolean to enable or disable search functionality (Boolean) example: true
+
+
+// for adding events
+// https://bootstrap-table.com/docs/api/events/
+// add click event listener for row clicks
+
+// example:
+// $("#ivSupplyTable").on('click-row.bs.table', function (e, row, $element) {
+//     // change background color of selected row
+//     $element.siblings().css('background-color', '');
+//     $element.css('background-color', '#e9f5ff'); 
+//     console.log(row);
+// });
+
+
+
+
+// tableName, tableHead, hiddenColumns, dataField,  tableData, withSearch
+async function initBootstrapTable(tableName, tableHead, hiddenColumns, dataField,  tableData, withSearch){
     
     // Ensure the table element exists
     var $table = $(tableName);
@@ -102,22 +130,8 @@ async function initBootstrapTable(tableName, tableHead, hiddenColumns, dataField
         $table.bootstrapTable('destroy');
     }
     await iBootstrapTable(tableName, tableHead, hiddenColumns, dataField,  tableData, withSearch)
-
-    $(tableName + " " + editName + "," + tableName + " " + deleteName).hide(); // hide edit button
-    $(tableName).addClass('table table-hover') // initialize table hover 
-    // Add hover effect to table rows
-
-    $(tableName +" tbody").on("mouseenter", "tr", function() {
-        // Show the icons
-        $(this).find(editName + " , " + deleteName).show();
-        $(this).addClass("table-primary")
-
-    }).on("mouseleave", "tr", function() {
-        // Hide the icons
-        $(this).find(editName + " , " + deleteName).hide();
-        $(this).removeClass("table-primary")
-    });
     
+
 }
 
 async function iBootstrapTable(tableName, tableHead, hiddenColumns, dataField,  tableData, withSearch){

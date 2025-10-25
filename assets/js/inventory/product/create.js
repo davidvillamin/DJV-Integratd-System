@@ -3,13 +3,6 @@
 function inventoryProductCreate(){
     return new Promise(function(resolve, reject){
         try {
-            //initialize product table
-            productListTable()
-
-            // toggle new product
-            // initial toggle
-            newProductToggle();
-
             // toggle same as name
             // initial toggle
             sameAsNameToggle();
@@ -32,14 +25,6 @@ function inventoryProductCreate(){
             // event listener for toggle
             $('#ipcWithModel').on('change', function(){
                 noModelToggle();
-            })
-
-            // toggle no serial
-            // initial toggle
-            noSerialToggle();
-            // event listener for toggle
-            $('#ipcWithSerial').on('change', function(){
-                noSerialToggle();
             })
 
             noQuantityToggle();
@@ -81,18 +66,6 @@ function inventoryProductCreate(){
         }
     })
 }
-
-function noSerialToggle(){
-    if ($('#ipcWithSerial').is(':checked')){
-        $('#ipcSerial').prop('disabled', true);
-        //clear serial input
-        $('#ipcSerial').val('No Serial Number');
-    } else {
-        $('#ipcSerial').prop('disabled', false);
-        $('#ipcSerial').val("");
-    }
-}
-
 function noQuantityToggle(){
     if ($('#ipcNoQuantity').is(':checked')){
         $('#ipcQuantity').prop('disabled', true);
@@ -137,56 +110,4 @@ function sameAsNameToggle(){
     } else {
         $('#ipcDescription').prop('disabled', false);
     }
-}
-
-function productListTable(){
-    // initialize datatable
-    // var dTable = $('#ipcProductListTable').DataTable({
-    //     data: crudiAjax({}, "/inventory/product/create/find/list", "POST"),
-    //     pageLength: 10, // set to display 5 items
-    //     lengthMenu: [10, 25, 50, 100], // entries per page options
-    // })
-    
-    // clickable row to select data
-    $('#ipcProductListTable tbody').on('click', 'tr', function() {
-        $('#ipcCode').val(dTable.row(this).data()[0]);
-        $('#ipcName').val(dTable.row(this).data()[1]);
-        $('#ipcDescription').val(dTable.row(this).data()[2]);
-        $('#ipcType').val(dTable.row(this).data()[3]);
-        console.log(dTable.row(this).data()[4])
-        if (dTable.row(this).data()[4]){ // brand
-            $('#ipcWithBrand').prop('checked', true);
-            noBrandToggle()
-        } else {
-            $('#ipcBrand').val(dTable.row(this).data()[5]);
-        }
-
-        if (dTable.row(this).data()[6]){ // model
-            $('#ipcWithModel').prop('checked', true);
-            noModelToggle()
-        } else {
-            $('#ipcModel').val(dTable.row(this).data()[7]);
-        }
-
-        if (dTable.row(this).data()[8]){ // serial
-            $('#ipcWithSerial').prop('checked', true);
-            noSerialToggle()
-        } 
-
-        // toggle off new product
-        $('#ipcNewProduct').prop('checked', false);
-    })
-}
-
-function newProductToggle(){
-    $('#ipcNewProduct').on('change', function(){
-        if ($('#ipcNewProduct').is(':checked')) {
-            $('#ipcCode, #ipcName, #ipcDescription, #ipcType, #ipcBrand, #ipcModel').val('');
-            $('#ipcWithBrand, #ipcWithModel, #ipcWithSerial ,#ipcNoQuantity ').prop('checked',false)
-            noBrandToggle()
-            noModelToggle()
-            noSerialToggle()
-            noQuantityToggle()
-        }
-    })
 }
