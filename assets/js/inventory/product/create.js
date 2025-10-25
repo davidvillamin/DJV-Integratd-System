@@ -3,6 +3,14 @@
 function inventoryProductCreate(){
     return new Promise(function(resolve, reject){
         try {
+            // toggle auto code number
+            // initial toggle
+            autoCodeNumberToggle();
+            // event listener for toggle
+            $('#ipcAutoCodeNumber').on('change', function(){
+                autoCodeNumberToggle();
+            })
+
             // toggle same as name
             // initial toggle
             sameAsNameToggle();
@@ -95,6 +103,19 @@ function noBrandToggle(){
     } else {
         $('#ipcBrand').prop('disabled', false);
         $('#ipcBrand').val('');
+    }
+}
+async function autoCodeNumberToggle(){
+    if ($('#ipcAutoCodeNumber').is(':checked')){
+        $('#ipcCode').prop('disabled', true);
+        //generate own code number
+        $('#ipcCode').val(''); // clear value first
+        
+        var generatedCode = await crudiAjax({}, "/inventory/product/generateCodeNumber", 'Get');
+        $('#ipcCode').val(generatedCode);
+    } else {
+        $('#ipcCode').prop('disabled', false);
+        $('#ipcCode').val('');
     }
 }
 

@@ -18,6 +18,14 @@ router.post('/inventory/product/create', async function(req, res){
     res.send("You have successfuly created a product!")
 })
 
+// auto generate code number
+router.get('/inventory/product/generateCodeNumber', async function(req, res){
+    // count how many data is inside Product to create unique code
+    var productCount = await Product.countDocuments();
+    var generatedCode = "PRD" + String(productCount + 1).padStart(5, '0'); // simple unique code
+    res.send(generatedCode);
+});
+
 //index table population
 router.post('/inventory/index/table', async function(req, res){
     var tableData = await populateIndexTable();
