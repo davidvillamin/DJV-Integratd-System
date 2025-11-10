@@ -1,0 +1,62 @@
+<!-- legend prefix :
+tihe - transaction in house expenses -->
+<div class="modal fade" id="tihExpensesModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Expenses</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="hidden" id="tiheExpensesId">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text input-group-sm" for="tiheType">Expenses Type</label>
+                            <select class="form-select" id="tiheType">
+                                <option selected>Choose...</option>
+                                <option value="Material">Material</option>
+                                <option value="Prepaid">Prepaid</option>
+                                <option value="Logistics">Logistics</option>
+                                <option value="Office">Office</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tiheNameLbl">Expenses Name</span>
+                            <input type="text" class="form-control" id="tiheName" aria-label="Brand" aria-describedby="tiheNameLbl" required>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tiheDateLbl">Date</span>
+                            <input type="date" class="form-control" id="tiheDate" aria-label="Brand" aria-describedby="tiheDateLbl" required>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tiheAmountLbl">Amount</span>
+                            <input type="number" class="form-control" id="tiheAmount" aria-label="Brand" aria-describedby="tiheAmountLbl" required>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tiheDescriptionLbl">Description</span>
+                            <textarea class="form-control" id="tiheDescription" aria-label="Brand" aria-describedby="tiheDescriptionLbl" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <table id="tiheExpensesList" class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Expenses List</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex">
+                <button type="button" class="btn btn-danger btn-sm" id="tiheDelete" hidden>Delete</button>
+                <button type="button" class="btn btn-secondary btn-sm ms-auto" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="tiheSave" class="btn btn-primary btn-sm">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -4,9 +4,7 @@ $(function(){
     // Loading Screen
     //======================================================
     // hide loading screen
-    $(window).on('load', function() {
-        $("#loadingScreen").attr('style', 'display: none !important');
-    });
+    loadingScreen();
     // initialize toast
     $(".toast").toast({
         delay: 5000
@@ -100,9 +98,14 @@ async function populateIvWithSerialSupplyTable(supplyData){
 
     // add click event listener for row clicks
     $("#ivSupplyTable").on('click-row.bs.table', function (e, row, $element) {
-        // change background color of selected row
-        $element.siblings().css('background-color', '');
-        $element.css('background-color', '#e9f5ff');
+        // Remove selection from ALL rows first
+        $("#ivSupplyTable tbody tr").removeClass('table-row-selected');
+        $("#ivSupplyTable tbody tr td").removeAttr('style');
+        $("#ivSupplyTable tbody tr").css('background-color', '').css('color', '');
+        
+        // Add selection to the clicked row only
+        $element.addClass('table-row-selected');
+
         $('#ivSupplyId').val(row._id);
         $('#ivSupplierName').text(row.Supplier.Name ? row.Supplier.Name : 'No Supplier Name available');
         $('#ivSupplierAddress').text(row.Supplier.Address ? row.Supplier.Address : 'No Supplier Address available');
@@ -134,9 +137,14 @@ async function populateIvWithoutSerialSupplyTable(supplyData){
     );
     // add click event listener for row clicks
     $("#ivSupplyTable").on('click-row.bs.table', function (e, row, $element) {
-        // change background color of selected row
-        $element.siblings().css('background-color', '');
-        $element.css('background-color', '#e9f5ff');
+        // Remove selection from ALL rows first
+        $("#ivSupplyTable tbody tr").removeClass('table-row-selected');
+        $("#ivSupplyTable tbody tr td").removeAttr('style');
+        $("#ivSupplyTable tbody tr").css('background-color', '').css('color', '');
+        
+        // Add selection to the clicked row only
+        $element.addClass('table-row-selected');
+        
         $('#ivSupplyId').val(row._id);
         $('#ivSupplierName').text(row.Supplier.Name ? row.Supplier.Name : 'No Supplier Name available');
         $('#ivSupplierAddress').text(row.Supplier.Address ? row.Supplier.Address : 'No Supplier Address available');

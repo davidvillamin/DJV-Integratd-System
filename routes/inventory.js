@@ -2,18 +2,19 @@ var express                             = require("express"),
     Product                             = require("../models/product"),
     Supply                              = require("../models/supply"),
     InventoryLedger                     = require("../models/ledgerInventory"),
-    router                              = express.Router();
+    router                              = express.Router(),
+    { isLoggedIn }                      = require("../middleware/auth");
 //====================================================================================================
 // Index Route
 //====================================================================================================
 
 // inventory index
-router.get("/inventory", async function(req, res){
+router.get("/inventory", isLoggedIn, async function(req, res){
     res.render("inventory/index");
 });
 
 //inventory product create
-router.post('/inventory/product/create', async function(req, res){
+router.post('/inventory/product/create', isLoggedIn, async function(req, res){
     await Product.create(req.body.data)
     res.send("You have successfuly created a product!")
 })
@@ -26,11 +27,22 @@ router.get('/inventory/product/generateCodeNumber', async function(req, res){
     res.send(generatedCode);
 });
 
-//index table population
-router.post('/inventory/index/table', async function(req, res){
-    var tableData = await populateIndexTable();
-    res.send(tableData);
-})
+
+// product get data
+router.post('/inventory/product/getData', async function(req, res){
+    var productData = await Product.find({})
+    .populate('Supply')
+    .lean();
+    res.send(productData);
+});
+
+// product get one data
+router.post('/inventory/product/getOneData', async function(req, res){
+    var productData = await Product.findById(req.body.data.productId)
+    .populate('Supply')
+    .lean();
+    res.send(productData);
+});
 
 //====================================================================================================
 // View Route

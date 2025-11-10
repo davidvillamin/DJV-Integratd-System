@@ -1,0 +1,51 @@
+<!-- legend prefix :
+tihpay - transaction in house payment -->
+<div class="modal fade" id="tihPaymentModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="hidden" id="tihpayId">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tihpayNameLbl">Payment Name</span>
+                            <input type="text" class="form-control" id="tihpayName" aria-label="Brand" aria-describedby="tihpayNameLbl" required>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tihpayDateLbl">Date</span>
+                            <input type="date" class="form-control" id="tihpayDate" aria-label="Brand" aria-describedby="tihpayDateLbl" required>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tihpayAmountLbl">Amount</span>
+                            <input type="number" class="form-control" id="tihpayAmount" aria-label="Brand" aria-describedby="tihpayAmountLbl" required>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tihpayDescriptionLbl">Description</span>
+                            <textarea class="form-control" id="tihpayDescription" aria-label="Brand" aria-describedby="tihpayDescriptionLbl" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <table id="tihPaymentsList" class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Payments List</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex">
+                <button type="button" class="btn btn-danger btn-sm" id="tihpayDelete" hidden>Delete</button>
+                <button type="button" class="btn btn-secondary btn-sm ms-auto" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="tihpaySave" class="btn btn-primary btn-sm">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+

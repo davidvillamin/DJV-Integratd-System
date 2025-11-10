@@ -1,0 +1,51 @@
+<!-- legend prefix :
+tihsc - transaction in house service charge -->
+<div class="modal fade" id="tihServiceChargeModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Service Charge</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="hidden" id="tihscServiceId">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tihscServiceNameLbl">Service Name</span>
+                            <input type="text" class="form-control" id="tihscServiceName" aria-label="Brand" aria-describedby="tihscServiceNameLbl" required>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tihscServiceDateLbl">Date</span>
+                            <input type="date" class="form-control" id="tihscServiceDate" aria-label="Brand" aria-describedby="tihscServiceDateLbl" required>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tihscServiceAmountLbl">Amount</span>
+                            <input type="number" class="form-control" id="tihscServiceAmount" aria-label="Brand" aria-describedby="tihscServiceAmountLbl" required>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="tihscServiceDescriptionLbl">Description</span>
+                            <textarea class="form-control" id="tihscServiceDescription" aria-label="Brand" aria-describedby="tihscServiceDescriptionLbl" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <table id="tihscServiceList" class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Service Charge List</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex">
+                <button type="button" class="btn btn-danger btn-sm" id="tihscDelete" hidden>Delete</button>
+                <button type="button" class="btn btn-secondary btn-sm ms-auto" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="tihscSave" class="btn btn-primary btn-sm">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -34,7 +34,8 @@ var express                         = require("express"),
 
     //loading screen
     // serviceRoutes                   = require("./routes/service"), 
-    niceAdminRoutes                 = require("./routes/niceadmin");
+    niceAdminRoutes                 = require("./routes/niceadmin"),
+    User                            = require("./models/users");
 
 //======================================================================================================
 //                                      MONGOOSE CONFIG
@@ -61,24 +62,24 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 //======================================================================================================
 //                                      PASSPORT CONFIG
 //======================================================================================================
-// app.use(require("express-session")({
-//     secret: "Don_David",
-//     resave: false,
-//     saveUninitialized: false
-// }))
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+app.use(require("express-session")({
+    secret: "Don_David",
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use(flash());
-// app.use(function(req, res, next){
-//     res.locals.currentUser = req.user;
-//     res.locals.error = req.flash("error");
-//     res.locals.success = req.flash("success");
-//     next();
-// })
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    next();
+})
 
 //======================================================================================================
 //                                      CONFIG

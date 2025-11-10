@@ -2,15 +2,21 @@
 <%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
     <main id="main" class="main">
-
-        <div class="pagetitle">
-        <h1>Transactions</h1>
-        <nav>
-            <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active">Transactions</li>
-            </ol>
-        </nav>
+        <!-- Page Title -->
+        <div class="pagetitle d-flex align-items-center">
+            <div>
+                <h1>Transactions</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">Transactions</li>
+                    </ol>
+                </nav>
+            </div>
+            <button class="btn btn-success ms-auto btn-sm" data-bs-toggle="modal" data-bs-target="#tCreateModal"> 
+                <i class="bi bi-plus-circle"></i>
+                New Transaction
+            </button>
         </div><!-- End Page Title -->
 
         <!-- Transactions -->
@@ -209,6 +215,11 @@
         
          
     </main><!-- End #main -->
+<!-- modal -->
+<%- include("modal/transaction/create.ejs") %>
+
 <%- include("../partials/script") %>
 <script src="../../../assets/js/transaction/index.js"></script>
+<script src="../../../assets/js/transaction/modal/transaction/create.js"></script>
+
 <%- include("../partials/footer") %>

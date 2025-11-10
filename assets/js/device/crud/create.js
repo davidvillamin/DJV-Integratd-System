@@ -55,7 +55,6 @@ function deviceCreate() {
                         Name:$('#dcName').val(),
                         CreatedDate: new Date()
                     }
-
                     
                     // save data on a variable for confirmation
                      var crudiAjaxResult = crudiAjax(data, "/device/create", "Post")

@@ -1,329 +1,388 @@
 <%- include("../../partials/header") %>
 <%- include("../../partials/header-sidebar") %>
-<%#- include("../../partials/loading") %>
-<!-- Prefiex Legend -->
-<!-- tihv = Transaction In-house View -->
+<%- include("../../partials/loading") %>
+<!-- tih - Transaction Inhouse View -->
 <main id="main" class="main">
-    <div class="pagetitle">
-        <h1 class="placeholder-glow">
-            <span id="tihvTitleJobOrder">
-                <span class="placeholder col-1"></span>
-            </span>
-            <span id="tihvTitleDevice">
-                <span class="placeholder col-1"></span>
-            </span> 
-            <span id="tihvTitleSerial">
-                <span class="placeholder col-1"></span>
-            </span>
-        </h1>
+    <div class="pagetitle d-flex mb-0 align-items-end">
         <nav>
-            <!-- Prefix Legend -->
-            <!-- tihvbc = Transaction In-house View Breadcrumb -->
+            <h1 id="tihName"></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/transaction">Transactions</a></li>
-                <li class="breadcrumb-item"><a href="/transaction/inhouse">In-house</a></li>
-                <li class="breadcrumb-item active" id="tihvbcJobOrder"></li>
+                <li class="breadcrumb-item"><a href="/transaction">Transaction</a></li>
+                <li class="breadcrumb-item active">Inhouse</li>
             </ol>
         </nav>
-    </div><!-- End Page Title -->
-    
+        <i class="bi bi-three-dots-vertical ms-auto" data-bs-toggle="dropdown" aria-expanded="false"></i>
 
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" data-bs-target="#tihSupplyModal" data-bs-toggle="modal">Quotation</a></li>
+            <li><a class="dropdown-item" data-bs-target="#tihExpensesModal" data-bs-toggle="modal">Approval</a></li>
+            <li><a class="dropdown-item" data-bs-target="#tihPaymentModal" data-bs-toggle="modal">Complete</a></li>
+        </ul>
+    </div><!-- End Page Title -->
+    <div class="container my-2">
+        <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-bg-info" style="width: 25%">
+                Repair
+            </div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary text-bg-primary" style="width: 25%">
+                Quotation
+            </div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-bg-warning" style="width: 25%">
+                Approval
+            </div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-bg-success" style="width: 25%">
+                Complete
+            </div>
+        </div>
+    </div>
+    
     <section class="section profile">
         <div class="row">
-            <div class="col-xl-4 clientInformation">
+            <!-- =====================left side ===================-->
+             <!-- legend: tiho - transaction inhouse overview -->
+            <div class="col-xl-3">
+                <!-- Over View -->
                 <div class="card">
-                    <!-- badges -->
-                    <!-- Prefiex Legend -->
-                    <!-- tihv = Transaction In-house View  -->
-                    <div id="tihvTags" class="container mt-2">
-
+                    <div class="card-header">
+                        Overview
                     </div>
-
-                    <!-- client information -->
-                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                        <!-- Profiel Image -->
-                        <img id="tihvProfile" alt="Profile" class="rounded-circle mb-3" style="width: 100px; height: 100px;">
-                        <!-- Client Name -->
-                        <h2 id="tihvClientName" class="mb-1">
-                            <span class="placeholder col-12"></span>
-                        </h2>
-
-                        <div class="tab-pane active profile-overview" id="profile-overview">
-                            <div class="d-flex justify-content-between"> 
-                                <h5 class="card-title">Profile Details</h5>
-                                <!-- Edit Client -->
-                                <i id="tihvClientEdit" class="bi bi-pencil-square hover-effect align-self-center" data-bs-toggle="modal" data-bs-target="#ciEditModal"></i>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6 col-md-4 label">Address</div>
-                                <div id="tihvClientAddress" class="col-lg-6 col-md-8"></div>
-                            </div>
-                            <!-- for contact person template  -->
-                            <!-- <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Contact Person</div>
-                                <div id="ccoContactPerson" class="col-lg-9 col-md-8"></div>
-                            </div> -->
-
-                            <div class="row">
-                                <div class="col-lg-6 col-md-4 label">Contact Number</div>
-                                <div id="tihvClientContactNumbers" class="col-lg-6 col-md-8"></div>
-                            </div>
-                            <h5 class="card-title">Notes</h5>
-                            <p id="tihCreateNotes" class="small fst-italic"></p>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            Payment
+                            <p class="m-0">₱ 0.00</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <strong>Balance</strong>
+                            <strong><span>₱ </span>0.00</strong>
+                        </div>
+                        <hr class="my-1">
+                        <div class="d-flex justify-content-between">
+                            Total
+                            <p class="m-0" id="tihoTotal"></p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-xl-8 mainContent">
+                <!-- tihc - transaction inhouse client -->
+                <!-- Customer Information -->
                 <div class="card">
-                    <!-- show/hide client info -->
-                     <div class="mx-3 mt-2 d-flex flex-row-reverse">
-                        <div class="dropdown">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihReadModal">
-                                        <i class="bx bx-detail me-2"></i>
-                                        Details
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihvrelModal">
-                                        <i class="bx bx-export me-2"></i>
-                                        Release
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tiAddModal">
-                                        <i class="bx bxs-image-add me-2"></i>
-                                        Image
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihvtEditModal">
-                                        <i class="bx bxs-purchase-tag me-2"></i>
-                                        Tags
-                                    </a>
-                                </li>
-                                <li>
-                                    <a id="tihvdReport" class="dropdown-item d-flex align-items-center" >
-                                        <i class="bx bxs-report me-2"></i>
-                                        Sevice Report
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#tihvctModal">
-                                        <i class="bx bx-window-close me-2"></i>
-                                        Close Transaction
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" id="tihvMaxMinDisplay">
-                                        Maximize
-                                    </a>
-                                </li>
-                            </ul>
+                    <div class="card-header d-flex">
+                        <span>Customer Information</span>
+                        <i class="bi bi-pencil-square ms-auto" data-bs-toggle="modal" data-bs-target="#cEditModal"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                Name:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihcName"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Email:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihcEmail"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Contact Number:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihcContactNumber"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Address:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihcAddress"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Notes:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihcNotes"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Created Date:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihcCreatedDate"></span>
+                            </div>
                         </div>
                     </div>
-              
-                    <!-- <i class="bi bi-fullscreen-exit hover-effect"></i> -->
-                    <div class="card-body pt-3">
-                        <div class="accordion accordion-flush" id="tihEditAccordion">
-                            <!-- Billing -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBilling" aria-expanded="false" aria-controls="flush-collapseBilling">
-                                    Billing
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseBilling" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
-                                    <div class="accordion-body">
-                                        <!-- tabs -->
-                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                              <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary" type="button" role="tab" aria-controls="summary" aria-selected="true">Summary</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                              <button class="nav-link" id="parts-tab" data-bs-toggle="tab" data-bs-target="#parts" type="button" role="tab" aria-controls="parts" aria-selected="false">Parts</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                              <button class="nav-link" id="transportation-tab" data-bs-toggle="tab" data-bs-target="#transportation" type="button" role="tab" aria-controls="transportation" aria-selected="false">Transportation</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                              <button class="nav-link" id="serviceCharge-tab" data-bs-toggle="tab" data-bs-target="#serviceCharge" type="button" role="tab" aria-controls="serviceCharge" aria-selected="false">Service Charge</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                              <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">Payment</button>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content" id="myTabContent">
-                                            <!-- summary -->
-                                            <div class="tab-pane fade show active" id="summary" role="tabpanel" aria-labelledby="summary-tab">
-                                                <table id="tihvbsTable" class="my-3"> 
-                                                    <!-- <thead>
-                                                        <th data-field="Description">Description</th>
-                                                        <th data-field="Quantity">Quantity</th>
-                                                        <th data-field="UnitPrice">Unit Price</th>
-                                                        <th data-field="Total">Total</th>
-                                                    </thead> -->
-                                                </table>
-                                            </div>
-                                            <!-- parts -->
-                                            <div class="tab-pane fade" id="parts" role="tabpanel" aria-labelledby="parts-tab">
-                                                <div class="d-flex flex-row-reverse m-2">
-                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tiiAddModal"><i class="bi bi-plus-square pe-1"></i>Parts</button>
-                                                </div>
-                                                <!-- tihvbp = transaction in house view billing parts -->
-                                                <table id="tihvbpTable" class="table">
-                                                    <!-- <thead>
-                                                        <th data-field="_id" data-visible="false">id</th>
-                                                        <th data-field="Description">Description</th>
-                                                        <th data-field="Serial">Serial</th>
-                                                        <th data-field="Price">Price</th>
-                                                    </thead> -->
-                                                </table>
-                                            </div>
-                                            <!-- transportation -->
-                                            <div class="tab-pane fade" id="transportation" role="tabpanel" aria-labelledby="transportation-tab">
-                                                <div class="d-flex flex-row-reverse m-2">
-                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ttAddModal"><i class="bi bi-plus-square me-3"></i>Transportation</button>
-                                                </div>
-                                                <!-- tihvbt = Transaction In House View Billing Transportation -->
-                                                <table class="table" id="tihvbtTable">
-                                                    <!-- <thead>
-                                                        <tr>
-                                                            <th data-field="Description">Description</th>
-                                                            <th data-field="Quantity">Qty</th>
-                                                            <th data-field="UnitPrice">Unit Price</th>
-                                                            <th data-field="Price">Price</th>
-                                                        </tr>
-                                                    </thead> -->
-                                                </table>
-                                            </div>
-                                            <!-- Service Charge -->
-                                            <div class="tab-pane fade" id="serviceCharge" role="tabpanel" aria-labelledby="serviceCharge-tab">
-                                                <div class="d-flex flex-row-reverse m-2">
-                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tscAddModal"><i class="bi bi-plus-square me-3"></i>Service Charge</button>
-                                                </div>
-                                                <!-- tihvbsc = Transaction In House View Billing Service Charge -->
-                                                <table class="table" id="tihvbscTable">
-                                                    <!-- <thead>
-                                                        <tr>
-                                                            <th data-field="Description">Description</th>
-                                                            <th data-field="Price">Price</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    </tbody> -->
-                                                </table>
-                                            </div>
-                                            <!-- Payment -->
-                                            <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
-                                                <div class="d-flex flex-row-reverse m-2">
-                                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tpayAddModal"><i class="bi bi-plus-square me-3"></i>Payment</button>
-                                                </div>
-                                                <!-- tihvbpay = Transaction In House Billing View Payment -->
-                                                <table class="table" id="tihvbpayTable">
-                                                    <!-- <thead>
-                                                        <tr>
-                                                            <th data-field="Description">Description</th>
-                                                            <th data-field="Date">Date</th>
-                                                            <th data-field="Amount">Amount</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    </tbody> -->
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                </div>
+                <!-- tihd - transaction inhouse device -->
+                <!-- Device Information -->
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span>Device Information</span>
+                        <i class="bi bi-pencil-square ms-auto" data-bs-toggle="modal" data-bs-target="#cEditModal"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                Name:
                             </div>
-                            <!-- Images -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseApproval" aria-expanded="false" aria-controls="flush-collapseApproval">
-                                    Images
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseApproval" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
-                                    <div id="tihvImage" class="accordion-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <!-- tihvi = Transaction In House View Image -->
-                                                <div class="list-group" id="tihviList">
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <img id="tihviPreview" src="/assets/img/no-image.jpg" class="img-thumbnail w-auto mt-3">
-                                                        <p id="tihviDescription" class="card-text pt-3">
-                                                            Description
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Notes -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNotes" aria-expanded="false" aria-controls="flush-collapseRelease">
-                                    Notes
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseNotes" class="accordion-collapse collapse" data-bs-parent="#tihEditAccordion">
-                                    <div class="accordion-body">
-                                        <div id="tihvNotes"></div>
-                                    </div>
-                                    <div class=" d-flex flex-row-reverse">
-                                        <!-- tihvn = Transaction In house view Notes -->
-                                        <button class="btn btn-success" id="tihvnSave">Save Notes</button>
-                                    </div>
-                                </div>
+                            <div class="col-8">
+                                <span id="tihdName"></span>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Brand:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihdBrand"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Model:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihdModel"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Serial Number:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihdSerialNumber"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Created Date:
+                            </div>
+                            <div class="col-8">
+                                <span id="tihdCreatedDate"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Documents -->
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span class="me-auto">Documents</span>
+                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#"></i>
+                    </div>
+                    <div class="card-body">
+                        <span id="cvDocuments"></span>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- =====================Ceneter Content===================-->
+
+            <div class="col-xl-6">
+                <!-- Sales Transactions -->
+                <!-- tihs - transaction inhouse sales -->
+                <div class="card">
+                    <div class="card-header d-flex dropstart">
+                        <span class="me-auto">Sales Report</span>
+                        <!-- <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#tihsrEditModal"></i> -->
+                        <i class="bi bi-three-dots" data-bs-toggle="dropdown" aria-expanded="false"></i>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" data-bs-target="#tihProductModal" data-bs-toggle="modal">Product</a></li>
+                            <li><a class="dropdown-item" data-bs-target="#tihExpensesModal" data-bs-toggle="modal">Expenses</a></li>
+                            <li><a class="dropdown-item" data-bs-target="#tihPaymentModal" data-bs-toggle="modal">Payment</a></li>
+                            <li><a class="dropdown-item" data-bs-target="#tihServiceChargeModal" data-bs-toggle="modal">Service Charge</a></li>
+                            <li><a class="dropdown-item" data-bs-target="#" data-bs-toggle="modal">Discount</a></li>
+                        </ul>
+                    </div>
+                   
+                    <div class="card-body">
+                        <table id="tihSalesTable" class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3" class="text-center">There are no sales available.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>  
+                </div>
+                <!-- Tickets -->
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span class="me-auto">Service Report</span>
+                        <i class="bi bi-floppy" data-bs-toggle="modal" data-bs-target="#"></i>
+                    </div>
+                    <div class="card-body">
+                        <div id="tihServiceReport"></div>
+                    </div>  
+                </div>
+            </div>
+            <!-- =================right side ===================-->
+            <div class="col-xl-3">
+                <!-- appointments calendar -->
+                <div class="card">
+                    <div class="card-header">
+                        Appointments
+                    </div>
+                    <div class="card-body">
+                        <div id="miniCalendar" class="mini-calendar">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <button id="mcPrev" type="button" class="btn btn-sm btn-outline-secondary">&lt;</button>
+                                <strong id="mcMonthYear" class="mx-2"></strong>
+                                <button id="mcNext" type="button" class="btn btn-sm btn-outline-secondary">&gt;</button>
+                            </div>
+
+                            <table class="table table-sm mb-0">
+                                <thead>
+                                    <tr id="mcWeekdays" class="text-center small"></tr>
+                                </thead>
+                                <tbody id="mcDates"></tbody>
+                            </table>
+                        </div>
+
+                        <style>
+                            .mini-calendar td, .mini-calendar th { width: 2.2rem; height: 2.2rem; padding: 0.15rem; }
+                            .mini-calendar td button { width: 100%; height: 100%; border: none; background: transparent; }
+                            .mini-calendar td .today { background-color: #0d6efd; color: #fff; border-radius: 0.25rem; }
+                            .mini-calendar td .muted { color: #6c757d; }
+                            .mini-calendar td button:hover { background-color: rgba(13,110,253,0.08); border-radius: 0.25rem; }
+                        </style>
+
+                        <script>
+                            (function () {
+                                const weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+                                const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+                                const mcMonthYear = document.getElementById('mcMonthYear');
+                                const mcWeekdays = document.getElementById('mcWeekdays');
+                                const mcDates = document.getElementById('mcDates');
+                                const prevBtn = document.getElementById('mcPrev');
+                                const nextBtn = document.getElementById('mcNext');
+
+                                // render weekdays header
+                                mcWeekdays.innerHTML = weekdays.map(d => '<th>' + d + '</th>').join('');
+
+                                let today = new Date();
+                                let viewYear = today.getFullYear();
+                                let viewMonth = today.getMonth(); // 0-11
+
+                                function daysInMonth(y,m){ return new Date(y, m+1, 0).getDate(); }
+                                function render(){
+                                    mcMonthYear.textContent = monthNames[viewMonth] + ' ' + viewYear;
+                                    mcDates.innerHTML = '';
+
+                                    const firstDay = new Date(viewYear, viewMonth, 1).getDay(); // 0-6
+                                    const totalDays = daysInMonth(viewYear, viewMonth);
+                                    let row = document.createElement('tr');
+                                    let dayCount = 0;
+
+                                    // leading blanks
+                                    for (let i=0; i<firstDay; i++){
+                                        row.appendChild(document.createElement('td'));
+                                        dayCount++;
+                                    }
+
+                                    for (let d=1; d<=totalDays; d++){
+                                        if (dayCount === 7){
+                                            mcDates.appendChild(row);
+                                            row = document.createElement('tr');
+                                            dayCount = 0;
+                                        }
+                                        const td = document.createElement('td');
+                                        const btn = document.createElement('button');
+                                        btn.type = 'button';
+                                        btn.textContent = d;
+
+                                        // mark today
+                                        if (viewYear === today.getFullYear() && viewMonth === today.getMonth() && d === today.getDate()){
+                                            btn.classList.add('today');
+                                        }
+
+                                        btn.addEventListener('click', () => {
+                                            // simple click behavior: highlight selected date and you can hook into appointment logic here
+                                            const prev = mcDates.querySelectorAll('button.selected');
+                                            prev.forEach(p => p.classList.remove('selected'));
+                                            btn.classList.add('selected');
+                                        });
+
+                                        td.appendChild(btn);
+                                        row.appendChild(td);
+                                        dayCount++;
+                                    }
+
+                                    // trailing blanks
+                                    while(dayCount > 0 && dayCount < 7){
+                                        row.appendChild(document.createElement('td'));
+                                        dayCount++;
+                                    }
+                                    mcDates.appendChild(row);
+                                }
+
+                                prevBtn.addEventListener('click', () => {
+                                    viewMonth--;
+                                    if (viewMonth < 0){ viewMonth = 11; viewYear--; }
+                                    render();
+                                });
+                                nextBtn.addEventListener('click', () => {
+                                    viewMonth++;
+                                    if (viewMonth > 11){ viewMonth = 0; viewYear++; }
+                                    render();
+                                });
+
+                                render();
+                            })();
+                        </script>
+                    </div>
+                </div>
+                <!-- Images -->
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span class="me-auto">Images</span>
+                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#"></i>
+                    </div>
+                    <div class="card-body">
+                        <p class="fst-italic mb-0">No images available.</p>
+                    </div>
+                </div>
+                <!-- Notes -->
+                <div class="card">
+                    <div class="card-header d-flex">
+                        <span class="me-auto">Notes</span>
+                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#"></i>
+                    </div>
+                    <div class="card-body">
+                        <span id="cvNotes"></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-</main><!-- End #main -->    
+</main>  
 
 <!-- =======================================
 Modals
 ======================================= -->
-<!-- billing -->
-<%- include("../Utilities/Billing/parts/add-parts") %>
-<%- include("../Utilities/Billing/transportation/add-transportation") %>
-<%- include("../Utilities/Billing/serviceCharge/add-serviceCharge") %>
-<%- include("../Utilities/Billing/payment/add-payment") %>
-<!-- dropDown -->
-<!-- closeTransaction -->
-<%#- include("modal/dropDown/closeTransaction/close") %>
-<!-- image -->
- <%- include("../Utilities/Images/add-image") %>
- <%#- include("../Utilities/Images/edit-image") %>
- <!-- release -->
- <%#- include("modal/dropDown/release/release") %>
- <!-- repairDetails -->
- <%- include("modal/crud/read") %>
- <%- include("modal/crud/edit") %>
- <!-- tags -->
- <%#- include("modal/dropDown/tags/tags") %>
- 
- <!-- client -->
- <!-- client edit  -->
- <%#-  include("../../client/modal/edit")  %>
+ <%#-  include("../../client/modal/edit")  %> 
+ <%-  include("modal/Supply/supply")  %>
+ <%-  include("modal/Expenses/expenses")  %>
+ <%-  include("modal/Service/service")  %>
+ <%-  include("modal/Payment/payment")  %>
+ <%-  include("modal/Product/product")  %>
+
  
 
  <!-- =======================================
@@ -338,37 +397,10 @@ Scripts
 ======================================= -->
 <!-- main script -->
 <script src="../../../assets/js/transaction/inhouse/view.js"></script>
-
-<!-- modals -->
- <!-- <script src="../../client/modal/edit.ejs"></script> -->
-<!-- billing -->
-<script src="../../../assets/js/transaction/utilities/BillingDetails/billingSummary.js"></script>
-<script src="../../../assets/js/transaction/utilities/BillingDetails/Parts/parts.js"></script>
-<script src="../../../assets/js/transaction/utilities/BillingDetails/Parts/add-parts.js"></script>
-<script src="../../../assets/js/transaction/utilities/BillingDetails/Transportation/add-transportation.js"></script>
-<script src="../../../assets/js/transaction/utilities/BillingDetails/Transportation/transportation.js"></script>
-<script src="../../../assets/js/transaction/utilities/BillingDetails/ServiceCharge/add-serviceCharge.js"></script>
-<script src="../../../assets/js/transaction/utilities/BillingDetails/ServiceCharge/serviceCharge.js"></script>
-<script src="../../../assets/js/transaction/utilities/BillingDetails/Payment/add-payment.js"></script>
-<script src="../../../assets/js/transaction/utilities/BillingDetails/Payment/payment.js"></script>
-
-<!-- dropDown -->
-<!-- close Transaction -->
-<!-- <script src="../../../assets/js/transaction/inhouse/modal/dropDown/closeTransaction/close.js"></script> -->
-<!-- image -->
-<script src="../../../assets/js/transaction/utilities/Images/add-image.js"></script>
-<!-- <script src="../../../assets/js/transaction/utilities/Images/edit-image.js"></script> -->
-<!-- release -->
-<!-- <script src="../../../assets/js/transaction/inhouse/modal/dropDown/release/release.js"></script> -->
-<!-- repairDetails -->
-<script src="../../../assets/js/transaction/inhouse/crud/read.js"></script>
-<script src="../../../assets/js/transaction/inhouse/crud/edit.js"></script>
-<!-- <script src="../../../assets/js/transaction/inhouse/modal/dropDown/repairDetials/view-repair.js"></script> -->
-<!-- tags -->
-<!-- <script src="../../../assets/js/transaction/inhouse/modal/dropDown/tags/tags.js"></script> -->
-<!-- print -->
-
-<!-- client -->
-<!-- <script src="../../../assets/js/client/crud/edit.js"></script> -->
+<script src="../../../assets/js/transaction/inhouse/modal/Supply/supply.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Expenses/expenses.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Service/service.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Payment/payment.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Product/product.js"></script>
 
 <%- include("../../partials/footer") %>

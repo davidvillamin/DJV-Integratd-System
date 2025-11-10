@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var clientSchema = new mongoose.Schema({
+    // ClientCode: String, // CLNTXXXXX
     CreatedDate: Date,
     FirstName: String,
     LastName: String,

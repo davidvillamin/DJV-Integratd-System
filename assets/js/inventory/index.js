@@ -7,9 +7,7 @@ $(function(){
     // Loading Screen
     //======================================================
     // hide loading screen
-    $(window).on('load', function() {
-        $("#loadingScreen").attr('style', 'display: none !important');
-    });
+    loadingScreen();
 
     //remove class collapsed after click on sidebar
     $("#sbinventory").removeClass("collapsed");
@@ -19,18 +17,39 @@ $(function(){
         delay: 5000
     });
 
-    // initialize datatable
-    var dTable = $('#iiTable').DataTable({
-        data: crudiAjax({}, "/inventory/index/table", "POST"),
-        pageLength: 5, // set to display 5 items
-        lengthMenu: [5, 10, 25, 50, 100], // entries per page options
-    })
-
     //create parts information
     inventoryProductCreate().then(function(){
-        // reload datatable
-        dTable.clear().rows.add(crudiAjax({}, "/inventory/index/table", "POST")).draw();
+        initialize();
     })
 
-    
+    initialize();
 })
+
+async function initialize(){
+    // get data
+    var tableData = crudiAjax({}, "/inventory/product/getData", "POST");
+    // document count for quantity
+    for (let i = 0; i < tableData.length; i++) {
+        // count how many supply available for each product
+        var supplyCount = await tableData[i].Supply.filter(function(supply){
+            return supply.Status === "Available";
+        }).length;
+        tableData[i].Quantity = supplyCount;
+    }    
+
+    await initBootstrapTable(
+        "#iiTable",                                                                     // tableName
+        ["Code", "Name", "Description", "Quantity" , "_id"],                            // tableHead
+        ["_id"],                                                                        // hiddenColumns (hide ID column)
+        ["Code", "Name", "Description", "Quantity", "_id"],                             // dataField
+        tableData,                                                                      // tableData
+        true,                                                                           // withSearch (enable search)
+    );
+
+    // add click event to table rows and view product details
+    $('#iiTable tbody').on('click', 'tr', function () {
+        var data = $('#iiTable').bootstrapTable('getData')[$(this).index()];
+        // to to product view page
+        window.location.href = "/inventory/product/view/" + data._id;
+    });
+}

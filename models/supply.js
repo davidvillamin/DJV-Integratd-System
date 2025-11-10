@@ -21,6 +21,7 @@ var supplySchema = new mongoose.Schema({
 
     // Accounting Information
     Cost: Number,
+    SRP: Number, // Suggested Retail Price
 
     // Transaction Information
     Status: String, // Available, Reserved, Sold

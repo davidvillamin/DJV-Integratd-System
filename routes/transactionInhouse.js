@@ -1,48 +1,12 @@
-var express                             = require("express"),
-    mongoose                            = require("mongoose");
-    moment                              = require("moment");
-    Transaction                         = require("../models/transaction"),
-    Client                              = require("../models/client"),
-    router                              = express.Router();
-//===============================================================================================================
-// CRUD Transaction Inhouse 
-//===============================================================================================================
-// edit inhouse transaction (Initialize data)
-router.post("/transaction/inhouse/edit",async function(req, res){
-    var transaction = await Transaction.findById(req.body.data.tihId)
-    .populate({
-        path: "Client",
-        select: "_id Name"
-    })
-    .select("_id JobOrder RecieveDate RecievedBy Device SerialNumber Notes Client")
-    .lean()
-    res.send(transaction)
-})
-// edit inhouse transaction
-router.put("/transaction/inhouse/edit",async function(req, res){
-    //convet string to date
-    req.body.data.data.RecieveDate = new Date(req.body.data.data.RecieveDate)
-    var transaction = await Transaction.findByIdAndUpdate(req.body.data.tihId,req.body.data.data)
-    var newClient = await Client.findById(req.body.data.clientId) // for new client
-    var oldClient = await Client.findById(req.body.data.clientOldId) // for old client
-    oldClient.Transaction.pull(req.body.data.tihId) // remove the old transaction id on old client
-    await oldClient.save() // save the edited client
-
-    newClient.Transaction.push(transaction._id) // insert new transaction id
-    await newClient.save() //save the new transaction id
-    res.send('You have successfuly edited a transaction!')
-})
-
-// delete inhouse transaction
-router.delete("/transaction/inhouse/delete",async function(req, res){
-    console.log(req.body.data)
-    // find first the client and remove the transaction id in transaction
-    var client = await Client.findById(req.body.data.clientId)
-    client.Transaction.pull(req.body.data.tihId)
-    await client.save()
-    await Transaction.findByIdAndDelete(req.body.data.tihId)
-    res.send('You have successfuly deleted a transaction!')
-})
+var express                              = require("express"),
+    mongoose                             = require("mongoose");
+    moment                               = require("moment");
+    Transaction                          = require("../models/transaction"),
+    InventoryLedger                      = require("../models/ledgerInventory"),
+    ExpensesLedger                       = require("../models/ledgerExpenses"),
+    Supply                               = require("../models/supply"),
+    Client                               = require("../models/client"),
+    router                               = express.Router();
 //===============================================================================================================
 // index
 //===============================================================================================================
@@ -51,144 +15,187 @@ router.get("/transaction/inhouse", function(req, res){
     res.render("transaction/Inhouse/index")
 })
 
-// get client list for add transaction
-router.post("/transaction/inhouse/create/clientList", async function(req, res){
-    var clientList = await Client.find()
-        .select('_id Name')
-        .lean()
-    res.send(clientList)
+// list all transactions for inhouse
+router.post("/transaction/inhouse/index", async function(req, res){
+    var transactionList = await populateIndexTable()
+    res.send(transactionList)
 })
 
-// create inhouse transaction
-router.post("/transaction/inhouse/create",async function(req, res){
-  // Convert the string date to a Date object
-  req.body.data.RecieveDate = new Date(req.body.data.RecieveDate);
-  var newlyCreatedTransaction = await Transaction.create(req.body.data.data);
-  var foundClient = await Client.findById(req.body.data.clientId);
-  foundClient.Transaction.push(newlyCreatedTransaction._id);
-  // Save the updated client information
-  await foundClient.save();
-  res.send("You have successfuly created a new transaction!" );
+// view transaction
+router.get("/transaction/inhouse/view/:id", async function(req, res){
+    res.render("transaction/Inhouse/view")
 })
 
-// initialize table in index 
-router.post("/transaction/inhouse/index/poplate/table", async function(req, res){
-    var tihList = await Transaction.find()
-    .populate({ path: 'Client', select: 'Name' }) // only retrieve the name field from Client
-    .populate({ path: 'Client', select: 'Name' }) // only retrieve the name field from Client
-    .select('_id JobOrder Client Device Tags Billing') // specify the fields you want to retrieve
-    .lean();
-    res.send(tihList)
-})
-
-//===============================================================================================================
-// view
-//===============================================================================================================
-
-
-// view inhouse transaction
-router.get("/transaction/inhouse/view/:id", function(req, res){
-    res.render("transaction/inhouse/view")
-})
-// get all inhouse transaction
-router.post("/transaction/inhouse/view/populate/transaction",async function(req, res){
-    var transaction = await Transaction.findById(req.body.data.tihId)
-        .populate('Client')
-        .populate({
-            path: "Billing.Parts",
-            model: "serial"
-        })
-        .lean()
-    res.send(transaction)
-})
-
-//===============================================================================================================
-// Dropdown
-//===============================================================================================================
-// add image
-router.post("/transaction/inhouse/edit/image/add",async function(req, res){
-    // find transaction
-    var transaction = await Transaction.findById(req.body.data.id)
-    // add image to transaction
-    transaction.Images.push(req.body.data.data)
-    await transaction.save()
-    res.send('You have successfuly added an image!')
-})
-
-
-
-// initial print report
-router.get("/transaction/inhouse/view/print/serviceReport/:id", async function(req, res){
-    res.render("transaction/inhouse/modal/dropDown/reports/serviceReport")
-})
-
-// initial print report of  transaction data
-router.post("/transaction/report/serviceReport", async function (req, res) {
-    var initialPrint = await Transaction.findById(req.body.data.id)
+// populate view data
+router.post("/transaction/inhouse/getData", async function(req, res){
+    var transactionData = await Transaction.findById(req.body.data.data)
     .populate('Client')
-    .populate({
-        path: "Billing.Parts",
-        model: "serial"
-    })
-    .lean()
-    res.send(initialPrint)
+    .populate('Device')
+    .populate('Product.Product')
+    .populate('Product.Supply')
+    .lean();
+    res.send(transactionData)
 })
+// ==============================================================================
+// Product
+// ==============================================================================
+router.post("/transaction/inhouse/product/add", async function(req, res){
+    // push product data to transaction
+    await Transaction.findByIdAndUpdate(req.body.data.transactionId,{
+        $push: {Product: {Product: req.body.data.productId}}
+    });
+    res.send("Product data saved successfully!");
+});
+// save supply data for sales report
+// router.post("/transaction/inhouse/salesReport/supply", async function(req, res){
+//     // save supply data to transaction
+//     var foundTransaction  = await Transaction.findById(req.body.data.transactionId);
 
-// part 
-// release
-router.post("/transaction/inhouse/view/release/update", async function(req, res){
-    await Transaction.findByIdAndUpdate(req.body.data.id, { Release: req.body.data.data });
-    res.send("You have successfuly release date!")
-})
+//     var tasks = req.body.data.supplyData.map(async function(supplyItem){ 
+//         await Supply.findByIdAndUpdate(supplyItem.supplyId, {
+//             SRP: Number(supplyItem.srp),
+//             Status: "Reserved"
+//         });
 
-//tags
+//         foundTransaction.Supplies.push(supplyItem.supplyId);
 
-router.post("/transaction/inhouse/view/tags/update", async function(req, res){
-    req.body.data.tagsTempList = req.body.data.tagsTempList || [];
-    req.body.data.tagsFixedList = req.body.data.tagsFixedList || [];
-    await Transaction.findByIdAndUpdate(req.body.data.id, {
-        TempStatus: req.body.data.tagsTempList,
-        FixedStatus: req.body.data.tagsFixedList
-    })
-    res.send("You have successfuly upated the tags!")
-})
+//         var ledgerCount = await InventoryLedger.countDocuments();
 
-//===============================================================================================================
-// Accordion
-//===============================================================================================================
+//         await InventoryLedger.create({
+//             ledger: "Inventory",
+//             code: "INV" + String(ledgerCount + 1).padStart(5, '0'),
+//             supply: supplyItem.supplyId,
+//             product: supplyItem.productId,
+//             Transaction: req.body.data.transactionId,
+//             SRP: Number(supplyItem.srp),
+//             status: "Reserved",
+//             description: "Supply reserved for Inhouse Transaction",
+//             date: new Date(),
+//             isTransaction: true,
+//         });
+//     });
 
+//     await Promise.all(tasks);
+//     await foundTransaction.save();
 
+//     res.send("Supply data saved successfully!");
+// })
 
+// generate automatic expense code
+// router.post("/transaction/inhouse/expenses/generateCode", async function(req, res){
+//     var expenseCount = await ExpensesLedger.countDocuments();
+//     var generatedCode = "EXP" + String(expenseCount + 1).padStart(5, '0');
+//     res.send(generatedCode);
+// });
 
-// notes
-router.put("/transaction/inhouse/view/notes", async function(req, res){
-    await Transaction.findByIdAndUpdate(req.body.data.id, { Notes: req.body.data.notes });
-    res.send("You have successfuly updated notes!")
-})
+// ==============================================================================
+// Expenses
+// ==============================================================================
+// add expense to transaction
+router.post("/transaction/inhouse/expenses/add", async function(req, res){
+    // push expense data to transaction
+    await Transaction.findByIdAndUpdate(req.body.data.tihId,{
+        $push: {Expense: req.body.data.data}
+    });
+    res.send("Expense data saved successfully!");
+});
 
-// images edit
-router.post("/transaction/inhouse/edit/image/edit",async function(req, res){
-    // console.log(req.body.data)
+// update expense to transaction
+router.put("/transaction/inhouse/expenses/update", async function(req, res){
+    // update expense data to transaction
+    await Transaction.updateOne(
+        { _id: req.body.data.tihId, "Expense._id": req.body.data.expensesId },
+        { $set: { "Expense.$": req.body.data.data } }
+    );
+    res.send("Expense data updated successfully!");
+});
 
-    // find transaction
-    var transaction = await Transaction.findById(req.body.data.id)
-    // add image to transaction
-    // Find the index of the image to be removed
-    var imageIndex = transaction.Images.findIndex(function(image){
-        image._id.toString() === req.body.data.data._id
-    })
-    console.log(imageIndex)
-    // Remove the image if it exists
-    if (imageIndex !== -1) {
-        transaction.Images.splice(imageIndex, 1);
-        // await transaction.save();
-        res.send('You have successfully removed the image!');
-    } else {
-        res.status(404).send('Image not found!');
-    }
-    // transaction.Images.push(req.body.data.data)
-    // await transaction.save()
-    // res.send('You have successfuly added an image!')
-})
+//delete expense from transaction
+router.delete("/transaction/inhouse/expenses/delete", async function(req, res){
+    // pull expense data from transaction
+    await Transaction.findByIdAndUpdate(req.body.data.tihId,{
+        $pull: {Expense: {_id: req.body.data.expensesId}}
+    });
+    res.send("Expense data deleted successfully!");
+});
+// ==============================================================================
+// Service Charge
+// ==============================================================================
+// add service charge to transaction
+router.post("/transaction/inhouse/servicecharge/add", async function(req, res){
+    // push service charge data to transaction
+    await Transaction.findByIdAndUpdate(req.body.data.transactionId,{
+        $push: {ServiceCharge: req.body.data.data}
+    });
+    res.send("Service charge data saved successfully!");
+});
+
+// update service charge to transaction
+router.put("/transaction/inhouse/servicecharge/update", async function(req, res){
+    // update service charge data to transaction
+    await Transaction.updateOne(
+        { _id: req.body.data.transactionId, "ServiceCharge._id": req.body.data.serviceChargeId },
+        { $set: { "ServiceCharge.$": req.body.data.data } }
+    );
+    res.send("Service charge data updated successfully!");
+});
+
+//delete service charge from transaction
+router.delete("/transaction/inhouse/servicecharge/delete", async function(req, res){
+    // pull service charge data from transaction
+    await Transaction.findByIdAndUpdate(req.body.data.transactionId,{
+        $pull: {ServiceCharge: {_id: req.body.data.serviceChargeId}}
+    });
+    res.send("Service charge data deleted successfully!");
+});
+// ==============================================================================
+// Payments
+// ==============================================================================
+// add payment to transaction
+router.post("/transaction/inhouse/payments/add", async function(req, res){
+    // push payment data to transaction
+    await Transaction.findByIdAndUpdate(req.body.data.tihId,{
+        $push: {Payment: req.body.data.data}
+    });
+    res.send("Payment data saved successfully!");
+});
+// update payment to transaction
+router.put("/transaction/inhouse/payments/update", async function(req, res){
+    // update payment data to transaction
+    await Transaction.updateOne(
+        { _id: req.body.data.tihId, "Payment._id": req.body.data.paymentId },
+        { $set: { "Payment.$": req.body.data.data } }
+    );
+    res.send("Payment data updated successfully!");
+});
+//delete payment from transaction
+router.delete("/transaction/inhouse/payments/delete", async function(req, res){
+    // pull payment data from transaction
+    await Transaction.findByIdAndUpdate(req.body.data.tihId,{
+        $pull: {Payment: {_id: req.body.data.paymentId}}
+    });
+    res.send("Payment data deleted successfully!");
+});
+
+async function populateIndexTable(){
+    // find all transactions with transaction type inhouse
+    var transaction = await Transaction.find({TransactionType: "Inhouse"})  
+    .populate('Client')
+    .populate('Device')
+    .lean();
+
+    var transactionList = []
+    // convert data to string
+    transaction.forEach(function(transactionItem){
+        transactionList.push([
+            "<a href='/transaction/inhouse/view/" + transactionItem._id + "'>" + transactionItem.transactionCode + "</a>",
+            transactionItem.Name,
+            "<a href='/client/view/" + transactionItem.Client._id + "'>" + transactionItem.Client.FullName + "</a>",
+            transactionItem.Device.Name,
+            transactionItem.isClosed ? "Closed" : "Open"
+        ]);
+    });
+    return transactionList;
+}
 
 module.exports = router;

@@ -1,6 +1,7 @@
 var express                             = require("express"),
     Client                              = require("../models/client"),
-    router                              = express.Router();
+    router                              = express.Router(),
+    { isLoggedIn }                      = require("../middleware/auth");
 
 
 
@@ -8,20 +9,21 @@ var express                             = require("express"),
 // Client Index
 // ============================================================
 // initialize client page (index)
-router.get("/client", async function(req, res){
+router.get("/client", isLoggedIn, async function(req, res){
     res.render("client/index")
 });
 
 // index populate table (ajax)
-router.post("/client/index/table", async function(req, res){
+router.post("/client/index/table", isLoggedIn, async function(req, res){
     var tableData = await populateTable()
     res.send(tableData)
 });
 // ============================================================
-// Generic Populate Client
+// Generic Populate Client with Devices
 // ============================================================
 router.post("/client/list", async function(req, res){
     var clientList = await Client.find()
+        .populate('Devices')
         .lean();
     res.send(clientList)
 })

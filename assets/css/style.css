@@ -1244,6 +1244,16 @@ h6 {
 }
 
 
+/* Table row selection styling */
+.table-row-selected {
+  background-color: #4154f1 !important;
+  color: #ffffff !important;
+}
+
+.table-row-selected td {
+  background-color: #4154f1 !important;
+  color: #ffffff !important;
+}
 /* hover on edit */
 .hover-effect {
   opacity: 0.2;
@@ -1252,8 +1262,6 @@ h6 {
 .hover-effect:hover {
   opacity: 1;
 }
-
-
 
 .status-indicator {
   display: inline-block;

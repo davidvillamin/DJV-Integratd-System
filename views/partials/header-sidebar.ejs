@@ -86,11 +86,12 @@
     <aside id="sidebar" class="sidebar">
   
       <ul class="sidebar-nav" id="sidebar-nav">
-  
+        <!-- disable dashboard link -->
         <li class="nav-item ">
-          <a id="sbdashboard" class="nav-link collapsed " href="/">
+          <a id="sbdashboard" class="nav-link collapsed disabled" href="/">
             <i class="bi bi-grid"></i>
-            <span>Dashboard</span>
+            <s class="text-decoration-line-through">Dashboard</s>
+            <!-- <span>Dashboard</span> -->
           </a>
         </li><!-- End Dashboard Nav -->
     
@@ -110,18 +111,27 @@
               </a>
             </li>
             <li>
-              <a id="sbonsite" class="nav-link collapsed" href="/transaction/onsite">
-                <i class="bi bi-circle"></i><span>On-site Repair</span>
+              <a id="sbonsite" class="nav-link collapsed disabled" href="/transaction/onsite">
+                <!-- <i class="bi bi-circle"></i><span>On-site Repair</span> -->
+                <i class="bi bi-circle"></i><s class="text-decoration-line-through">
+                  On-site Repair
+                </s>
               </a>
             </li>
             <li>
-              <a id="sbsales" class="nav-link collapsed" href="/transaction/sales">
-                <i class="bi bi-circle"></i><span>Sales</span>
+              <a id="sbsales" class="nav-link collapsed disabled" href="/transaction/sales">
+                <!-- <i class="bi bi-circle"></i><span>Sales</span> -->
+                <i class="bi bi-circle"></i><s class="text-decoration-line-through">
+                  Sales
+                </s>
               </a>
             </li>
             <li>
-              <a id="sbproject" class="nav-link collapsed" href="/transaction/project">
-                <i class="bi bi-circle"></i><span>Contracts</span>
+              <a id="sbproject" class="nav-link collapsed disabled" href="/transaction/project">
+                <!-- <i class="bi bi-circle"></i><span>Contracts</span> -->
+                <i class="bi bi-circle"></i><s class="text-decoration-line-through">
+                  Contracts
+                </s>
               </a>
             </li>
           </ul>
@@ -134,20 +144,23 @@
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
-          <a id="sbClient" class="nav-link collapsed" href="/client">
-            <i class="bi bi-people"></i><span>Leads</span>
+          <a id="sbLeads" class="nav-link collapsed disabled" href="/leads">
+            <!-- <i class="bi bi-people"></i><span>Leads</span> -->
+            <i class="bi bi-people"></i><s class="text-decoration-line-through">Leads</s>
           </a>
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
-          <a id="sbClient" class="nav-link collapsed" href="/client">
-            <i class="bi bi-calendar-event"></i><span>Calendar</span>
+          <a id="sbCalendar" class="nav-link collapsed disabled" href="/calendar">
+            <!-- <i class="bi bi-calendar-event"></i><span>Calendar</span> -->
+            <i class="bi bi-calendar-event"></i><s class="text-decoration-line-through">Calendar</s>
           </a>
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#forms-nav-reports" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-journal-text"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+          <a class="nav-link collapsed disabled" data-bs-target="#forms-nav-reports" data-bs-toggle="collapse" href="#">
+            <!-- <i class="bi bi-journal-text"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i> -->
+            <i class="bi bi-journal-text"></i><s class="text-decoration-line-through">Reports</s><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="forms-nav-reports" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
@@ -186,8 +199,9 @@
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#forms-nav-accounting" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-journal-text"></i><span>Accounting</span><i class="bi bi-chevron-down ms-auto"></i>
+          <a class="nav-link collapsed disabled" data-bs-target="#forms-nav-accounting" data-bs-toggle="collapse" href="#">
+            <!-- <i class="bi bi-journal-text"></i><span>Accounting</span><i class="bi bi-chevron-down ms-auto"></i> -->
+            <i class="bi bi-journal-text"></i><s class="text-decoration-line-through">Accounting</s><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="forms-nav-accounting" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
@@ -244,14 +258,16 @@
         </li>
 
         <li class="nav-item">
-          <a id="sbemployees" class="nav-link collapsed" href="/employees">
-            <i class="bi bi-person-badge"></i><span>Employees</span>
+          <a id="sbemployees" class="nav-link collapsed disabled" href="/employees">
+            <!-- <i class="bi bi-person-badge"></i><span>Employees</span> -->
+            <i class="bi bi-person-badge"></i><s class="text-decoration-line-through">Employees</s>
           </a>
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
-          <a id="sbsettings" class="nav-link collapsed" href="/settings">
-            <i class="bi bi-gear"></i><span>Settings</span>
+          <a id="sbsettings" class="nav-link collapsed disabled" href="/settings">
+            <!-- <i class="bi bi-gear"></i><span>Settings</span> -->
+            <i class="bi bi-gear"></i><s class="text-decoration-line-through">Settings</s>
           </a>
         </li><!-- End Tables Nav -->
         

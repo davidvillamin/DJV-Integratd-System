@@ -150,6 +150,7 @@ async function iBootstrapTable(tableName, tableHead, hiddenColumns, dataField,  
         pageSize: 5, // Set default page size
         pageList: [5, 10, 25, 50, 'all'], // Set available page sizes
         search: withSearch,
+        // pagination: false,
         rowStyle: function(row, index) {
             if (row._rowVariant) {
                 return {
@@ -227,5 +228,19 @@ function tagGenerator(tags) {
         }
     })
 
+}
+
+function loadingScreen(){
+    if (document.readyState === 'complete') {
+        $("#loadingScreen").fadeOut(100, function() {
+            $(this).remove();
+        });
+    } else {
+        $(window).on('load', function() {
+            $("#loadingScreen").fadeOut(100, function() {
+                $(this).remove();
+            });
+        });
+    }
 }
 

@@ -1,18 +1,19 @@
 var express                             = require("express"),
     Device                              = require("../models/device"),
     Client                              = require("../models/client"),
-    router                              = express.Router();
+    router                              = express.Router(),
+    { isLoggedIn }                      = require("../middleware/auth");
 
 //====================================================================================================
 // Index Route
 //====================================================================================================
 
-router.get("/device", function(req, res){
+router.get("/device", isLoggedIn, function(req, res){
     res.render("device/index")
 });
 
 // index populate table (ajax)
-router.post("/device/index/table", async function(req, res){
+router.post("/device/index/table", isLoggedIn, async function(req, res){
     var foundDevice = await populateTable()
     res.send(foundDevice)
 });

@@ -4,9 +4,7 @@ $(function(){
     // Loading Screen
     //======================================================
     // hide loading screen
-    $(window).on('load', function() {
-        $("#loadingScreen").attr('style', 'display: none !important');
-    });
+    loadingScreen();
 
     //remove class collapsed after click on sidebar
     $("#sbdevice").removeClass("collapsed");

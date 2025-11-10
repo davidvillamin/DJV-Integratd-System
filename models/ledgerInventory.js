@@ -26,7 +26,8 @@ var inventoryLedgerSchema = new mongoose.Schema({
     },
 
     unitPrice: Number,
-    status: String, // IN / OUT
+    SRP: Number,
+    status: String, // IN / OUT / Reserved
     date: Date,
     description: String,
 

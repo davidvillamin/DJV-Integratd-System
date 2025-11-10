@@ -1,8 +1,8 @@
 <%- include("../../partials/header") %>
 <%- include("../../partials/loading") %>
 <%- include("../../partials/header-sidebar") %>
+<!-- prefix tih - transaction inhouse-->
     <main id="main" class="main">
-
         <div class="pagetitle">
         <h1>In-House</h1>
         <nav>
@@ -26,6 +26,15 @@
                     <!-- Table with stripped rows -->
                     <!-- assets/js/transaction/inhouse/index.js -->
                     <table id="tihIndexTable">
+                        <thead>
+                            <tr>
+                                <th>Ticket</th>
+                                <th>Name</th>
+                                <th>Client</th>
+                                <th>Device</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
                     </table>
                     <!-- End Table with stripped rows -->
                 </div>
@@ -34,16 +43,10 @@
     </main><!-- End #main -->
     </a>
 <!-- modal -->
-<%- include("modal/crud/create") %>
-<%- include("modal/crud/edit") %>
-<%- include("modal/crud/delete") %>
 
 <%- include("../../partials/toaster") %>
 <%- include("../../partials/script") %>
 
 <!-- script -->
 <script src="../../../assets/js/transaction/inhouse/index.js"></script>
-<script src="../../../assets/js/transaction/inhouse/crud/create.js"></script>
-<script src="../../../assets/js/transaction/inhouse/crud/edit.js"></script>
-<script src="../../../assets/js/transaction/inhouse/crud/delete.js"></script>
 <%- include("../../partials/footer") %>
