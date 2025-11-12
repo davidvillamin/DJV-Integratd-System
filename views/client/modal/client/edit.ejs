@@ -1,7 +1,7 @@
 <!-- legend prefix :
  ce - client Edit -->
 <div class="modal fade" id="cEditModal" tabindex="-1">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Client</h5>
@@ -9,52 +9,46 @@
             </div>
             <div class="modal-body">
                 <form class="needs-validation" id="cEditClient" novalidate enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ceFristNameLbl">First Name</span>
-                                <input type="text" class="form-control" id="ceFristName" aria-label="First Name" aria-describedby="ceFristNameLbl" required>
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ceLastNameLbl">Last Name</span>
-                                <input type="text" class="form-control" id="ceLastName" aria-label="Last Name" aria-describedby="ceLastNameLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ceBusinessNameLbl">Business Name</span>
-                                <input type="text" class="form-control" id="ceBusinessName" aria-label="Business Name" aria-describedby="ceBusinessNameLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ceEmailLbl">Email</span>
-                                <input type="text" class="form-control" id="ceEmail" aria-label="Email" aria-describedby="ceEmailLbl">
-                            </div>
-                            <div id="ceContactNumberContainer">
-                                <!-- contact numbers will be appended here -->
-                                <!-- <div class="input-group input-group-sm my-3 ceContactNumberGroup">
-                                    <span class="input-group-text">Contact Number</span>
-                                    <input type="text" class="form-control ceContactNumber" required>
-                                    <button class="btn btn-success ceContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                    <button class="btn btn-danger ceContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
-                                </div> -->
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ceAddressLineLbl">Address Line</span>
-                                <input type="text" class="form-control" id="ceAddressLine" aria-label="Address Line" aria-describedby="ceAddressLineLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ceCityLbl">City</span>
-                                <input type="text" class="form-control" id="ceCity" aria-label="City" aria-describedby="ceCityLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ceZipLbl">Zip</span>
-                                <input type="text" class="form-control" id="ceZip" aria-label="Zip" aria-describedby="ceZipLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ceNotesLbl">Notes</span>
-                                <textarea class="form-control" id="ceNotes" aria-label="Notes"></textarea>
-                            </div>
-                        </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ceFristNameLbl">First Name</span>
+                        <input type="text" class="form-control" id="ceFristName" aria-label="First Name" aria-describedby="ceFristNameLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ceLastNameLbl">Last Name</span>
+                        <input type="text" class="form-control" id="ceLastName" aria-label="Last Name" aria-describedby="ceLastNameLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ceBusinessNameLbl">Business Name</span>
+                        <input type="text" class="form-control" id="ceBusinessName" aria-label="Business Name" aria-describedby="ceBusinessNameLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ceEmailLbl">Email</span>
+                        <input type="text" class="form-control" id="ceEmail" aria-label="Email" aria-describedby="ceEmailLbl">
+                    </div>
+                    <div id="ceContactNumberContainer">
+                        <!-- contact numbers will be appended here -->
+                        <!-- <div class="input-group input-group-sm my-3 ceContactNumberGroup">
+                            <span class="input-group-text">Contact Number</span>
+                            <input type="text" class="form-control ceContactNumber" required>
+                            <button class="btn btn-success ceContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                            <button class="btn btn-danger ceContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
+                        </div> -->
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ceAddressLineLbl">Address Line</span>
+                        <input type="text" class="form-control" id="ceAddressLine" aria-label="Address Line" aria-describedby="ceAddressLineLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ceCityLbl">City</span>
+                        <input type="text" class="form-control" id="ceCity" aria-label="City" aria-describedby="ceCityLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ceZipLbl">Zip</span>
+                        <input type="text" class="form-control" id="ceZip" aria-label="Zip" aria-describedby="ceZipLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ceNotesLbl">Notes</span>
+                        <textarea class="form-control" id="ceNotes" aria-label="Notes"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>

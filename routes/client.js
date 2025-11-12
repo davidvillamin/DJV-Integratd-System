@@ -1,7 +1,7 @@
 var express                             = require("express"),
     Client                              = require("../models/client"),
     router                              = express.Router(),
-    { isLoggedIn }                      = require("../middleware/auth");
+    auth                                = require("../middleware/auth");
 
 
 
@@ -9,12 +9,12 @@ var express                             = require("express"),
 // Client Index
 // ============================================================
 // initialize client page (index)
-router.get("/client", isLoggedIn, async function(req, res){
+router.get("/client", auth.requireRoles('root', 'admin'), async function(req, res){
     res.render("client/index")
 });
 
 // index populate table (ajax)
-router.post("/client/index/table", isLoggedIn, async function(req, res){
+router.post("/client/index/table", auth.requireRoles('root', 'admin'), async function(req, res){
     var tableData = await populateTable()
     res.send(tableData)
 });
@@ -27,6 +27,41 @@ router.post("/client/list", async function(req, res){
         .lean();
     res.send(clientList)
 })
+
+// auto generate code number
+router.get('/client/generateCodeNumber', auth.requireRoles('root', 'admin'), async function(req, res){
+    // count how many data is inside Product to create unique code
+    var clientCount = await Client.countDocuments();
+    var generatedCode = "CLN" + String(clientCount + 1).padStart(5, '0'); // simple unique code
+    res.send(generatedCode);
+});
+
+// auto generate verify code existing
+router.post('/client/verifyCodeNumber', auth.requireRoles('root', 'admin'), async function(req, res){
+    var existingClient = await Client.findOne({Code: req.body.data.codeNumber});
+    if (existingClient){
+        res.send(true); // code number exists
+    } else {
+        res.send(false); // code number does not exist
+    }
+});
+
+// product get data
+router.post('/client/getData', auth.requireRoles('root', 'admin'), async function(req, res){
+    var clientData = await Client.find({})
+    .populate('Devices')
+    .lean();
+    res.send(clientData);
+});
+
+// product get one data
+router.post('/client/getOneData', auth.requireRoles('root', 'admin'), async function(req, res){
+    var clientData = await Client.findById(req.body.data.clientId)
+    .populate('Devices')
+    .lean();
+    res.send(clientData);
+});
+
 
 // ============================================================
 // Client Create

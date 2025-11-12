@@ -5,9 +5,9 @@ var productSchema = new mongoose.Schema({
     Name: String,
     Description: String,
     Type: String,
-    withBrand: Boolean,
+    noBrand: Boolean,
     Brand: String,
-    withModel: Boolean,
+    noModel: Boolean,
     Model: String,
     withSerial: Boolean,
     Supply:[{ 

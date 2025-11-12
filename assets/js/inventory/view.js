@@ -5,29 +5,59 @@ $(function(){
     //======================================================
     // hide loading screen
     loadingScreen();
+    //remove class collapsed after click on sidebar
+    $("#sbinventory").removeClass("collapsed");
     // initialize toast
     $(".toast").toast({
         delay: 5000
     });
-    ivPopulateData()
+    initialize()
 
+    // add product
+    inventoryProductCreate().then(function(){
+        initialize();
+        inventoryProductCreate()
+    })
+    // edit product modal
+    inventoryProductEdit(productId).then( function(){
+        initialize()
+        inventoryProductEdit(productId)
+    });
+    // add supply
+    inventorySupplyCreate(productId).then( function(){
+        initialize()
+        inventorySupplyCreate(productId)
+    });
+    // for edit supply the it will be run by initialize
+    
+    // initialize product notes modal
+    inventoryNotes(productId).then( function(){
+        initialize()
+        invoiceNotes(productId)
+    });
+
+    // initialize image modal
+    inventoryImage(productId).then( function(){
+        initialize()
+        inventoryImage(productId)
+    });
 })
 
 // iv = inventory view
-async function ivPopulateData(){
-    var data = await crudiAjax({id:productId},"/inventory/product/view/populate","POST")
-
-    $('#ivProductName').text(data.Name)
-    $('#ivProductCode').text(data.Code)
-    $('#ivType').text(data.Type)
-    $('#ivBrand').text(data.Brand)
-    $('#ivModel').text(data.Model)
-    $('#ivDescription').text(data.Description)
-    $('#ivWithSerial').text(data.withSerial ? 'Yes' : 'No')
-    $('#ivIdealPrice').text(data.idealPrice ? formatCurrency(data.idealPrice) : 'No Ideal Price set');
+async function initialize(){
+    var data = await crudiAjax({productId:productId},"/inventory/product/getOneData","POST")
+    // if no prouduct name add no name available
+    $('#ivpName').html(data.Name ? data.Name : '<p class="fst-italic mb-0">No Name available.</p>')
+    $('#ivpCode').html(data.Code ? data.Code : '<p class="fst-italic mb-0">No Code available.</p>');
+    $('#ivpType').html(data.Type ? data.Type : '<p class="fst-italic mb-0">No Type available.</p>');
+    $('#ivpBrand').html(data.Brand ? data.Brand : '<p class="fst-italic mb-0">No Brand available.</p>');
+    $('#ivpModel').html(data.Model ? data.Model : '<p class="fst-italic mb-0">No Model available.</p>');
+    $('#ivpDescription').html(data.Description ? data.Description : '<p class="fst-italic mb-0">No Description available.</p>');
+    $('#ivpWithSerial').html(data.withSerial ? 'Yes' : 'No')
+    $('#ivpIdealPrice').html(data.idealPrice ? formatCurrency(data.idealPrice) : '<p class="fst-italic mb-0">No Ideal Price set.</p>');
 
     // populate details 
-    $('#dvNotes').text(data.Notes ? data.Notes : 'No Notes available');
+    $('#ivpNotes').html(data.Notes ? data.Notes : '<p class="fst-italic mb-0">No Notes available.</p>');
     
     //set add supply modal
     // set modal target based on whether product uses serials or not
@@ -40,44 +70,32 @@ async function ivPopulateData(){
     var editTarget = data.withSerial ? '#iseWithSerialModal' : '#iseWithoutSerialModal';
     $('#ivEditSupply').attr('data-bs-target', editTarget).attr('data-target', editTarget);
     
-    // supply with serial number functions
+    // populate supply table
     if (data.withSerial){
-        addSupplyWithSerial(data.Code,productId)
         populateIvWithSerialSupplyTable(data.Supply)
     } else {
-        addSupplyWithoutSerial(data.Code,productId)
         populateIvWithoutSerialSupplyTable(data.Supply)
     }
 
-    // initialize product notes modal
-    initializeProductNotesEdit(data.Notes, productId).then( function(){
-        ivPopulateData()
-    });
-
-    // initialize image modal
-    initImageEditModal(data.Images, productId).then( function(){
-        ivPopulateData()
-    });
-
     // populate image list
     if (data.Images.length === 0) {
-        $('#ivImageList').html('<p class="text-muted">No images available.</p>');
+        $('#ivImageList').html('<p class="fst-italic mb-0">No images available.</p>');
     } else {
         // clear existing images
         $('#ivImageList').empty();
         data.Images.forEach(function(image) {
-            $('#ivImageList').append('<img src="' + image.base64String + '" class="img-thumbnail" />');
+            $('#ivImageList').append('<img src="' + image.base64String + '" class="img-thumbnail img-fluid rounded mb-2" />');
         });
     }
 
-    // initialize edit product modal
-    initProductEditModal(data,productId).then( function(){
-        ivPopulateData()
-    });
-
-    // for edit supply modal, populate serial numbers dropdown
-    initEditSupplyModal(data.Supply).then( function(){
-        ivPopulateData()
+    // add click event to edit supply
+    $('#ivEditSupply').off('click').on('click', function() {
+        var supplyId = $('#ivSupplyId').val();
+        if (supplyId) {
+            inventorySupplyEdit(supplyId).then(function() {
+                initialize();
+            });
+        }
     });
 }
 // populate inventory view supply table
@@ -119,6 +137,8 @@ async function populateIvWithSerialSupplyTable(supplyData){
         // unhide edit supply button
         $('#ivEditSupply').attr('hidden', false);
     });
+
+
 }
 
 async function populateIvWithoutSerialSupplyTable(supplyData){

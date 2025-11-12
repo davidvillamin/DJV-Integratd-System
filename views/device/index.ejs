@@ -6,43 +6,27 @@
 <%- include("../partials/header-sidebar") %>
 <main id="main" class="main">
     <!-- Title Page -->
-    <div class="pagetitle">
-    <h1>Devices</h1>
-    <nav>
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active">Devices</li>
-        </ol>
-    </nav>
+    <div class="pagetitle d-flex align-items-center">
+        <nav>
+            <h1>Devices</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Devices</li>
+            </ol>
+        </nav>
+        <button type="button" class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#diCreateModal">
+            <i class="bi bi-plus-circle"></i> Add Device
+        </button> <!-- end of device create button -->
     </div><!-- End Page Title -->
     
     <section class="section">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title p-1 m-0 align-self-center">All Devices</h5>
-                <!-- create device button -->
-                <!-- location = \views\device\modal\create.ejs -->
-                <button type="button" class="btn btn-success m-0 p-1" data-bs-toggle="modal" data-bs-target="#diCreateModal">
-                    <i class="bi bi-plus-circle"></i> New
-                </button> <!-- end of device create button -->
             </div>
             <div class="card-body">
-                <!-- Table for list of clients
-
-                This table is created by DataTable
-                location = \assets\js\device\index.js -->
                 <table id="diTable">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Client</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
                 </table>
-                <!-- End Table on list of devices -->
             </div>
         </div>
     </section>
@@ -50,12 +34,14 @@
 </main>
 <!-- End #main -->
 <!-- modal -->
-<%- include("modal/create") %>
+<%- include("modal/device/create") %>
+<%- include("../client/modal/client/create") %>
 
 <%- include("../partials/toaster") %>
 <%- include("../partials/script") %>
 
 <script src="../../assets/js/device/index.js"></script>
-<script src="../../assets/js/device/crud/create.js"></script>
+<script src="../../assets/js/device/modal/device/create.js"></script>
+<script src="../../assets/js/client/crud/client/create.js"></script>
 
 <%- include("../partials/footer") %>

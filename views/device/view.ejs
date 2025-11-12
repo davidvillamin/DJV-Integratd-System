@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-header d-flex">
                         <span class="me-auto">Device Information</span>
-                        <i class="bi bi-pencil-square mx-2"></i>
+                        <i class="bi bi-pencil-square mx-2" data-bs-toggle="modal" data-bs-target="#deEditModal"></i>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -81,6 +81,14 @@
                             </div>
                             <div class="col-8">
                                 <span id="dvcName"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                Business:
+                            </div>
+                            <div class="col-8">
+                                <span id="dvcBusiness"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -267,12 +275,14 @@
 <%- include("../partials/toaster") %>
 
 <!-- modal -->
-<%- include("modal/editNotes") %>
+<%- include("modal/notes/notes") %>
 <%- include("../client/modal/client/edit") %>
+<%- include("modal/device/edit") %>
 
 
 <%- include("../partials/script") %>
 <script src="../../assets/js/device/view.js"></script>
-<script src="../../assets/js/device/crud/editNotes.js"></script>
+<script src="../../assets/js/device/modal/notes/notes.js"></script>
+<script src="../../assets/js/device/modal/device/edit.js"></script>
 
 <%- include("../partials/footer") %>

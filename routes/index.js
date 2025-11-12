@@ -60,6 +60,15 @@ router.get("/logout", function(req, res){
     });
 });
 
+// Show current user info (for debugging)
+router.get("/whoami", isLoggedIn, function(req, res){
+    res.json({
+        user: req.user,
+        isAuthenticated: req.isAuthenticated(),
+        sessionID: req.sessionID
+    });
+});
+
 module.exports = router;
 
     

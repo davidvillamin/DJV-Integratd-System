@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var deviceSchema = new mongoose.Schema({
+    Code: String,
     Client:{ 
             type: mongoose.Schema.Types.ObjectId,
             ref: "client"

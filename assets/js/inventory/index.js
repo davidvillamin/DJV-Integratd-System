@@ -20,6 +20,7 @@ $(function(){
     //create parts information
     inventoryProductCreate().then(function(){
         initialize();
+        inventoryProductCreate()
     })
 
     initialize();
@@ -39,16 +40,16 @@ async function initialize(){
 
     await initBootstrapTable(
         "#iiTable",                                                                     // tableName
-        ["Code", "Name", "Description", "Quantity" , "_id"],                            // tableHead
+        ["Code", "Name", "With Serial", "Quantity" , "_id"],                            // tableHead
         ["_id"],                                                                        // hiddenColumns (hide ID column)
-        ["Code", "Name", "Description", "Quantity", "_id"],                             // dataField
+        ["Code", "Name", "withSerial", "Quantity", "_id"],                             // dataField
         tableData,                                                                      // tableData
         true,                                                                           // withSearch (enable search)
     );
 
     // add click event to table rows and view product details
     $('#iiTable tbody').on('click', 'tr', function () {
-        var data = $('#iiTable').bootstrapTable('getData')[$(this).index()];
+        var data = $('#iiTable').bootstrapTable('getData')[$(this).data('index')];
         // to to product view page
         window.location.href = "/inventory/product/view/" + data._id;
     });

@@ -1,5 +1,5 @@
 <!-- Prefix Legend -->
-<!-- isa = Inventory Supply Add-->
+<!-- isaws = Inventory Supply Add With Serial-->
 
 <!-- with serial modal -->
 <div class="modal fade" id="isaWithSerialModal" tabindex="-1">
@@ -11,17 +11,17 @@
             </div>
             <div class="modal-body">
                 <!-- isaw - inventory supply add with serial -->
-                <form class="needs-validation" id="isawAddSerialForm" novalidate enctype="multipart/form-data">
+                <form class="needs-validation" id="isawsAddSerialForm" novalidate enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">
                             <h6>Serials:</h6>
-                            <div class="input-group input-group-sm mb-3 isawSerialGroup">
+                            <div class="input-group input-group-sm mb-3 isawsSerialGroup">
                                 <span class="input-group-text">Serial</span>
-                                <input type="text" class="form-control isawSerial" aria-label="Brand" required>
-                                <button class="btn btn-success" type="button">
-                                    <i class="bi bi-plus-circle isawAddSerial"></i>
+                                <input type="text" class="form-control isawsSerial" aria-label="Brand" required>
+                                <button class="btn btn-success isawsAddSerial" type="button">
+                                    <i class="bi bi-plus-circle"></i>
                                 </button>
-                                <button class="btn btn-danger isawRemoveSerial" type="button">
+                                <button class="btn btn-danger isawsRemoveSerial" type="button">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </div>
@@ -29,37 +29,37 @@
                         <div class="col-md-6">
                             <h6>Supplier Information:</h6>
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="isawProductCodeLbl">Product Code</span>
-                                <input type="text" class="form-control" id="isawProductCode" aria-label="Brand" aria-describedby="isawProductCodeLbl" disabled>
+                                <span class="input-group-text" id="isawsProductCodeLbl">Product Code</span>
+                                <input type="text" class="form-control" id="isawsProductCode" aria-label="Brand" aria-describedby="isawsProductCodeLbl" disabled>
                             </div>
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="isawNameLbl">Name</span>
-                                <input type="text" class="form-control" id="isawName" aria-label="Brand" aria-describedby="isawNameLbl" required>
+                                <span class="input-group-text" id="isawsNameLbl">Name</span>
+                                <input type="text" class="form-control" id="isawsName" aria-label="Brand" aria-describedby="isawsNameLbl" required>
                             </div>
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="isawAddressLbl">Address</span>
-                                <input type="text" class="form-control" id="isawAddress" aria-label="Brand" aria-describedby="isawAddressLbl" required>
+                                <span class="input-group-text" id="isawsAddressLbl">Address</span>
+                                <input type="text" class="form-control" id="isawsAddress" aria-label="Brand" aria-describedby="isawsAddressLbl" required>
                             </div>
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="isawORLbl">OR #</span>
-                                <input type="text" class="form-control" id="isawOR" aria-label="Brand" aria-describedby="isawORLbl" required>
+                                <span class="input-group-text" id="isawsORLbl">OR #</span>
+                                <input type="text" class="form-control" id="isawsOR" aria-label="Brand" aria-describedby="isawsORLbl" required>
                             </div>
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="isawORDateLbl">OR Date</span>
-                                <input type="date" class="form-control" id="isawORDate" aria-label="Brand" aria-describedby="isawORDateLbl" required>
+                                <span class="input-group-text" id="isawsORDateLbl">OR Date</span>
+                                <input type="date" class="form-control" id="isawsORDate" aria-label="Brand" aria-describedby="isawsORDateLbl" required>
                             </div>
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="isawWarrantyLbl">Warranty</span>
-                                <input type="text" class="form-control" id="isawWarranty" aria-label="Brand" aria-describedby="isawWarrantyLbl" required>
+                                <span class="input-group-text" id="isawsWarrantyLbl">Warranty</span>
+                                <input type="text" class="form-control" id="isawsWarranty" aria-label="Brand" aria-describedby="isawsWarrantyLbl" required>
                             </div>
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="isawNotesLbl">Notes</span>
-                                <input type="text" class="form-control" id="isawNotes" aria-label="Brand" aria-describedby="isawNotesLbl" required>
+                                <span class="input-group-text" id="isawsNotesLbl">Notes</span>
+                                <input type="text" class="form-control" id="isawsNotes" aria-label="Brand" aria-describedby="isawsNotesLbl">
                             </div>
                             <h6>Accounting Information:</h6>
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="isawUnitCostLbl">Unit Cost</span>
-                                <input type="number" class="form-control" id="isawCost" aria-label="Brand" aria-describedby="isawUnitCostLbl" required>
+                                <span class="input-group-text" id="isawsUnitCostLbl">Unit Cost</span>
+                                <input type="number" class="form-control" id="isawsCost" aria-label="Brand" aria-describedby="isawsUnitCostLbl" required>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
 </div>
 
 <!-- without serial modal -->
-<!-- prefix isawo - inventory supply add without serial -->
+<!-- prefix isawos - inventory supply add without serial -->
 <div class="modal fade" id="isaWithoutSerialModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -86,44 +86,44 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="needs-validation" id="isawoAddSerialForm" novalidate enctype="multipart/form-data">
+                <form class="needs-validation" id="isawosAddSupplyForm" novalidate enctype="multipart/form-data">
                     <h6>Supplier Information:</h6>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="isawoProductCodeLbl">Product Code</span>
-                        <input type="text" class="form-control" id="isawoProductCode" aria-label="Brand" aria-describedby="isawoProductCodeLbl" disabled>
+                        <span class="input-group-text" id="isawosProductCodeLbl">Product Code</span>
+                        <input type="text" class="form-control" id="isawosProductCode" aria-label="Brand" aria-describedby="isawosProductCodeLbl" disabled>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="isawoNameLbl">Name</span>
-                        <input type="text" class="form-control" id="isawoName" aria-label="Brand" aria-describedby="isawoNameLbl" required>
+                        <span class="input-group-text" id="isawosNameLbl">Name</span>
+                        <input type="text" class="form-control" id="isawosName" aria-label="Brand" aria-describedby="isawosNameLbl" required>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="isawoAddressLbl">Address</span>
-                        <input type="text" class="form-control" id="isawoAddress" aria-label="Brand" aria-describedby="isawoAddressLbl" required>
+                        <span class="input-group-text" id="isawosAddressLbl">Address</span>
+                        <input type="text" class="form-control" id="isawosAddress" aria-label="Brand" aria-describedby="isawosAddressLbl" required>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="isawoORLbl">OR #</span>
-                        <input type="text" class="form-control" id="isawoOR" aria-label="Brand" aria-describedby="isawoORLbl" required>
+                        <span class="input-group-text" id="isawosORLbl">OR #</span>
+                        <input type="text" class="form-control" id="isawosOR" aria-label="Brand" aria-describedby="isawosORLbl" required>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="isawoORDateLbl">OR Date</span>
-                        <input type="date" class="form-control" id="isawoORDate" aria-label="Brand" aria-describedby="isawoORDateLbl" required>
+                        <span class="input-group-text" id="isawosORDateLbl">OR Date</span>
+                        <input type="date" class="form-control" id="isawosORDate" aria-label="Brand" aria-describedby="isawosORDateLbl" required>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="isawoWarrantyLbl">Warranty</span>
-                        <input type="text" class="form-control" id="isawoWarranty" aria-label="Brand" aria-describedby="isawoWarrantyLbl" required>
+                        <span class="input-group-text" id="isawosWarrantyLbl">Warranty</span>
+                        <input type="text" class="form-control" id="isawosWarranty" aria-label="Brand" aria-describedby="isawosWarrantyLbl" required>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="isawoNotesLbl">Notes</span>
-                        <input type="text" class="form-control" id="isawoNotes" aria-label="Brand" aria-describedby="isawoNotesLbl" required>
+                        <span class="input-group-text" id="isawosNotesLbl">Notes</span>
+                        <input type="text" class="form-control" id="isawosNotes" aria-label="Brand" aria-describedby="isawosNotesLbl">
                     </div>
                     <h6>Accounting Information:</h6>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="isawoUnitCostLbl">Unit Cost</span>
-                        <input type="number" class="form-control" id="isawoCost" aria-label="Brand" aria-describedby="isawoUnitCostLbl" required>
+                        <span class="input-group-text" id="isawosUnitCostLbl">Unit Cost</span>
+                        <input type="number" class="form-control" id="isawosCost" aria-label="Brand" aria-describedby="isawosUnitCostLbl" required>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="isawoQuantityLbl">Quantity</span>
-                        <input type="number" class="form-control" id="isawoQuantity" aria-label="Brand" aria-describedby="isawoQuantityLbl" required>
+                        <span class="input-group-text" id="isawosQuantityLbl">Quantity</span>
+                        <input type="number" class="form-control" id="isawosQuantity" aria-label="Brand" aria-describedby="isawosQuantityLbl" required>
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -2,16 +2,21 @@
 <%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
 <!-- iv = inventory view -->
+ <!-- ivp - inventory view product -->
 <main id="main" class="main">
-    <div class="pagetitle">
-        <h1 id="ivProductName">Product Name</h1>
+    <div class="pagetitle d-flex align-items-center">
         <nav>
+            <h1 id="ivpName">Product Name</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="/inventory">Inventory</a></li>
                 <li class="breadcrumb-item active">Product Details</li>
             </ol>
         </nav>
+        <button class="btn btn-success ms-auto btn-sm" data-bs-toggle="modal" data-bs-target="#ipCreateModal"> 
+            <i class="bi bi-plus-circle"></i>
+            Add Product
+        </button>
     </div><!-- End Page Title -->
 
     <section class="section profile">
@@ -19,6 +24,7 @@
             <!-- =====================left side ===================-->
             <div class="col-xl-3">
                 <!-- Device Information -->
+                 
                 <div class="card">
                     <div class="card-header d-flex">
                         <span class="me-auto">Product Information</span>
@@ -30,7 +36,7 @@
                                 Code:
                             </div>
                             <div class="col-7">
-                                <span id="ivProductCode"></span>
+                                <span id="ivpCode"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -38,7 +44,7 @@
                                 Type:
                             </div>
                             <div class="col-7">
-                                <span id="ivType"></span>
+                                <span id="ivpType"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -46,7 +52,7 @@
                                 Brand:
                             </div>
                             <div class="col-7">
-                                <span id="ivBrand"></span>
+                                <span id="ivpBrand"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -54,7 +60,7 @@
                                 Model:
                             </div>
                             <div class="col-7">
-                                <span id="ivModel"></span>
+                                <span id="ivpModel"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -62,7 +68,7 @@
                                 Description:
                             </div>
                             <div class="col-7">
-                                <span id="ivDescription"></span>
+                                <span id="ivpDescription"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -70,7 +76,7 @@
                                 Ideal Price:
                             </div>
                             <div class="col-7">
-                                <span id="ivIdealPrice"></span>
+                                <span id="ivpIdealPrice"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -78,7 +84,7 @@
                                 With Serial:
                             </div>
                             <div class="col-7">
-                                <span id="ivWithSerial"></span>
+                                <span id="ivpWithSerial"></span>
                             </div>
                         </div>
                     </div>
@@ -103,7 +109,7 @@
                         <i class="bi bi-pencil-square mx-2" data-bs-toggle="modal" data-bs-target="#ipnEditModal"></i>
                     </div>
                     <div class="card-body">
-                        <div id="dvNotes"></div>
+                        <div id="ivpNotes"></div>
                     </div>
                 </div>
             </div>
@@ -223,17 +229,19 @@
 <%- include("modal/Supply/add") %>
 <%- include("modal/Supply/edit") %>
 <%- include("modal/Product/edit") %>
-<%- include("modal/Notes/edit") %>
-<%- include("modal/Image/edit") %>
+<%- include("modal/Product/create") %>
+<%- include("modal/Notes/notes") %>
+<%- include("modal/Image/image") %>
 
 <%- include("../partials/toaster") %>
 <%- include("../partials/script") %>
 
 <script src="/../../assets/js/inventory/view.js"></script>
-<script src="/../../assets/js/inventory/supply/add.js"></script>
-<script src="/../../assets/js/inventory/supply/edit.js"></script>
-<script src="/../../assets/js/inventory/product/edit.js"></script>
-<script src="/../../assets/js/inventory/notes/edit.js"></script>
-<script src="/../../assets/js/inventory/image/edit.js"></script>
+<script src="/../../assets/js/inventory/modal/supply/add.js"></script>
+<script src="/../../assets/js/inventory/modal/supply/edit.js"></script>
+<script src="/../../assets/js/inventory/modal/product/create.js"></script>
+<script src="/../../assets/js/inventory/modal/product/edit.js"></script>
+<script src="/../../assets/js/inventory/modal/Notes/notes.js"></script>
+<script src="/../../assets/js/inventory/modal/image/image.js"></script>
 
 <%- include("../partials/footer") %> 

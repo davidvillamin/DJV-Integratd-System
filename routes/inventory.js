@@ -3,33 +3,42 @@ var express                             = require("express"),
     Supply                              = require("../models/supply"),
     InventoryLedger                     = require("../models/ledgerInventory"),
     router                              = express.Router(),
-    { isLoggedIn }                      = require("../middleware/auth");
+    auth                                = require("../middleware/auth");
 //====================================================================================================
-// Index Route
+// Routes
 //====================================================================================================
-
-// inventory index
-router.get("/inventory", isLoggedIn, async function(req, res){
+// inventory product index
+router.get("/inventory", auth.requireRoles('root', 'admin'), async function(req, res){
     res.render("inventory/index");
 });
 
-//inventory product create
-router.post('/inventory/product/create', isLoggedIn, async function(req, res){
-    await Product.create(req.body.data)
-    res.send("You have successfuly created a product!")
+// inventory product view
+router.get('/inventory/product/view/:id', auth.requireRoles('root', 'admin'), function(req, res){
+    res.render('inventory/view')
 })
-
-// auto generate code number
-router.get('/inventory/product/generateCodeNumber', async function(req, res){
+//====================================================================================================
+// Utilities
+//====================================================================================================
+// auto generate code number for Product
+router.get('/inventory/product/generateCodeNumber', auth.requireRoles('root', 'admin'), async function(req, res){
     // count how many data is inside Product to create unique code
     var productCount = await Product.countDocuments();
     var generatedCode = "PRD" + String(productCount + 1).padStart(5, '0'); // simple unique code
     res.send(generatedCode);
 });
 
+// auto generate verify code existing for Product
+router.post('/inventory/product/verifyCodeNumber', auth.requireRoles('root', 'admin'), async function(req, res){
+    var existingProduct = await Product.findOne({Code: req.body.data.codeNumber});
+    if (existingProduct){
+        res.send(true); // code number exists
+    } else {
+        res.send(false); // code number does not exist
+    }
+});
 
 // product get data
-router.post('/inventory/product/getData', async function(req, res){
+router.post('/inventory/product/getData', auth.requireRoles('root', 'admin'), async function(req, res){
     var productData = await Product.find({})
     .populate('Supply')
     .lean();
@@ -37,32 +46,40 @@ router.post('/inventory/product/getData', async function(req, res){
 });
 
 // product get one data
-router.post('/inventory/product/getOneData', async function(req, res){
+router.post('/inventory/product/getOneData', auth.requireRoles('root', 'admin'), async function(req, res){
     var productData = await Product.findById(req.body.data.productId)
     .populate('Supply')
     .lean();
     res.send(productData);
 });
 
+// supply get data
+router.post('/inventory/supply/getOneData', auth.requireRoles('root', 'admin'), async function(req, res){
+    var supplyData = await Supply.findById(req.body.data.supplyId)
+    .populate('Product')
+    .lean();
+    res.send(supplyData);
+});
 //====================================================================================================
-// View Route
+// Product
 //====================================================================================================
 
-//view parts information
-router.get('/inventory/product/view/:id', function(req, res){
-    res.render('inventory/view')
-})
+// create product
+router.post('/inventory/product/create', auth.requireRoles('root', 'admin'), async function(req, res){
+    await Product.create(req.body.data)
+    res.send("You have successfuly created a product!")
+});
 
-//populate parts information view
-router.post('/inventory/product/view/populate',async function(req, res){
-    var productInformation = await Product.findById(req.body.data.id)
-    .populate('Supply')
-    .lean()
-    res.send(productInformation)
+// edit product
+router.put('/inventory/product/edit', auth.requireRoles('root', 'admin'), async function(req, res){
+    await Product.findByIdAndUpdate(req.body.data.productId, req.body.data.data)
+    res.send("Product information updated successfully!")
 })
-
+//====================================================================================================
+// Supply
+//====================================================================================================
 // add supply
-router.post('/inventory/supply/addSupply', async function(req, res){
+router.post('/inventory/supply/addSupply', auth.requireRoles('root', 'admin'), async function(req, res){
     // count how many data is inside InventoryLedger to create unique code
     var ledgerCount = await InventoryLedger.countDocuments();
 
@@ -91,27 +108,27 @@ router.post('/inventory/supply/addSupply', async function(req, res){
 });
 
 // edit supply
-router.put('/inventory/supply/editSupply', async function(req, res){
+router.put('/inventory/supply/editSupply', auth.requireRoles('root', 'admin'), async function(req, res){
     await Supply.findByIdAndUpdate(req.body.data.supplyId, req.body.data.data)
     res.send("Supply information updated successfully!")
 });
 
-// edit product information
-router.put('/inventory/product/edit', async function(req, res){
-    await Product.findByIdAndUpdate(req.body.data.productId, req.body.data.data)
-    res.send("Product information updated successfully!")
-})
-
-// Product Notes edit
-router.post('/inventory/product/notes/edit', async function(req, res){
+//====================================================================================================
+// Notes
+//====================================================================================================
+// Product Notes
+router.post('/inventory/product/notes', auth.requireRoles('root', 'admin'), async function(req, res){
     await Product.findByIdAndUpdate(req.body.data.ProductId, {
         Notes: req.body.data.Notes
     });
     res.send("Product notes updated successfully!")
 });
 
+//====================================================================================================
+// Images
+//====================================================================================================
 // Product Image edit
-router.post('/inventory/product/image/edit', async function(req, res){
+router.post('/inventory/product/image/edit', auth.requireRoles('root', 'admin'), async function(req, res){
 
     var newlyfoundProduct = await Product.findById(req.body.data.ProductId);
     // on the newlyfoundcreatedproduct.Images._id find the image and update else add new image
@@ -138,7 +155,7 @@ router.post('/inventory/product/image/edit', async function(req, res){
 });
 
 // product image delete
-router.post('/inventory/product/image/delete', async function(req, res){
+router.post('/inventory/product/image/delete', auth.requireRoles('root', 'admin'), async function(req, res){
     var foundProduct = await Product.findById(req.body.data.ProductId);
     var imageIndex = foundProduct.Images.findIndex(function(image){
         console.log("Comparing: ", image._id.toString(), " with ", req.body.data.ImageId);
@@ -150,28 +167,3 @@ router.post('/inventory/product/image/delete', async function(req, res){
     res.send("Product image deleted successfully!")
 });
 module.exports = router;
-
-async function populateIndexTable(){
-    // find all products
-    var products = await Product.find({})
-    .lean();
-    // count all supplies base on product code to get quantity that is Available via for loop
-    for (let i = 0; i < products.length; i++) {
-        var supplyCount = await Supply.countDocuments({
-            ProductCode: products[i].Code,
-            Status: "Available"
-        });
-        products[i].quantity = supplyCount;
-    }    
-    var partList = []
-    // convert data to string
-    products.forEach(function(product){
-        partList.push([
-            "<a href='/inventory/product/view/" + product._id + "'>" + product.Code + "</a>",
-            "<a href='/inventory/product/view/" + product._id + "'>" + product.Name + "</a>",
-            product.Description,
-            product.quantity
-        ]);
-    });
-    return partList;
-}

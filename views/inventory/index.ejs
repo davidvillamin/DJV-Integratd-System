@@ -4,25 +4,23 @@
 <!-- Prefix Legends
 ii - Inventory Index -->
 <main id="main" class="main">
-    <div class="pagetitle">
-    <h1>Inventory</h1>
-    <nav>
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active">Inventory</li>
-        </ol>
-    </nav>
+    <div class="pagetitle d-flex align-items-center">
+        <nav>
+            <h1>Inventory</h1>
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Inventory</li>
+            </ol>
+        </nav>
+        <button type="button" class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#ipCreateModal">
+            <i class="bi bi-plus-circle"></i> Add Product
+        </button> 
     </div><!-- End Page Title -->
     
     <section class="section">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title p-1 m-0 align-self-center">All Products </h5>
-                <!-- create device button -->
-                <!-- location = \views\device\modal\create.ejs -->
-                <button type="button" class="btn btn-success m-0 p-1" data-bs-toggle="modal" data-bs-target="#ipCreateModal">
-                    <i class="bi bi-plus-circle"></i> New
-                </button> <!-- end of device create button -->
             </div>
             <div class="card-body">
                 <!-- Table for list of inventory
@@ -43,7 +41,7 @@ ii - Inventory Index -->
 <%- include("../partials/script") %>
 
 <script src="../../assets/js/inventory/index.js"></script>
-<script src="../../assets/js/inventory/product/create.js"></script>
+<script src="../../assets/js/inventory/modal/product/create.js"></script>
 
 
 <%- include("../partials/footer") %>

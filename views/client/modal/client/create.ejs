@@ -1,7 +1,7 @@
 <!-- legend prefix :
  cc - client Create -->
 <div class="modal fade" id="cCreateModal" tabindex="-1">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Create Client</h5>
@@ -9,49 +9,43 @@
             </div>
             <div class="modal-body">
                 <form class="needs-validation" id="cCreateClient" novalidate enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ccFristNameLbl">First Name</span>
-                                <input type="text" class="form-control" id="ccFristName" aria-label="First Name" aria-describedby="ccFristNameLbl" required>
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ccLastNameLbl">Last Name</span>
-                                <input type="text" class="form-control" id="ccLastName" aria-label="Last Name" aria-describedby="ccLastNameLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ccBusinessNameLbl">Business Name</span>
-                                <input type="text" class="form-control" id="ccBusinessName" aria-label="Business Name" aria-describedby="ccBusinessNameLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ccEmailLbl">Email</span>
-                                <input type="text" class="form-control" id="ccEmail" aria-label="Email" aria-describedby="ccEmailLbl">
-                            </div>
-                            <div class="input-group input-group-sm my-3 ccContactNumberGroup">
-                                <span class="input-group-text">Contact Number</span>
-                                <input type="text" class="form-control ccContactNumber" required>
-                                <button class="btn btn-success ccContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                                <button class="btn btn-danger ccContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ccAddressLineLbl">Address Line</span>
-                                <input type="text" class="form-control" id="ccAddressLine" aria-label="Address Line" aria-describedby="ccAddressLineLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ccCityLbl">City</span>
-                                <input type="text" class="form-control" id="ccCity" aria-label="City" aria-describedby="ccCityLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ccZipLbl">Zip</span>
-                                <input type="text" class="form-control" id="ccZip" aria-label="Zip" aria-describedby="ccZipLbl">
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="ccNotesLbl">Notes</span>
-                                <textarea class="form-control" id="ccNotes" aria-label="Notes"></textarea>
-                            </div>
-                        </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ccFristNameLbl">First Name</span>
+                        <input type="text" class="form-control" id="ccFristName" aria-label="First Name" aria-describedby="ccFristNameLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ccLastNameLbl">Last Name</span>
+                        <input type="text" class="form-control" id="ccLastName" aria-label="Last Name" aria-describedby="ccLastNameLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ccBusinessNameLbl">Business Name</span>
+                        <input type="text" class="form-control" id="ccBusinessName" aria-label="Business Name" aria-describedby="ccBusinessNameLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ccEmailLbl">Email</span>
+                        <input type="text" class="form-control" id="ccEmail" aria-label="Email" aria-describedby="ccEmailLbl">
+                    </div>
+                    <div class="input-group input-group-sm my-3 ccContactNumberGroup">
+                        <span class="input-group-text">Contact Number</span>
+                        <input type="text" class="form-control ccContactNumber" required>
+                        <button class="btn btn-success ccContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
+                        <button class="btn btn-danger ccContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ccAddressLineLbl">Address Line</span>
+                        <input type="text" class="form-control" id="ccAddressLine" aria-label="Address Line" aria-describedby="ccAddressLineLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ccCityLbl">City</span>
+                        <input type="text" class="form-control" id="ccCity" aria-label="City" aria-describedby="ccCityLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ccZipLbl">Zip</span>
+                        <input type="text" class="form-control" id="ccZip" aria-label="Zip" aria-describedby="ccZipLbl">
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ccNotesLbl">Notes</span>
+                        <textarea class="form-control" id="ccNotes" aria-label="Notes"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>

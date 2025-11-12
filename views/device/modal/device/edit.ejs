@@ -1,0 +1,52 @@
+<!-- de - device Edit -->
+<div class="modal fade" id="deEditModal" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Device Edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="dEditDevice" novalidate enctype="multipart/form-data">
+                    <div class="input-group input-group-sm mb-3">
+                        <input type="hidden" id="deClientId">
+                        <span class="input-group-text">Client</span>
+                        <input class="form-control" id="deClient"  disabled>
+
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="deTypeLbl">Type</span>
+                        <input type="text" class="form-control" id="deType" aria-label="Brand" aria-describedby="deTypeLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="deBrandLbl">Brand</span>
+                        <input type="text" class="form-control" id="deBrand" aria-label="Brand" aria-describedby="deBrandLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="deModelLbl">Model</span>
+                        <input type="text" class="form-control" id="deModel" aria-label="Model" aria-describedby="deModelLbl" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="deSerialLbl">Serial</span>
+                        <input type="text" class="form-control" id="deSerial" aria-label="Serial" aria-describedby="deSerialLbl" required>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0 me-1" id="deWithSerial" type="checkbox" value="">No Serial
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="deNameLbl">Name</span>
+                        <input type="text" class="form-control" id="deName" aria-label="Brand" aria-describedby="deNameLbl" required>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0 me-1" type="checkbox" id="deDefaultName" value="">Default Name
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -4,8 +4,9 @@ $(function(){
     //======================================================
     // hide loading screen
     loadingScreen();
-    
-    $("#sbdashboard").removeClass("collapsed");
+    // collapse sidebar nav link and set active link
+    $("#forms-nav-transaction").addClass("show");
+    $("#sbtransaction").removeClass("collapsed");
     
     // initalize create transaction
     createTransaction();

@@ -12,19 +12,38 @@ $(function(){
     $(".toast").toast({
         delay: 5000
     });
-
-    // initialize datatable
-    var dTable = $('#diTable').DataTable({
-        data: crudiAjax({}, "/device/index/table", "POST"),
-        pageLength: 5, // set to display 5 items
-        lengthMenu: [5, 10, 25, 50, 100] // entries per page options
-    })
+    
+    initialize()
 
     deviceCreate().then(function(){
-        // reload datatable
-        dTable.clear().rows.add(crudiAjax({}, "/device/index/table", "POST")).draw();
+        initialize();
+    })
+
+    // client create
+    createClient().then(function(){
+        initialize();
     })
 
 })
 
+async function initialize(){
+        // get data
+    var tableData = crudiAjax({}, "/device/getData", "POST"); 
+    console.log(tableData)
+    await initBootstrapTable(
+        "#diTable",                                                                     // tableName
+        ["Code", "Name", "Client", "Type" , "_id"],                                     // tableHead
+        ["_id"],                                                                        // hiddenColumns (hide ID column)
+        ["Code", "Name", "Client.FullName", "Type", "_id"],                             // dataField
+        tableData,                                                                      // tableData
+        true,                                                                           // withSearch (enable search)
+    );
+
+    // add click event to table rows and view product details
+    $('#diTable tbody').on('click', 'tr', function () {
+        var data = $('#diTable').bootstrapTable('getData')[$(this).data('index')];
+        // to to product view page
+        window.location.href = "/device/view/" + data._id;
+    });
+}
 
