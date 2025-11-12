@@ -15,18 +15,21 @@ $(function(){
 
     //populate data
     initialize();
+
+    // device edit
+    deviceEdit(deviceId);
 })
 
 async function initialize(){
-    var deviceData = await crudiAjax({id: deviceId}, "/device/view/populate", 'Post');   
-    
+    var deviceData = await crudiAjax({deviceId: deviceId}, "/device/getOneData", 'Post');   
+    console.log(deviceData);
     // populate device data
-    $('#dvDeviceName').html(deviceData.Name ? deviceData.Name : '<p class="fst-italic mb-0">No Name available.</p>');
-    $('#dvType').html(deviceData.Type ? deviceData.Type : '<p class="fst-italic mb-0">No Type available.</p>');
-    $('#dvBrand').html(deviceData.Brand ? deviceData.Brand : '<p class="fst-italic mb-0">No Brand available.</p>');
-    $('#dvModel').html(deviceData.Model ? deviceData.Model : '<p class="fst-italic mb-0">No Model available.</p>');
-    $('#dvSerial').html(deviceData.withSerial ? deviceData.Serial : '<p class="fst-italic mb-0">Serial Not Available.</p>');
-    $('#dvCreatedDate').html(deviceData.CreatedDate ? moment(deviceData.CreatedDate).format("MMM-DD-YYYY  hh:mm A") : '<p class="fst-italic mb-0">No Created Date available.</p>');
+    $('#dvdName').html(deviceData.Name ? deviceData.Name : '<p class="fst-italic mb-0">No Name available.</p>');
+    $('#dvdType').html(deviceData.Type ? deviceData.Type : '<p class="fst-italic mb-0">No Type available.</p>');
+    $('#dvdBrand').html(deviceData.Brand ? deviceData.Brand : '<p class="fst-italic mb-0">No Brand available.</p>');
+    $('#dvdModel').html(deviceData.Model ? deviceData.Model : '<p class="fst-italic mb-0">No Model available.</p>');
+    $('#dvdSerial').html(deviceData.noSerial ? '<p class="fst-italic mb-0">Serial Not Available.</p>' : deviceData.Serial);
+    $('#dvdCreatedDate').html(deviceData.CreatedDate ? moment(deviceData.CreatedDate).format("MMM-DD-YYYY  hh:mm A") : '<p class="fst-italic mb-0">No Created Date available.</p>');
 
     //populate client data
     $('#dvcName').html(deviceData.Client.FullName ? deviceData.Client.FullName : '<p class="fst-italic mb-0">No Name available.</p>');
@@ -41,7 +44,4 @@ async function initialize(){
 
     // populate notes
     $('#dvNotes').html(deviceData.Notes ? deviceData.Notes : '<p class="fst-italic mb-0">No Notes available.</p>');
-    
-    // edit device
-    deviceEdit(deviceId);
 }

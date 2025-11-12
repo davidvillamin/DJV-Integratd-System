@@ -19,7 +19,7 @@ function deviceCreate() {
             // initial toggle
             noSerialToggle();
             // event listener for toggle
-            $('#dcWithSerial').on('change', function(){
+            $('#dcNoSerial').on('change', function(){
                 noSerialToggle();
             })
 
@@ -81,7 +81,7 @@ function deviceCreate() {
                             Type:$('#dcType').val(),
                             Brand:$('#dcBrand').val(),
                             Model:$('#dcModel').val(),
-                            withSerial: $('#dcWithSerial').is(':checked'),
+                            noSerial: $('#dcNoSerial').is(':checked'),
                             Serial:$('#dcSerial').val(),
                             Name:$('#dcName').val(),
                             CreatedDate: new Date()
@@ -123,7 +123,7 @@ function populateClientDropdown(){
 }
 
 function noSerialToggle(){
-    if ($('#dcWithSerial').is(':checked')){
+    if ($('#dcNoSerial').is(':checked')){
         $('#dcSerial').prop('disabled', true);
         $('#dcSerial').val('No Serial Number');
     } else {

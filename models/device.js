@@ -9,7 +9,7 @@ var deviceSchema = new mongoose.Schema({
     Type: String,
     Brand: String,
     Model: String,
-    withSerial: Boolean,
+    noSerial: Boolean,
     Serial: String,
     Images: [{
         Title: String,

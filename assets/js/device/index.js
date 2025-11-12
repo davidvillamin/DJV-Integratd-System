@@ -29,7 +29,6 @@ $(function(){
 async function initialize(){
         // get data
     var tableData = crudiAjax({}, "/device/getData", "POST"); 
-    console.log(tableData)
     await initBootstrapTable(
         "#diTable",                                                                     // tableName
         ["Code", "Name", "Client", "Type" , "_id"],                                     // tableHead
