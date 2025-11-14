@@ -13,15 +13,40 @@ $(function(){
     });
 
     // initialize datatable
-    var dTable = $('#ciTable').DataTable({
-        data: crudiAjax({}, "/client/index/table", "POST"),
-        pageLength: 5, // set to display 5 items
-        lengthMenu: [5, 10, 25, 50, 100] // entries per page options
-    })
+    initialize()
 
     createClient().then(function(){
         // reload datatable
-        dTable.clear().rows.add(crudiAjax({}, "/client/index/table", "POST")).draw();
+        initialize();
     })
 });
+
+async function initialize(){
+        // get data
+    var tableData = crudiAjax({}, "/client/getData", "POST"); 
+    tableData.forEach(function(data){
+        if (data.BusinessName == '') {
+            clientType = "<span class='badge bg-primary'>Individual</span>"
+        } else {
+            clientType = "<span class='badge bg-warning'>Business</span>"
+        }
+        data.Type = clientType;
+    })
+    // type if business or individual
+    await initBootstrapTable(
+        "#ciTable",                                                                     // tableName
+        ["Code", "Name", "Address", "Type" , "_id"],                                    // tableHead
+        ["_id"],                                                                        // hiddenColumns (hide ID column)
+        ["Code", "FullName", "Address.FullAddress", "Type", "_id"],                     // dataField
+        tableData,                                                                      // tableData
+        true,                                                                           // withSearch (enable search)
+    );
+
+    // add click event to table rows and view product details
+    $('#ciTable tbody').on('click', 'tr', function () {
+        var data = $('#ciTable').bootstrapTable('getData')[$(this).data('index')];
+        // to to product view page
+        window.location.href = "/client/view/" + data._id;
+    });
+}
 

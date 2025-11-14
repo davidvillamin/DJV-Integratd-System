@@ -3,15 +3,15 @@
 // legend prefix :
 
 // de - device Edit
-function deviceEdit(deviceId) {
+function editDevice(deviceId) {
     return new Promise(async function(resolve, reject) {
         try {
             // populate client dropdown
-            await populateDeviceEdit(deviceId);
+            await editDevicePopulateDeviceEdit(deviceId);
 
             // event listener for toggle
             $('#deNoSerial').on('change', function(){
-                noSerialToggle();
+                editDeviceNoSerialToggle();
             })
 
             // create transaction
@@ -49,7 +49,7 @@ function deviceEdit(deviceId) {
     })
 }
 
-function populateDeviceEdit(deviceId){
+function editDevicePopulateDeviceEdit(deviceId){
     return new Promise(async function(resolve, reject) {
         try {
             var deviceData = await crudiAjax({deviceId: deviceId}, "/device/getOneData", 'Post');
@@ -80,7 +80,7 @@ function populateDeviceEdit(deviceId){
     });
 }
 
-function noSerialToggle(){
+function editDeviceNoSerialToggle(){
     if ($('#deNoSerial').is(':checked')){
         $('#deSerial').prop('disabled', true);
         $('#deSerial').val('No Serial Number');

@@ -6,33 +6,24 @@ var express                             = require("express"),
 
 
 // ============================================================
-// Client Index
+// Routes
 // ============================================================
 // initialize client page (index)
 router.get("/client", auth.requireRoles('root', 'admin'), async function(req, res){
     res.render("client/index")
 });
-
-// index populate table (ajax)
-router.post("/client/index/table", auth.requireRoles('root', 'admin'), async function(req, res){
-    var tableData = await populateTable()
-    res.send(tableData)
+// view
+router.get("/client/view/:clntId", function(req, res){
+    res.render("client/view")
 });
 // ============================================================
-// Generic Populate Client with Devices
+// Utilities
 // ============================================================
-router.post("/client/list", async function(req, res){
-    var clientList = await Client.find()
-        .populate('Devices')
-        .lean();
-    res.send(clientList)
-})
-
 // auto generate code number
 router.get('/client/generateCodeNumber', auth.requireRoles('root', 'admin'), async function(req, res){
     // count how many data is inside Product to create unique code
     var clientCount = await Client.countDocuments();
-    var generatedCode = "CLN" + String(clientCount + 1).padStart(5, '0'); // simple unique code
+    var generatedCode = "CLT" + String(clientCount + 1).padStart(5, '0'); // simple unique code
     res.send(generatedCode);
 });
 
@@ -64,7 +55,7 @@ router.post('/client/getOneData', auth.requireRoles('root', 'admin'), async func
 
 
 // ============================================================
-// Client Create
+// Client
 // ============================================================
 
 //create new client
@@ -72,57 +63,57 @@ router.post("/client/create", async function(req, res){
     await Client.create(req.body.data)
     res.send("You have successfuly created a new client!")
 });
-
-
-// ============================================================
-// Client Edit
-// ============================================================
+// edit client
 router.post("/client/edit", async function(req, res){
     await Client.findByIdAndUpdate(req.body.data.clientId, req.body.data.data)
     res.send('You have successfuly updated the client information!')
 });
 
 // ============================================================
-// Client Delete
+// Notes
 // ============================================================
-
-// ============================================================
-// Client View
-// ============================================================
-router.get("/client/view/:clntId", function(req, res){
-    res.render("client/view")
+router.post("/client/notes", async function(req, res){
+    await Client.findByIdAndUpdate(req.body.data.clientId, {Notes: req.body.data.Notes})
+    res.send('You have successfuly updated the client notes!')
 });
 
-//get client info
-router.post("/client/view/ajax", async function(req, res){
-    var foundClient = await Client.findById(req.body.data.clientId)
-    .populate('Devices')
-    .lean();
-    res.send(foundClient)
+// ============================================================
+// Images
+// ============================================================
+// edit / create image
+router.post("/client/image/edit", async function(req, res){
+    // find device by id, then find image by id inside device images array, then update image data
+    var clientData = await Client.findById(req.body.data.clientId);
+    // on the newlyfoundcreatedproduct.Images._id find the image and update else add new image
+    var imageIndex = clientData.Images.findIndex(function(img) {
+        return img._id.toString() === req.body.data.imageId;
+    });
+    if (imageIndex == -1){
+        // add new image
+        await Client.findByIdAndUpdate(req.body.data.clientId, {
+            $push: { Images: req.body.data.data }
+        });
+    } else {
+        // update existing image
+        clientData.Images[imageIndex] = {
+            Title: req.body.data.data.Title,
+            Description: req.body.data.data.Description,
+            base64String: req.body.data.data.base64String
+        }   
+        await clientData.save();
+    }
+    res.send("Product image updated successfully!")
+});
+
+// delete image
+router.post("/client/image/delete", async function(req, res){
+    var foundClient = await Client.findById(req.body.data.clientId);
+    var imageIndex = foundClient.Images.findIndex(function(image){
+        return image._id.toString() === req.body.data.imageId;
+    });
+    foundClient.Images.splice(imageIndex, 1);
+    await foundClient.save();
+    res.send("Product image deleted successfully!")
 });
 
 module.exports = router;
-
-async function populateTable(){
-    var cList = [];
-    var clientList = await Client.find()
-        .select('_id FullName Address.FullAddress BusinessName') // specify the fields you want to retrieve
-        .lean();
-    // convert data to string
-    clientList.forEach(function(c){
-        var clientType = ''
-        if (c.BusinessName == '') {
-            clientType = "<span class='badge bg-primary'>Individual</span>"
-        } else {
-            clientType = "<span class='badge bg-warning'>Business</span>"
-        }
-
-        cList.push([
-            "<a href='/client/view/" + c._id + "'>" + c.FullName + "</a>",
-            c.Address.FullAddress,
-            clientType
-        ]);
-    });
-
-    return cList;
-}

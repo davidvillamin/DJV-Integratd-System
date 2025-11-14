@@ -2,30 +2,29 @@
 //just call this create client function
 // legend prefix :
 // dc - device Create
-function deviceCreate() {
-    return new Promise(function(resolve, reject) {
+function createDevice() {
+    return new Promise(async function(resolve, reject) {
         try {
             // populate client dropdown
-            populateClientDropdown()
-
+            await createDevicePopulateClientDropdown()
             // toggle auto code number
             // initial toggle
-            autoCodeNumberToggle();
+            createDeviceAutoCodeNumberToggle();
             // event listener for toggle
             $('#dcAutoCodeNumber').on('change', function(){
-                autoCodeNumberToggle();
+                createDeviceAutoCodeNumberToggle();
             })
 
             // initial toggle
-            noSerialToggle();
+            createDeviceNoSerialToggle();
             // event listener for toggle
             $('#dcNoSerial').on('change', function(){
-                noSerialToggle();
+                createDeviceNoSerialToggle();
             })
 
             // toggle default name
             // initial toggle
-            defualtNameToggle();
+            createDeviceDefaultNameToggle();
 
             // add initial value for default name
             // ensure 'Use default name' checkbox is checked by default and update state
@@ -34,7 +33,7 @@ function deviceCreate() {
 
             // event listener for toggle
             $('#dcDefaultName').on('change', function(){
-                defualtNameToggle();
+                createDeviceDefaultNameToggle();
             })
 
             // auto fill up device name
@@ -108,8 +107,8 @@ function deviceCreate() {
     })
 }
 
-function populateClientDropdown(){
-    var clients = crudiAjax({}, "/client/list", "POST");
+async function createDevicePopulateClientDropdown(){
+    var clients = await crudiAjax({}, "/client/getData", "POST");
     $('#dcClient').empty();
     clients.forEach(function(client){
         $('#dcClientList').append('<option data-id='+ client._id +' value="' + client.FullName + '"></option>');
@@ -122,7 +121,7 @@ function populateClientDropdown(){
     });
 }
 
-function noSerialToggle(){
+function createDeviceNoSerialToggle(){
     if ($('#dcNoSerial').is(':checked')){
         $('#dcSerial').prop('disabled', true);
         $('#dcSerial').val('No Serial Number');
@@ -133,7 +132,7 @@ function noSerialToggle(){
     }
 }
 
-function defualtNameToggle(){
+function createDeviceDefaultNameToggle(){
     if ($('#dcDefaultName').is(':checked')){
         $('#dcName').prop('disabled', true);
     } else {
@@ -141,7 +140,7 @@ function defualtNameToggle(){
     }
 }
 
-async function autoCodeNumberToggle(){
+async function  createDeviceAutoCodeNumberToggle(){
     if ($('#dcAutoCodeNumber').is(':checked')){
         $('#dcCode').prop('disabled', true);
         //generate own code number

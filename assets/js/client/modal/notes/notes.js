@@ -1,24 +1,24 @@
-function deviceNotes(deviceId) {
+function clientNotes(clientId) {
     return new Promise(async function(resolve, reject) {
         try {
             // get data to populate notes modal
-            var deviceData = await crudiAjax({deviceId:deviceId},"/device/getOneData","POST");
-            $('#dnNotes').val(deviceData.Notes);
+            var clientData = await crudiAjax({clientId:clientId},"/client/getOneData","POST");
+            $('#cnNotes').val(clientData.Notes);
             // submit edit notes form
-            $('#dEditNotes').on('submit', async function(e) {
+            $('#cEditNotes').on('submit', async function(e) {
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
                     var data = {
-                        Notes: $('#dnNotes').val()
+                        Notes: $('#cnNotes').val()
                     }
-                    data.deviceId = deviceId;
-                    var toastMessage = await crudiAjax(data, "/device/notes", 'Post');
-                    $('#dEditNotes')[0].reset();
-                    $('#dNotesModal').modal('toggle'); // fix modal toggle method
+                    data.clientId = clientId;
+                    var toastMessage = await crudiAjax(data, "/client/notes", 'Post');
+                    $('#cEditNotes')[0].reset();
+                    $('#cEditNotesModal').modal('toggle'); // fix modal toggle method
                     $('.modal-backdrop').remove(); // ensure backdrop is removed
                     // show toast
                     $(".toast").toast("show").find(".toast-body").text(toastMessage)
-                    $(".toast").find(".toast-title").text("Device notes updated successfully!")
+                    $(".toast").find(".toast-title").text("Client notes updated successfully!")
                     resolve()
                 }
             });

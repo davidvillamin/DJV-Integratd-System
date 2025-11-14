@@ -127,16 +127,14 @@ router.post('/inventory/product/notes', auth.requireRoles('root', 'admin'), asyn
 //====================================================================================================
 // Images
 //====================================================================================================
-// Product Image edit
+// edit and create product image
 router.post('/inventory/product/image/edit', auth.requireRoles('root', 'admin'), async function(req, res){
 
     var newlyfoundProduct = await Product.findById(req.body.data.ProductId);
     // on the newlyfoundcreatedproduct.Images._id find the image and update else add new image
     var imageIndex = newlyfoundProduct.Images.findIndex(function(img) {
-        console.log("Comparing: ", img._id.toString(), " with ", req.body.data.ImageId);
         return img._id.toString() === req.body.data.ImageId;
     });
-    console.log("Found Image Index: ", imageIndex);
     if (imageIndex == -1){
         // add new image
         await Product.findByIdAndUpdate(req.body.data.ProductId, {

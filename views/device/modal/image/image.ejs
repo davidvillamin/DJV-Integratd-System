@@ -1,0 +1,54 @@
+<!-- di = device Image -->
+<div class="modal fade" id="dImageModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Images</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- tia = Transaction Image Add -->
+                <form class="needs-validation" id="dImageEdit" novalidate enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-4">
+                            <h6>Image List</h6>
+                            <div class="list-group" id="diImageList" role="tablist">
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <input type="hidden" id="diImageId">
+                            <div class="mb-3">
+                                <label for="diTitle" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="diTitle" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" id="diImage" accept="image/*" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="diDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="diDescription" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex justify-content-center flex-column align-items-center">
+                            <div class="card">
+                                <h6 class="cad-text ms-3 mt-3">Preview</h6>
+                                <div class="card-body">
+                                    <img id="diPreview" src="/assets/img/no-image.jpg" class="img-thumbnail w-auto">
+                                </div>  
+                            </div>
+                            
+                            <button class="btn btn-danger " id="diDelete" style="display: none;"><i class="bi bi-trash"></i> Delete</button>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer d-flex">
+                        <button type="button" class="btn btn-success me-auto" style="display: none;" id="diClear">Clear</button>
+                        <button type="reset" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Save image</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        

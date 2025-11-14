@@ -17,12 +17,26 @@ $(function(){
     initialize();
 
     // device edit
-    deviceEdit(deviceId);
+    editDevice(deviceId).then(function(){
+        initialize()
+        editDevice(deviceId);
+    })
+
+    // device notes
+    deviceNotes(deviceId).then(function(){
+        initialize()        
+        deviceNotes(deviceId);
+    })
+
+    // image
+    deviceImage(deviceId).then(function(){
+        initialize()
+        deviceImage(deviceId);
+    })
 })
 
 async function initialize(){
     var deviceData = await crudiAjax({deviceId: deviceId}, "/device/getOneData", 'Post');   
-    console.log(deviceData);
     // populate device data
     $('#dvdName').html(deviceData.Name ? deviceData.Name : '<p class="fst-italic mb-0">No Name available.</p>');
     $('#dvdType').html(deviceData.Type ? deviceData.Type : '<p class="fst-italic mb-0">No Type available.</p>');
@@ -42,6 +56,11 @@ async function initialize(){
         contact ? $('#dvcContactNumber').append(" " + contact): '<p class="fst-italic mb-0">No Contact Numbers available.</p>';
     });
 
-    // populate notes
+    // populate notes for device
     $('#dvNotes').html(deviceData.Notes ? deviceData.Notes : '<p class="fst-italic mb-0">No Notes available.</p>');
+
+    // edit client from device view
+    editClient(deviceData.Client._id).then(function(){
+        initialize();
+    })
 }

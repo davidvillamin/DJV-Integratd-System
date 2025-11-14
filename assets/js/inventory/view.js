@@ -33,7 +33,7 @@ $(function(){
     // initialize product notes modal
     inventoryNotes(productId).then( function(){
         initialize()
-        invoiceNotes(productId)
+        inventoryNotes(productId)
     });
 
     // initialize image modal

@@ -3,15 +3,18 @@
 <%- include("../partials/header-sidebar") %>
 <!-- cv - Client View -->
 <main id="main" class="main">
-    <div class="pagetitle">
-        <h1 id="cvFullName"></h1>
+    <div class="pagetitle d-flex align-items-center">
         <nav>
+            <h1 id="cvFullName"></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="/client">Client</a></li>
                 <li class="breadcrumb-item active">Client Profile</li>
             </ol>
         </nav>
+        <button type="button" class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#cCreateModal">
+            <i class="bi bi-plus-circle"></i> Add Client
+        </button>
     </div><!-- End Page Title -->
 
     <section class="section profile">
@@ -54,6 +57,7 @@
                 </div>
 
                 <!-- Customer Information -->
+                 <!-- cv - client view -->
                 <div class="card">
                     <div class="card-header d-flex">
                         <span>Customer Information</span>
@@ -97,8 +101,9 @@
 
                 <!-- Notes -->
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex">
                         <span>Notes</span>
+                        <i class="bi bi-pencil-square ms-auto" data-bs-toggle="modal" data-bs-target="#cEditNotesModal"></i>
                     </div>
                     <div class="card-body">
                         <span id="cvNotes"></span>
@@ -216,136 +221,23 @@
             </div>
             <!-- =================right side ===================-->
             <div class="col-xl-3">
-                <!-- reminders -->
-                <div class="card">
-                    <div class="card-header">
-                        Reminders
-                    </div>
-                    <div class="card-body">
-                        <p class="fst-italic mb-0">No reminders available.</p>
-                    </div>
-                </div>
                 <!-- appointments calendar -->
                 <div class="card">
                     <div class="card-header">
                         Appointments
                     </div>
                     <div class="card-body">
-                        <div id="miniCalendar" class="mini-calendar">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <button id="mcPrev" type="button" class="btn btn-sm btn-outline-secondary">&lt;</button>
-                                <strong id="mcMonthYear" class="mx-2"></strong>
-                                <button id="mcNext" type="button" class="btn btn-sm btn-outline-secondary">&gt;</button>
-                            </div>
-
-                            <table class="table table-sm mb-0">
-                                <thead>
-                                    <tr id="mcWeekdays" class="text-center small"></tr>
-                                </thead>
-                                <tbody id="mcDates"></tbody>
-                            </table>
-                        </div>
-
-                        <style>
-                            .mini-calendar td, .mini-calendar th { width: 2.2rem; height: 2.2rem; padding: 0.15rem; }
-                            .mini-calendar td button { width: 100%; height: 100%; border: none; background: transparent; }
-                            .mini-calendar td .today { background-color: #0d6efd; color: #fff; border-radius: 0.25rem; }
-                            .mini-calendar td .muted { color: #6c757d; }
-                            .mini-calendar td button:hover { background-color: rgba(13,110,253,0.08); border-radius: 0.25rem; }
-                        </style>
-
-                        <script>
-                            (function () {
-                                const weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-                                const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-                                const mcMonthYear = document.getElementById('mcMonthYear');
-                                const mcWeekdays = document.getElementById('mcWeekdays');
-                                const mcDates = document.getElementById('mcDates');
-                                const prevBtn = document.getElementById('mcPrev');
-                                const nextBtn = document.getElementById('mcNext');
-
-                                // render weekdays header
-                                mcWeekdays.innerHTML = weekdays.map(d => '<th>' + d + '</th>').join('');
-
-                                let today = new Date();
-                                let viewYear = today.getFullYear();
-                                let viewMonth = today.getMonth(); // 0-11
-
-                                function daysInMonth(y,m){ return new Date(y, m+1, 0).getDate(); }
-                                function render(){
-                                    mcMonthYear.textContent = monthNames[viewMonth] + ' ' + viewYear;
-                                    mcDates.innerHTML = '';
-
-                                    const firstDay = new Date(viewYear, viewMonth, 1).getDay(); // 0-6
-                                    const totalDays = daysInMonth(viewYear, viewMonth);
-                                    let row = document.createElement('tr');
-                                    let dayCount = 0;
-
-                                    // leading blanks
-                                    for (let i=0; i<firstDay; i++){
-                                        row.appendChild(document.createElement('td'));
-                                        dayCount++;
-                                    }
-
-                                    for (let d=1; d<=totalDays; d++){
-                                        if (dayCount === 7){
-                                            mcDates.appendChild(row);
-                                            row = document.createElement('tr');
-                                            dayCount = 0;
-                                        }
-                                        const td = document.createElement('td');
-                                        const btn = document.createElement('button');
-                                        btn.type = 'button';
-                                        btn.textContent = d;
-
-                                        // mark today
-                                        if (viewYear === today.getFullYear() && viewMonth === today.getMonth() && d === today.getDate()){
-                                            btn.classList.add('today');
-                                        }
-
-                                        btn.addEventListener('click', () => {
-                                            // simple click behavior: highlight selected date and you can hook into appointment logic here
-                                            const prev = mcDates.querySelectorAll('button.selected');
-                                            prev.forEach(p => p.classList.remove('selected'));
-                                            btn.classList.add('selected');
-                                        });
-
-                                        td.appendChild(btn);
-                                        row.appendChild(td);
-                                        dayCount++;
-                                    }
-
-                                    // trailing blanks
-                                    while(dayCount > 0 && dayCount < 7){
-                                        row.appendChild(document.createElement('td'));
-                                        dayCount++;
-                                    }
-                                    mcDates.appendChild(row);
-                                }
-
-                                prevBtn.addEventListener('click', () => {
-                                    viewMonth--;
-                                    if (viewMonth < 0){ viewMonth = 11; viewYear--; }
-                                    render();
-                                });
-                                nextBtn.addEventListener('click', () => {
-                                    viewMonth++;
-                                    if (viewMonth > 11){ viewMonth = 0; viewYear++; }
-                                    render();
-                                });
-
-                                render();
-                            })();
-                        </script>
+                        <div id="miniCalendar"></div>
                     </div>
                 </div>
                 <!-- Attatchments -->
                 <div class="card">
-                    <div class="card-header">
-                        Attatchments
+                    <div class="card-header d-flex">
+                        <span>Images</span>
+                        <i class="bi bi-pencil-square ms-auto" data-bs-toggle="modal" data-bs-target="#cImageModal"></i>
                     </div>
                     <div class="card-body">
-                        <p class="fst-italic mb-0">No reminders available.</p>
+                        <p class="fst-italic mb-0">No images available.</p>
                     </div>
                 </div>
             </div>
@@ -355,15 +247,20 @@
 <!-- End #main -->
 <!-- modal -->
 <%- include("modal/client/edit") %>
-<%- include("../device/modal/create.ejs") %>
+<%- include("modal/client/create") %>
+<%- include("modal/notes/notes") %>
+<%- include("modal/image/image") %>
 
 <!-- notification -->
 <%- include("../partials/toaster") %>
 <!-- dependencies -->
 <%- include("../partials/script") %>
 
+
 <script src="/assets/js/client/view.js"></script>
-<script src="/assets/js/client/crud/client/edit.js"></script>
-<script src="/assets/js/device/crud/create.js"></script>
+<script src="/assets/js/client/modal/client/create.js"></script>
+<script src="/assets/js/client/modal/client/edit.js"></script>
+<script src="/assets/js/client/modal/notes/notes.js"></script>
+<script src="/assets/js/client/modal/image/image.js"></script>
 
 <%- include("../partials/footer") %>

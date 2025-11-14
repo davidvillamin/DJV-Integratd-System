@@ -12,13 +12,37 @@ $(function(){
     });
     
     //Initialize data
-    initializeData();
+    initialize();
+
+    // create client
+    createClient()
+
+    clientNotes(clientId).then(function(){
+        // after notes updated
+        initialize();
+        clientNotes(clientId);
+    });
+
+    // edit client
+    editClient(clientId).then(function(){
+        // listeners for edit client modal
+        initialize();
+        editClient(clientId);
+    });
+
+    // client image 
+    clientImage(clientId).then(function(){
+        // after image modal actions
+        initialize();
+        clientImage(clientId);
+    });
+
 })
 
-function initializeData(){
+function initialize(){
     //population of data
-    var currentClient = crudiAjax({clientId: clientId}, "/client/view/ajax", 'Post')
-
+    var currentClient = crudiAjax({clientId: clientId}, "/client/getOneData", 'Post')
+    console.log(currentClient);
     $('#cvFullName').text(currentClient.FullName)
     $('#cvEmail').text(currentClient.Email ? currentClient.Email : 'Email Not Available');
     $('#cvAddress').text(currentClient.Address.FullAddress ? currentClient.Address.FullAddress : 'Address Not Available');
@@ -35,11 +59,7 @@ function initializeData(){
 
     $('#cvNotes').text(currentClient.Notes ? currentClient.Notes : 'No Notes Available');
 
-    // initialize edit client modal data
-    clientEdit(currentClient).then(function(){
-        // listeners for edit client modal
-        initializeData();
-    })
+
 
     //devices table
     // clear first the table body
@@ -52,8 +72,23 @@ function initializeData(){
         $('#cvDeviceTable tbody').append(deviceRow);
     });
 
-    deviceCreate().then(function(){
-        // reload after creating device
-        initializeData();
-    })
+    // initialize mini calendar
+    // this data will be populated
+    // date created
+    // ticket dates
+    // etc
+    var initialDates = [
+        { // Client Created Date
+            date: moment(currentClient.CreatedDate).format('YYYY-MM-DD'), 
+            title: 'Client created', 
+            color: 'success'
+        },
+    ];
+
+    $('#miniCalendar').miniCalendar({
+        clickable: false, // Disable clicking on calendar dates
+        showToday: true,
+        initialDates: initialDates
+    });
+
 }

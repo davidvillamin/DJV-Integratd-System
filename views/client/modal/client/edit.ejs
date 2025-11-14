@@ -10,6 +10,10 @@
             <div class="modal-body">
                 <form class="needs-validation" id="cEditClient" novalidate enctype="multipart/form-data">
                     <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ceCodeLbl">Code</span>
+                        <input type="text" class="form-control" id="ceCode" aria-label="Brand" aria-describedby="ceCodeLbl" required disabled>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="ceFristNameLbl">First Name</span>
                         <input type="text" class="form-control" id="ceFristName" aria-label="First Name" aria-describedby="ceFristNameLbl" required>
                     </div>
@@ -26,13 +30,6 @@
                         <input type="text" class="form-control" id="ceEmail" aria-label="Email" aria-describedby="ceEmailLbl">
                     </div>
                     <div id="ceContactNumberContainer">
-                        <!-- contact numbers will be appended here -->
-                        <!-- <div class="input-group input-group-sm my-3 ceContactNumberGroup">
-                            <span class="input-group-text">Contact Number</span>
-                            <input type="text" class="form-control ceContactNumber" required>
-                            <button class="btn btn-success ceContactNumberAdd" type="button"><i class="bi bi-plus-square"></i></button>
-                            <button class="btn btn-danger ceContactNumberDelete" type="button"><i class="bi bi-trash"></i></button>
-                        </div> -->
                     </div>
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="ceAddressLineLbl">Address Line</span>
@@ -45,10 +42,6 @@
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="ceZipLbl">Zip</span>
                         <input type="text" class="form-control" id="ceZip" aria-label="Zip" aria-describedby="ceZipLbl">
-                    </div>
-                    <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" id="ceNotesLbl">Notes</span>
-                        <textarea class="form-control" id="ceNotes" aria-label="Notes"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>

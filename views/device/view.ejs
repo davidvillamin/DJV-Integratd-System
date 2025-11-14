@@ -134,7 +134,7 @@
                 <!-- Tickets -->
                 <div class="card">
                     <div class="card-header">
-                        Tickets
+                        Transaction
                     </div>
                     <div class="card-body">
                         <table id="cvTicketTable" class="table table-sm table-striped">
@@ -247,13 +247,13 @@
                 </div>
             </div>
             <!-- =================right side ===================-->
+             <!-- dv - device View -->
             <div class="col-xl-3">
                 <!-- Images -->
                 <div class="card">
                     <div class="card-header d-flex">
                         <span class="me-auto">Images</span>
-                        <i class="bi bi-plus-circle"></i>
-                        <i class="bi bi-pencil-square mx-2"></i>
+                        <i class="bi bi-pencil-square mx-2" data-bs-toggle="modal" data-bs-target="#dImageModal"></i>
                     </div>
                     <div class="card-body">
                         <p class="fst-italic mb-0">No Images available.</p>
@@ -263,7 +263,7 @@
                 <div class="card">
                     <div class="card-header d-flex">
                         <span class="me-auto">Notes</span>
-                        <i class="bi bi-pencil-square mx-2" data-bs-toggle="modal" data-bs-target="#dveNotesModal"></i>
+                        <i class="bi bi-pencil-square mx-2" data-bs-toggle="modal" data-bs-target="#dNotesModal"></i>
                     </div>
                     <div class="card-body">
                         <div id="dvNotes"></div>
@@ -279,11 +279,14 @@
 <%- include("modal/notes/notes") %>
 <%- include("../client/modal/client/edit") %>
 <%- include("modal/device/edit") %>
+<%- include("modal/image/image") %>
 
 
 <%- include("../partials/script") %>
 <script src="../../assets/js/device/view.js"></script>
+<script src="../../assets/js/client/modal/client/edit.js"></script>
 <script src="../../assets/js/device/modal/notes/notes.js"></script>
 <script src="../../assets/js/device/modal/device/edit.js"></script>
+<script src="../../assets/js/device/modal/image/image.js"></script>
 
 <%- include("../partials/footer") %>

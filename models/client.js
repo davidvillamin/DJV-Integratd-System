@@ -8,6 +8,11 @@ var clientSchema = new mongoose.Schema({
     BusinessName: String,
     Email: String,
     ContactDetails: [],
+    Images: [{
+        Title: String,
+        Description: String,
+        base64String: String
+    }],
     Address: {
         FullAddress: String,
         AddressLine: String,

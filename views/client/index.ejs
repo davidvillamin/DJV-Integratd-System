@@ -6,41 +6,27 @@
 <%- include("../partials/header-sidebar") %>
 <main id="main" class="main">
     <!-- Title Page -->
-    <div class="pagetitle">
-        <h1>Client</h1>
+    <div class="pagetitle d-flex align-items-center">
         <nav>
+            <h1>Client</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item active">Client</li>
             </ol>
         </nav>
+        <button type="button" class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#cCreateModal">
+            <i class="bi bi-plus-circle"></i> Add Client
+        </button>
     </div><!-- End Page Title -->
     
     <section class="section">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title p-1 m-0 align-self-center">All Clients</h5>
-                <!-- create client button -->
-                <!-- location = \views\client\modal\create.ejs  -->
-                <button type="button" class="btn btn-success m-0 p-1" data-bs-toggle="modal" data-bs-target="#cCreateModal">
-                    <i class="bi bi-plus-circle"></i> New
-                </button><!-- end of client create button -->
             </div>
             <div class="card-body">
-                <!-- Table for list of clients
-
-                This table is created by DataTable
-                location = \assets\js\client\index.js -->
                 <table id="ciTable">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
                 </table>
-                <!-- End Table on list of clients -->
             </div>
         </div>
     </section>
@@ -58,6 +44,6 @@
 
 <!-- JS -->
 <script src="/assets/js/client/index.js"></script>
-<script src="/assets/js/client/crud/client/create.js"></script>
+<script src="/assets/js/client/modal/client/create.js"></script>
 
 <%- include("../partials/footer") %>

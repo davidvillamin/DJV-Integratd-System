@@ -9,6 +9,14 @@
             </div>
             <div class="modal-body">
                 <form class="needs-validation" id="cCreateClient" novalidate enctype="multipart/form-data">
+                    <div class="form-check form-switch d-flex ">
+                        <input class="form-check-input ms-auto me-1" type="checkbox" id="ccAutoCodeNumber" checked>
+                        <label class="form-check-label" for="ccAutoCodeNumber">Auto Code Number</label>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="ccCodeLbl">Code</span>
+                        <input type="text" class="form-control" id="ccCode" aria-label="Brand" aria-describedby="ccCodeLbl" required>
+                    </div>
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text" id="ccFristNameLbl">First Name</span>
                         <input type="text" class="form-control" id="ccFristName" aria-label="First Name" aria-describedby="ccFristNameLbl" required>

@@ -15,7 +15,7 @@ $(function(){
     
     initialize()
 
-    deviceCreate().then(function(){
+    createDevice().then(function(){
         initialize();
     })
 
