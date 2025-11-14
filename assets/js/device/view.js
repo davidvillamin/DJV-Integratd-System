@@ -33,6 +33,18 @@ $(function(){
         initialize()
         deviceImage(deviceId);
     })
+
+    // create device
+    createDevice().then(function(){
+        initialize()
+        createDevice();
+    })
+
+    // create client from device view
+    createClient().then(function(){
+        initialize()
+        createClient();
+    })
 })
 
 async function initialize(){

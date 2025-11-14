@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 var transactionDbSchema = new mongoose.Schema({
-    TransactionType: String, // inhouse , onsite, sales , warranty , project
+    Type: String, // inhouse , onsite, sales , warranty , project
     // TRXXXXXX
-    transactionCode: String, 
+    Code: String, 
     Name: String,
     Client: 
         { 
@@ -32,7 +32,15 @@ var transactionDbSchema = new mongoose.Schema({
         Date: Date,
         Personel: String
     },
-    isClosed: Boolean,
+    Status: Array, // pending, onprogress, forrelease, released, closed, cancelled
+    isOpen: Boolean,
+    CreatedDate: Date,
+    Notes: String,
+    Documents: [
+        {
+            base64String: String
+        }
+    ],
     Product: [
         {
             Product: {

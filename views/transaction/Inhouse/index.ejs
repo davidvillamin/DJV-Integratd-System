@@ -3,24 +3,24 @@
 <%- include("../../partials/header-sidebar") %>
 <!-- prefix tih - transaction inhouse-->
     <main id="main" class="main">
-        <div class="pagetitle">
-        <h1>In-House</h1>
-        <nav>
-            <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/transaction">Transactions</a></li>
-            <li class="breadcrumb-item active">In-House</li>
-            </ol>
-        </nav>
+        <div class="pagetitle d-flex justify-content-between align-items-center">
+            <nav>
+                <h1>In-House</h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/transaction">Transactions</a></li>
+                    <li class="breadcrumb-item active">In-House</li>
+                </ol>
+            </nav>
+            <button type="button" class="btn btn-success ms-auto btn-sm" data-bs-toggle="modal" data-bs-target="#tCreateModal">
+                <i class="bi bi-plus-circle"></i> New Transaction
+            </button>
         </div><!-- End Page Title -->
         
         <section class="section">
             <div class="card">
-                <div class=" card-header d-flex justify-content-between">
+                <div class=" card-header ">
                     <h5 class="card-title p-1 m-0 align-self-center">All Transactions</h5>
-                    <button type="button" class="btn btn-success m-0 p-1" data-bs-toggle="modal" data-bs-target="#tihCreateModal">
-                        <i class="bi bi-file-earmark"></i> Create
-                    </button>
                 </div>
                 <div class="card-body">
                     <!-- Table with stripped rows -->
@@ -43,10 +43,15 @@
     </main><!-- End #main -->
     </a>
 <!-- modal -->
+<%- include("../modal/transaction/create") %>
+<%- include("../../client/modal/client/create") %>
 
 <%- include("../../partials/toaster") %>
 <%- include("../../partials/script") %>
 
 <!-- script -->
 <script src="../../../assets/js/transaction/inhouse/index.js"></script>
+<script src="../../../assets/js/transaction/modal/transaction/create.js"></script>
+<script src="../../../assets/js/client/modal/client/create.js"></script>
+
 <%- include("../../partials/footer") %>

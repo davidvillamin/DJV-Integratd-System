@@ -14,9 +14,9 @@
                         <select class="form-select" id="tTypeGroup" required>
                             <option selected></option>
                             <option value="Inhouse">In-house</option>
-                            <option value="Onsite">On-site</option>
-                            <option value="Sales">Sales</option>
-                            <option value="Projects">Projects</option>
+                            <!-- <option value="Onsite">On-site</option> -->
+                            <!-- <option value="Sales">Sales</option> -->
+                            <!-- <option value="Projects">Projects</option> -->
                         </select>
                     </div>
                     <div class="input-group input-group-sm mb-3">
@@ -37,7 +37,7 @@
                         <input class="form-control" list="tClientList" id="tClient" placeholder="Type to search client..." required>
                         <datalist id="tClientList">
                         </datalist>
-                        <button class="btn btn-outline-secondary" type="button" id="tClientCreate">Create</button>
+                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#cCreateModal">Create</button>
                     </div>
                     <div class="form-check form-switch d-flex ">
                         <input class="form-check-input ms-auto me-1" type="checkbox" id="tToday" checked>

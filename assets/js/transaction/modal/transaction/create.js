@@ -18,7 +18,7 @@ function createTransaction() {
             })
 
             // get client list
-            var clientList = await crudiAjax({},"/client/list", "POST");
+            var clientList = await crudiAjax({},"/client/getData", "POST");
 
             // populate client select
             $("#tClientList").empty();
@@ -73,15 +73,17 @@ function createTransaction() {
                     e.preventDefault();
                     var data = {
                         Name: $('#tTicketName').val(),
-                        TransactionType: $('#tTypeGroup').val(),
-                        transactionCode: $('#tTicketNumber').val(),
+                        Type: $('#tTypeGroup').val(),
+                        Code: $('#tTicketNumber').val(),
                         Client: $('#tClientID').val(),
                         Device: $('#tDeviceID').val(),
                         RecievedBy: {
                             Date: $('#tReceivedDate').val(),
                             Personel: $('#tPersonel').val()
                         },
-                        isClosed: false
+                        Status: ["Pending","Open"],
+                        isOpen: true,
+                        CreatedDate: new Date(),
                     }
                     
                     await crudiAjax(data, "/transaction/create", "POST");

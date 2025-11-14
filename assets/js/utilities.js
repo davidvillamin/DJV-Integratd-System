@@ -189,6 +189,10 @@ function tagGenerator(tags) {
     }
     return tags.map(function(tag){
         switch (tag) {
+            case "Open":
+                return `<span class="badge bg-success mx-1">Open</span>`;
+            case "Closed":
+                return `<span class="badge bg-secondary mx-1">Closed</span>`;
             case "Pending":
                 return `<span class="badge bg-warning text-dark mx-1">Pending</span>`;
             case "Quotation":

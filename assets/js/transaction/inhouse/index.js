@@ -1,25 +1,48 @@
-$(async function(){
+$(function(){
     // hide loading screen
     loadingScreen();
 
-    //for selection on side bar
+    // collapse sidebar nav link and set active link
+    $("#forms-nav-transaction").addClass("show");
     $("#sbinhouse").removeClass("collapsed");
     
     // initialize toast
     $(".toast").toast({
         delay: 5000
     });
-    // initialize datatable
-    var dTable = $('#tihIndexTable').DataTable({
-        data: crudiAjax({}, "/transaction/inhouse/index", "POST"),
-        pageLength: 5, // set to display 5 items
-        lengthMenu: [5, 10, 25, 50, 100], // entries per page options
-    })
 
-    // //create parts information
-    // inventoryProductCreate().then(function(){
-    //     // reload datatable
-    //     dTable.clear().rows.add(crudiAjax({}, "/inventory/index/table", "POST")).draw();
-    // })
+    initialize();
+    // create client
+    createClient().then(function(){
+        initialize();
+    });
+
+    // create transaction
+    createTransaction().then(function(){
+        initialize();
+    });
 })
 
+async function initialize(){
+        // get data
+    var tableData = crudiAjax({}, "/transaction/inhouse/getData", "POST"); 
+    // status generator
+    tableData.forEach(function(item){
+        item.Status = tagGenerator(item.Status);
+    });
+    await initBootstrapTable(
+        "#tihIndexTable",                                                               // tableName
+        ["Code", "Name", "Client", "Device" ,"Status" ,"_id"],                                     // tableHead
+        ["_id"],                                                                        // hiddenColumns (hide ID column)
+        ["Code", "Name", "Client.FullName", "Device.Type", "Status", "_id"],                             // dataField
+        tableData,                                                                      // tableData
+        true,                                                                           // withSearch (enable search)
+    );
+
+    // add click event to table rows and view product details
+    $('#tihIndexTable tbody').off('click', 'tr').on('click', 'tr', function () {
+        var data = $('#tihIndexTable').bootstrapTable('getData')[$(this).data('index')];
+        // to to product view page
+        window.location.href = "/transaction/inhouse/view/" + data._id;
+    });
+}

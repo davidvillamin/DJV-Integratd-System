@@ -1,4 +1,4 @@
-var tihId = window.location.href.split('/')[window.location.href.split('/').length - 1];
+var inhouseId = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
 $(async function(){
     //======================================================
@@ -7,17 +7,28 @@ $(async function(){
     // hide loading screen
     loadingScreen();
 
+    // collapse sidebar nav link and set active link
+    $("#forms-nav-transaction").addClass("show");
+    $("#sbinhouse").removeClass("collapsed");
+
     // initialize toast
     $(".toast").toast({
         delay: 5000
     });
     
-    initialize(tihId);
+    initialize(inhouseId);
+
+    // image modal
+    inhouseImage(inhouseId).then(function(){
+        initialize(inhouseId); // re-initialize to update image list
+        inhouseImage(inhouseId);
+    })
+
 });
 
-async function initialize(tihId) {
-    var transactionData = await crudiAjax({data: tihId}, "/transaction/inhouse/getData", "POST");
-
+async function initialize(inhouseId) {
+    var transactionData = await crudiAjax({inhouseId: inhouseId}, "/transaction/inhouse/getOneData", "POST");
+    console.log(transactionData);
     // populate client fields
     $("#tihName").text(transactionData.Name); // transaction inhouse name
     $("#tihcName").text(transactionData.Client.FullName); // transaction inhouse client name
@@ -37,7 +48,7 @@ async function initialize(tihId) {
 
     $("#tihcAddress").text(transactionData.Client.Address.FullAddress);
     $("#tihcCreatedDate").text(moment(transactionData.CreatedAt).format("MMMM Do YYYY"));
-    $("#tihcNotes").text(transactionData.Client.Notes ? transactionData.Client.Notes : 'No notes available.');
+    $("#tihcNotes").html(transactionData.Client.Notes ? transactionData.Client.Notes : '<p class="fst-italic mb-0">No notes available.</p>');
 
     // populate device fields
     $("#tihdName").text(transactionData.Device.Name);
@@ -46,11 +57,70 @@ async function initialize(tihId) {
     $("#tihdSerialNumber").text(transactionData.Device.Serial);
     $("#tihdCreatedDate").text(moment(transactionData.Device.CreatedDate).format("MMMM Do YYYY"));
 
+    // transaction populate
+
+    // destroy and reinitialize quill
+    if (window.quillInstance) {
+        window.quillInstance.disable();
+        delete window.quillInstance;
+    }
+
+    // clean quill container and any toolbars
+    $('#tihServiceReport').empty().removeClass().removeAttr('data-gramm data-gramm_editor data-enable-grammarly');
+    $('#tihServiceReport').siblings('.ql-toolbar').remove();
+
     // initialize quill for service report
-    var quill = new Quill('#tihServiceReport', {
+    window.quillInstance = new Quill('#tihServiceReport', {
         theme: 'snow',
     });
-    quill.setContents(transactionData.ServiceReport); // set quill content
+    // add contents on quill
+    if (transactionData.ServiceReport) {
+        window.quillInstance.setContents(transactionData.ServiceReport);
+    }
+
+    // populate image list
+    $('#tihImageList').empty();
+    if (transactionData.Images.length === 0) {
+        $('#tihImageList').html('<p class="fst-italic mb-0">No images available.</p>');
+    } else {
+        // clear existing images
+        transactionData.Images.forEach(function(image) {
+            $('#tihImageList').append('<img src="' + image.base64String + '" class="img-thumbnail img-fluid rounded mb-2" />');
+        });
+    }
+
+    // notes
+    $('#tihNotes').html(transactionData.Notes ? transactionData.Notes : '<p class="fst-italic mb-0">No notes available.</p>');
+    // documents
+    // $('#tihDocuments').html('<p class="fst-italic mb-0">No documents available.</p>');
+    $('#tihDocuments').html(transactionData.Documents ? transactionData.Documents : '<p class="fst-italic mb-0">No documents available.</p>');
+
+    // initialize calendar
+    var initialDates = [
+        { // Client Created Date
+            date: moment(transactionData.CreatedDate).format('YYYY-MM-DD'), 
+            title: 'Transaction Created', 
+            color: 'success'
+        },
+    ];
+
+    $('#miniCalendar').miniCalendar({
+        clickable: false, // Disable clicking on calendar dates
+        showToday: true,
+        initialDates: initialDates
+    });
+
+    // client edit
+    editClient(transactionData.Client._id).then(function(){
+        initialize(inhouseId); // re-initialize to update client info
+        editClient(transactionData.Client._id)
+    })
+
+    // device edit
+    editDevice(transactionData.Device._id).then(function(){
+        initialize(inhouseId); // re-initialize to update device info
+        editDevice(transactionData.Device._id)
+    })
 
     // populate sales table
     // i need the salesReportTable to finish first before adding click event
@@ -58,7 +128,7 @@ async function initialize(tihId) {
     salesReportTable(transactionData).then(function(){
         // legend: tihs - transaction inhouse sales
         // product
-        initTihsProductModal(tihId);
+        initTihsProductModal(inhouseId);
         // supply
         // add click event to supply add button 
         $('.tihAddSupply').on('click', async function () {
@@ -70,11 +140,11 @@ async function initialize(tihId) {
             initTihsSupplyEditModal(data);
         });
         // expenses
-        initTihsExpensesModal(tihId);
+        initTihsExpensesModal(inhouseId);
         // payment
-        initTihsPaymentModal(tihId);
+        initTihsPaymentModal(inhouseId);
         // service charge
-        initTihsServiceChargeEditModal(tihId);
+        initTihsServiceChargeEditModal(inhouseId);
     })
 
     // compute total amount for overview

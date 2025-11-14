@@ -5,15 +5,18 @@
 <!-- dvd - Device View device -->
 <!-- dvc - Device View Client -->
 <main id="main" class="main">
-    <div class="pagetitle">
-        <h1 id="dvdName"></h1>
+    <div class="pagetitle d-flex align-items-center">
         <nav>
+            <h1 id="dvdName"></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="/Device">Device</a></li>
                 <li class="breadcrumb-item active">Device Profile</li>
             </ol>
         </nav>
+        <button type="button" class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#diCreateModal">
+            <i class="bi bi-plus-circle"></i> Add Device
+        </button> 
     </div><!-- End Page Title -->
 
     <section class="section profile">
@@ -280,6 +283,8 @@
 <%- include("../client/modal/client/edit") %>
 <%- include("modal/device/edit") %>
 <%- include("modal/image/image") %>
+<%- include("../client/modal/client/create") %>
+<%- include("modal/device/create") %>
 
 
 <%- include("../partials/script") %>
@@ -288,5 +293,7 @@
 <script src="../../assets/js/device/modal/notes/notes.js"></script>
 <script src="../../assets/js/device/modal/device/edit.js"></script>
 <script src="../../assets/js/device/modal/image/image.js"></script>
+<script src="../../assets/js/client/modal/client/create.js"></script>
+<script src="../../assets/js/device/modal/device/create.js"></script>
 
 <%- include("../partials/footer") %>
