@@ -1,81 +1,93 @@
-async function initTihsPaymentModal(tihId) {
-    // list all payments
-    PaymentList(tihId);
-
-    // add payments
-    $('#tihpaySave').off('click').on('click', async function () {
-        // identify if payments and transaction id is existing
-        if ( !$('#tihpayId').val()) {
-            // add new payments
-            var data = {}
-            data.data = {
-                Name: $('#tihpayName').val(),
-                Date: $('#tihpayDate').val(),
-                Amount: $('#tihpayAmount').val(),
-                Description: $('#tihpayDescription').val(),
-                Transaction: tihId
-            };
-            data.tihId = tihId;
-
-            await crudiAjax(data, '/transaction/inhouse/payments/add', 'POST');
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfully created payment data.")
-            $(".toast").find(".toast-title").text("Payment Data Saved")
-        } else {
-            // update existing payments
-            var data = {}
-            data.data = {
-                Name: $('#tihpayName').val(),
-                Date: $('#tihpayDate').val(),
-                Amount: $('#tihpayAmount').val(),
-                Description: $('#tihpayDescription').val(),
-                Transaction: tihId,
-            };
-            data.tihId = tihId;
-            data.paymentId = $('#tihpayId').val();
-
-            await crudiAjax(data, '/transaction/inhouse/payments/update', 'PUT');
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfully updated the payment data.")
-            $(".toast").find(".toast-title").text("Payment Data Updated")
-        }
-        // clear form
-        clearTihpayForm();
-        //update expenses list
-        ExpensesList(tihId);
-    });
-
-    // delete expenses
-    $('#tihpayDelete').off('click').on('click', async function () {
-        // confirm delete
-        if (confirm("Are you sure you want to delete this payment? This action cannot be undone.")) {
-            var data = {}
-            data.tihId = tihId;
-            data.paymentId = $('#tihpayId').val();
-            await crudiAjax(data, '/transaction/inhouse/payments/delete', 'DELETE');
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfully deleted the payment data.")
-            $(".toast").find(".toast-title").text("Payment Data Deleted")
-
-            // clear form
-            clearTihpayForm();
-
-            // refresh payments list
-            ExpensesList(tihId);
+async function inhousePayment(inhouseId) {
+    return new Promise(async function(resolve, reject) {
+        try {
+            // list all payments
+            PaymentList(inhouseId);
+        
+            // add payments
+            $('#tihpaySave').off('click').on('click', async function () {
+                // identify if payments and transaction id is existing
+                if ( !$('#tihpayId').val()) {
+                    // add new payments
+                    var data = {}
+                    data.data = {
+                        Name: $('#tihpayName').val(),
+                        Date: $('#tihpayDate').val(),
+                        Amount: $('#tihpayAmount').val(),
+                        Description: $('#tihpayDescription').val(),
+                        Transaction: inhouseId
+                    };
+                    data.inhouseId = inhouseId;
+        
+                    await crudiAjax(data, '/transaction/inhouse/payments/add', 'POST');
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfully created payment data.")
+                    $(".toast").find(".toast-title").text("Payment Data Saved")
+                    // clear form
+                    clearTihpayForm();
+                    //update expenses list
+                    PaymentList(inhouseId);
+                    resolve();
+                } else {
+                    // update existing payments
+                    var data = {}
+                    data.data = {
+                        Name: $('#tihpayName').val(),
+                        Date: $('#tihpayDate').val(),
+                        Amount: $('#tihpayAmount').val(),
+                        Description: $('#tihpayDescription').val(),
+                        Transaction: inhouseId,
+                    };
+                    data.inhouseId = inhouseId;
+                    data.paymentId = $('#tihpayId').val();
+        
+                    await crudiAjax(data, '/transaction/inhouse/payments/update', 'PUT');
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfully updated the payment data.")
+                    $(".toast").find(".toast-title").text("Payment Data Updated")
+                    // clear form
+                    clearTihpayForm();
+                    //update expenses list
+                    PaymentList(inhouseId);
+                    resolve();
+                }
+            });
+        
+            // delete expenses
+            $('#tihpayDelete').off('click').on('click', async function () {
+                // confirm delete
+                if (confirm("Are you sure you want to delete this payment? This action cannot be undone.")) {
+                    var data = {}
+                    data.inhouseId = inhouseId;
+                    data.paymentId = $('#tihpayId').val();
+                    await crudiAjax(data, '/transaction/inhouse/payments/delete', 'DELETE');
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfully deleted the payment data.")
+                    $(".toast").find(".toast-title").text("Payment Data Deleted")
+        
+                    // clear form
+                    clearTihpayForm();
+                    // refresh payments list
+                    PaymentList(inhouseId);
+                    resolve();
+                }
+            });
+        } catch (error) {
+            reject(error);
         }
     });
 }
 
-async function PaymentList(tihId) {
+async function PaymentList(inhouseId) {
     // clear form
     clearTihpayForm();
 
     // get data 
-    var paymentList = await crudiAjax({ data: tihId }, "/transaction/inhouse/getData", "POST").Payment
+    var paymentList = await crudiAjax({ inhouseId: inhouseId }, "/transaction/inhouse/getOneData", "POST").Payment
     // initialize table
     await initBootstrapTable(
-        "#tihPaymentsList",                                            // tableName
-        ["Name", "Date", "Amount","Description", "_id"],                // tableHead
+        "#tihPaymentsList",                                             // tableName
+        ["Payment List", "Date", "Amount","Description", "_id"],        // tableHead
         ["Date", "Amount","Description", "_id"],                        // hiddenColumns (hide ID column)
         ["Name", "Date", "Amount","Description", "_id"],                // dataField
         paymentList,                                                    // tableData

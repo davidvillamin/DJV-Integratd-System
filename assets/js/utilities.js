@@ -185,7 +185,7 @@ async function iBootstrapTable(tableName, tableHead, hiddenColumns, dataField,  
 function tagGenerator(tags) {
     if (!Array.isArray(tags)) {
         console.error("tagBadgeGenerator: Input must be an array of strings.");
-        return []; // Return an empty array if the input is not an array
+        return ""; // Return an empty string if the input is not an array
     }
     return tags.map(function(tag){
         switch (tag) {
@@ -197,15 +197,15 @@ function tagGenerator(tags) {
                 return `<span class="badge bg-warning text-dark mx-1">Pending</span>`;
             case "Quotation":
                 return `<span class="badge bg-info text-dark mx-1">Quotation</span>`;
-            case "PendingApproval":
-                return `<span class="badge bg-warning text-dark mx-1">Pending Approval</span>`;
+            case "Approved":
+                return `<span class="badge bg-warning text-dark mx-1">Approved</span>`;
             case "For Release":
                 return `<span class="badge bg-success text-dark mx-1">ForRelease</span>`;
             case "PendingPayment":
                 return `<span class="badge bg-info text-dark mx-1">Pending Payment</span>`;
             case "IncompletePayment":
                 return `<span class="badge bg-info text-dark mx-1">Incomplete Payment</span>`;
-            case "Hold":
+            case "Hold": // for double check hold status
                 return `<span class="badge bg-danger text-dark mx-1">Hold</span>`;
             case "CancelRepair":
                 return `<span class="badge bg-danger mx-1">Cancel Repair</span>`;
@@ -230,7 +230,7 @@ function tagGenerator(tags) {
             default:
                 return ""
         }
-    })
+    }).join('');
 
 }
 

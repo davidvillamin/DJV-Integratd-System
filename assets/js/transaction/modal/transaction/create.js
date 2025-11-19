@@ -82,7 +82,12 @@ function createTransaction() {
                             Personel: $('#tPersonel').val()
                         },
                         Status: ["Pending","Open"],
-                        isOpen: true,
+                        statComplete: false,
+                        statReleased: false,
+                        statRepaired: false,
+                        statApproved: false,
+                        statQuotation: false,
+                        statPending: true,
                         CreatedDate: new Date(),
                     }
                     

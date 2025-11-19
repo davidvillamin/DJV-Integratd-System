@@ -1,87 +1,100 @@
-function initTihsExpensesModal(tihId) {
-    // list all expenses
-    ExpensesList(tihId);
-
-    // add expenses
-    $('#tiheSave').off('click').on('click', async function () {
-        // identify if expenses and transaction id is existing
-        if ( !$('#tiheExpensesId').val()) {
-            // add new expenses
-            var data = {}
-            data.data = {
-                ExpenseCode: $('#tiheCode').val(),
-                ExpensesType: $('#tiheType').val(),
-                Name: $('#tiheName').val(),
-                Date: $('#tiheDate').val(),
-                Amount: $('#tiheAmount').val(),
-                Description: $('#tiheDescription').val(),
-                Transaction: tihId
-            };
-            data.tihId = tihId;
-    
-            await crudiAjax(data, '/transaction/inhouse/expenses/add', 'POST');
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfully created expense data.")
-            $(".toast").find(".toast-title").text("Expense Data Saved")
-        } else {
-            // update existing expenses
-            var data = {}
-            data.data = {
-                ExpenseCode: $('#tiheCode').val(),
-                ExpensesType: $('#tiheType').val(),
-                Name: $('#tiheName').val(),
-                Date: $('#tiheDate').val(),
-                Amount: $('#tiheAmount').val(),
-                Description: $('#tiheDescription').val(),
-                Transaction: tihId,
-            };
-            data.tihId = tihId;
-            data.expensesId = $('#tiheExpensesId').val();
-
-            await crudiAjax(data, '/transaction/inhouse/expenses/update', 'PUT');
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfully updated the expense data.")
-            $(".toast").find(".toast-title").text("Expense Data Updated")
+function inhouseExpenses(inhouseId) {
+    return new Promise(async function(resolve, reject) {
+        try {
+            // list all expenses
+            ExpensesList(inhouseId);
+        
+            // add expenses
+            $('#tiheSave').off('click').on('click', async function () {
+                // identify if expenses and transaction id is existing
+                if ( !$('#tiheExpensesId').val()) {
+                    // add new expenses
+                    var data = {}
+                    data.data = {
+                        ExpenseCode: $('#tiheCode').val(),
+                        ExpensesType: $('#tiheType').val(),
+                        Name: $('#tiheName').val(),
+                        Date: $('#tiheDate').val(),
+                        Amount: $('#tiheAmount').val(),
+                        Description: $('#tiheDescription').val(),
+                        Transaction: inhouseId
+                    };
+                    data.inhouseId = inhouseId;
+            
+                    await crudiAjax(data, '/transaction/inhouse/expenses/add', 'POST');
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfully created expense data.")
+                    $(".toast").find(".toast-title").text("Expense Data Saved")
+                    // clear form
+                    clearTiheForm();
+                    //update expenses list
+                    ExpensesList(inhouseId);
+                    resolve();
+                } else {
+                    // update existing expenses
+                    var data = {}
+                    data.data = {
+                        ExpenseCode: $('#tiheCode').val(),
+                        ExpensesType: $('#tiheType').val(),
+                        Name: $('#tiheName').val(),
+                        Date: $('#tiheDate').val(),
+                        Amount: $('#tiheAmount').val(),
+                        Description: $('#tiheDescription').val(),
+                        Transaction: inhouseId,
+                    };
+                    data.inhouseId = inhouseId;
+                    data.expensesId = $('#tiheExpensesId').val();
+        
+                    await crudiAjax(data, '/transaction/inhouse/expenses/update', 'PUT');
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfully updated the expense data.")
+                    $(".toast").find(".toast-title").text("Expense Data Updated")
+                    // clear form
+                    clearTiheForm();
+                    //update expenses list
+                    ExpensesList(inhouseId);
+                    resolve();
+                }
+            });
+        
+            // delete expenses
+            $('#tiheDelete').off('click').on('click', async function () {
+                // confirm delete
+                if (confirm("Are you sure you want to delete this expense? This action cannot be undone.")) {
+                    var data = {}
+                    data.inhouseId = inhouseId;
+                    data.expensesId = $('#tiheExpensesId').val();
+                    await crudiAjax(data, '/transaction/inhouse/expenses/delete', 'DELETE');
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfully deleted the expense data.")
+                    $(".toast").find(".toast-title").text("Expense Data Deleted")
+        
+                    // clear form
+                    clearTiheForm();
+        
+                    // refresh expenses list
+                    ExpensesList(inhouseId);
+                    resolve();
+                }
+            });
+        } catch (error) {
+            reject(error);
         }
-        // clear form
-        clearTiheForm();
-        //update expenses list
-        ExpensesList(tihId);
-    });
-
-    // delete expenses
-    $('#tiheDelete').off('click').on('click', async function () {
-        // confirm delete
-        if (confirm("Are you sure you want to delete this expense? This action cannot be undone.")) {
-            var data = {}
-            data.tihId = tihId;
-            data.expensesId = $('#tiheExpensesId').val();
-            await crudiAjax(data, '/transaction/inhouse/expenses/delete', 'DELETE');
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfully deleted the expense data.")
-            $(".toast").find(".toast-title").text("Expense Data Deleted")
-
-            // clear form
-            clearTiheForm();
-
-            // refresh expenses list
-            ExpensesList(tihId);
-        }
-    });
+    })
 }
 
-async function ExpensesList(tihId) {
+async function ExpensesList(inhouseId) {
     // clear form
     clearTiheForm();
 
     // get data 
-    var expensesList = await crudiAjax({ data: tihId }, "/transaction/inhouse/getData", "POST").Expense
+    var expensesList = await crudiAjax({ inhouseId: inhouseId }, "/transaction/inhouse/getOneData", "POST").Expense
     // initialize table
     await initBootstrapTable(
         "#tiheExpensesList",                                                                    // tableName
-        ["Name", "ExpensesType", "Date", "Amount","Description","Status", "_id"],     // tableHead
-        ["ExpensesType", "Date", "Amount","Description","Status" , "_id"],             // hiddenColumns (hide ID column)
-        ["Name", "ExpensesType", "Date", "Amount","Description","Status", "_id"],     // dataField
+        ["Expenses List", "ExpensesType", "Date", "Amount","Description","Status", "_id"],               // tableHead
+        ["ExpensesType", "Date", "Amount","Description","Status" , "_id"],                      // hiddenColumns (hide ID column)
+        ["Name", "ExpensesType", "Date", "Amount","Description","Status", "_id"],               // dataField
         expensesList,                                                                           // tableData
         false,                                                                                  // withSearch (enable search)
     );

@@ -1,0 +1,34 @@
+<!-- legend prefix :
+tiha - transaction in house approval -->
+<div class="modal fade" id="tihApprovalModal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Approval</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="tihApprovalForm" novalidate enctype="multipart/form-data">
+                    <div class="card">
+                        <h6 class="cad-text ms-3 mt-3">Preview</h6>
+                        <div class="card-body">
+                            <img id="tihaPreview" src="/assets/img/no-image.jpg" class="img-thumbnail w-auto">
+                        </div>  
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="tihaTitleLbl">Title</span>
+                        <input type="text" class="form-control" aria-describedby="tihaTitleLbl" id="tihaTitle" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="tihaImage" accept="image/*" required>
+                    </div>
+                    <div class="modal-footer d-flex">
+                        <button type="reset" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Save image</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

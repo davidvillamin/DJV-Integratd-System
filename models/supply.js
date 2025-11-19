@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var supplySchema = new mongoose.Schema({
+    Code: String, // SPL00001
     // Product Information
     ProductCode: String,
     Serial: String,

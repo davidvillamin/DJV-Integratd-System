@@ -107,9 +107,9 @@ async function populateIvWithSerialSupplyTable(supplyData){
     })
     await initBootstrapTable(
         "#ivSupplyTable",                                                             // tableName
-        ["Date", "Serial", "Status", "id","Cost","Product", "ProductCode", ],         // tableHead
+        ["Code" , "Date", "Serial", "Status", "id","Cost","Product", "ProductCode", ],         // tableHead
         ["id", "Cost", "Product", "ProductCode"],                                     // hiddenColumns (hide ID column)
-        ["DateAcquired", "Serial", "Status", "id","Cost","Product", "ProductCode"],   // dataField
+        ["Code", "DateAcquired", "Serial", "Status", "id","Cost","Product", "ProductCode"],   // dataField
         supplyData,                                                                   // tableData
         true,                                                                         // withSearch (enable search)
     );
@@ -149,9 +149,9 @@ async function populateIvWithoutSerialSupplyTable(supplyData){
     })
     await initBootstrapTable(
         "#ivSupplyTable",                                                   // tableName
-        ["Date", "Status", "id","Cost","Product", "ProductCode", ],         // tableHead
+        ["Code" , "Date", "Status", "id","Cost","Product", "ProductCode", ],         // tableHead
         ["id", "Cost", "Product", "ProductCode"],                           // hiddenColumns (hide ID column)
-        ["DateAcquired", "Status", "id","Cost","Product", "ProductCode"],   // dataField
+        ["Code", "DateAcquired", "Status", "id","Cost","Product", "ProductCode"],   // dataField
         supplyData,                                                         // tableData
         true,                                                               // withSearch (enable search)
     );

@@ -1,0 +1,27 @@
+<!-- legend prefix :
+tihsrp - transaction in house suggested retial price -->
+<!-- the js of this code is under assets/js/transaction/inhouse/modal/Supply/supply.js -->
+<div class="modal fade" id="tihSrpModal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SRP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="tihSrpForm" class="needs-validation" novalidate enctype="multipart/form-data">
+                    <div class="input-group input-group-sm mb-3">
+                        <input type="hidden" id="tihSrpSupplyId" required>
+                        <span class="input-group-text" id="tihSrpLbl">SRP</span>
+                        <input type="number" class="form-control" id="tihSrp" aria-label="SRP" aria-describedby="tihSrpLbl" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Add Supply</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -26,19 +26,22 @@ function inventorySupplyWithSerialAdd(productData) {
         try {
             // set product code in modal
             $("#isawsProductCode").val(productData.Code);
-            
+            // create supply code number
             // adding event listener
             listenerAddSerial();
             listenerRemoveSerial();
-
-            $('#isawsAddSerialForm').on('submit', function(e){
+            
+            $('#isawsAddSerialForm').on('submit', async function(e){
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
                     // loop all serial and add supplier and accounting info
                     var data = [];
+                    var serialCount = parseInt(await crudiAjax({}, "/inventory/supply/generateCodeNumber","GET"));
                     $('.isawsSerialGroup').each(function(i){
+                        var serialCode = "SUP" + String(serialCount + 1 + i).padStart(5, '0'); // simple unique code
                         data.push({
                             Serial: $(this).find('.isawsSerial').val(),
+                            Code: serialCode,
                             ProductCode: productData.Code,
                             Product: productData._id,
                             Supplier: {
@@ -79,13 +82,16 @@ function inventorySupplyWithoutSerialAdd(productData) {
         try {
             // set product code in modal
             $("#isawosProductCode").val(productData.Code);
-            $('#isawosAddSupplyForm').on('submit', function(e){
+            $('#isawosAddSupplyForm').on('submit', async function(e){
                 if ($(this).closest('form').is(':valid') === true){
                     e.preventDefault();
+                    var serialCount = parseInt(await crudiAjax({}, "/inventory/supply/generateCodeNumber","GET"));
                     // loop all serial and add supplier and accounting info
                     var data = [];
                     for (var i = 0; i < $('#isawosQuantity').val(); i++) {
+                        var serialCode = "SUP" + String(serialCount + 1 + i).padStart(5, '0'); // simple unique code
                         data.push({
+                            Code: serialCode,
                             ProductCode: productData.Code,
                             Product: productData._id,
                             Supplier: {

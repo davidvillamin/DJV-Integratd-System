@@ -5,33 +5,45 @@
 <main id="main" class="main">
     <div class="pagetitle d-flex mb-0 align-items-end">
         <nav>
-            <h1 id="tihName"></h1>
+            <h1 class="tihName"></h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="/transaction">Transaction</a></li>
-                <li class="breadcrumb-item active">Inhouse</li>
+                <li class="breadcrumb-item"><a href="/transaction/inhouse">Inhouse</a></li>
+                <li class="breadcrumb-item active tihName"></li>
             </ol>
         </nav>
         <i class="bi bi-three-dots-vertical ms-auto" data-bs-toggle="dropdown" aria-expanded="false"></i>
-
+     
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" data-bs-target="#tihSupplyModal" data-bs-toggle="modal">Quotation</a></li>
-            <li><a class="dropdown-item" data-bs-target="#tihExpensesModal" data-bs-toggle="modal">Approval</a></li>
-            <li><a class="dropdown-item" data-bs-target="#tihPaymentModal" data-bs-toggle="modal">Complete</a></li>
+            <li><a class="dropdown-item">Pending</a></li>
+            <li><a class="dropdown-item" data-bs-target="#tihQuotationModal" data-bs-toggle="modal">Quotation</a></li>
+            <li><a class="dropdown-item" data-bs-target="#tihApprovalModal" data-bs-toggle="modal">Approval</a></li>
+            <!-- this will be click to change status to repaired -->
+            <!-- tihdm - transaction inhouse dropdowm menu -->
+            <li><a class="dropdown-item" type="button" id="tihdmRepaired">Repaired</a></li> 
+            <li><a class="dropdown-item" data-bs-target="#tihReleasedModal" data-bs-toggle="modal">Released</a></li>
+            <li><a class="dropdown-item" type="button" id="tihdmComplete">Complete</a></li>
         </ul>
     </div><!-- End Page Title -->
     <div class="container my-2">
         <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-bg-info" style="width: 25%">
-                Repair
+            <div id="tihPending" class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-bg-warning" style="width: 16.67%">
+                Pending
             </div>
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary text-bg-primary" style="width: 25%">
+            <div id="tihQuotation" class="progress-bar progress-bar-striped progress-bar-animated bg-primary text-bg-primary d-none" style="width: 16.67%">
                 Quotation
             </div>
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-bg-warning" style="width: 25%">
-                Approval
+            <div id="tihApproved" class="progress-bar progress-bar-striped progress-bar-animated bg-info text-bg-info d-none" style="width: 16.67%">
+                Approved
             </div>
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success text-bg-success" style="width: 25%">
+            <div id="tihRepaired" class="progress-bar progress-bar-striped progress-bar-animated bg-danger text-bg-danger d-none" style="width: 16.67%">
+                Repaired
+            </div>
+            <div id="tihReleased" class="progress-bar progress-bar-striped progress-bar-animated bg-secondary text-bg-secondary d-none" style="width: 16.67%">
+                Released
+            </div>
+            <div id="tihComplete" class="progress-bar progress-bar-striped progress-bar-animated bg-success text-bg-success d-none" style="width: 16.67%">
                 Complete
             </div>
         </div>
@@ -50,11 +62,11 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             Payment
-                            <p class="m-0">₱ 0.00</p>
+                            <p class="m-0" id="tihoPayment"></p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <strong>Balance</strong>
-                            <strong><span>₱ </span>0.00</strong>
+                            <strong id="tihoBalance"></strong>
                         </div>
                         <hr class="my-1">
                         <div class="d-flex justify-content-between">
@@ -172,13 +184,20 @@
                     </div>
                 </div>
                 <!-- Documents -->
+                <!-- tihd - transaction inhouse documents -->
                 <div class="card">
-                    <div class="card-header d-flex">
-                        <span class="me-auto">Documents</span>
-                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#"></i>
+                    <div class="card-header">
+                        <span>Documents</span>
                     </div>
                     <div class="card-body">
-                        <span id="tihDocuments"></span>
+                        Quotation
+                        <div id="tihdQuotation" class="list-group">
+                            <!-- Document items will be appended here -->
+                        </div>
+                        Approval
+                        <div id="tihdApproval" class="list-group">
+                            <!-- Document items will be appended here -->
+                        </div>
                     </div>
                 </div>
                 
@@ -210,7 +229,12 @@
                                 <tr>
                                     <th>Code</th>
                                     <th>Name</th>
-                                    <th>Amount</th>
+                                    <!-- available or unavailable -->
+                                    <th>Status</th>
+                                    <!-- if currntUser role is tech hide this Amount -->
+                                    <% if (currentUser.role !== 'tech') { %>
+                                        <th>Amount</th> 
+                                    <% } %>
                                 </tr>
                             </thead>
                             <tbody>
@@ -221,21 +245,21 @@
                         </table>
                     </div>  
                 </div>
-                <!-- Initial Diagnostics -->
+                <!-- Pre-assessment -->
                 <div class="card">
                     <div class="card-header d-flex">
-                        <span class="me-auto">Initial Diagnostics</span>
-                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#"></i>
+                        <span class="me-auto">Pre-assessment</span>
+                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#tihPreAssessmentModal"></i>
                     </div>
                     <div class="card-body">
-                        <p class="fst-italic mb-0">No initial diagnostics available.</p>
+                        <span id="tihPreAssessmentNotes"></span>
                     </div>
                 </div>
                 <!-- Service Report -->
                 <div class="card">
                     <div class="card-header d-flex">
                         <span class="me-auto">Service Report</span>
-                        <i class="bi bi-floppy" data-bs-toggle="modal" data-bs-target="#"></i>
+                        <i class="bi bi-floppy" id="tihSaveServiceReport"></i>
                     </div>
                     <div class="card-body">
                         <div id="tihServiceReport"></div>
@@ -269,7 +293,7 @@
                 <div class="card">
                     <div class="card-header d-flex">
                         <span class="me-auto">Notes</span>
-                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#"></i>
+                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#tihNotesModal"></i>
                     </div>
                     <div class="card-body">
                         <span id="tihNotes"></span>
@@ -283,15 +307,23 @@
 <!-- =======================================
 Modals
 ======================================= -->
- <%-  include("../../client/modal/client/edit")  %> 
- <%-  include("../../device/modal/device/edit")  %> 
- <%-  include("modal/Supply/supply")  %>
- <%-  include("modal/Expenses/expenses")  %>
- <%-  include("modal/Service/service")  %>
- <%-  include("modal/Payment/payment")  %>
- <%-  include("modal/Product/product")  %>
- <%-  include("modal/image/image")  %>
-
+<%-  include("../../client/modal/client/edit")  %> 
+<%-  include("../../device/modal/device/edit")  %> 
+<%-  include("modal/Supply/supply")  %>
+<%-  include("modal/Expenses/expenses")  %>
+<%-  include("modal/Service/service")  %>
+<%-  include("modal/Payment/payment")  %>
+<%-  include("modal/Product/product")  %> 
+<%-  include("modal/image/image")  %> 
+<%-  include("modal/Notes/notes")  %> 
+<%-  include("modal/Pre-assessment/Pre-assessment")  %> 
+<!-- SRP has no script file . it is attached on supply.js -->
+<%-  include("modal/Supply/srp")  %>
+<%-  include("modal/Quotation/quotation")  %>
+<%-  include("modal/Approval/approval")  %>
+<!-- No modal for repaired since it is just a status change -->
+<%-  include("modal/Released/released")  %>
+<!-- No modal for complete since it is just a status change -->
  
 
  <!-- =======================================
@@ -314,5 +346,12 @@ Scripts
 <script src="../../../assets/js/transaction/inhouse/modal/Payment/payment.js"></script>
 <script src="../../../assets/js/transaction/inhouse/modal/Product/product.js"></script>
 <script src="../../../assets/js/transaction/inhouse/modal/image/image.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Notes/notes.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Pre-assessment/Pre-assessment.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Quotation/quotation.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Approval/approval.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Repaired/repaired.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Released/released.js"></script>
+<script src="../../../assets/js/transaction/inhouse/modal/Complete/complete.js"></script>
 
 <%- include("../../partials/footer") %>

@@ -1,0 +1,29 @@
+<!-- legend prefix :
+tihr - transaction in house released -->
+<div class="modal fade" id="tihReleasedModal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Released</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" id="tihReleasedForm" novalidate enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="tihrDateLbl">Date</span>
+                        <input type="date" class="form-control" aria-describedby="tihrDateLbl" id="tihrDate" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="tihrPersonelLbl">Personel</span>
+                        <input type="text" class="form-control" aria-describedby="tihrPersonelLbl" id="tihrPersonel" required>
+                    </div>
+                    <div class="modal-footer d-flex">
+                        <button type="reset" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,87 +1,95 @@
 // tihs = transaction inhouse sales
-async function initTihsServiceChargeEditModal(tihId) {
-    // clear form
-    clearTihscForm();
-
-    // service charge list
-    ServiceChargeList(tihId);
-
-    // add service charge
-    $('#tihscSave').off('click').on('click', async function() {
-        if (!$('#tihscServiceId').val()) {
-            // add new service charge
-            var data = {};
-            data.data = {
-                Date: new Date($('#tihscServiceDate').val()),
-                Name: $('#tihscServiceName').val(),
-                Amount: parseFloat($('#tihscServiceAmount').val()),
-                Description: $('#tihscServiceDescription').val(),
-                Transaction: tihId
-            };
-            data.transactionId = tihId;
-
-            await crudiAjax(data, '/transaction/inhouse/servicecharge/add', 'POST')
-
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfully created service charge data.");
-            $(".toast").find(".toast-title").text("Service Charge Data Saved");
-
-            //clear form
-            clearTihscForm();
-            //update service charge list
-            ServiceChargeList(tihId);
-        } else {
-            // update existing service charge
-            var data = {};
-            data.data = {
-                Date: new Date($('#tihscServiceDate').val()),
-                Name: $('#tihscServiceName').val(),
-                Amount: parseFloat($('#tihscServiceAmount').val()),
-                Description: $('#tihscServiceDescription').val(),
-                Transaction: tihId
-            };
-            data.transactionId = tihId;
-            data.serviceChargeId = $('#tihscServiceId').val();
-            await crudiAjax(data, '/transaction/inhouse/servicecharge/update', 'PUT');
-
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfully updated the service charge data.");
-            $(".toast").find(".toast-title").text("Service Charge Data Updated");
-
+async function inhouseServiceCharge(inhouseId) {
+    return new Promise(async function (resolve, reject) {
+        try {
             // clear form
             clearTihscForm();
-            //update service charge list
-            ServiceChargeList(tihId);
-        }
-    });
-
-    // delete service charge
-    $('#tihscDelete').off('click').on('click', async function () {
-        // confirm delete
-        if (confirm("Are you sure you want to delete this service charge? This action cannot be undone.")) {
-            var data = {}
-            data.transactionId = tihId;
-            data.serviceChargeId = $('#tihscServiceId').val();
-            await crudiAjax(data, '/transaction/inhouse/servicecharge/delete', 'DELETE');
-            // show toast
-            $(".toast").toast("show").find(".toast-body").text("You have successfully deleted the service charge data.");
-            $(".toast").find(".toast-title").text("Service Charge Data Deleted");
-
-            // clear form
-            clearTihscForm();
-            //update service charge list
-            ServiceChargeList(tihId);
+        
+            // service charge list
+            ServiceChargeList(inhouseId);
+        
+            // add service charge
+            $('#tihscSave').off('click').on('click', async function() {
+                if (!$('#tihscServiceId').val()) {
+                    // add new service charge
+                    var data = {};
+                    data.data = {
+                        Date: new Date($('#tihscServiceDate').val()),
+                        Name: $('#tihscServiceName').val(),
+                        Amount: parseFloat($('#tihscServiceAmount').val()),
+                        Description: $('#tihscServiceDescription').val(),
+                        Transaction: inhouseId
+                    };
+                    data.inhouseId = inhouseId;
+                    await crudiAjax(data, '/transaction/inhouse/servicecharge/add', 'POST')
+        
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfully created service charge data.");
+                    $(".toast").find(".toast-title").text("Service Charge Data Saved");
+        
+                    //clear form
+                    clearTihscForm();
+                    //update service charge list
+                    ServiceChargeList(inhouseId);
+                    resolve();
+                } else {
+                    // update existing service charge
+                    var data = {};
+                    data.data = {
+                        Date: new Date($('#tihscServiceDate').val()),
+                        Name: $('#tihscServiceName').val(),
+                        Amount: parseFloat($('#tihscServiceAmount').val()),
+                        Description: $('#tihscServiceDescription').val(),
+                        Transaction: inhouseId
+                    };
+                    data.inhouseId = inhouseId;
+                    data.serviceChargeId = $('#tihscServiceId').val();
+                    await crudiAjax(data, '/transaction/inhouse/servicecharge/update', 'PUT');
+        
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfully updated the service charge data.");
+                    $(".toast").find(".toast-title").text("Service Charge Data Updated");
+        
+                    // clear form
+                    clearTihscForm();
+                    //update service charge list
+                    ServiceChargeList(inhouseId);
+                    resolve();
+                }
+            });
+        
+            // delete service charge
+            $('#tihscDelete').off('click').on('click', async function () {
+                // confirm delete
+                if (confirm("Are you sure you want to delete this service charge? This action cannot be undone.")) {
+                    var data = {}
+                    data.inhouseId = inhouseId;
+                    data.serviceChargeId = $('#tihscServiceId').val();
+                    await crudiAjax(data, '/transaction/inhouse/servicecharge/delete', 'DELETE');
+                    // show toast
+                    $(".toast").toast("show").find(".toast-body").text("You have successfully deleted the service charge data.");
+                    $(".toast").find(".toast-title").text("Service Charge Data Deleted");
+        
+                    // clear form
+                    clearTihscForm();
+                    //update service charge list
+                    ServiceChargeList(inhouseId);
+                    resolve();
+                }
+            });
+        } catch (error) {
+            reject(error);
         }
     });
 }
 
 // populate service charge list
-async function ServiceChargeList(tihId) {
-    var serviceChargeList = await crudiAjax({ data: tihId }, "/transaction/inhouse/getData", "POST").ServiceCharge;
+async function ServiceChargeList(inhouseId) {
+    var serviceChargeList = await crudiAjax({ inhouseId: inhouseId }, "/transaction/inhouse/getOneData", "POST").ServiceCharge;
     // initialize table
     await initBootstrapTable(
         "#tihscServiceList",                                 // tableName
-        ["Name", "Date", "Amount","Description", "_id"],     // tableHead
+        ["Service Charge List", "Date", "Amount","Description", "_id"],     // tableHead
         ["Date", "Amount","Description", "_id"],             // hiddenColumns (hide ID column)
         ["Name", "Date", "Amount","Description", "_id"],     // dataField
         serviceChargeList,                                   // tableData

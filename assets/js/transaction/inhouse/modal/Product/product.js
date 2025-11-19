@@ -1,4 +1,4 @@
-async function initTihsProductModal(tihId) {
+async function addInhouseProduct(inhouseId) {
     // get data
     var productData = await crudiAjax({},'/inventory/product/getData', 'POST');
 
@@ -12,11 +12,11 @@ async function initTihsProductModal(tihId) {
     );
 
     // add click event to table rows and view product details
-    $('#tihProductTable').on('click-row.bs.table', async function (e, row, $element) {
+    $('#tihProductTable').off('click-row.bs.table').on('click-row.bs.table', async function (e, row, $element) {
         if (confirm("Are you sure you want to add this product?")){
             // add product to transaction
             var data = {
-                transactionId: tihId,
+                inhouseId: inhouseId,
                 productId: row._id,
             };
             await crudiAjax(data, '/transaction/inhouse/product/add', 'POST');

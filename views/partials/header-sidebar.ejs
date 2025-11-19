@@ -43,7 +43,7 @@
 						<li class="dropdown-header">
 							<% if (currentUser) { %>
 								<h6><%= currentUser.username %></h6>
-								<span>Role: <%= currentUser.role %></span>
+								<span id="userRole">Role: <%= currentUser.role %></span>
 							<% } else { %>
 								<h6>Not Logged In</h6>
 								<span>Guest User</span>

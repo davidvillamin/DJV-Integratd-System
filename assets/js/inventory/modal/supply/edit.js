@@ -55,7 +55,7 @@ function inventorySupplyEditWithSerial(supplyData) {
                     data.supplyId = supplyData._id;
 
                     // save edited supply data
-                        var response = crudiAjax(data, "/inventory/supply/editSupply","put");
+                    var response = crudiAjax(data, "/inventory/supply/editSupply","put");
                     // reset form
                     $('#iseWithSerialForm')[0].reset();
                     // close modal
@@ -68,6 +68,18 @@ function inventorySupplyEditWithSerial(supplyData) {
 
                 }
             });
+
+            // clear reservation button
+            $('#isewsClearReservationBtn').off('click').on('click', function() {
+                crudiAjax({supplyId: supplyData._id}, "/inventory/supply/clearReservation","put");
+                // close modal
+                $('#iseWithSerialModal').modal('toggle'); // fix modal toggle method
+                $('.modal-backdrop').remove(); // ensure backdrop is removed
+                // show toast
+                $(".toast").toast("show").find(".toast-body").text("Reservation has been cleared.")
+                $(".toast").find(".toast-title").text("Reservation Cleared")
+                resolve()
+            }) 
         } catch (error) {
             reject(error);
         }
@@ -118,6 +130,18 @@ function inventorySupplyEditWithoutSerial(supplyData) {
                     resolve()
                 }
             });
+
+            // clear reservation button
+            $('#isewosClearReservationBtn').off('click').on('click', function() {
+                crudiAjax({supplyId: supplyData._id}, "/inventory/supply/clearReservation","put");
+                // close modal
+                $('#iseWithoutSerialModal').modal('toggle'); // fix modal toggle method
+                $('.modal-backdrop').remove(); // ensure backdrop is removed
+                // show toast
+                $(".toast").toast("show").find(".toast-body").text("Reservation has been cleared.")
+                $(".toast").find(".toast-title").text("Reservation Cleared")
+                resolve()
+            }) 
         } catch (error) {
             reject(error);
         }

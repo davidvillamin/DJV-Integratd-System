@@ -38,7 +38,7 @@ router.post('/client/verifyCodeNumber', auth.requireRoles('root', 'admin'), asyn
 });
 
 // product get data
-router.post('/client/getData', auth.requireRoles('root', 'admin'), async function(req, res){
+router.post('/client/getData', auth.requireRoles('root', 'admin','tech'), async function(req, res){
     var clientData = await Client.find({})
     .populate('Devices')
     .lean();
@@ -46,7 +46,7 @@ router.post('/client/getData', auth.requireRoles('root', 'admin'), async functio
 });
 
 // product get one data
-router.post('/client/getOneData', auth.requireRoles('root', 'admin'), async function(req, res){
+router.post('/client/getOneData', auth.requireRoles('root', 'admin','tech'), async function(req, res){
     var clientData = await Client.findById(req.body.data.clientId)
     .populate('Devices')
     .lean();

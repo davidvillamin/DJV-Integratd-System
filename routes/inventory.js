@@ -20,7 +20,7 @@ router.get('/inventory/product/view/:id', auth.requireRoles('root', 'admin'), fu
 // Utilities
 //====================================================================================================
 // auto generate code number for Product
-router.get('/inventory/product/generateCodeNumber', auth.requireRoles('root', 'admin'), async function(req, res){
+router.get('/inventory/product/generateCodeNumber', auth.requireRoles('root', 'admin' ,'tech'), async function(req, res){
     // count how many data is inside Product to create unique code
     var productCount = await Product.countDocuments();
     var generatedCode = "PRD" + String(productCount + 1).padStart(5, '0'); // simple unique code
@@ -28,7 +28,7 @@ router.get('/inventory/product/generateCodeNumber', auth.requireRoles('root', 'a
 });
 
 // auto generate verify code existing for Product
-router.post('/inventory/product/verifyCodeNumber', auth.requireRoles('root', 'admin'), async function(req, res){
+router.post('/inventory/product/verifyCodeNumber', auth.requireRoles('root', 'admin', 'tech'), async function(req, res){
     var existingProduct = await Product.findOne({Code: req.body.data.codeNumber});
     if (existingProduct){
         res.send(true); // code number exists
@@ -38,7 +38,7 @@ router.post('/inventory/product/verifyCodeNumber', auth.requireRoles('root', 'ad
 });
 
 // product get data
-router.post('/inventory/product/getData', auth.requireRoles('root', 'admin'), async function(req, res){
+router.post('/inventory/product/getData', auth.requireRoles('root', 'admin', 'tech'), async function(req, res){
     var productData = await Product.find({})
     .populate('Supply')
     .lean();
@@ -46,16 +46,31 @@ router.post('/inventory/product/getData', auth.requireRoles('root', 'admin'), as
 });
 
 // product get one data
-router.post('/inventory/product/getOneData', auth.requireRoles('root', 'admin'), async function(req, res){
+router.post('/inventory/product/getOneData', auth.requireRoles('root', 'admin', 'tech'), async function(req, res){
     var productData = await Product.findById(req.body.data.productId)
     .populate('Supply')
     .lean();
     res.send(productData);
 });
+// auto generate code number for Supply
+router.get('/inventory/supply/generateCodeNumber', auth.requireRoles('root', 'admin' ,'tech'), async function(req, res){
+    // count how many data is inside Supply to create unique code
+    var supplyCount = await Supply.countDocuments();
+    res.send(String(supplyCount));
+});
 
 // supply get data
-router.post('/inventory/supply/getOneData', auth.requireRoles('root', 'admin'), async function(req, res){
+router.post('/inventory/supply/getOneData', auth.requireRoles('root', 'admin', 'tech'), async function(req, res){
     var supplyData = await Supply.findById(req.body.data.supplyId)
+    .populate('Product')
+    .lean();
+    res.send(supplyData);
+});
+
+// product get data
+router.post('/inventory/supply/getData', auth.requireRoles('root', 'admin', 'tech'), async function(req, res){
+    // find all supply with same product id
+    var supplyData = await Supply.find({Product: req.body.data.productId})
     .populate('Product')
     .lean();
     res.send(supplyData);
@@ -163,5 +178,16 @@ router.post('/inventory/product/image/delete', auth.requireRoles('root', 'admin'
     foundProduct.Images.splice(imageIndex, 1);
     await foundProduct.save();
     res.send("Product image deleted successfully!")
+});
+
+//====================================================================================================
+// Reservation
+//====================================================================================================
+router.put('/inventory/supply/clearReservation', auth.requireRoles('root', 'admin'), async function(req, res){
+    await Supply.findByIdAndUpdate(req.body.data.supplyId, {
+        Status: "Available",
+        Transaction: null
+    });
+    res.send("Supply reservation cleared successfully!")
 });
 module.exports = router;

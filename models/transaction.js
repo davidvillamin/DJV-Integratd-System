@@ -4,15 +4,12 @@ var transactionDbSchema = new mongoose.Schema({
     // TRXXXXXX
     Code: String, 
     Name: String,
-    Client: 
-        { 
+    Client: { 
             type: mongoose.Schema.Types.ObjectId,
-            ref: "client"
-        },
+            ref: "client"},
     Device: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "device"
-    },
+        ref: "device"},
     ServiceReport: Object, // quill
     Images: [
         {
@@ -21,8 +18,6 @@ var transactionDbSchema = new mongoose.Schema({
             base64String: String
         }
     ],
-
-    Tags: Array, // temporary tags or fix tags
     Technician: String,
     ReleasedBy: {
         Date: Date,
@@ -33,14 +28,32 @@ var transactionDbSchema = new mongoose.Schema({
         Personel: String
     },
     Status: Array, // pending, onprogress, forrelease, released, closed, cancelled
-    isOpen: Boolean,
-    CreatedDate: Date,
+
+    statComplete: Boolean,
+    statCompletedDate: Date,
+    statReleased: Boolean,
+    statReleasedDate: Date,
+    statRepaired: Boolean,
+    statRepairedDate: Date,
+    statApproved: Boolean,
+    statApprovedDate: Date,
+    statQuotation: Boolean,
+    statQuotationDate: Date,
+    statPending: Boolean,
+    CreatedDate: Date, // this date also for pending date
+
     Notes: String,
-    Documents: [
-        {
+    PreAssessmentNotes: String,
+    DocumentImages: {
+        Quotation: {
+            Title: String,
+            base64String: String
+        },
+        Approval: {
+            Title: String,
             base64String: String
         }
-    ],
+    },
     Product: [
         {
             Product: {
