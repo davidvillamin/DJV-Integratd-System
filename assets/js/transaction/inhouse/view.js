@@ -217,13 +217,14 @@ async function initialize(inhouseId) {
 
     // documents
     $('#tihdQuotation').empty();
-    if (transactionData.DocumentImages.Quotation) {
+    // check if quotation document exists
+    if (transactionData.DocumentImages && transactionData.DocumentImages.Quotation !== undefined) {
         $('#tihdQuotation').append('<img src="' + transactionData.DocumentImages.Quotation.base64String + '" class="img-thumbnail img-fluid rounded mb-2" />');
     } else {
         $('#tihdQuotation').html('<p class="fst-italic mb-0">No documents available.</p>');
     }
     $('#tihdApproval').empty();
-    if (transactionData.DocumentImages.Approval) {
+    if (transactionData.DocumentImages && transactionData.DocumentImages.Approval !== undefined) {
         $('#tihdApproval').append('<img src="' + transactionData.DocumentImages.Approval.base64String + '" class="img-thumbnail img-fluid rounded mb-2" />');
     } else {
         $('#tihdApproval').html('<p class="fst-italic mb-0">No documents available.</p>');
@@ -240,8 +241,49 @@ async function initialize(inhouseId) {
             date: moment(transactionData.CreatedDate).format('YYYY-MM-DD'), 
             title: 'Transaction Created', 
             color: 'success'
-        },
+        }
     ];
+
+    // Add conditional dates only if they are defined
+    if (transactionData.statQuotationDate) {
+        initialDates.push({
+            date: moment(transactionData.statQuotationDate).format('YYYY-MM-DD'), 
+            title: 'Quotation', 
+            color: 'success'
+        });
+    }
+    
+    if (transactionData.statApprovedDate) {
+        initialDates.push({
+            date: moment(transactionData.statApprovedDate).format('YYYY-MM-DD'), 
+            title: 'Approved',
+            color: 'success'
+        });
+    }
+    
+    if (transactionData.statRepairedDate) {
+        initialDates.push({
+            date: moment(transactionData.statRepairedDate).format('YYYY-MM-DD'),
+            title: 'Repaired',
+            color: 'success'
+        });
+    }
+    
+    if (transactionData.statReleasedDate) {
+        initialDates.push({
+            date: moment(transactionData.statReleasedDate).format('YYYY-MM-DD'),
+            title: 'Released',
+            color: 'success'
+        });
+    }
+    
+    if (transactionData.statCompletedDate) {
+        initialDates.push({
+            date: moment(transactionData.statCompletedDate).format('YYYY-MM-DD'),
+            title: 'Completed',
+            color: 'success'
+        });
+    }
 
     $('#miniCalendar').miniCalendar({
         clickable: false, // Disable clicking on calendar dates

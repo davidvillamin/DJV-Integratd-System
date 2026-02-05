@@ -95,9 +95,9 @@ var transactionDbSchema = new mongoose.Schema({
     Payment: [{
         // PaymentCode: String, //PAYXXXX - Payment Code
         Date: Date,
-        Name: String,
-        Amount: Number,
-        Description: String,
+        Name: String, // transaction name
+        Amount: Number, // total amount to be paid
+        Description: String, // description of the payment
         Transaction: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "transaction"
@@ -107,18 +107,19 @@ var transactionDbSchema = new mongoose.Schema({
     // reporting
     Quotation: [{
         QuotationCode: String, //QUOXXXX - Quotation Code\
-        Name: String,
-        Date: Date,
-        Name: String,
-        Supplies: [
+        Name: String, //transaction name
+        Date: Date, // date of quotation
+        Supplies: [ // list of supplies in the quotation
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "supply"
             }
         ],
-        // ServiceCharge
-        Amount: Number,
-        Description: String,
+        ServiceCharge: String, // total service charge in the quotation
+        Amount: Number, // total amount of the quotation
+        hasInitialPaymets: Boolean, // if quotation has initial payment
+        InitialPayment: Number,
+        PreAssessment: String, // pre-assessment notes
         Transaction: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "transaction"

@@ -88,7 +88,7 @@ function createTransaction() {
                         statApproved: false,
                         statQuotation: false,
                         statPending: true,
-                        CreatedDate: new Date(),
+                        CreatedDate: $('#tReceivedDate').val(),
                     }
                     
                     await crudiAjax(data, "/transaction/create", "POST");

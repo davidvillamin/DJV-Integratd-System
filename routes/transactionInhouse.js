@@ -325,7 +325,7 @@ router.post("/transaction/inhouse/released/save", auth.requireRoles('root', 'adm
             "ReleasedBy.Date": req.body.data.data.Date,
             "ReleasedBy.Personel": req.body.data.data.Personel,
             statReleased: true,
-            statReleasedDate: new Date()
+            statReleasedDate: new Date(req.body.data.data.Date)
         }
     });
     res.send("Released information saved successfully!");
