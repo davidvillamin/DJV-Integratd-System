@@ -1,300 +1,507 @@
 <body>
-	<!-- ======= Header ======= -->
-	<header id="header" class="header fixed-top d-flex align-items-center">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+                        <i class="ti-menu ti-close"></i>
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-brand">
+                        <a href="index.html" class="logo">
+                            <!-- Logo icon -->
+                            <b class="logo-icon">
+                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                                <!-- Dark Logo icon -->
+                                <img src="/assets/img/djv-logo.png" alt="homepage" class="dark-logo" width="25" height="25" />
+                                <!-- Light Logo icon -->
+                                <img src="/assets/img/djv-logo.png" alt="homepage" class="light-logo" width="25" height="25" />
+                            </b>
+                            <!--End Logo icon -->
+                            <!-- Logo text -->
+                            <span class="logo-text">
+                                <!-- dark Logo text -->
+                                <img src="/assets/img/djv-it-solutions-dark.png" alt="homepage" class="dark-logo" width="150" height="17" />
+                                <!-- Light Logo text -->
+                                <img src="/assets/img/djv-it-solutions-light.png" class="light-logo" alt="homepage" width="150" height="17" />
+                            </span>
+                        </a>
+                        <a class="sidebartoggler d-none d-md-block" href="javascript:void(0)" data-sidebartype="mini-sidebar">
+                            <i class="mdi mdi-toggle-switch mdi-toggle-switch-off font-20"></i>
+                        </a>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="javascript:void(0)navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-left mr-auto">
+                        <!-- left side hamburger -->
+                        <!-- <li class="nav-item d-none d-md-block">
+                            <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar">
+                                <i class="mdi mdi-menu font-24"></i>
+                            </a>
+                        </li> -->
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item search-box">
+                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
+                                <div class="d-flex align-items-center">
+                                    <i class="mdi mdi-magnify font-20 mr-1"></i>
+                                    <div class="ml-1 d-none d-sm-block">
+                                        <span>Search</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <form class="app-search position-absolute">
+                                <input type="text" class="form-control" placeholder="Search &amp; enter">
+                                <a class="srh-btn">
+                                    <i class="ti-close"></i>
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+                        <!-- ============================================================== -->
+                        <!-- Messages -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="font-22 mdi mdi-email-outline"></i>
 
-		<div class="d-flex align-items-center justify-content-between">
-			<a href="/" class="logo d-flex align-items-center">
-			<img src="/assets/img/logo.png" alt="">
-			<!-- <span class="d-none d-lg-block">DJV IT Solutions</span> -->
-			</a>
-			<i class="bi bi-list toggle-sidebar-btn"></i>
-		</div><!-- End Logo -->
-
-		<div class="search-bar">
-			<form class="search-form d-flex align-items-center" method="POST" action="#">
-				<input type="text" name="query" placeholder="Search" title="Enter search keyword">
-				<button type="submit" title="Search"><i class="bi bi-search"></i></button>
-			</form>
-		</div><!-- End Search Bar -->
-
-		<nav class="header-nav ms-auto">
-			<ul class="d-flex align-items-center">
-				<li class="nav-item dropdown pe-3">
-
-					<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-						<% if (currentUser) { %>
-							<% if (currentUser.role === 'admin') { %>
-								<img src="/assets/img/admin.png" alt="Profile" class="rounded-circle">
-							<% } else if (currentUser.role === 'technical') { %>
-								<img src="/assets/img/technician.jpg" alt="Profile" class="rounded-circle">
-							<% } else if (currentUser.role === 'root') { %>
-								<img src="/assets/img/root.png" alt="Profile" class="rounded-circle">
-							<% } else { %>
-								<img src="/assets/img/default-image.png" alt="Profile" class="rounded-circle">
-							<% } %>
-							<span class="d-none d-md-block dropdown-toggle ps-2"><%= currentUser.username %></span>
-						<% } else { %>
-							<img src="/assets/img/default-image.png" alt="Profile" class="rounded-circle">
-							<span class="d-none d-md-block dropdown-toggle ps-2">Guest</span>
-						<% } %>
-					</a><!-- End Profile Image Icon -->
-
-					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-						<li class="dropdown-header">
-							<% if (currentUser) { %>
-								<h6><%= currentUser.username %></h6>
-								<span id="userRole">Role: <%= currentUser.role %></span>
-							<% } else { %>
-								<h6>Not Logged In</h6>
-								<span>Guest User</span>
-							<% } %>
-						</li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<% if (currentUser) { %>
-							<% if (currentUser && (currentUser.role === 'root') ) { %>
-								<li>
-									<a class="dropdown-item d-flex align-items-center" href="">
-										<i class="bi bi-person"></i>
-										<!-- <span>My Profile</span> -->
-										<s class="text-decoration-line-through">My Profile</s>
-									</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider">
-								</li>
-
-								<li>
-									<a class="dropdown-item d-flex align-items-center" href="">
-										<i class="bi bi-gear"></i>
-										<!-- <span>Account Settings</span> -->
-										<s class="text-decoration-line-through">Account Settings</s>
-									</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider">
-								</li>
-							<% } %>
-							<li>
-								<a class="dropdown-item d-flex align-items-center" href="/logout">
-									<i class="bi bi-box-arrow-right"></i>
-									<span>Sign Out</span>
-								</a>
-							</li>
-						<% } else { %>
-							<li>
-								<a class="dropdown-item d-flex align-items-center" href="/login">
-									<i class="bi bi-box-arrow-in-right"></i>
-									<span>Sign In</span>
-								</a>
-							</li>
-						<% } %>
-
-					</ul><!-- End Profile Dropdown Items -->
-				</li><!-- End Profile Nav -->
-
-			</ul>
-		</nav><!-- End Icons Navigation -->
-
-	</header><!-- End Header -->
-
-	<!-- ======= Sidebar ======= -->
-	<aside id="sidebar" class="sidebar">
-
-		<ul class="sidebar-nav" id="sidebar-nav">
-			<!-- disable dashboard link -->
-			<% if (currentUser && currentUser.role === 'root') { %>
-				<li class="nav-item ">
-					<a id="sbdashboard" class="nav-link collapsed disabled" href="/">
-						<i class="bi bi-grid"></i>
-						<s class="text-decoration-line-through">Dashboard</s>
-						<!-- <span>Dashboard</span> -->
-					</a>
-				</li><!-- End Dashboard Nav -->
-			<% } %>
-			<li class="nav-item">
-				<a class="nav-link collapsed" data-bs-target="#forms-nav-transaction" data-bs-toggle="collapse" href="#">
-					<i class="bi bi-journal-text"></i><span>Transaction</span><i class="bi bi-chevron-down ms-auto"></i>
-				</a>
-				<ul id="forms-nav-transaction" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-					<li>
-						<a id="sbtransaction" class="nav-link collapsed" href="/transaction">
-							<i class="bi bi-circle "></i><span>Dashboard</span>
-						</a>
-					</li>
-					<li>
-						<a id="sbinhouse" class="nav-link collapsed" href="/transaction/inhouse">
-							<i class="bi bi-circle"></i><span>In-house Repair</span>
-						</a>
-					</li>
-					<% if (currentUser && currentUser.role === 'root') { %>
-						<li>
-							<a id="sbonsite" class="nav-link collapsed disabled" href="/transaction/onsite">
-								<!-- <i class="bi bi-circle"></i><span>On-site Repair</span> -->
-								<i class="bi bi-circle"></i><s class="text-decoration-line-through">
-								On-site Repair
-								</s>
-							</a>
-						</li>
-						<li>
-							<a id="sbsales" class="nav-link collapsed disabled" href="/transaction/sales">
-								<!-- <i class="bi bi-circle"></i><span>Sales</span> -->
-								<i class="bi bi-circle"></i><s class="text-decoration-line-through">
-								Sales
-								</s>
-							</a>
-						</li>
-						<li>
-							<a id="sbproject" class="nav-link collapsed disabled" href="/transaction/project">
-								<!-- <i class="bi bi-circle"></i><span>Contracts</span> -->
-								<i class="bi bi-circle"></i><s class="text-decoration-line-through">
-								Contracts
-								</s>
-							</a>
-						</li>
-					<% } %>
-				</ul>
-			</li><!-- End Forms Nav -->
-			<% if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'root')) { %>
-				<li class="nav-item">
-					<a id="sbClient" class="nav-link collapsed" href="/client">
-						<i class="bi bi-person"></i><span>Client</span>
-					</a>
-				</li><!-- End Tables Nav -->
-			<% } %>
-			<% if (currentUser && currentUser.role === 'root') { %>
-				<li class="nav-item">
-					<a id="sbLeads" class="nav-link collapsed disabled" href="/leads">
-						<!-- <i class="bi bi-people"></i><span>Leads</span> -->
-						<i class="bi bi-people"></i><s class="text-decoration-line-through">Leads</s>
-					</a>
-				</li><!-- End Tables Nav -->
-
-				<li class="nav-item">
-					<a id="sbCalendar" class="nav-link collapsed disabled" href="/calendar">
-						<!-- <i class="bi bi-calendar-event"></i><span>Calendar</span> -->
-						<i class="bi bi-calendar-event"></i><s class="text-decoration-line-through">Calendar</s>
-					</a>
-				</li><!-- End Tables Nav -->
-
-				<li class="nav-item">
-					<a class="nav-link collapsed disabled" data-bs-target="#forms-nav-reports" data-bs-toggle="collapse" href="#">
-						<!-- <i class="bi bi-journal-text"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i> -->
-						<i class="bi bi-journal-text"></i><s class="text-decoration-line-through">Reports</s><i class="bi bi-chevron-down ms-auto"></i>
-					</a>
-					<ul id="forms-nav-reports" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-						<li>
-							<a id="sbtransaction" class="nav-link collapsed" href="/reports">
-								<i class="bi bi-circle "></i><span>Dashboard</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbinhouse" class="nav-link collapsed" href="/reports/invoice">
-								<i class="bi bi-circle"></i><span>Invoice</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbonsite" class="nav-link collapsed" href="/reports/po">
-								<i class="bi bi-circle"></i><span>Purchase Order</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbsales" class="nav-link collapsed" href="/reports/quotation">
-								<i class="bi bi-circle"></i><span>Quotation</span>
-							</a>
-						</li>
-					</ul>
-				</li><!-- End Forms Nav -->
-			<% } %>
-			<% if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'root')) { %>
-				<li class="nav-item">
-					<a id="sbdevice" class="nav-link collapsed" href="/device">
-						<i class="bi bi-laptop"></i><span>Device</span>
-					</a>
-				</li><!-- End Tables Nav -->
-				<!-- display inventory if user is admin or root -->
-				<li class="nav-item">
-					<a id="sbinventory" class="nav-link collapsed" href="/inventory">
-						<i class="bi bi-database-gear"></i><span>Inventory</span>
-					</a>
-				</li><!-- End Tables Nav -->
-			<% } %>
-			
-			<!-- display on root -->
-			<% if (currentUser && currentUser.role === 'root') { %>
-				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#forms-nav-accounting" data-bs-toggle="collapse" href="#">
-						<!-- <i class="bi bi-journal-text"></i><span>Accounting</span><i class="bi bi-chevron-down ms-auto"></i> -->
-						<i class="bi bi-journal-text"></i><s class="text-decoration-line-through">Accounting</s><i class="bi bi-chevron-down ms-auto"></i>
-					</a>
-					<ul id="forms-nav-accounting" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-						<li>
-							<a id="sbtransaction" class="nav-link collapsed" href="/accounting">
-								<i class="bi bi-circle "></i><span>Dashboard</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbinhouse" class="nav-link collapsed" href="/accounting/ledger/expenses">
-								<i class="bi bi-circle"></i><span>Expenses Ledger</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbonsite" class="nav-link collapsed" href="/accounting/ledger/inventory">
-								<i class="bi bi-circle"></i><span>Inventory Ledger</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbsales" class="nav-link collapsed" href="/accounting/ledger/invoice">
-								<i class="bi bi-circle"></i><span>Invoice Ledger</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/payments">
-								<i class="bi bi-circle"></i><span>Payments Ledger</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/po">
-								<i class="bi bi-circle"></i><span>Purchase Order Ledger</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/quotation">
-								<i class="bi bi-circle"></i><span>Quotation Ledger</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/running">
-								<i class="bi bi-circle"></i><span>Running Ledger</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/sales">
-								<i class="bi bi-circle"></i><span>Sales Ledger</span>
-							</a>
-						</li>
-						<li>
-							<a id="sbproject" class="nav-link collapsed" href="/accounting/ledger/service">
-								<i class="bi bi-circle"></i><span>Service Ledger</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a id="sbemployees" class="nav-link collapsed disabled" href="/employees">
-						<!-- <i class="bi bi-person-badge"></i><span>Employees</span> -->
-						<i class="bi bi-person-badge"></i><s class="text-decoration-line-through">Employees</s>
-					</a>
-				</li><!-- End Tables Nav -->
-	
-				<li class="nav-item">
-					<a id="sbsettings" class="nav-link collapsed disabled" href="/settings">
-						<!-- <i class="bi bi-gear"></i><span>Settings</span> -->
-						<i class="bi bi-gear"></i><s class="text-decoration-line-through">Settings</s>
-					</a>
-				</li><!-- End Tables Nav -->
-			<% } %>
-		</ul>	
-	</aside><!-- End Sidebar-->
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
+                                <span class="with-arrow">
+                                    <span class="bg-danger"></span>
+                                </span>
+                                <ul class="list-style-none">
+                                    <li>
+                                        <div class="drop-title text-white bg-danger">
+                                            <h4 class="m-b-0 m-t-5">5 New</h4>
+                                            <span class="font-light">Messages</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="message-center message-body">
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img">
+                                                    <img src="" alt="user" class="rounded-circle">
+                                                    <span class="profile-status online pull-right"></span>
+                                                </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Pavan kumar</h5>
+                                                    <span class="mail-desc">Just see the my admin!</span>
+                                                    <span class="time">9:30 AM</span>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img">
+                                                    <img src="" alt="user" class="rounded-circle">
+                                                    <span class="profile-status busy pull-right"></span>
+                                                </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Sonu Nigam</h5>
+                                                    <span class="mail-desc">I've sung a song! See you at</span>
+                                                    <span class="time">9:10 AM</span>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img">
+                                                    <img src="" alt="user" class="rounded-circle">
+                                                    <span class="profile-status away pull-right"></span>
+                                                </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Arijit Sinh</h5>
+                                                    <span class="mail-desc">I am a singer!</span>
+                                                    <span class="time">9:08 AM</span>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="user-img">
+                                                    <img src="" alt="user" class="rounded-circle">
+                                                    <span class="profile-status offline pull-right"></span>
+                                                </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Pavan kumar</h5>
+                                                    <span class="mail-desc">Just see the my admin!</span>
+                                                    <span class="time">9:02 AM</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-center link text-dark" href="javascript:void(0);">
+                                            <b>See all e-Mails</b>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Messages -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Comment -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown border-right">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-bell-outline font-22"></i>
+                                <span class="badge badge-pill badge-info noti">3</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
+                                <span class="with-arrow">
+                                    <span class="bg-primary"></span>
+                                </span>
+                                <ul class="list-style-none">
+                                    <li>
+                                        <div class="drop-title bg-primary text-white">
+                                            <h4 class="m-b-0 m-t-5">4 New</h4>
+                                            <span class="font-light">Notifications</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="message-center notifications">
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-danger btn-circle">
+                                                    <i class="fa fa-link"></i>
+                                                </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Luanch Admin</h5>
+                                                    <span class="mail-desc">Just see the my new admin!</span>
+                                                    <span class="time">9:30 AM</span>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-success btn-circle">
+                                                    <i class="ti-calendar"></i>
+                                                </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Event today</h5>
+                                                    <span class="mail-desc">Just a reminder that you have event</span>
+                                                    <span class="time">9:10 AM</span>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-info btn-circle">
+                                                    <i class="ti-settings"></i>
+                                                </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Settings</h5>
+                                                    <span class="mail-desc">You can customize this template as you want</span>
+                                                    <span class="time">9:08 AM</span>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="javascript:void(0)" class="message-item">
+                                                <span class="btn btn-primary btn-circle">
+                                                    <i class="ti-user"></i>
+                                                </span>
+                                                <div class="mail-contnet">
+                                                    <h5 class="message-title">Pavan kumar</h5>
+                                                    <span class="mail-desc">Just see the my admin!</span>
+                                                    <span class="time">9:02 AM</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-center m-b-5 text-dark" href="javascript:void(0);">
+                                            <strong>Check all notifications</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Comment -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="/assets/img/admin.png" alt="user" class="rounded-circle" width="40">
+                                <span class="m-l-5 font-medium d-none d-sm-inline-block">Jonathan Doe <i class="mdi mdi-chevron-down"></i></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd bounceInDown animated">
+                                <span class="with-arrow">
+                                    <span class="bg-primary"></span>
+                                </span>
+                                <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
+                                    <div class="">
+                                        <img src="/assets/img/admin.png" alt="user" class="rounded-circle" width="60">
+                                    </div>
+                                    <div class="m-l-10">
+                                        <h4 class="m-b-0">Jonathan Doe</h4>
+                                        <p class=" m-b-0">jon@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="profile-dis scrollable">
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target=".accountSettingModal">
+                                        <i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                                <div class="p-l-30 p-10">
+                                    <a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Customizer -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="sidebar-item">
+                            <a id="sbDashboard" class="sidebar-link waves-effect waves-dark" href="/" aria-expanded="false">
+                                <i class="mdi mdi-av-timer"></i>
+                                <span class="hide-menu">Dashboard </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a id="sbTransaction" class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-tune"></i>
+                                <span class="hide-menu">Transactions</span>
+                            </a>
+                            <ul id="sbTransactionSub" aria-expanded="false" class="collapse first-level">
+                                <li id="sbTransactionSubOverview" class="sidebar-item">
+                                    <a href="/transaction" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-view-quilt"></i>
+                                        <span class="hide-menu"> Overview </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a id="sbTransactionSubInhouse" href="/transaction/inhouse" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-view-parallel"></i>
+                                        <span class="hide-menu"> In-house </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-view-day"></i>
+                                        <span class="hide-menu"> On-site </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-view-array"></i>
+                                        <span class="hide-menu"> Sales </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-view-module"></i>
+                                        <span class="hide-menu"> Contract </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-account"></i>
+                                <span class="hide-menu">Client</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-account-multiple"></i>
+                                <span class="hide-menu">Leads</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-calendar"></i>
+                                <span class="hide-menu">Calendar</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-file-document"></i>
+                                <span class="hide-menu">Reports</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-responsive"></i>
+                                <span class="hide-menu">Device</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-folder"></i>
+                                <span class="hide-menu">Inventory</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-account-settings-variant"></i>
+                                <span class="hide-menu">Employess </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-email"></i>
+                                        <span class="hide-menu"> Overview </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="mdi mdi-dots-horizontal"></i>
+                            <span class="hide-menu">Accounting</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-cash"></i>
+                                <span class="hide-menu">Overview</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-file-multiple"></i>
+                                <span class="hide-menu">Ledger </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-file-document-box"></i>
+                                        <span class="hide-menu"> Expenses </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-file-document-box"></i>
+                                        <span class="hide-menu"> Inventory </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-file-document-box"></i>
+                                        <span class="hide-menu"> Invoice </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-file-document-box"></i>
+                                        <span class="hide-menu"> Payments </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-file-document-box"></i>
+                                        <span class="hide-menu"> Purchase Order </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-file-document-box"></i>
+                                        <span class="hide-menu"> Quotation </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-file-document-box"></i>
+                                        <span class="hide-menu"> Running </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-file-document-box"></i>
+                                        <span class="hide-menu"> Sales </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="javascript:void(0)" class="sidebar-link ml-3">
+                                        <i class="mdi mdi-file-document-box"></i>
+                                        <span class="hide-menu"> Service </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="mdi mdi-dots-horizontal"></i>
+                            <span class="hide-menu">Utilities</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                                <i class="mdi mdi-settings"></i>
+                                <span class="hide-menu">Settings </span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+    

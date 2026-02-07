@@ -88,8 +88,6 @@ app.use(function(req, res, next){
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit:'50mb',extended: true}));
 app.use('/modules', express.static(__dirname + '/node_modules/'));
-// app.use('/public', express.static(__dirname + '/public/'));
-// app.use('/js', express.static(__dirname + '/jquery/'));
 app.use('/assets', express.static(__dirname + '/assets/'));
 
 app.set("view engine", "ejs");

@@ -1,6 +1,5 @@
 var express                              = require("express"),
     mongoose                             = require("mongoose");
-const { $where } = require("../models/product");
     moment                               = require("moment");
     Transaction                          = require("../models/transaction"),
     InventoryLedger                      = require("../models/ledgerInventory"),

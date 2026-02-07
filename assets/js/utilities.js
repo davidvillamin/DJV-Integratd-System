@@ -149,7 +149,7 @@ async function iBootstrapTable(tableName, tableHead, hiddenColumns, dataField,  
         pagination: true, // Enable pagination
         pageSize: 5, // Set default page size
         pageList: [5, 10, 25, 50, 'all'], // Set available page sizes
-        search: withSearch,
+        search: withSearch, // Enable or disable search
         // pagination: false,
         rowStyle: function(row, index) {
             if (row._rowVariant) {
@@ -234,17 +234,20 @@ function tagGenerator(tags) {
 
 }
 
-function loadingScreen(){
-    if (document.readyState === 'complete') {
-        $("#loadingScreen").fadeOut(100, function() {
-            $(this).remove();
-        });
-    } else {
-        $(window).on('load', function() {
-            $("#loadingScreen").fadeOut(100, function() {
-                $(this).remove();
-            });
-        });
-    }
+// toastr.success("Message", "Title");
+function loadToastr(){
+    toastr.options = {
+    "closeButton": true,           // Show close button
+    "debug": false,
+    "newestOnTop": true,           // New messages on top
+    "progressBar": true,           // Show progress bar
+    "positionClass": "toast-top-right",  // Position
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": 300,           // Show animation (ms)
+    "hideDuration": 1000,          // Hide animation (ms)
+    "timeOut": 5000,               // Display duration (ms)
+    "extendedTimeOut": 1000        // Extended time on hover (ms)
+    };
 }
 

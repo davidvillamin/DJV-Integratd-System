@@ -16,9 +16,11 @@ router.get("/", function(req, res){
     // Check if user is logged in, if not redirect to login
     if (!req.isAuthenticated()) {
         return res.redirect("/login");
+    } else {
+        res.render("index");
     }
     // redirect to /transaction
-    res.redirect("/transaction");
+    // res.redirect("/");
 });
 
 router.get("/login", function(req, res){
@@ -44,7 +46,7 @@ router.post("/login", function(req, res, next) {
                 return next(err);
             }
             console.log("Login successful for user:", user.username);
-            return res.redirect("/transaction");
+            return res.redirect("/");
         });
     })(req, res, next);
 });

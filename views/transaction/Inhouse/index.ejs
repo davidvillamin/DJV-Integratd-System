@@ -1,28 +1,90 @@
 <%- include("../../partials/header") %>
-<%- include("../../partials/loading") %>
 <%- include("../../partials/header-sidebar") %>
 <!-- prefix tih - transaction inhouse-->
-    <main id="main" class="main">
-        <div class="pagetitle d-flex justify-content-between align-items-center">
-            <nav>
-                <h1>In-House</h1>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/transaction">Transactions</a></li>
-                    <li class="breadcrumb-item active">In-House</li>
-                </ol>
-            </nav>
-            <button type="button" class="btn btn-success ms-auto btn-sm" data-bs-toggle="modal" data-bs-target="#tCreateModal">
+
+<main class="page-wrapper">
+    <!-- breadcrumb -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">In-house</h4>
+            </div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" aria-current="page">
+                                <a href="/">Home</a>
+                                <a href="/transaction">Transaction</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">In-house</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of breadcrumb -->
+
+    <div class="container-fluid">
+        <div class="d-flex mb-3">
+            <button type="button" class="btn btn-success ml-auto btn-sm" data-toggle="modal" data-target="#tCreateModal">
                 <i class="bi bi-plus-circle"></i> New Transaction
             </button>
-        </div><!-- End Page Title -->
+        </div>
         
         <section class="section">
             <div class="card">
-                <div class=" card-header ">
-                    <h5 class="card-title p-1 m-0 align-self-center">All Transactions</h5>
-                </div>
                 <div class="card-body">
+                    <div class="d-inline-flex align-items-center justify-content-between w-100 mb-3">
+                        <h4 class="card-title">All Transactions</h4>
+                        <div class="mb-3">
+                            <input type="text" id="tihSearchInput" class="form-control" placeholder="Search transactions...">
+                        </div>
+                    </div>
+
+                    <!-- Summary cards -->
+                     <div class="row m-t-40">
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                            <div class="card card-hover">
+                                <div class="box bg-info text-center">
+                                    <h1 class="font-light text-white">2,064</h1>
+                                    <h6 class="text-white">Total Tickets</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                            <div class="card card-hover">
+                                <div class="box bg-primary text-center">
+                                    <h1 class="font-light text-white">1,738</h1>
+                                    <h6 class="text-white">Responded</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                            <div class="card card-hover">
+                                <div class="box bg-success text-center">
+                                    <h1 class="font-light text-white">1100</h1>
+                                    <h6 class="text-white">Resolve</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                            <div class="card card-hover">
+                                <div class="box bg-dark text-center">
+                                    <h1 class="font-light text-white">964</h1>
+                                    <h6 class="text-white">Pending</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                    </div>
+
+
                     <!-- Table with stripped rows -->
                     <!-- assets/js/transaction/inhouse/index.js -->
                     <table id="tihIndexTable">
@@ -35,22 +97,22 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                    </table>
+                    </table> 
                     <!-- End Table with stripped rows -->
                 </div>
             </div>
         </section>
-    </main><!-- End #main -->
-    </a>
+    </div>
+</main>
 <!-- modal -->
 <%- include("../modal/transaction/create") %>
 <%- include("../../client/modal/client/create") %>
 
-<%- include("../../partials/toaster") %>
 <%- include("../../partials/script") %>
 
 <!-- script -->
 <script src="../../../assets/js/transaction/inhouse/index.js"></script>
+
 <script src="../../../assets/js/transaction/modal/transaction/create.js"></script>
 <script src="../../../assets/js/client/modal/client/create.js"></script>
 

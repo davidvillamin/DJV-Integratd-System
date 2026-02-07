@@ -1,12 +1,145 @@
 <%- include("../partials/header") %>
-<%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
+
+<!-- select sidebar items -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Select the sidebar item and sub-item
+        const sbTransaction = document.getElementById("sbTransaction");
+        const sbTransactionSub = document.getElementById("sbTransactionSub");
+        const sbTransactionSubOverview = document.getElementById("sbTransactionSubOverview");
+
+        // Add active class to the sidebar item and sub-item
+        sbTransaction.classList.add("active");
+        sbTransactionSub.classList.add("in");
+        sbTransactionSubOverview.classList.add("active");
+    });
+</script>
+
 <!-- ti - transaction index -->
-<main id="main" class="main">
-    <!-- Page Title -->
-    <div class="pagetitle d-flex align-items-center">
+<main class="page-wrapper">
+    <!-- breadcrumb -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Transactions</h4>
+            </div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Transactions</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of breadcrumb -->
+
+    <div class="container-fluid">
+        <div class="d-flex mb-3">
+            <button class="btn btn-success ml-auto btn-sm" data-bs-toggle="modal" data-bs-target="#tCreateModal"> 
+                <i class="bi bi-plus-circle"></i>
+                New Transaction
+            </button>
+        </div>
+        <!-- Transactions -->
+        <section class="section">
+            <div class="row">
+                <div class="col-xl-3 md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="/transaction/inhouse"> <h5 class="card-title">In-House</h5></a>
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Description</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>002</td>
+                                        <td>Epson L3110</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td>
+                                        <td>Epson L3110</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td>
+                                        <td>Epson L3110</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td>
+                                        <td>Epson L3110</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td>
+                                        <td>Epson L3110</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>          
+                    </div>       
+                </div>       
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="/transaction/Onsite"> <h5 class="card-title">On-site</h5></a>
+                            <!-- insert table here -->
+                        </div>          
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="/transaction/Sales"> <h5 class="card-title">Sales</h5></a>
+                            <!-- insert table here -->
+                        </div>          
+                    </div>
+                </div>   
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="/transaction/Project"> <h5 class="card-title">Projects</h5></a>
+                            <!-- insert table here -->
+                        </div>          
+                    </div>
+                </div>   
+            </div>
+        </section>
+        
+        <!-- Reports -->
+        <div class="card">
+
+            <div class="card-header">
+                <h6 class="card-title p-0 my-1">Reports</h6>
+            </div>
+            
+            
+            <div class="card-body">
+                <div class="d-flex">
+                    <!-- insert a year list dropdown here -->
+                    <div class="d-flex align-items-center ms-auto">
+                        <button class="btn btn-outline-secondary btn-sm me-1" id="tidecrementYear">
+                            <i class="bi bi-dash"></i>
+                        </button>
+                        <span id="tiCurrentYear" class="mx-2">2025</span>
+                        <button class="btn btn-outline-secondary btn-sm ms-1 me-3" id="tiIncrementYear">
+                            <i class="bi bi-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <canvas id="tiTransactionChart" style="max-height: 360px;"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="d-flex align-items-center">
         <div>
-            <h1>Transactions</h1>
+            <h4 class="page-title">Transactions</h4>
             <nav>
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -14,109 +147,18 @@
                 </ol>
             </nav>
         </div>
-        <button class="btn btn-success ms-auto btn-sm" data-bs-toggle="modal" data-bs-target="#tCreateModal"> 
-            <i class="bi bi-plus-circle"></i>
-            New Transaction
-        </button>
-    </div><!-- End Page Title -->
-
-    <!-- Transactions -->
-    <section class="section">
-        <div class="row">
-            <div class="col-xl-3 md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="/transaction/inhouse"> <h5 class="card-title">In-House</h5></a>
-                        <table class="table table-sm table-striped">
-                            <thead>
-                                <th>ID</th>
-                                <th>Description</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Epson L3110</td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Epson L3110</td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Epson L3110</td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Epson L3110</td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Epson L3110</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>          
-                </div>       
-            </div>       
-            <div class="col-xl-3">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="/transaction/Onsite"> <h5 class="card-title">On-site</h5></a>
-                        <!-- insert table here -->
-                    </div>          
-                </div>
-            </div>
-            <div class="col-xl-3">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="/transaction/Sales"> <h5 class="card-title">Sales</h5></a>
-                        <!-- insert table here -->
-                    </div>          
-                </div>
-            </div>   
-            <div class="col-xl-3">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="/transaction/Project"> <h5 class="card-title">Projects</h5></a>
-                        <!-- insert table here -->
-                    </div>          
-                </div>
-            </div>   
-        </div>
-    </section>
-    
-    <!-- Reports -->
-    <div class="card">
-
-        <div class="card-header">
-            <h6 class="card-title p-0 my-1">Reports</h6>
-        </div>
         
-        
-        <div class="card-body">
-            <div class="d-flex">
-                <!-- insert a year list dropdown here -->
-                <div class="d-flex align-items-center ms-auto">
-                    <button class="btn btn-outline-secondary btn-sm me-1" id="tidecrementYear">
-                        <i class="bi bi-dash"></i>
-                    </button>
-                    <span id="tiCurrentYear" class="mx-2">2025</span>
-                    <button class="btn btn-outline-secondary btn-sm ms-1 me-3" id="tiIncrementYear">
-                        <i class="bi bi-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <canvas id="tiTransactionChart" style="max-height: 360px;"></canvas>
-        </div>
-    </div>
-</main><!-- End #main -->
+    </div> -->
+
+ 
+</main>
 <!-- modal -->
 <%- include("modal/transaction/create.ejs") %>
 <%- include("../client/modal/client/create.ejs") %>
 <%- include("../partials/script") %>
 
-<script src="../../../assets/js/transaction/index.js"></script>
+<!-- <script src="../../../assets/js/transaction/index.js"></script>
 <script src="../../../assets/js/transaction/modal/transaction/create.js"></script>
-<script src="../../../assets/js/client/modal/client/create.js"></script>
+<script src="../../../assets/js/client/modal/client/create.js"></script> -->
 
 <%- include("../partials/footer") %>
