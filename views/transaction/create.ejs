@@ -1,0 +1,49 @@
+<%- include("../partials/header") %>
+<%- include("../partials/header-sidebar") %>
+
+<!-- ti - transaction index -->
+<main class="page-wrapper">
+    <!-- breadcrumb -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Create Transaction</h4>
+            </div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">Home /</a>
+                                <a href="/transaction">Transaction</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Transaction</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of breadcrumb -->
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Client Information</h5>
+                <div class="input-group input-group-sm mb-3">
+                    <input type="hidden" id="tClientID">
+                    <span class="input-group-text">Client</span>
+                    <input class="form-control" list="tClientList" id="tClient" placeholder="Type to search client..." required>
+                    <datalist id="tClientList">
+                    </datalist>
+                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#cCreateModal">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- =======================================
+Scripts and accessories
+======================================= -->
+<%- include("../partials/script") %>
+<%- include("../partials/footer") %>

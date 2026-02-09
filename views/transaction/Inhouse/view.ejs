@@ -1,357 +1,121 @@
 <%- include("../../partials/header") %>
 <%- include("../../partials/header-sidebar") %>
-<%- include("../../partials/loading") %>
-<!-- tih - Transaction Inhouse View -->
-<main id="main" class="main">
-    <div class="pagetitle d-flex mb-0 align-items-end">
-        <nav>
-            <h1 class="tihName"></h1>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/transaction">Transaction</a></li>
-                <li class="breadcrumb-item"><a href="/transaction/inhouse">Inhouse</a></li>
-                <li class="breadcrumb-item active tihName"></li>
-            </ol>
-        </nav>
-        <i class="bi bi-three-dots-vertical ms-auto" data-bs-toggle="dropdown" aria-expanded="false"></i>
-     
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item">Pending</a></li>
-            <li><a class="dropdown-item" data-bs-target="#tihQuotationModal" data-bs-toggle="modal">Quotation</a></li>
-            <li><a class="dropdown-item" data-bs-target="#tihApprovalModal" data-bs-toggle="modal">Approval</a></li>
-            <!-- this will be click to change status to repaired -->
-            <!-- tihdm - transaction inhouse dropdowm menu -->
-            <li><a class="dropdown-item" type="button" id="tihdmRepaired">Repaired</a></li> 
-            <li><a class="dropdown-item" data-bs-target="#tihReleasedModal" data-bs-toggle="modal">Released</a></li>
-            <li><a class="dropdown-item" type="button" id="tihdmComplete">Complete</a></li>
-        </ul>
-    </div><!-- End Page Title -->
-    <div class="container my-2">
-        <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-            <div id="tihPending" class="progress-bar progress-bar-striped progress-bar-animated bg-warning text-bg-warning" style="width: 16.67%">
-                Pending
+
+<main class="page-wrapper">
+     <!-- breadcrumb -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Transaction In-House (W001)</h4>
             </div>
-            <div id="tihQuotation" class="progress-bar progress-bar-striped progress-bar-animated bg-primary text-bg-primary d-none" style="width: 16.67%">
-                Quotation
-            </div>
-            <div id="tihApproved" class="progress-bar progress-bar-striped progress-bar-animated bg-info text-bg-info d-none" style="width: 16.67%">
-                Approved
-            </div>
-            <div id="tihRepaired" class="progress-bar progress-bar-striped progress-bar-animated bg-danger text-bg-danger d-none" style="width: 16.67%">
-                Repaired
-            </div>
-            <div id="tihReleased" class="progress-bar progress-bar-striped progress-bar-animated bg-secondary text-bg-secondary d-none" style="width: 16.67%">
-                Released
-            </div>
-            <div id="tihComplete" class="progress-bar progress-bar-striped progress-bar-animated bg-success text-bg-success d-none" style="width: 16.67%">
-                Complete
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Transactions</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
-    
-    <section class="section profile">
-        <div class="row">
-            <!-- =====================left side ===================-->
-             <!-- legend: tiho - transaction inhouse overview -->
-            <div class="col-xl-3">
-                <!-- Over View -->
-                <div class="card">
-                    <div class="card-header">
-                        Overview
+    <div class="container-fluid">
+        <section class="cd-horizontal-timeline m-t-0 m-b-0">
+            <div class="timeline">
+                <div class="events-wrapper">
+                    <div class="events">
+                        <ol>
+                            <!-- initial assessment add Down payment -->
+                            <li><a href="#0" data-left="50" data-type="evaluation" class="selected">Evaluation</a></li>
+                            <!-- parts requested, Recommendation, Technical Report -->
+                            <li><a href="#0" data-left="190" data-type="repair">Repair</a></li> 
+                            <li><a href="#0" data-left="300" data-type="quotation">Quotation</a></li>
+                            <li><a href="#0" data-left="400" data-type="approval">Approval</a></li>
+                            <li><a href="#0" data-left="500" data-type="payment">Payment</a></li>
+                            <li><a href="#0" data-left="600" data-type="report">Report</a></li>
+                            <li><a href="#0" data-left="700" data-type="summary">Summary</a></li>
+                        </ol>
+                        <span class="filling-line" aria-hidden="true"></span>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            Payment
-                            <p class="m-0" id="tihoPayment"></p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <strong>Balance</strong>
-                            <strong id="tihoBalance"></strong>
-                        </div>
-                        <hr class="my-1">
-                        <div class="d-flex justify-content-between">
-                            Total
-                            <p class="m-0" id="tihoTotal"></p>
-                        </div>
-                    </div>
+                    <!-- .events -->
                 </div>
-                <!-- tihc - transaction inhouse client -->
-                <!-- Customer Information -->
-                <div class="card">
-                    <div class="card-header d-flex">
-                        <span>Customer Information</span>
-                        <i class="bi bi-pencil-square ms-auto" data-bs-toggle="modal" data-bs-target="#cEditModal"></i>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-4">
-                                Name:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihcName"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                Email:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihcEmail"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                Contact Number:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihcContactNumber"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                Address:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihcAddress"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                Notes:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihcNotes"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                Created Date:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihcCreatedDate"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- tihd - transaction inhouse device -->
-                <!-- Device Information -->
-                <div class="card">
-                    <div class="card-header d-flex">
-                        <span>Device Information</span>
-                        <i class="bi bi-pencil-square ms-auto" data-bs-toggle="modal" data-bs-target="#deEditModal"></i>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-4">
-                                Name:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihdName"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                Brand:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihdBrand"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                Model:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihdModel"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                Serial Number:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihdSerialNumber"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                Created Date:
-                            </div>
-                            <div class="col-8">
-                                <span id="tihdCreatedDate"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Documents -->
-                <!-- tihd - transaction inhouse documents -->
-                <div class="card">
-                    <div class="card-header">
-                        <span>Documents</span>
-                    </div>
-                    <div class="card-body">
-                        Quotation
-                        <div id="tihdQuotation" class="list-group">
-                            <!-- Document items will be appended here -->
-                        </div>
-                        Approval
-                        <div id="tihdApproval" class="list-group">
-                            <!-- Document items will be appended here -->
-                        </div>
-                    </div>
-                </div>
-                
+                <!-- .events-wrapper -->
+                <ul class="cd-timeline-navigation">
+                    <li><a href="#0" class="prev inactive">Prev</a></li>
+                    <li><a href="#0" class="next">Next</a></li>
+                </ul>
+                <!-- .cd-timeline-navigation -->
             </div>
-
-            <!-- =====================Ceneter Content===================-->
-
-            <div class="col-xl-6">
-                <!-- Sales Transactions -->
-                <!-- tihs - transaction inhouse sales -->
-                <div class="card">
-                    <div class="card-header d-flex dropstart">
-                        <span class="me-auto">Sales Report</span>
-                        <!-- <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#tihsrEditModal"></i> -->
-                        <i class="bi bi-three-dots" data-bs-toggle="dropdown" aria-expanded="false"></i>
-
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" data-bs-target="#tihProductModal" data-bs-toggle="modal">Product</a></li>
-                            <li><a class="dropdown-item" data-bs-target="#tihExpensesModal" data-bs-toggle="modal">Expenses</a></li>
-                            <li><a class="dropdown-item" data-bs-target="#tihPaymentModal" data-bs-toggle="modal">Payment</a></li>
-                            <li><a class="dropdown-item" data-bs-target="#tihServiceChargeModal" data-bs-toggle="modal">Service Charge</a></li>
-                            <li><a class="dropdown-item" data-bs-target="#" data-bs-toggle="modal">Discount</a></li>
-                        </ul>
-                    </div>
-                   
-                    <div class="card-body">
-                        <table id="tihSalesTable" class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <!-- available or unavailable -->
-                                    <th>Status</th>
-                                    <!-- if currntUser role is tech hide this Amount -->
-                                    <% if (currentUser.role !== 'tech') { %>
-                                        <th>Amount</th> 
-                                    <% } %>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="3" class="text-center">There are no sales available.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>  
-                </div>
-                <!-- Pre-assessment -->
-                <div class="card">
-                    <div class="card-header d-flex">
-                        <span class="me-auto">Pre-assessment</span>
-                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#tihPreAssessmentModal"></i>
-                    </div>
-                    <div class="card-body">
-                        <span id="tihPreAssessmentNotes"></span>
-                    </div>
-                </div>
-                <!-- Service Report -->
-                <div class="card">
-                    <div class="card-header d-flex">
-                        <span class="me-auto">Service Report</span>
-                        <i class="bi bi-floppy" id="tihSaveServiceReport"></i>
-                    </div>
-                    <div class="card-body">
-                        <div id="tihServiceReport"></div>
-                    </div>  
-                </div>
+            <!-- .timeline -->
+            <div class="events-content">
+                <ol>
+                    <li class="selected" data-type="evaluation">
+                        Client Information
+                        
+                    </li>
+                    <li data-type="repair">
+                        <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user3" src="../../assets/images/users/7.jpg"> Horizontal Timeline<br/><small>March 20th, 2014</small></h2>
+                        <p class="m-t-40">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                        <p class="p-b-20">
+                            <button class="btn btn-rounded btn-outline-info m-t-20">Read more</button>
+                        </p>
+                    </li>
+                    <li data-type="quotation">
+                        <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user4" src="../../assets/images/users/6.jpg"> Horizontal Timeline<br/><small>May 20th, 2014</small></h2>
+                        <p class="m-t-40">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                        <p class="p-b-20">
+                            <button class="btn btn-rounded btn-outline-info m-t-20">Read more</button>
+                        </p>
+                    </li>
+                    <li data-type="approval">
+                        <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user5" src="../../assets/images/users/5.jpg"> Horizontal Timeline<br/><small>July 9th, 2014</small></h2>
+                        <p class="m-t-40">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                        <p class="p-b-20">
+                            <button class="btn btn-rounded btn-outline-info m-t-20">Read more</button>
+                        </p>
+                    </li>
+                    <li data-type="payment">
+                        <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user6" src="../../assets/images/users/4.jpg"> Horizontal Timeline<br/><small>August 30th, 2014</small></h2>
+                        <p class="m-t-40">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                        <p class="p-b-20">
+                            <button class="btn btn-rounded btn-outline-info m-t-20">Read more</button>
+                        </p>
+                    </li>
+                    <li data-type="report">
+                        <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user7" src="../../assets/images/users/3.jpg"> Horizontal Timeline<br/><small>September 15th, 2014</small></h2>
+                        <p class="m-t-40">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                        <p class="p-b-20">
+                            <button class="btn btn-rounded btn-outline-info m-t-20">Read more</button>
+                        </p>
+                    </li>
+                    <li data-type="summary">
+                        <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user8" src="../../assets/images/users/2.jpg"> Horizontal Timeline<br/><small>November 01st, 2014</small></h2>
+                        <p class="m-t-40">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                        <p>
+                            <button class="btn btn-rounded btn-outline-info m-t-20">Read more</button>
+                        </p>
+                    </li>
+                </ol>
             </div>
-            <!-- =================right side ===================-->
-            <div class="col-xl-3">
-                <!-- appointments calendar -->
-                <div class="card">
-                    <div class="card-header">
-                        Appointments
-                    </div>
-                    <div class="card-body">
-                        <div id="miniCalendar"></div>
-                    </div>
-                </div>
-                <!-- Images -->
-                <div class="card">
-                    <div class="card-header d-flex">
-                        <span class="me-auto">Images</span>
-                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#tihImageModal"></i>
-                    </div>
-                    <div class="card-body">
-                        <div id="tihImageList" class="list-group">
-                            <!-- Image items will be appended here -->
-                        </div>
-                    </div>
-                </div>
-                <!-- Notes -->
-                <div class="card">
-                    <div class="card-header d-flex">
-                        <span class="me-auto">Notes</span>
-                        <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#tihNotesModal"></i>
-                    </div>
-                    <div class="card-body">
-                        <span id="tihNotes"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>  
+            <!-- .events-content -->
+        </section>
+    </div>
+</main>
 
-<!-- =======================================
-Modals
-======================================= -->
-<%-  include("../../client/modal/client/edit")  %> 
-<%-  include("../../device/modal/device/edit")  %> 
-<%-  include("modal/Supply/supply")  %>
-<%-  include("modal/Expenses/expenses")  %>
-<%-  include("modal/Service/service")  %>
-<%-  include("modal/Payment/payment")  %>
-<%-  include("modal/Product/product")  %> 
-<%-  include("modal/image/image")  %> 
-<%-  include("modal/Notes/notes")  %> 
-<%-  include("modal/Pre-assessment/Pre-assessment")  %> 
-<!-- SRP has no script file . it is attached on supply.js -->
-<%-  include("modal/Supply/srp")  %>
-<%-  include("modal/Quotation/quotation")  %>
-<%-  include("modal/Approval/approval")  %>
-<!-- No modal for repaired since it is just a status change -->
-<%-  include("modal/Released/released")  %>
-<!-- No modal for complete since it is just a status change -->
- 
-
- <!-- =======================================
-Scripts and accessories
-======================================= -->
-<%- include("../../partials/toaster") %>
 <%- include("../../partials/script") %>
-
-
- <!-- =======================================
-Scripts
-======================================= -->
-<!-- main script -->
-<script src="../../../assets/js/transaction/inhouse/view.js"></script>
-<script src="../../../assets/js/client/modal/client/edit.js"></script>
-<script src="../../../assets/js/device/modal/device/edit.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Supply/supply.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Expenses/expenses.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Service/service.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Payment/payment.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Product/product.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/image/image.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Notes/notes.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Pre-assessment/Pre-assessment.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Quotation/quotation.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Approval/approval.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Repaired/repaired.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Released/released.js"></script>
-<script src="../../../assets/js/transaction/inhouse/modal/Complete/complete.js"></script>
-
 <%- include("../../partials/footer") %>

@@ -1,21 +1,6 @@
 <%- include("../partials/header") %>
 <%- include("../partials/header-sidebar") %>
 
-<!-- select sidebar items -->
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Select the sidebar item and sub-item
-        const sbTransaction = document.getElementById("sbTransaction");
-        const sbTransactionSub = document.getElementById("sbTransactionSub");
-        const sbTransactionSubOverview = document.getElementById("sbTransactionSubOverview");
-
-        // Add active class to the sidebar item and sub-item
-        sbTransaction.classList.add("active");
-        sbTransactionSub.classList.add("in");
-        sbTransactionSubOverview.classList.add("active");
-    });
-</script>
-
 <!-- ti - transaction index -->
 <main class="page-wrapper">
     <!-- breadcrumb -->
@@ -42,10 +27,10 @@
 
     <div class="container-fluid">
         <div class="d-flex mb-3">
-            <button class="btn btn-success ml-auto btn-sm" data-bs-toggle="modal" data-bs-target="#tCreateModal"> 
+            <a class="btn btn-success ml-auto btn-sm" href="/transaction/create"> 
                 <i class="bi bi-plus-circle"></i>
                 New Transaction
-            </button>
+            </a>
         </div>
         <!-- Transactions -->
         <section class="section">
