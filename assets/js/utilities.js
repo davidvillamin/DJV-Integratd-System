@@ -241,13 +241,17 @@ function loadToastr(){
     "debug": false,
     "newestOnTop": true,           // New messages on top
     "progressBar": true,           // Show progress bar
-    "positionClass": "toast-top-right",  // Position
+    "positionClass": "toast-bottom-right",  // Position
     "preventDuplicates": false,
     "onclick": null,
     "showDuration": 300,           // Show animation (ms)
     "hideDuration": 1000,          // Hide animation (ms)
     "timeOut": 5000,               // Display duration (ms)
-    "extendedTimeOut": 1000        // Extended time on hover (ms)
+    "extendedTimeOut": 1000,        // Extended time on hover (ms)
+    "showEasing": "linear",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
     };
 }
 

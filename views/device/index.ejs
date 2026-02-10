@@ -2,29 +2,43 @@
 
 <!-- di - Device Index -->
 <%- include("../partials/header") %>
-<%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
-<main id="main" class="main">
-    <!-- Title Page -->
-    <div class="pagetitle d-flex align-items-center">
-        <nav>
-            <h1>Devices</h1>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">Devices</li>
-            </ol>
-        </nav>
-        <button type="button" class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#diCreateModal">
-            <i class="bi bi-plus-circle"></i> Add Device
-        </button> 
-    </div><!-- End Page Title -->
-    
-    <section class="section">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <h5 class="card-title p-1 m-0 align-self-center">All Devices</h5>
+<main class="page-wrapper">
+    <!-- breadcrumb -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Client</h4>
             </div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" aria-current="page">
+                                <a href="/">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Device</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of breadcrumb -->    
+    <section class="container-fluid">
+        <div class="d-flex mb-3">
+            <button type="button" class="btn btn-success btn-sm ml-auto" data-toggle="modal" data-target="#diCreateModal">
+                <i class="bi bi-plus-circle"></i> Add Device
+            </button>
+        </div>
+        <div class="card">
             <div class="card-body">
+                <div class="d-inline-flex align-items-center justify-content-between w-100 mb-3">
+                    <h4 class="card-title">All Device</h4>
+                    <div class="mb-3">
+                        <input type="text" id="diSearchInput" class="form-control" placeholder="Search device...">
+                    </div>
+                </div>
                 <table id="diTable">
                 </table>
             </div>
@@ -37,7 +51,6 @@
 <%- include("modal/device/create") %>
 <%- include("../client/modal/client/create") %>
 
-<%- include("../partials/toaster") %>
 <%- include("../partials/script") %>
 
 <script src="../../assets/js/device/index.js"></script>

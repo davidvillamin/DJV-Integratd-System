@@ -1,3 +1,7 @@
+$(function(){
+    createTransaction();
+});
+
 function createTransaction() {
     return new Promise(async function(resolve, reject) {
         try {

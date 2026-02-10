@@ -71,15 +71,14 @@ function createClient(){
                             ContactDetails: contactNumbers
                         }
                         // save data on a variable for confirmation
-                        var crudiAjaxResult = crudiAjax(data, "/client/create", "Post")
+                        var crudiAjaxResult = await crudiAjax(data, "/client/create", "Post")
                         // clear form
                         $('#cCreateClient')[0].reset();
                         // close modal   
                         $('#cCreateModal').modal('toggle'); // fix modal toggle method
                         $('.modal-backdrop').remove(); // ensure backdrop is removed
                         // show toast
-                        $(".toast").toast("show").find(".toast-body").text(crudiAjaxResult)
-                        $(".toast").find(".toast-title").text("New Client")
+                        toastr.success("New Client", crudiAjaxResult);
                         resolve()
                     }
                 }

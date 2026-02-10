@@ -2,42 +2,55 @@
 
 <!-- ci - Client Index -->
 <%- include("../partials/header") %>
-<%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
-<main id="main" class="main">
-    <!-- Title Page -->
-    <div class="pagetitle d-flex align-items-center">
-        <nav>
-            <h1>Client</h1>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">Client</li>
-            </ol>
-        </nav>
-        <button type="button" class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#cCreateModal">
-            <i class="bi bi-plus-circle"></i> Add Client
-        </button>
-    </div><!-- End Page Title -->
-    
-    <section class="section">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <h5 class="card-title p-1 m-0 align-self-center">All Clients</h5>
+<main class="page-wrapper">
+    <!-- breadcrumb -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Client</h4>
             </div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" aria-current="page">
+                                <a href="/">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Client</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of breadcrumb -->
+
+    <section class="container-fluid">
+        <div class="d-flex mb-3">
+            <button type="button" class="btn btn-success btn-sm ml-auto" data-toggle="modal" data-target="#cCreateModal">
+                <i class="bi bi-plus-circle"></i> Add Client
+            </button>
+        </div>
+        <div class="card">
             <div class="card-body">
+                <div class="d-inline-flex align-items-center justify-content-between w-100 mb-3">
+                    <h4 class="card-title">All Client</h4>
+                    <div class="mb-3">
+                        <input type="text" id="ciSearchInput" class="form-control" placeholder="Search client...">
+                    </div>
+                </div>
                 <table id="ciTable">
                 </table>
             </div>
         </div>
     </section>
+    
 
 </main><!-- End #main -->
 
 <!-- modal -->
 <%- include("modal/client/create") %>
-
-<!-- notification -->
-<%- include("../partials/toaster") %>
 
 <!-- dependencies -->
 <%- include("../partials/script") %>

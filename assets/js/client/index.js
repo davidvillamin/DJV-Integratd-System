@@ -1,16 +1,6 @@
 $(function(){
-    //======================================================
-    // Loading Screen
-    //======================================================
-    loadingScreen();
-    
-    //remove class collapsed after click on sidebar
-    $("#sbClient").removeClass("collapsed");
-    
-    // initialize toast
-    $(".toast").toast({
-        delay: 5000
-    });
+    // collapse sidebar nav link and set active link
+    $("#sbClient").addClass("active");
 
     // initialize datatable
     initialize()
@@ -39,7 +29,7 @@ async function initialize(){
         ["_id"],                                                                        // hiddenColumns (hide ID column)
         ["Code", "FullName", "Address.FullAddress", "Type", "_id"],                     // dataField
         tableData,                                                                      // tableData
-        true,                                                                           // withSearch (enable search)
+        false,                                                                           // withSearch (enable search)
     );
 
     // add click event to table rows and view product details
@@ -47,6 +37,14 @@ async function initialize(){
         var data = $('#ciTable').bootstrapTable('getData')[$(this).data('index')];
         // to to product view page
         window.location.href = "/client/view/" + data._id;
+    });
+    // add click event to search input
+    $('#ciSearchInput').on('keyup', function() {
+        var searchVal = this.value.toLowerCase();
+        $('#ciTable tbody tr').each(function() {
+            var row = $(this).text().toLowerCase();
+            $(this).toggle(row.indexOf(searchVal) > -1);
+        });
     });
 }
 

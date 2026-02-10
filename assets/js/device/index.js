@@ -1,17 +1,6 @@
 $(function(){
-    
-    //======================================================
-    // Loading Screen
-    //======================================================
-    // hide loading screen
-    loadingScreen();
-    
-    //remove class collapsed after click on sidebar
-    $("#sbdevice").removeClass("collapsed");
-    // initialize toast
-    $(".toast").toast({
-        delay: 5000
-    });
+    // collapse sidebar nav link and set active link
+    $("#sbDevice").addClass("active");
     
     initialize()
 
@@ -35,7 +24,7 @@ async function initialize(){
         ["_id"],                                                                        // hiddenColumns (hide ID column)
         ["Code", "Name", "Client.FullName", "Type", "_id"],                             // dataField
         tableData,                                                                      // tableData
-        true,                                                                           // withSearch (enable search)
+        false,                                                                           // withSearch (enable search)
     );
 
     // add click event to table rows and view product details
@@ -43,6 +32,15 @@ async function initialize(){
         var data = $('#diTable').bootstrapTable('getData')[$(this).data('index')];
         // to to product view page
         window.location.href = "/device/view/" + data._id;
+    });
+
+        // add click event to search input
+    $('#diSearchInput').on('keyup', function() {
+        var searchVal = this.value.toLowerCase();
+        $('#diTable tbody tr').each(function() {
+            var row = $(this).text().toLowerCase();
+            $(this).toggle(row.indexOf(searchVal) > -1);
+        });
     });
 }
 
