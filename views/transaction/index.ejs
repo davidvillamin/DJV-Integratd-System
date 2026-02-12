@@ -1,13 +1,16 @@
 <%- include("../partials/header") %>
 <%- include("../partials/header-sidebar") %>
 
+<!-- Chart.js CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.css">
+
 <!-- ti - transaction index -->
 <main class="page-wrapper">
     <!-- breadcrumb -->
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Transactions</h4>
+                <h4 class="page-title">Overview</h4>
             </div>
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
@@ -35,93 +38,115 @@
         <!-- Transactions -->
         <section class="section">
             <div class="row">
-                <div class="col-xl-3 md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="/transaction/inhouse"> <h5 class="card-title">In-House</h5></a>
-                            <table class="table table-sm table-striped">
-                                <thead>
-                                    <th>ID</th>
-                                    <th>Description</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>002</td>
-                                        <td>Epson L3110</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td>
-                                        <td>Epson L3110</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td>
-                                        <td>Epson L3110</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td>
-                                        <td>Epson L3110</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td>
-                                        <td>Epson L3110</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>          
-                    </div>       
-                </div>       
                 <div class="col-xl-3">
                     <div class="card">
                         <div class="card-body">
-                            <a href="/transaction/Onsite"> <h5 class="card-title">On-site</h5></a>
-                            <!-- insert table here -->
-                        </div>          
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <h5 class="card-title mb-0">Overview</h5>   
+                              <!--DROPDOWN-->  
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="overviewDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Daily
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="overviewDropdown">
+                                        <a class="dropdown-item" href="#" onclick="updateOverview('daily')">Current</a>
+                                        <a class="dropdown-item" href="#" onclick="updateOverview('weekly')">Weekly</a>
+                                        <a class="dropdown-item" href="#" onclick="updateOverview('monthly')">Monthly</a>
+                                        <a class="dropdown-item" href="#" onclick="updateOverview('yearly')">Yearly</a>
+                                    </div>
+                                </div>
+                            </div>
+                          <!--CARDS-->  
+                           <div class="row">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card bg-info">
+                                    <div class="card-body">
+                                        <div class="d-flex no-block align-items-center">
+                                            <div class="text-white">
+                                                <h2>42</h2>
+                                                <h6>In-House</h6>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <span class="text-white display-6"><i class="icon-home"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card bg-cyan">
+                                    <div class="card-body">
+                                        <div class="d-flex no-block align-items-center">
+                                            <div class="text-white">
+                                                <h2>56</h2>
+                                                <h6>On-Site</h6>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <span class="text-white display-6"><i class="ti-pin"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card bg-orange">
+                                    <div class="card-body">
+                                        <div class="d-flex no-block align-items-center">
+                                            <div class="text-white">
+                                                <h2>100</h2>
+                                                <h6>Sales</h6>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <span class="text-white display-6"><i class="ti-stats-down"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card bg-success">
+                                    <div class="card-body">
+                                        <div class="d-flex no-block align-items-center">
+                                            <div class="text-white">
+                                                <h2>139</h2>
+                                                <h6>Projects</h6>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <span class="text-white display-6"><i class="ti-clipboard"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
                 </div>
-                <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="/transaction/Sales"> <h5 class="card-title">Sales</h5></a>
-                            <!-- insert table here -->
-                        </div>          
+                
+        </section>
+
+        <!-- Monthly Graph Report -->
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h6 class="card-title p-0 my-1">Monthly Report</h6>
+                        <div class="d-flex gap-2">
+                            <select class="form-control form-control-sm" id="monthlyReportYear" style="max-width: 120px;">
+                                <option value="2024">2024</option>
+                                <option value="2025" selected>2025</option>
+                                <option value="2026">2026</option>
+                            </select>
+                        </div>
                     </div>
-                </div>   
-                <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="/transaction/Project"> <h5 class="card-title">Projects</h5></a>
-                            <!-- insert table here -->
-                        </div>          
+                </div>
+                    <div style="position: relative; height: 400px;">
+                        <canvas id="monthlyReportChart"></canvas>
                     </div>
-                </div>   
+                </div>
             </div>
         </section>
-        
-        <!-- Reports -->
-        <div class="card">
 
-            <div class="card-header">
-                <h6 class="card-title p-0 my-1">Reports</h6>
-            </div>
-            
-            
-            <div class="card-body">
-                <div class="d-flex">
-                    <!-- insert a year list dropdown here -->
-                    <div class="d-flex align-items-center ms-auto">
-                        <button class="btn btn-outline-secondary btn-sm me-1" id="tidecrementYear">
-                            <i class="bi bi-dash"></i>
-                        </button>
-                        <span id="tiCurrentYear" class="mx-2">2025</span>
-                        <button class="btn btn-outline-secondary btn-sm ms-1 me-3" id="tiIncrementYear">
-                            <i class="bi bi-plus"></i>
-                        </button>
-                    </div>
-                </div>
-                <canvas id="tiTransactionChart" style="max-height: 360px;"></canvas>
-            </div>
-        </div>
-    </div>
+        
     <!-- <div class="d-flex align-items-center">
         <div>
             <h4 class="page-title">Transactions</h4>
@@ -142,8 +167,107 @@
 <%- include("../client/modal/client/create.ejs") %>
 <%- include("../partials/script") %>
 
+<!-- Chart.js Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
 <!-- <script src="../../../assets/js/transaction/index.js"></script>
 <script src="../../../assets/js/transaction/modal/transaction/create.js"></script>
 <script src="../../../assets/js/client/modal/client/create.js"></script> -->
+
+<script>
+function updateOverview(period) {
+    // Update dropdown button text
+    document.getElementById('overviewDropdown').textContent = period.charAt(0).toUpperCase() + period.slice(1);
+    
+    // TODO: Add logic to filter/update overview cards based on selected period
+    // This can fetch data from your backend or filter existing data
+    console.log('Overview period changed to:', period);
+}
+
+// Initialize Monthly Report Chart with Chart.js
+document.addEventListener('DOMContentLoaded', function() {
+    const monthlyReportCtx = document.getElementById('monthlyReportChart');
+    if (monthlyReportCtx) {
+        const monthlyReportChart = new Chart(monthlyReportCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'In-House',
+                        data: [35, 45, 55, 65, 75, 85, 95, 32, 43, 47, 55, 56],
+                        borderColor: '#4472C4',
+                        backgroundColor: 'rgba(68, 114, 196, 0.3)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        order: 4
+                    },
+                    {
+                        label: 'On-Site',
+                        data: [28, 32, 35, 38, 42, 45, 48, 50, 52, 54, 56, 58],
+                        borderColor: '#4fc3f7',
+                        backgroundColor: 'rgba(79, 195, 247, 0.3)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        order: 3
+                    },
+                    {
+                        label: 'Projects',
+                        data: [32, 44, 67, 77, 83, 92, 60, 54, 23, 53, 75, 69],
+                        borderColor: '#5ac146',
+                        backgroundColor: 'rgba(90, 193, 70, 0.3)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        order: 2
+                    },
+                    {
+                        label: 'Sales',
+                        data: [45, 50, 55, 60, 65, 70, 75, 80, 82, 85, 88, 90],
+                        borderColor: '#FF9F40',
+                        backgroundColor: 'rgba(255, 159, 64, 0.3)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        order: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        // Handle year change
+        document.getElementById('monthlyReportYear').addEventListener('change', function(e) {
+            console.log('Monthly report year changed to:', e.target.value);
+            // TODO: Fetch new data based on selected year
+        });
+    }
+});
+</script>
 
 <%- include("../partials/footer") %>
