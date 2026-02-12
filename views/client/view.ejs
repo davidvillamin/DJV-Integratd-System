@@ -1,23 +1,30 @@
 <%- include("../partials/header") %>
-<%- include("../partials/loading") %>
 <%- include("../partials/header-sidebar") %>
 <!-- cv - Client View -->
-<main id="main" class="main">
-    <div class="pagetitle d-flex align-items-center">
-        <nav>
-            <h1 id="cvFullName"></h1>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/client">Client</a></li>
-                <li class="breadcrumb-item active">Client Profile</li>
-            </ol>
-        </nav>
-        <button type="button" class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#cCreateModal">
-            <i class="bi bi-plus-circle"></i> Add Client
-        </button>
-    </div><!-- End Page Title -->
-
-    <section class="section profile">
+<main id="main" class="page-wrapper">
+    <!-- breadcrumb -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Client</h4>
+            </div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" aria-current="page">
+                                <a href="/">Home /</a>
+                                <a href="/client">Client</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Client Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of breadcrumb -->
+    <section class="container-fluid">
         <div class="row">
             <!-- =====================left side ===================-->
             <div class="col-xl-3">
@@ -252,7 +259,6 @@
 <%- include("modal/image/image") %>
 
 <!-- notification -->
-<%- include("../partials/toaster") %>
 <!-- dependencies -->
 <%- include("../partials/script") %>
 

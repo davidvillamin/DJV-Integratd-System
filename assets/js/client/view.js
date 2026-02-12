@@ -1,15 +1,8 @@
 var clientId                                              = window.location.href.split('/')[window.location.href.split('/').length - 1]              
 
 $(function(){
-    //======================================================
-    // Loading Screen
-    //======================================================
-    loadingScreen();
-
-    // initialize toast
-    $(".toast").toast({
-        delay: 5000
-    });
+    // collapse sidebar nav link and set active link
+    $("#sbClient").addClass("active");
     
     //Initialize data
     initialize();

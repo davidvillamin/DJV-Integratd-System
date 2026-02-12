@@ -38,11 +38,12 @@ var express                         = require("express"),
     User                            = require("./models/users");
 
 //======================================================================================================
-//                                      MONGOOSE CONFIG
+//                                      MONGOOSE CONFIGs
 //======================================================================================================
 var mongoose = require('mongoose');
 //Set up default mongoose connection
-var mongoDB = 'mongodb://root:root@192.168.254.150:27017/DJV-Test?directConnection=true&authSource=admin';
+var mongoDB = 'mongodb://127.0.0.1:27017/DJV';
+// var mongoDB = 'mongodb://root:root@192.168.254.150:27017/DJV-Test?directConnection=true&authSource=admin';
 // var mongoDB = 'mongodb://root:root@192.168.254.150:27017/DJV?directConnection=true&authSource=admin';
 //Get the default connection
 // mongoose.connect(mongoDB, { useNewUrlParser: true });
