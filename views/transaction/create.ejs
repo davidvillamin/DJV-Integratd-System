@@ -26,69 +26,183 @@
     </div>
     <!-- end of breadcrumb -->
     <div class="container-fluid">
-        <form class="needs-validation" id="tCreateForm" novalidate enctype="multipart/form-data">
-            <div class="input-group mb-3 input-group-sm">
-                <label class="input-group-text" for="tTypeGroup">Transaction Type</label>
-                <select class="form-select" id="tTypeGroup" required>
-                    <option selected></option>
-                    <option value="Inhouse">In-house</option>
-                    <!-- <option value="Onsite">On-site</option> -->
-                    <!-- <option value="Sales">Sales</option> -->
-                    <!-- <option value="Projects">Projects</option> -->
-                </select>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <h4 class="card-title">Client Information</h4>
+                            <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#tAddClient">Add Client</button>
+                            <button class="btn btn-success mx-2" data-toggle="modal" data-target="#cCreateModal">Create Client</button>
+                        </div>
+                        <!-- When client added the list of information will be shown here and the device input will be enabled -->
+
+                        <div id="clientInfoCollapse" class="collapse mt-3">
+                            <input type="hidden" id="tClientID">
+                            <div class="row p-1">
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="tAddClientCodeLbl">Code</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Code" aria-label="Code" aria-describedby="tAddClientCodeLbl" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="tAddClientCreatedDateLbl">Created Date</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Created Date" aria-label="Created Date" aria-describedby="tAddClientCreatedDateLbl" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group px-1 pb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="tAddClientFullNameLbl">Full Name</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Full Name" aria-label="Full Name" aria-describedby="tAddClientFullNameLbl" disabled>
+                            </div>
+                            <div class="input-group px-1 pb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="tAddClientBusinessNameLbl">Business Name</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Business Name" aria-label="Business Name" aria-describedby="tAddClientBusinessNameLbl" disabled>
+                            </div>
+
+                            <div class="card pt-1">
+                                <div class="card-body p-0">
+                                    <h6 class="ml-3">Address</h6>
+                                    <div class="input-group px-1 pb-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="tAddClientBusinessNameLbl">Business Name</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Business Name" aria-label="Business Name" aria-describedby="tAddClientBusinessNameLbl" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="tTicketNameLbl">Ticket Name</span>
-                <input type="text" class="form-control" id="tTicketName" aria-label="Brand" aria-describedby="tTicketNameLbl" required>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <h4 class="card-title">Device Information</h4>
+                            <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#dAddDevice">Add Device</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-check form-switch d-flex ">
-                <input class="form-check-input ms-auto me-1" type="checkbox" id="tAutoTicketNumber" checked>
-                <label class="form-check-label" for="tAutoTicketNumber">Auto Ticket Number</label>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Initial Evaluation</h4>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <!-- <span class="input-group-text">With textarea</span> -->
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                </div>
             </div>
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="tTicketNumberLbl">Ticket Number</span>
-                <input type="text" class="form-control" id="tTicketNumber" aria-label="Brand" aria-describedby="tTicketNumberLbl" required>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Technical Notes</h4>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">With textarea</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                </div>
             </div>
-            <div class="input-group input-group-sm mb-3">
-                <input type="hidden" id="tClientID">
-                <span class="input-group-text">Client</span>
-                <input class="form-control" list="tClientList" id="tClient" placeholder="Type to search client..." required>
-                <datalist id="tClientList">
-                </datalist>
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#cCreateModal">Create</button>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Payment Information</h4>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">With textarea</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                </div>
             </div>
-            <div class="form-check form-switch d-flex ">
-                <input class="form-check-input ms-auto me-1" type="checkbox" id="tToday" checked>
-                <label class="form-check-label" for="tToday">Today</label>
-            </div>
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="tReceivedDateLbl">Recieved Date</span>
-                <input type="date" class="form-control" id="tReceivedDate" aria-label="Brand" aria-describedby="tReceivedDateLbl" required>
-            </div>
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="tPersonelLbl">Personel</span>
-                <input type="text" class="form-control" id="tPersonel" aria-label="Brand" aria-describedby="tPersonelLbl" required>
-            </div>
-            <div class="input-group input-group-sm mb-3">
-                <input type="hidden" id="tDeviceID">
-                <span class="input-group-text">Device</span>
-                <input class="form-control" list="tDeviceList" id="tDevice" placeholder="Type to search device..." disabled required>
-                <datalist id="tDeviceList">
-                </datalist>
-            </div>
-            <div class="modal-footer">
-                <button type="reset" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary btn-sm">Create Transaction</button>
-            </div>
-        </form>
+        </div>
     </div>
 </main>
 
 <!-- =======================================
 Scripts and accessories
 ======================================= -->
+<!-- modal -->
+<%- include("./modal/addClient") %>
+<%#- include("../client/modal/createClient") %>
+<%#- include("../device/modal/addDevice") %>
+
 <%- include("../partials/script") %>
+
+
 <!-- Main script -->
 <script src="/assets/js/transaction/create.js"></script>
+<script src="/assets/js/transaction/modal/addClient.js"></script>
 
 <%- include("../partials/footer") %>
+
+
+<!-- <form class="needs-validation" id="tCreateForm" novalidate enctype="multipart/form-data">
+    <div class="input-group mb-3 input-group-sm">
+        <label class="input-group-text" for="tTypeGroup">Transaction Type</label>
+        <select class="form-select" id="tTypeGroup" required>
+            <option selected></option>
+            <option value="Inhouse">In-house</option>
+            <option value="Onsite">On-site</option>
+            <option value="Sales">Sales</option>
+            <option value="Projects">Projects</option>
+        </select>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="tTicketNameLbl">Ticket Name</span>
+        <input type="text" class="form-control" id="tTicketName" aria-label="Brand" aria-describedby="tTicketNameLbl" required>
+    </div>
+    <div class="form-check form-switch d-flex ">
+        <input class="form-check-input ms-auto me-1" type="checkbox" id="tAutoTicketNumber" checked>
+        <label class="form-check-label" for="tAutoTicketNumber">Auto Ticket Number</label>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="tTicketNumberLbl">Ticket Number</span>
+        <input type="text" class="form-control" id="tTicketNumber" aria-label="Brand" aria-describedby="tTicketNumberLbl" required>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <input type="hidden" id="tClientID">
+        <span class="input-group-text">Client</span>
+        <input class="form-control" list="tClientList" id="tClient" placeholder="Type to search client..." required>
+        <datalist id="tClientList">
+        </datalist>
+        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#cCreateModal">Create</button>
+    </div>
+    <div class="form-check form-switch d-flex ">
+        <input class="form-check-input ms-auto me-1" type="checkbox" id="tToday" checked>
+        <label class="form-check-label" for="tToday">Today</label>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="tReceivedDateLbl">Recieved Date</span>
+        <input type="date" class="form-control" id="tReceivedDate" aria-label="Brand" aria-describedby="tReceivedDateLbl" required>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="tPersonelLbl">Personel</span>
+        <input type="text" class="form-control" id="tPersonel" aria-label="Brand" aria-describedby="tPersonelLbl" required>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <input type="hidden" id="tDeviceID">
+        <span class="input-group-text">Device</span>
+        <input class="form-control" list="tDeviceList" id="tDevice" placeholder="Type to search device..." disabled required>
+        <datalist id="tDeviceList">
+        </datalist>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary btn-sm">Create Transaction</button>
+    </div>
+</form> -->
